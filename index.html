@@ -911,7 +911,7 @@
 
       <div class="track" id="track">
         <!-- Panel 1 -->
-        <div class="panel is-active" tabindex="0" aria-label="Step 1: Ticket comes in">
+        <div class="panel is-active" tabindex="0" aria-label="Step 1: Ticket comes in" aria-expanded="true">
           <div class="panel-in">
             <div class="num" style="color:var(--olive)">1</div>
             <div class="step">
@@ -923,7 +923,7 @@
         </div>
 
         <!-- Panel 2 -->
-        <div class="panel" tabindex="0" aria-label="Step 2: Review record">
+        <div class="panel" tabindex="0" aria-label="Step 2: Review record" aria-expanded="false">
           <div class="panel-in">
             <div class="num" style="color:var(--green)">2</div>
             <div class="step">
@@ -935,7 +935,7 @@
         </div>
 
         <!-- Panel 3 -->
-        <div class="panel" tabindex="0" aria-label="Step 3: Apply the rules">
+        <div class="panel" tabindex="0" aria-label="Step 3: Apply the rules" aria-expanded="false">
           <div class="panel-in">
             <div class="num" style="color:var(--lime)">3</div>
             <div class="step">
@@ -1013,7 +1013,6 @@
   <script>
     (function () {
       // 1) Setup & environment
-      gsap.registerPlugin(ScrollTrigger);
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const isMobile = window.innerWidth <= 760;
 
@@ -1027,6 +1026,54 @@
       if (heroVideo) {
         heroVideo.play().catch(() => {});
       }
+
+      // Check external animation libraries resilience
+      const hasGSAP = typeof gsap !== 'undefined';
+      const hasScrollTrigger = typeof ScrollTrigger !== 'undefined';
+      const hasLenis = typeof Lenis !== 'undefined';
+
+      if (!hasGSAP || !hasScrollTrigger) {
+        console.warn('GSAP or ScrollTrigger unavailable. Falling back to static accessible mode.');
+        document.body.classList.remove('intro');
+        const backdrop = document.querySelector('.backdrop');
+        if (backdrop) backdrop.remove();
+        const fRing = document.getElementById('fRing');
+        if (fRing) fRing.style.strokeDashoffset = '0';
+        const fMark = document.getElementById('fMark');
+        if (fMark) fMark.style.strokeDashoffset = '0';
+        document.querySelectorAll('.card').forEach(card => {
+          const to = parseFloat(card.dataset.to) || 0;
+          const dec = parseInt(card.dataset.dec, 10) || 0;
+          const suf = card.dataset.suf || '';
+          const b = card.querySelector('b');
+          if (b) b.textContent = to.toFixed(dec) + suf;
+        });
+
+        // Setup vanilla accordion interaction without GSAP
+        const panels = document.querySelectorAll('.panel');
+        panels.forEach(panel => {
+          const activate = () => {
+            panels.forEach(p => {
+              p.classList.remove('is-active');
+              p.setAttribute('aria-expanded', 'false');
+            });
+            panel.classList.add('is-active');
+            panel.setAttribute('aria-expanded', 'true');
+          };
+          panel.addEventListener('mouseenter', activate);
+          panel.addEventListener('focus', activate);
+          panel.addEventListener('click', activate);
+          panel.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              activate();
+            }
+          });
+        });
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
 
       // 2) Word splitter for .split elements
       function splitElementWords(el) {
@@ -1416,17 +1463,29 @@
 
           panels.forEach(panel => {
             const activate = () => {
-              panels.forEach(p => p.classList.remove('is-active'));
+              panels.forEach(p => {
+                p.classList.remove('is-active');
+                p.setAttribute('aria-expanded', 'false');
+              });
               panel.classList.add('is-active');
+              panel.setAttribute('aria-expanded', 'true');
+            };
+            const onKeyDown = e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                activate();
+              }
             };
             panel.addEventListener('mouseenter', activate);
             panel.addEventListener('focus', activate);
             panel.addEventListener('click', activate);
+            panel.addEventListener('keydown', onKeyDown);
 
             cleanups.push(() => {
               panel.removeEventListener('mouseenter', activate);
               panel.removeEventListener('focus', activate);
               panel.removeEventListener('click', activate);
+              panel.removeEventListener('keydown', onKeyDown);
             });
           });
 
