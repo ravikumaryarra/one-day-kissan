@@ -2,21 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Petalyx — Benchmark all AI staff</title>
-  <meta name="description" content="Benchmark the impact of all your AI staff.">
+  <title>One Day Kissan — A day away from the ordinary</title>
+  <meta name="description" content="Immerse yourself in authentic farm life. Breathe fresh country air, feel the soil, and reconnect with where your food begins.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #121410;
-      --olive: #4d6a10;
-      --green: #6f9a0c;
-      --lime: #b4cd52;
-      --pill: #e7efcf;
-      --line: #eef0ea;
-      --bg: #fff;
+      --forest: #203C2B;
+      --harvest: #D9A85C;
+      --harvest-hover: #c79446;
+      --ivory: #F5F1E8;
+      --sage: #7B8D65;
+      --charcoal: #292D26;
+      --ink: #292D26;
+      --pill: #E4EBD8;
+      --pill-text: #203C2B;
+      --line: rgba(32, 60, 43, 0.12);
+      --bg: #F5F1E8;
       --radius: 22px;
     }
     * {
@@ -25,7 +29,7 @@
       padding: 0;
     }
     html {
-      background: #e9eee0;
+      background: var(--ivory);
     }
     html.lenis, html.lenis body {
       height: auto;
@@ -34,8 +38,8 @@
       scroll-behavior: auto !important;
     }
     body {
-      font-family: "Inter Tight", system-ui, sans-serif;
-      color: var(--ink);
+      font-family: "Manrope", system-ui, sans-serif;
+      color: var(--charcoal);
       background: transparent;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -49,45 +53,71 @@
       text-decoration: none;
     }
 
+    /* Typography */
+    h1, h2, h3, .editorial {
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
     /* Shared components */
     .pill {
       display: inline-flex;
       align-items: center;
-      font-size: 11px;
-      font-weight: 500;
-      padding: 5px 10px;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 6px 14px;
       border-radius: 999px;
       background: var(--pill);
-      color: #2c3a10;
-      letter-spacing: .01em;
+      color: var(--pill-text);
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      box-shadow: 0 1px 3px rgba(32, 60, 43, 0.06);
+    }
+    .pill svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
     }
     .h2 {
-      font-size: clamp(26px, 3.1vw, 44px);
-      font-weight: 400;
-      letter-spacing: -.03em;
-      line-height: 1.12;
+      font-size: clamp(28px, 3.4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -.02em;
+      line-height: 1.15;
       text-align: center;
+      color: var(--forest);
     }
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 36px;
-      padding: 0 16px;
+      gap: 8px;
+      height: 40px;
+      padding: 0 20px;
       border-radius: 999px;
-      background: var(--olive);
-      color: #f3f8e4;
-      font-size: 13px;
+      background: var(--forest);
+      color: var(--ivory);
+      font-size: 13.5px;
       font-weight: 600;
       letter-spacing: -.01em;
       white-space: nowrap;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 2px 6px rgba(60, 80, 10, .25);
-      transition: transform .3s, background .3s;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 3px 8px rgba(32, 60, 43, .25);
+      transition: transform .3s cubic-bezier(.2, .8, .2, 1), background .3s, box-shadow .3s;
       cursor: pointer;
+      border: none;
     }
     .btn:hover {
-      transform: translateY(-1px);
-      background: #5a7c14;
+      transform: translateY(-2px);
+      background: #172d20;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 6px 14px rgba(32, 60, 43, .3);
+    }
+    .btn-gold {
+      background: var(--harvest);
+      color: var(--forest);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), 0 3px 8px rgba(217, 168, 92, .3);
+    }
+    .btn-gold:hover {
+      background: var(--harvest-hover);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 6px 14px rgba(217, 168, 92, .4);
     }
     .w {
       display: inline-block;
@@ -95,28 +125,28 @@
     }
     .glass {
       position: absolute;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, .16);
-      border: 1px solid rgba(255, 255, 255, .55);
-      backdrop-filter: blur(10px) saturate(1.2);
-      -webkit-backdrop-filter: blur(10px) saturate(1.2);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4);
+      border-radius: 14px;
+      background: rgba(245, 241, 232, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px) saturate(1.2);
+      -webkit-backdrop-filter: blur(12px) saturate(1.2);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 8px 24px rgba(32, 60, 43, .08);
       pointer-events: none;
     }
     .grid-sq {
       position: absolute;
-      border: 1px solid #edf0e8;
+      border: 1px solid rgba(123, 141, 101, 0.25);
       border-radius: 10px;
       pointer-events: none;
     }
 
-    /* Keyframes */
+    /* Keyframe Animations */
     @keyframes driftA {
       0% {
         transform: translate(0, 0);
       }
       100% {
-        transform: translateX(26px) translateY(4px);
+        transform: translateX(28px) translateY(5px);
       }
     }
     @keyframes driftB {
@@ -124,7 +154,7 @@
         transform: translate(0, 0);
       }
       100% {
-        transform: translateX(-30px) translateY(6px);
+        transform: translateX(-32px) translateY(7px);
       }
     }
     .drift-a {
@@ -134,20 +164,20 @@
       animation: driftB 17s ease-in-out infinite alternate;
     }
 
-    /* App & Backdrop */
+    /* App & Backdrop for Intro Zoom */
     .backdrop {
       position: fixed;
       inset: -40px;
       z-index: 0;
-      background: url("https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093215_b7826239-e451-4e15-b42b-d6bcf9497a32.png") center 70% / cover no-repeat;
-      filter: blur(18px) saturate(1.1);
+      background: url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80") center 60% / cover no-repeat;
+      filter: blur(20px) saturate(1.15);
       transform: scale(1.3);
       pointer-events: none;
     }
     #app {
       position: relative;
       z-index: 1;
-      background: #fff;
+      background: var(--ivory);
       transform-origin: 50% 50vh;
       overflow: clip;
     }
@@ -159,13 +189,13 @@
       border-radius: 28px;
     }
 
-    /* 4a. Hero */
+    /* 01. HERO */
     section.hero {
       position: relative;
       height: 100vh;
-      min-height: 620px;
+      min-height: 640px;
       overflow: hidden;
-      background: #fff;
+      background: var(--ivory);
     }
     .nav {
       position: absolute;
@@ -175,26 +205,28 @@
       z-index: 20;
       display: flex;
       align-items: center;
-      gap: 44px;
-      padding: 5px 5px 5px 16px;
+      gap: 40px;
+      padding: 6px 6px 6px 20px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, .9);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 6px 18px rgba(0, 0, 0, .06);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(245, 241, 232, 0.92);
+      box-shadow: 0 0 0 1px rgba(32, 60, 43, .08), 0 8px 24px rgba(32, 60, 43, .08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .brand {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: -.04em;
+      gap: 8px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -.03em;
+      color: var(--forest);
     }
     .brand svg {
-      width: 30px;
-      height: 22px;
+      width: 28px;
+      height: 24px;
       display: block;
+      color: var(--harvest);
     }
     .cloud {
       position: absolute;
@@ -216,24 +248,41 @@
       width: 100%;
       height: auto;
       display: block;
+      filter: drop-shadow(0 15px 30px rgba(32, 60, 43, 0.06));
     }
-    #heroTitle {
+    .hero-content {
       position: absolute;
       z-index: 6;
-      top: 31%;
+      top: 28%;
       left: 0;
       right: 0;
       text-align: center;
-      font-size: clamp(34px, 5.2vw, 76px);
-      font-weight: 400;
-      letter-spacing: -.045em;
-      line-height: 1.04;
       padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    #heroTitle {
+      font-size: clamp(38px, 5.5vw, 80px);
+      font-weight: 600;
+      letter-spacing: -.02em;
+      line-height: 1.06;
+      color: var(--forest);
+      max-width: 980px;
+      margin: 0 auto;
     }
     #heroTitle em {
-      color: var(--olive);
+      color: var(--harvest);
       font-style: italic;
+      font-weight: 600;
+    }
+    .hero-subtitle {
+      font-size: clamp(14px, 1.4vw, 17px);
       font-weight: 500;
+      color: #4a5445;
+      max-width: 600px;
+      line-height: 1.5;
     }
     .hero-media {
       position: absolute;
@@ -242,8 +291,8 @@
       bottom: 0;
       height: 72%;
       z-index: 2;
-      mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 24%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 24%);
     }
     #heroVideo {
       width: 100%;
@@ -257,14 +306,29 @@
       z-index: 5;
       pointer-events: none;
     }
+    .glass-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--forest);
+      white-space: nowrap;
+    }
+    .glass-badge svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--harvest);
+    }
 
-    /* 4b. Stats */
+    /* 02. FARM DISCOVERY & METRICS */
     section.stats {
       position: relative;
       height: 100vh;
-      min-height: 680px;
+      min-height: 700px;
       overflow: hidden;
-      background: #fff;
+      background: var(--ivory);
     }
     .sq-field {
       position: absolute;
@@ -282,13 +346,14 @@
       left: 50%;
       transform: translateX(-50%);
       bottom: -2%;
-      width: min(340px, 58vw);
+      width: min(380px, 62vw);
       pointer-events: none;
     }
     .tree {
       width: 100%;
       height: auto;
       display: block;
+      filter: hue-rotate(85deg) saturate(1.15) contrast(1.05);
     }
     .stats-inner {
       position: relative;
@@ -298,61 +363,75 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 22px;
+      gap: 20px;
       padding: 0 16px;
     }
     .stats-inner .h2 {
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
     .cards {
       position: relative;
       z-index: 4;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      width: min(880px, 100%);
+      gap: 14px;
+      width: min(900px, 100%);
     }
     .card {
-      height: 150px;
-      padding: 18px 22px;
+      height: 154px;
+      padding: 20px 22px;
       border-radius: var(--radius);
-      background: var(--lime);
+      background: var(--sage);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      color: var(--ivory);
       mask: radial-gradient(circle 17px at 0 55%, #0000 97%, #000) left/51% 100% no-repeat,
             radial-gradient(circle 17px at 100% 55%, #0000 97%, #000) right/51% 100% no-repeat;
       -webkit-mask: radial-gradient(circle 17px at 0 55%, #0000 97%, #000) left/51% 100% no-repeat,
                     radial-gradient(circle 17px at 100% 55%, #0000 97%, #000) right/51% 100% no-repeat;
+      box-shadow: 0 12px 28px rgba(32, 60, 43, 0.14);
+    }
+    .card:nth-child(2) {
+      background: var(--forest);
+    }
+    .card:nth-child(3) {
+      background: var(--harvest);
+      color: var(--forest);
+    }
+    .card:nth-child(4) {
+      background: var(--forest);
     }
     .card-label {
-      font-size: 10.5px;
-      font-weight: 500;
-      color: #2a3410;
-      letter-spacing: .02em;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .03em;
+      opacity: .9;
+      text-transform: uppercase;
     }
     .card b {
-      font-size: clamp(30px, 3.4vw, 44px);
-      font-weight: 600;
-      letter-spacing: -.04em;
-      color: #151a08;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(32px, 3.6vw, 46px);
+      font-weight: 700;
+      letter-spacing: -.03em;
       font-variant-numeric: tabular-nums;
       line-height: 1;
     }
     .cards-shadow {
-      width: min(820px, 94%);
-      height: 10px;
-      margin-top: -18px;
+      width: min(840px, 94%);
+      height: 12px;
+      margin-top: -16px;
       border-radius: 50%;
-      background: radial-gradient(closest-side, rgba(0, 0, 0, .08), transparent);
+      background: radial-gradient(closest-side, rgba(32, 60, 43, .16), transparent);
       z-index: 3;
     }
     .logos-wrap {
       position: relative;
-      width: min(860px, 100%);
+      width: min(880px, 100%);
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: 6px;
     }
     .band {
       position: absolute;
@@ -360,11 +439,11 @@
       left: 50%;
       transform: translateX(-50%);
       top: -6px;
-      width: min(340px, 58vw);
+      width: min(380px, 62vw);
       height: 64px;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      background: rgba(255, 255, 255, .12);
+      background: rgba(245, 241, 232, 0.25);
       mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
       pointer-events: none;
@@ -375,28 +454,35 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 24px;
-      width: min(860px, 100%);
-      padding: 6px 10px;
-      color: #151515;
+      gap: 28px;
+      width: min(880px, 100%);
+      padding: 8px 12px;
+      color: var(--forest);
     }
     .logo-item {
-      font-size: 21px;
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: -.03em;
+      letter-spacing: .02em;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       white-space: nowrap;
+      text-transform: uppercase;
+      opacity: .85;
+    }
+    .logo-item svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
     }
 
-    /* 4c. Loop / Accordion */
+    /* 03. FARMING EXPERIENCES (3-PANEL ACCORDION) */
     section.loop {
       position: relative;
       height: 100vh;
-      min-height: 680px;
+      min-height: 700px;
       overflow: hidden;
-      background: #fff;
+      background: var(--ivory);
     }
     .loop-cloud {
       position: absolute;
@@ -410,17 +496,18 @@
       width: 100%;
       height: auto;
       display: block;
+      filter: drop-shadow(0 15px 30px rgba(32, 60, 43, 0.08));
     }
     .loop-head {
       position: absolute;
       z-index: 4;
-      top: 9vh;
+      top: 8vh;
       left: 0;
       right: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       padding: 0 16px;
     }
     .track {
@@ -450,23 +537,24 @@
     }
     .panel-in {
       position: absolute;
-      left: clamp(14px, 1.8vw, 28px);
-      bottom: 10vh;
+      left: clamp(16px, 2.2vw, 36px);
+      bottom: 8vh;
       display: flex;
       align-items: flex-end;
-      gap: clamp(16px, 2vw, 30px);
+      gap: clamp(18px, 2.5vw, 36px);
       width: max-content;
     }
     .num {
-      font-size: clamp(170px, 36vh, 380px);
-      font-weight: 600;
-      line-height: .74;
-      letter-spacing: -.07em;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(160px, 34vh, 360px);
+      font-weight: 700;
+      line-height: .75;
+      letter-spacing: -.05em;
       user-select: none;
     }
     .step {
       position: relative;
-      width: min(400px, 30vw);
+      width: min(440px, 32vw);
       padding-bottom: 4px;
       opacity: 0;
       transform: translateX(-24px);
@@ -479,51 +567,176 @@
       filter: none;
       transition: opacity .7s .4s, transform .9s .35s cubic-bezier(.2, .8, .2, 1), filter .7s .4s;
     }
+    .step-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--harvest);
+      margin-bottom: 8px;
+    }
     .step h3 {
-      font-size: clamp(20px, 1.7vw, 26px);
-      font-weight: 400;
-      letter-spacing: -.03em;
-      margin-bottom: 12px;
-      color: var(--ink);
+      font-size: clamp(24px, 2vw, 32px);
+      font-weight: 600;
+      letter-spacing: -.02em;
+      margin-bottom: 14px;
+      color: var(--forest);
     }
     .step p {
-      font-size: 14px;
-      line-height: 1.4;
-      color: #2b2e27;
+      font-size: 15px;
+      line-height: 1.55;
+      color: #3b4237;
+    }
+    .step-img-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(245, 241, 232, 0.8);
+      border: 1px solid rgba(32, 60, 43, 0.1);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--forest);
     }
     .mini-cloud {
       position: absolute;
       left: -10%;
-      bottom: calc(100% + clamp(70px, 13vh, 150px));
+      bottom: calc(100% + clamp(60px, 11vh, 130px));
       width: min(18vw, 250px);
       max-width: none !important;
       animation: driftA 9s ease-in-out infinite alternate;
       pointer-events: none;
     }
 
-    /* 4d. CTA */
+    /* 04. FARM STORIES */
+    section.stories {
+      position: relative;
+      padding: 120px 4vw;
+      background: var(--ivory);
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+    .stories-head {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 54px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .story-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 16px 36px rgba(32, 60, 43, 0.08);
+      transition: transform .4s cubic-bezier(.2, .8, .2, 1), box-shadow .4s;
+      display: flex;
+      flex-direction: column;
+    }
+    .story-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(32, 60, 43, 0.15);
+    }
+    .story-img-wrap {
+      position: relative;
+      height: 240px;
+      overflow: hidden;
+    }
+    .story-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.2, .8, .2, 1);
+    }
+    .story-card:hover .story-img-wrap img {
+      transform: scale(1.06);
+    }
+    .story-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(32, 60, 43, 0.85);
+      color: var(--ivory);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      backdrop-filter: blur(8px);
+    }
+    .story-body {
+      padding: 26px 24px 30px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+    .story-meta {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--harvest);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .story-title {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--forest);
+      margin-bottom: 12px;
+    }
+    .story-quote {
+      font-style: italic;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #4a5445;
+      margin-bottom: 18px;
+    }
+    .story-author {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--forest);
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    /* 05. BOOKING EXPERIENCE (CTA) */
     section.cta {
       position: relative;
       height: 110vh;
-      min-height: 720px;
+      min-height: 780px;
       overflow: hidden;
-      background: #fff;
+      background: var(--forest);
     }
     .cta-img {
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
-      height: 78%;
+      height: 82%;
       mask-image: linear-gradient(to bottom, transparent 0, #000 24%);
       -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 24%);
       pointer-events: none;
     }
     #ctaImg {
       width: 100%;
-      height: 118%;
+      height: 120%;
       object-fit: cover;
       object-position: center 60%;
+      filter: saturate(1.15) brightness(0.9);
     }
     .petals {
       position: absolute;
@@ -535,12 +748,13 @@
     .petal {
       position: absolute;
       top: -20px;
-      width: 10px;
-      height: 8px;
-      border-radius: 80% 0 80% 0;
-      background: #f6c4d6;
+      width: 9px;
+      height: 9px;
+      border-radius: 50% 0 50% 50%;
+      background: radial-gradient(circle at 30% 30%, #FFE9A8, #D9A85C);
       opacity: .85;
       animation: fall linear infinite;
+      box-shadow: 0 0 8px rgba(217, 168, 92, 0.8);
     }
     @keyframes fall {
       0% {
@@ -554,41 +768,97 @@
       position: absolute;
       z-index: 4;
       left: 50%;
-      top: 30%;
+      top: 24%;
       transform: translateX(-50%);
-      width: min(680px, calc(100% - 32px));
-      padding: 46px 28px 54px;
-      text-align: center;
-      border-radius: 26px;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, .96) 0%, rgba(255, 255, 255, .75) 35%, rgba(255, 255, 255, .12) 100%);
-      border: 1px solid rgba(255, 255, 255, .7);
-      backdrop-filter: blur(16px) saturate(1.1);
-      -webkit-backdrop-filter: blur(16px) saturate(1.1);
-      box-shadow: 0 30px 60px rgba(10, 20, 60, .18);
+      width: min(740px, calc(100% - 32px));
+      padding: 42px 34px 46px;
+      border-radius: 28px;
+      background: linear-gradient(to bottom, rgba(245, 241, 232, 0.94) 0%, rgba(245, 241, 232, 0.85) 45%, rgba(245, 241, 232, 0.35) 100%);
+      border: 1px solid rgba(255, 255, 255, .8);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      box-shadow: 0 32px 70px rgba(18, 36, 25, .32);
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
     }
     .cta-card .h2 {
-      margin: 16px 0 10px;
-      font-size: clamp(24px, 2.8vw, 38px);
+      margin: 14px 0 10px;
+      font-size: clamp(26px, 3.2vw, 42px);
     }
     .cta-card p {
-      font-size: 14px;
-      color: #1d2230;
-      margin-bottom: 20px;
+      font-size: 14.5px;
       line-height: 1.5;
-      max-width: 440px;
+      color: #3b4438;
+      margin-bottom: 24px;
+      max-width: 520px;
+    }
+    /* Booking form widgets inside CTA card */
+    .booking-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 22px;
+      text-align: left;
+    }
+    .booking-field {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(32, 60, 43, 0.14);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .booking-field label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--forest);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .booking-field select, .booking-field input {
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--charcoal);
+      outline: none;
+      cursor: pointer;
+    }
+    .booking-perks {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 18px;
+      font-size: 11.5px;
+      color: var(--forest);
+      font-weight: 600;
+    }
+    .booking-perk-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .booking-perk-item svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--harvest);
     }
 
-    /* 4e. Footer */
+    /* 06. FOOTER */
     footer#footer {
-      background: var(--lime);
-      padding: 34px 4vw 22px;
+      background: var(--forest);
+      color: var(--ivory);
+      padding: 48px 4vw 26px;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      row-gap: 22px;
+      row-gap: 28px;
       position: relative;
       z-index: 5;
     }
@@ -596,6 +866,7 @@
       justify-self: start;
       display: flex;
       align-items: center;
+      gap: 14px;
     }
     .f-logo {
       width: 72px;
@@ -611,39 +882,71 @@
       stroke-dasharray: 60;
       stroke-dashoffset: 60;
     }
+    .f-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .f-brand-text span:first-child {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--harvest);
+    }
+    .f-brand-text span:last-child {
+      font-size: 11px;
+      opacity: .8;
+      letter-spacing: .02em;
+    }
     nav.f-links {
       display: flex;
-      gap: 24px;
-      font-size: 13px;
-      color: #1d240c;
+      gap: 26px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: rgba(245, 241, 232, 0.9);
       justify-self: center;
     }
+    nav.f-links a {
+      transition: color .2s;
+    }
     nav.f-links a:hover {
-      text-decoration: underline;
+      color: var(--harvest);
     }
     .f-social {
       display: flex;
-      gap: 16px;
+      gap: 18px;
       justify-self: end;
-      color: #1d240c;
+      color: var(--ivory);
     }
     .f-social a {
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity .2s;
+      transition: color .2s, transform .2s;
     }
     .f-social a:hover {
-      opacity: .7;
+      color: var(--harvest);
+      transform: translateY(-2px);
     }
     .f-copy {
       grid-column: 1 / -1;
       text-align: center;
-      font-size: 11px;
-      color: #2a330f;
+      font-size: 11.5px;
+      color: rgba(245, 241, 232, 0.65);
+      border-top: 1px solid rgba(245, 241, 232, 0.12);
+      padding-top: 20px;
     }
 
-    /* 6. Responsive */
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 990px) {
+      .stories-grid {
+        grid-template-columns: 1fr;
+        max-width: 580px;
+      }
+      .booking-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 900px) {
       .nav {
         gap: 24px;
@@ -652,20 +955,20 @@
         grid-template-columns: repeat(2, 1fr);
       }
       .card {
-        height: 120px;
+        height: 126px;
       }
       .logos {
         flex-wrap: wrap;
         justify-content: center;
-        gap: 14px 26px;
+        gap: 16px 28px;
       }
       .logo-item {
-        font-size: 17px;
+        font-size: 14px;
       }
       section.stats {
         height: auto;
         min-height: 100vh;
-        padding: 90px 0 300px;
+        padding: 90px 0 280px;
       }
       .tree-wrap {
         bottom: 0;
@@ -680,13 +983,16 @@
         height: 100svh;
         min-height: 560px;
       }
+      .hero-content {
+        top: 24%;
+      }
       #heroTitle {
-        top: 26%;
+        font-size: 38px;
       }
       .hero-media {
         height: 66%;
-        mask-image: linear-gradient(to bottom, transparent 0, #000 14%);
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%);
+        mask-image: linear-gradient(to bottom, transparent 0, #000 16%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%);
       }
       #heroVideo {
         object-position: 38% 100%;
@@ -706,10 +1012,10 @@
       .nav {
         top: 16px;
         gap: 18px;
-        padding-left: 12px;
+        padding-left: 14px;
       }
       .brand {
-        font-size: 19px;
+        font-size: 18px;
       }
       section.loop {
         height: auto;
@@ -749,7 +1055,7 @@
         gap: 18px;
       }
       .num {
-        font-size: 150px;
+        font-size: 140px;
       }
       .step, .panel.is-active .step {
         opacity: 1 !important;
@@ -769,14 +1075,14 @@
       .cta-img {
         position: relative;
         height: 92vh;
-        min-height: 620px;
+        min-height: 640px;
       }
       #ctaImg {
         object-position: 30% 60%;
       }
       .cta-card {
-        top: 120px;
-        padding: 34px 18px 42px;
+        top: 80px;
+        padding: 34px 20px 40px;
       }
       footer#footer {
         grid-template-columns: 1fr;
@@ -809,17 +1115,19 @@
 <body class="intro">
   <div class="backdrop"></div>
   <div id="app">
-    <!-- 4a. HERO -->
+    <!-- 01. IMMERSIVE HERO -->
     <section class="hero" id="hero">
       <nav class="nav">
-        <a href="#hero" class="brand" aria-label="Petalyx home">
-          <svg viewBox="0 0 30 22" aria-hidden="true">
-            <circle cx="4" cy="17" r="3.6" fill="currentColor"/>
-            <path d="M10.5 18.5 16.8 5.2 25.5 18.5" fill="none" stroke="currentColor" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <a href="#hero" class="brand" aria-label="One Day Kissan home">
+          <!-- Sprout Monogram SVG -->
+          <svg viewBox="0 0 30 24" aria-hidden="true">
+            <path d="M15 22V12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M15 12C15 6 9 3 4 5C4 11 9 14 15 12Z" fill="currentColor" opacity="0.9"/>
+            <path d="M15 10C15 5 21 2 26 4C26 10 21 12 15 10Z" fill="var(--forest)" stroke="currentColor" stroke-width="1.2"/>
           </svg>
-          petalyx
+          <span>One Day Kissan</span>
         </a>
-        <a href="#cta" class="btn">Start for $0</a>
+        <a href="#booking" class="btn">Explore Farm Experiences</a>
       </nav>
 
       <div class="cloud cloud-l" data-par="-60">
@@ -829,40 +1137,50 @@
         <img class="drift-b" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093215_0f37c0c3-f82c-485b-87dd-5a35b75a8782.png" alt="" width="620" height="auto">
       </div>
 
-      <h1 id="heroTitle" class="split">Benchmark the impact of<br>all your <em>AI staff.</em></h1>
+      <div class="hero-content">
+        <span class="pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          Heritage Agrarian Retreats
+        </span>
+        <h1 id="heroTitle" class="split">A day away from<br><em>the ordinary.</em></h1>
+        <p class="hero-subtitle">Breathe clean country air, step into fertile soil, and experience the timeless rhythms of rural farming alongside authentic agrarian stewards.</p>
+      </div>
 
       <div class="hero-media">
-        <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093215_b7826239-e451-4e15-b42b-d6bcf9497a32.png" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093331_5998f443-1b9c-4b62-820c-8219c73c72c4.mp4"></video>
+        <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093331_5998f443-1b9c-4b62-820c-8219c73c72c4.mp4"></video>
       </div>
 
       <div class="hero-glass" id="heroGlass"></div>
     </section>
 
-    <!-- 4b. STATS -->
+    <!-- 02. FARM DISCOVERY & METRICS -->
     <section class="stats" id="stats">
       <div class="sq-field" data-count="22"></div>
       <div class="tree-wrap">
-        <img id="tree" class="tree" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093215_95f11900-c4a0-49ad-bb2d-bb927dd594ee.png" alt="Cherry blossom trees">
+        <img id="tree" class="tree" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093215_95f11900-c4a0-49ad-bb2d-bb927dd594ee.png" alt="Heritage Countryside Banyan">
       </div>
       <div class="stats-inner">
-        <span class="pill reveal">Teams rely on us</span>
-        <h2 class="h2 split">80,000+ flows<br>finished on autopilot.</h2>
+        <span class="pill reveal">
+          <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+          Living Terroirs & Stewardship
+        </span>
+        <h2 class="h2 split">10,000+ acres of living earth<br>cultivated with ancestral wisdom.</h2>
         <div class="cards">
-          <div class="card" data-to="40" data-dec="0" data-suf="%">
-            <span class="card-label">Staff Time Freed</span>
+          <div class="card" data-to="100" data-dec="0" data-suf="%">
+            <span class="card-label">Soil Integrity</span>
             <b class="card-val">0%</b>
           </div>
-          <div class="card" data-to="300" data-dec="0" data-suf="+">
-            <span class="card-label">Customers</span>
+          <div class="card" data-to="12" data-dec="0" data-suf="+">
+            <span class="card-label">Living Terroirs</span>
             <b class="card-val">0+</b>
           </div>
-          <div class="card" data-to="99.2" data-dec="1" data-suf="%">
-            <span class="card-label">Task Success Rates</span>
-            <b class="card-val">0.0%</b>
+          <div class="card" data-to="4800" data-dec="0" data-suf="+">
+            <span class="card-label">Urban Citizens</span>
+            <b class="card-val">0+</b>
           </div>
-          <div class="card" data-to="99.2" data-dec="1" data-suf="%">
-            <span class="card-label">Output Reliability</span>
-            <b class="card-val">0.0%</b>
+          <div class="card" data-to="0" data-dec="0" data-suf="%">
+            <span class="card-label">Synthetic Additives</span>
+            <b class="card-val">0%</b>
           </div>
         </div>
         <div class="cards-shadow"></div>
@@ -870,32 +1188,22 @@
           <div class="band" id="band"></div>
           <div class="logos">
             <div class="logo-item">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M4.5 10.5C4.5 9.67 3.83 9 3 9s-1.5.67-1.5 1.5.67 1.5 1.5 1.5h1.5v-1.5zm1 0c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V6.5c0-.83-.67-1.5-1.5-1.5S5.5 5.67 5.5 6.5v4zm4-6c.83 0 1.5-.67 1.5-1.5S10.33 1.5 9.5 1.5 8 2.17 8 3v1.5h1.5zm0 1c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h4c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-4zm6 4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v1.5h1.5c.83 0 1.5-.67 1.5-1.5zm-1 0c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v4c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-4zm-4 6c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5v-1.5h-1.5zm0-1c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-4c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h4z"/>
-              </svg>
-              <span>slack</span>
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+              <span>Regenerative Organic</span>
             </div>
-            <div class="logo-item" style="font-weight: 400;">zapier</div>
+            <div class="logo-item">Slow Food Heritage</div>
             <div class="logo-item">
-              <svg width="20" height="18" viewBox="0 0 28 26" fill="currentColor" aria-hidden="true">
-                <path d="M7 2 0 6.5 7 11l7-4.5L7 2zm14 0-7 4.5 7 4.5 7-4.5L21 2zM0 15.5 7 20l7-4.5-7-4.5-7 4.5zm21-4.5-7 4.5 7 4.5 7-4.5-7-4.5zM7 21.5l7 4.5 7-4.5-7-4.5-7 4.5z"/>
-              </svg>
-              <span>Dropbox</span>
+              <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.8L19.5 19h-15L12 5.8z"/></svg>
+              <span>Biodynamic Trust</span>
             </div>
-            <div class="logo-item">HubSpot</div>
-            <div class="logo-item" style="font-size: 15px; font-weight: 500;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-                <rect x="1.2" y="1.2" width="15.6" height="15.6" rx="4"/>
-                <path d="M5.5 13.5V4.8l7 8.4V4.8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <span>Notion</span>
-            </div>
+            <div class="logo-item">Rainforest Alliance</div>
+            <div class="logo-item" style="font-size: 13px;">Indigenous Seed Bank</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4c. HUMAN-IN-THE-LOOP HOVER ACCORDION -->
+    <!-- 03. FARMING EXPERIENCES (3-PANEL ACCORDION) -->
     <section class="loop" id="loop">
       <div class="loop-cloud" data-par="-50">
         <img class="drift-a" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093216_44218665-b15e-4566-a2d4-2676ab03609d.png" alt="" width="520" height="auto">
@@ -905,83 +1213,211 @@
       </div>
 
       <div class="loop-head">
-        <span class="pill reveal">Expert escalation</span>
-        <h2 class="h2 split">Humans take over only at<br>the crunch.</h2>
+        <span class="pill reveal">Handmade Days</span>
+        <h2 class="h2 split">Three stages of your<br>countryside immersion.</h2>
       </div>
 
       <div class="track" id="track">
         <!-- Panel 1 -->
-        <div class="panel is-active" tabindex="0" aria-label="Step 1: Ticket comes in" aria-expanded="true">
+        <div class="panel is-active" tabindex="0" aria-label="Stage 1: Discover the Farm" aria-expanded="true">
           <div class="panel-in">
-            <div class="num" style="color:var(--olive)">1</div>
+            <div class="num" style="color:var(--forest)">01</div>
             <div class="step">
               <img class="mini-cloud" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093215_0f37c0c3-f82c-485b-87dd-5a35b75a8782.png" alt="">
-              <h3>Ticket comes in</h3>
-              <p>A shopper files a return claim with the purchase details, why it's going back, and any proof they can share.</p>
+              <span class="step-tag">Morning Arrival · 8:00 AM</span>
+              <h3>Discover the Farm</h3>
+              <p>Walk barefoot through ancient fruit orchards, breathe rich wet petrichor, identify wild edible herbs, and learn how companion planting restores biodiversity.</p>
+              <div class="step-img-badge">
+                <span>🌿 Orchard trail & soil walk</span>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Panel 2 -->
-        <div class="panel" tabindex="0" aria-label="Step 2: Review record" aria-expanded="false">
+        <div class="panel" tabindex="0" aria-label="Stage 2: Participate in Farming" aria-expanded="false">
           <div class="panel-in">
-            <div class="num" style="color:var(--green)">2</div>
+            <div class="num" style="color:var(--sage)">02</div>
             <div class="step">
               <img class="mini-cloud" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093216_44218665-b15e-4566-a2d4-2676ab03609d.png" alt="">
-              <h3>Review record</h3>
-              <p>Your agent scans the buyer profile, earlier purchases, prior returns, and any notable account events.</p>
+              <span class="step-tag">Midday Field Work · 11:30 AM</span>
+              <h3>Participate in Farming</h3>
+              <p>Step directly into flooded terrace paddies to transplant indigenous rice saplings, guide traditional bullock ploughs, and harvest seasonal greens with your own hands.</p>
+              <div class="step-img-badge">
+                <span>🌾 Paddy transplanting & harvesting</span>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Panel 3 -->
-        <div class="panel" tabindex="0" aria-label="Step 3: Apply the rules" aria-expanded="false">
+        <div class="panel" tabindex="0" aria-label="Stage 3: Experience Rural Life" aria-expanded="false">
           <div class="panel-in">
-            <div class="num" style="color:var(--lime)">3</div>
+            <div class="num" style="color:var(--harvest)">03</div>
             <div class="step">
               <img class="mini-cloud" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093215_0f37c0c3-f82c-485b-87dd-5a35b75a8782.png" alt="">
-              <h3>Apply the rules</h3>
-              <p>Your agent measures the claim against return terms, qualifying conditions, time limits, and edge cases.</p>
+              <span class="step-tag">Evening Hearth · 4:30 PM</span>
+              <h3>Experience Rural Life</h3>
+              <p>Crush fresh sugarcane for sweet juice, shape earthen clay on artisan pottery wheels, cook over woodfire stoves, and share folk stories beneath unpolluted stars.</p>
+              <div class="step-img-badge">
+                <span>🔥 Clay chulha cooking & stargazing</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4d. CTA -->
-    <section class="cta" id="cta">
-      <div class="sq-field" data-count="16"></div>
-      <div class="cta-img">
-        <img id="ctaImg" alt="Moonlit cherry blossom valley" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093217_cc690198-ad8c-4127-8734-8485bd878351.png">
+    <!-- 04. FARM STORIES -->
+    <section class="stories" id="stories">
+      <div class="stories-head">
+        <span class="pill reveal">Stewards of the Earth</span>
+        <h2 class="h2 split">Stories rooted in the soil.</h2>
+        <p style="font-size:15px;color:#4a5445;max-width:560px;">Meet the dedicated agrarian families who care for the land and welcome you to experience their heritage.</p>
       </div>
-      <div class="petals" id="petals"></div>
-      <div class="cta-card" id="ctaCard">
-        <span class="pill">Get started</span>
-        <h2 class="h2 split">Every hour your agents free up is gold.</h2>
-        <p class="reveal">Set up your first AI agent in minutes and see results on day one.</p>
-        <a href="#hero" class="btn reveal">Start for $0</a>
+      <div class="stories-grid">
+        <!-- Story 1 -->
+        <article class="story-card">
+          <div class="story-img-wrap">
+            <img src="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80" alt="Hands in soil" loading="lazy">
+            <span class="story-badge">Western Ghats</span>
+          </div>
+          <div class="story-body">
+            <div>
+              <div class="story-meta">Indigenous Seeds</div>
+              <h3 class="story-title">The Deshmukh Family</h3>
+              <p class="story-quote">"We do not merely grow grain; we preserve sixty varieties of drought-resilient heirloom rice passed down through four generations."</p>
+            </div>
+            <div class="story-author">Ramrao & Savitri Deshmukh • Sahyadri Foothills</div>
+          </div>
+        </article>
+
+        <!-- Story 2 -->
+        <article class="story-card">
+          <div class="story-img-wrap">
+            <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80" alt="Green rice terrace" loading="lazy">
+            <span class="story-badge">Deccan Terraces</span>
+          </div>
+          <div class="story-body">
+            <div>
+              <div class="story-meta">Regenerative Farming</div>
+              <h3 class="story-title">From Cubicles to Crops</h3>
+              <p class="story-quote">"Trading twelve hours of screen time for morning dew and seed sowing gave our family a living relationship with where our nourishment begins."</p>
+            </div>
+            <div class="story-author">Ananya & Devraj • Certified Agroforest Stewards</div>
+          </div>
+        </article>
+
+        <!-- Story 3 -->
+        <article class="story-card">
+          <div class="story-img-wrap">
+            <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=80" alt="Farmer in fields" loading="lazy">
+            <span class="story-badge">Punjab Plains</span>
+          </div>
+          <div class="story-body">
+            <div>
+              <div class="story-meta">Ancestral Foodways</div>
+              <h3 class="story-title">Golden Mustard Harvests</h3>
+              <p class="story-quote">"The aroma of fresh cold-pressed mustard oil and slow woodfire hearth cooking has the magic to bring three generations together at one wooden table."</p>
+            </div>
+            <div class="story-author">Gurmehar Singh • Organic Wheat & Mustard Grower</div>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- 4e. FOOTER -->
+    <!-- 05. BOOKING EXPERIENCE (CTA) -->
+    <section class="cta" id="booking">
+      <div class="sq-field" data-count="16"></div>
+      <div class="cta-img">
+        <img id="ctaImg" alt="Moonlit countryside rice terrace" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1920&q=80">
+      </div>
+      <div class="petals" id="petals"></div>
+      <div class="cta-card" id="ctaCard">
+        <span class="pill">Begin Your Journey</span>
+        <h2 class="h2 split">A single day in the fields stays with you forever.</h2>
+        <p class="reveal">Select your preferred agrarian region and tailor your farm immersion. Zero advance deposit required.</p>
+
+        <!-- Interactive Glass Booking Form -->
+        <form class="booking-grid" onsubmit="event.preventDefault(); alert('Thank you! Your One Day Kissan farm immersion inquiry has been reserved with $0 deposit. Our steward coordinator will reach out shortly.');">
+          <div class="booking-field">
+            <label for="regionSelect">1. Choose Region</label>
+            <select id="regionSelect" required>
+              <option value="sahyadri">Western Ghats Foothills</option>
+              <option value="deccan">Deccan Agroforest Plateau</option>
+              <option value="cauvery">Cauvery Delta Wetlands</option>
+              <option value="punjab">Canal Plains Organic Estate</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label for="experienceSelect">2. Experience Type</label>
+            <select id="experienceSelect" required>
+              <option value="paddy">Paddy Immersion & Sowing</option>
+              <option value="harvest">Organic Harvest & Feast</option>
+              <option value="artisanal">Pottery & Rural Hearth Life</option>
+              <option value="family">Full Family Countryside Day</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label for="partySelect">3. Travellers</label>
+            <select id="partySelect" required>
+              <option value="2a">2 Adults (Couple)</option>
+              <option value="family">2 Adults + 2 Children</option>
+              <option value="solo">1 Adult (Solo Explorer)</option>
+              <option value="group">Small Group (5-8 people)</option>
+            </select>
+          </div>
+          <div style="grid-column: 1 / -1; margin-top: 6px;">
+            <button type="submit" class="btn btn-gold" style="width: 100%; height: 46px; font-size: 15px;">
+              Reserve Your Day Away — $0 Deposit
+            </button>
+          </div>
+        </form>
+
+        <div class="booking-perks">
+          <div class="booking-perk-item">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <span>Organic Farm Breakfast & Lunch</span>
+          </div>
+          <div class="booking-perk-item">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <span>Field Boots & Work Aprons Provided</span>
+          </div>
+          <div class="booking-perk-item">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <span>Guided by Local Farmer Stewards</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. FOOTER -->
     <footer id="footer">
       <div class="f-logo-wrap">
-        <svg class="f-logo" viewBox="0 0 80 80" aria-label="Petalyx">
-          <circle id="fRing" cx="40" cy="40" r="37" fill="none" stroke="#111" stroke-width="2.4" stroke-dasharray="233" stroke-dashoffset="233" transform="rotate(-90 40 40)"/>
-          <circle class="fdot" cx="22" cy="40" r="4.5" fill="#111"/>
-          <circle class="fdot" cx="40" cy="40" r="4.5" fill="#111"/>
-          <circle class="fdot" cx="58" cy="40" r="4.5" fill="#111"/>
-          <path id="fMark" d="M33 53 43 31 56 53" fill="none" stroke="#111" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60"/>
+        <svg class="f-logo" viewBox="0 0 80 80" aria-label="One Day Kissan Emblem">
+          <!-- Harvest Ring -->
+          <circle id="fRing" cx="40" cy="40" r="37" fill="none" stroke="var(--harvest)" stroke-width="2.4" stroke-dasharray="233" stroke-dashoffset="233" transform="rotate(-90 40 40)"/>
+          <!-- Three Seedling Dots -->
+          <circle class="fdot" cx="22" cy="40" r="4.5" fill="var(--harvest)"/>
+          <circle class="fdot" cx="40" cy="40" r="4.5" fill="var(--harvest)"/>
+          <circle class="fdot" cx="58" cy="40" r="4.5" fill="var(--harvest)"/>
+          <!-- Sprout Monogram Path -->
+          <path id="fMark" d="M33 53 43 31 56 53" fill="none" stroke="var(--harvest)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60"/>
         </svg>
+        <div class="f-brand-text">
+          <span>One Day Kissan</span>
+          <span>Reconnecting Cities to the Soil</span>
+        </div>
       </div>
       <nav class="f-links">
-        <a href="#hero">Toolkit</a>
-        <a href="#stats">Mission</a>
-        <a href="#loop">Help desk</a>
-        <a href="#cta">Terms</a>
+        <a href="#hero">Farm Trails</a>
+        <a href="#stats">Our Philosophy</a>
+        <a href="#loop">Experiences</a>
+        <a href="#stories">Farm Stories</a>
+        <a href="#booking">Book A Day</a>
       </nav>
       <div class="f-social">
-        <!-- X -->
+        <!-- X / Twitter -->
         <a href="#" aria-label="X">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
             <path d="M14.1 2H16.8L10.9 8.7L17.8 17.8H12.3L8 12.2L3.1 17.8H0.4L6.7 10.6L0.2 2H5.8L9.7 7.2L14.1 2ZM13.1 16.2H14.6L5 3.5H3.4L13.1 16.2Z"/>
@@ -1002,17 +1438,17 @@
           </svg>
         </a>
       </div>
-      <div class="f-copy">© 2026 Petalyx. All rights reserved.</div>
+      <div class="f-copy">© 2026 One Day Kissan. Rooted in soil stewardship & rural community empowerment. All rights reserved.</div>
     </footer>
   </div>
 
-  <!-- Scripts at end of body in order -->
+  <!-- Scripts in order -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     (function () {
-      // 1) Setup & environment
+      // 1) Environment & setup
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const isMobile = window.innerWidth <= 760;
 
@@ -1108,8 +1544,8 @@
       document.querySelectorAll('.sq-field').forEach(field => {
         const count = parseInt(field.dataset.count, 10) || 20;
         for (let i = 0; i < count; i++) {
-          const col = Math.floor(Math.random() * 30); // 0–29
-          const row = Math.floor(Math.random() * 6);  // 0–5
+          const col = Math.floor(Math.random() * 30);
+          const row = Math.floor(Math.random() * 6);
           const sq = document.createElement('div');
           sq.className = 'grid-sq';
           sq.style.width = '46px';
@@ -1135,11 +1571,11 @@
         }
       });
 
-      // 4) Hero glass squares
+      // 4) Hero 3D glass elevation markers & badges
       const glassCoords = [
-        [3, 64], [3, 71], [6.5, 71], [10, 71], [3, 78], [-1, 70],
-        [45.5, 76], [49, 80], [49, 76], [52.5, 76],
-        [86, 58], [86, 67], [82, 76], [89.5, 76], [86, 84]
+        [4, 66], [4, 74], [8, 74], [12, 74], [4, 82], [-1, 72],
+        [45.5, 76], [49, 81], [49, 76], [52.5, 76],
+        [85, 60], [85, 69], [81, 78], [88.5, 78], [85, 86]
       ];
       const glassContainer = document.getElementById('heroGlass');
       if (glassContainer) {
@@ -1150,28 +1586,42 @@
             sq.classList.add('glass-odd');
           }
           if (x > 40 && x < 60) {
-            sq.style.width = 'clamp(28px, 3.4vw, 44px)';
+            sq.style.width = 'clamp(32px, 3.8vw, 48px)';
           } else {
-            sq.style.width = 'clamp(36px, 5.4vw, 74px)';
+            sq.style.width = 'clamp(40px, 5.8vw, 80px)';
           }
           sq.style.aspectRatio = '1';
           sq.style.left = `${x}%`;
           sq.style.top = `${y}%`;
+
+          // Add subtle elevation & crop tag to key markers
+          if (idx === 0) {
+            sq.innerHTML = '<div class="glass-badge"><span>🌾 1,250m</span></div>';
+            sq.style.aspectRatio = 'auto';
+            sq.style.height = '32px';
+            sq.style.width = 'auto';
+          } else if (idx === 10) {
+            sq.innerHTML = '<div class="glass-badge"><span>🍃 Wet Terraces</span></div>';
+            sq.style.aspectRatio = 'auto';
+            sq.style.height = '32px';
+            sq.style.width = 'auto';
+          }
+
           glassContainer.appendChild(sq);
         });
       }
 
-      // 5) Petals generator
+      // 5) Natural Golden Pollen & Spores Particles
       const petalsWrap = document.getElementById('petals');
       if (petalsWrap) {
-        for (let i = 0; i < 18; i++) {
+        for (let i = 0; i < 24; i++) {
           const petal = document.createElement('span');
           petal.className = 'petal';
           const left = (Math.random() * 100).toFixed(2);
           const dx = (Math.random() * 160 - 80).toFixed(1) + 'px';
-          const dur = (Math.random() * 9 + 9).toFixed(2) + 's';
-          const delay = (-Math.random() * 15).toFixed(2) + 's';
-          const scale = (Math.random() * 0.8 + 0.6).toFixed(2);
+          const dur = (Math.random() * 8 + 8).toFixed(2) + 's';
+          const delay = (-Math.random() * 14).toFixed(2) + 's';
+          const scale = (Math.random() * 0.9 + 0.5).toFixed(2);
 
           petal.style.left = `${left}%`;
           petal.style.setProperty('--dx', dx);
@@ -1182,9 +1632,9 @@
         }
       }
 
-      // 6) Lenis smooth scroll
+      // 6) Lenis smooth inertial scrolling
       const lenis = new Lenis({
-        duration: 1.25,
+        duration: 1.3,
         easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true
       });
@@ -1210,6 +1660,7 @@
       const heroWords = document.querySelectorAll('#heroTitle .w');
       gsap.set(heroWords, { opacity: 0, y: 24, filter: 'blur(10px)' });
       gsap.set('.nav', { opacity: 0, y: -16 });
+      gsap.set('.hero-subtitle', { opacity: 0, y: 16 });
 
       const introComplete = () => {
         document.body.classList.remove('intro');
@@ -1219,12 +1670,12 @@
         lenis.start();
         setupScroll();
 
-        // Flickering glass squares unless reduced motion
+        // Flickering glass markers
         if (!reduce) {
           document.querySelectorAll('#heroGlass .glass').forEach(sq => {
             gsap.to(sq, {
-              opacity: 0.15,
-              duration: 0.9,
+              opacity: 0.25,
+              duration: 1.1,
               yoyo: true,
               repeat: -1,
               ease: 'sine.inOut',
@@ -1269,6 +1720,13 @@
           ease: 'power3.out'
         }, '-=0.7');
 
+        introTl.to('.hero-subtitle', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out'
+        }, '-=0.5');
+
         introTl.from('.cloud.cloud-l', {
           x: -120,
           opacity: 0,
@@ -1305,8 +1763,8 @@
           scrub: true
         };
 
-        gsap.to('#heroTitle', {
-          yPercent: -60,
+        gsap.to('.hero-content', {
+          yPercent: -45,
           ease: 'none',
           scrollTrigger: heroTrigger
         });
@@ -1340,8 +1798,8 @@
           });
         });
 
-        // Word reveal for .split in stats/loop/cta
-        document.querySelectorAll('#stats .split, #loop .split, #cta .split').forEach(splitEl => {
+        // Word reveal for .split in stats/loop/cta/stories
+        document.querySelectorAll('#stats .split, #loop .split, #stories .split, #booking .split').forEach(splitEl => {
           const words = splitEl.querySelectorAll('.w');
           if (words.length) {
             gsap.from(words, {
@@ -1356,6 +1814,19 @@
                 start: 'top 80%'
               }
             });
+          }
+        });
+
+        // Farm Stories cards stagger entrance
+        gsap.from('.story-card', {
+          y: 40,
+          opacity: 0,
+          duration: 0.9,
+          stagger: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.stories-grid',
+            start: 'top 75%'
           }
         });
 
@@ -1543,7 +2014,7 @@
           yPercent: 0,
           ease: 'none',
           scrollTrigger: {
-            trigger: '#cta',
+            trigger: '#booking',
             start: 'top bottom',
             end: 'bottom bottom',
             scrub: true
@@ -1558,12 +2029,12 @@
           duration: 1.2,
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: '#cta',
+            trigger: '#booking',
             start: 'top 60%'
           }
         });
 
-        // Footer Logo Animation
+        // Footer Logo Animation (Sprout Monogram Reveal)
         const dots = document.querySelectorAll('.fdot');
         const footerTl = gsap.timeline({
           scrollTrigger: {
