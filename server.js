@@ -433,9 +433,22 @@ app.use((req, res) => {
 // Start server after database initialization
 initDatabase()
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`🌾 One Day Kissan full-stack engine running on http://localhost:${PORT}`);
-    });
+    function startListening(portToTry) {
+      const server = app.listen(portToTry, () => {
+        console.log(`🌾 One Day Kissan full-stack engine running on http://localhost:${portToTry}`);
+      });
+
+      server.on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+          console.warn(`⚠️ Port ${portToTry} is already active. Checking next port...`);
+          startListening(portToTry + 1);
+        } else {
+          console.error('Server error:', err);
+        }
+      });
+    }
+
+    startListening(Number(PORT));
   })
   .catch(err => {
     console.error('Failed to initialize database:', err);

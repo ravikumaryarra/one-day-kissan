@@ -3,7 +3,6 @@ Thumbs.db
 *.log
 *.db
 node_modules/
-package.json
 package-lock.json
 screenshots/
 screenshots_phase1/

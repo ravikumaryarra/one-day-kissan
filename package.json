@@ -1,0 +1,19 @@
+{
+  "name": "one-day-kissan",
+  "version": "1.0.0",
+  "description": "One Day Kissan — Full-Stack Agrotourism & Organic Produce Platform",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "test": "node test_phase4.cjs"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "playwright-core": "^1.64.1",
+    "qrcode": "^1.5.4",
+    "sqlite3": "^6.0.1"
+  }
+}
