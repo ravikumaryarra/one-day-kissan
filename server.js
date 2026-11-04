@@ -9,7 +9,13 @@ const {
   createBooking,
   getBookingByRef,
   getTerroirs,
-  getTerroirById
+  getTerroirById,
+  getStories,
+  getStoryById,
+  getHampers,
+  getHamperById,
+  createHamperOrder,
+  getHamperOrderByRef
 } = require('./database');
 
 const app = express();
@@ -60,6 +66,103 @@ app.get('/api/terroirs/:id', async (req, res) => {
       return res.status(404).json({ success: false, error: 'Terroir not found.' });
     }
     res.json({ success: true, data: terroir });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 3: Farmer Stories API
+app.get('/api/stories', async (req, res) => {
+  try {
+    const stories = await getStories();
+    res.json({ success: true, count: stories.length, data: stories });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/stories/:id', async (req, res) => {
+  try {
+    const story = await getStoryById(req.params.id);
+    if (!story) {
+      return res.status(404).json({ success: false, error: 'Story not found.' });
+    }
+    res.json({ success: true, data: story });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 3: Farm-to-Table Harvest Hampers API
+app.get('/api/hampers', async (req, res) => {
+  try {
+    const hampers = await getHampers();
+    res.json({ success: true, count: hampers.length, data: hampers });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/hampers/:id', async (req, res) => {
+  try {
+    const hamper = await getHamperById(req.params.id);
+    if (!hamper) {
+      return res.status(404).json({ success: false, error: 'Harvest hamper not found.' });
+    }
+    res.json({ success: true, data: hamper });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 3: Reserve a Harvest Hamper
+app.post('/api/hampers/orders', async (req, res) => {
+  try {
+    const {
+      hamperId,
+      fullName,
+      email,
+      phone,
+      deliveryAddress,
+      frequency,
+      specialNotes
+    } = req.body;
+
+    if (!hamperId || !fullName || !email || !phone || !deliveryAddress) {
+      return res.status(400).json({
+        success: false,
+        error: 'Please fill in all required fields: hamperId, fullName, email, phone, deliveryAddress.'
+      });
+    }
+
+    const order = await createHamperOrder({
+      hamperId,
+      fullName: fullName.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      deliveryAddress: deliveryAddress.trim(),
+      frequency: frequency || 'one_time',
+      specialNotes: specialNotes ? specialNotes.trim() : ''
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'Harvest hamper reserved with $0 deposit. Hand-packed fresh by our agrarian stewards.',
+      data: order
+    });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 3: Lookup Hamper Order by Reference
+app.get('/api/hampers/orders/:ref', async (req, res) => {
+  try {
+    const order = await getHamperOrderByRef(req.params.ref.toUpperCase());
+    if (!order) {
+      return res.status(404).json({ success: false, error: 'Hamper order reservation not found.' });
+    }
+    res.json({ success: true, data: order });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }

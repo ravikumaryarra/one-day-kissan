@@ -200,10 +200,182 @@ function initDatabase() {
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `);
       seedTerroirs.forEach(t => stmtTerroir.run(t));
-      stmtTerroir.finalize(err => {
-        if (err) reject(err);
-        else resolve();
-      });
+      stmtTerroir.finalize();
+
+      // 5. Stories table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS stories (
+          id TEXT PRIMARY KEY,
+          region_id TEXT NOT NULL,
+          title TEXT NOT NULL,
+          farmer_name TEXT NOT NULL,
+          role_title TEXT NOT NULL,
+          category TEXT NOT NULL,
+          quote TEXT NOT NULL,
+          full_story TEXT NOT NULL,
+          ambient_sound TEXT NOT NULL,
+          image_url TEXT NOT NULL,
+          FOREIGN KEY (region_id) REFERENCES regions (id)
+        )
+      `);
+
+      const seedStories = [
+        [
+          'story-sahyadri',
+          'sahyadri',
+          'The Deshmukh Family',
+          'Ramrao & Savitri Deshmukh',
+          'Heirloom Seed Keepers & Agroforest Stewards',
+          'Indigenous Seeds',
+          'We do not merely grow grain; we preserve sixty varieties of drought-resilient heirloom rice passed down through four generations.',
+          'For thirty-eight years, Savitri and I watched chemical fertilizers harden our father’s soft red clay into cracked chalk. In 2004, we took an oath to cast aside artificial sprays forever. We trekked across remote Sahyadri valleys collecting forgotten indigenous seeds: Indrayani, Ghansal, and Ambemohar. Today, our living soil drinks torrential monsoon rains without eroding, and our heirloom grains feed over four hundred urban families with pure unadulterated vitality.',
+          'canopy-breeze',
+          'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80'
+        ],
+        [
+          'story-deccan',
+          'deccan',
+          'From Cubicles to Crops',
+          'Ananya & Devraj',
+          'Regenerative Agroforestry Stewards',
+          'Regenerative Farming',
+          'Trading twelve hours of screen time for morning dew and seed sowing gave our family a living relationship with where our nourishment begins.',
+          'We used to be senior software architects in Whitefield, Bangalore. After twelve years of artificial office air conditioning, chronic fatigue, and grocery store food with no aroma, we bought eight acres of barren granite boulder land on the Deccan plateau. Using multi-layered Syntropic Agroforestry—planting jackfruit, coffee, cardamom, and native leguminous shade trees—we created an oasis with its own microclimate that remains 4°C cooler than surrounding towns.',
+          'canopy-breeze',
+          'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80'
+        ],
+        [
+          'story-punjab',
+          'punjab',
+          'Golden Mustard Harvests',
+          'Gurmehar Singh',
+          'Master Organic Wheat & Mustard Grower',
+          'Ancestral Foodways',
+          'The aroma of fresh cold-pressed mustard oil and slow woodfire hearth cooking has the magic to bring three generations together at one wooden table.',
+          'Punjab was once made the epicenter of petrochemical agriculture, but my grandfather refused to poison our family well. He taught me that wheat grown slowly under cool winter skies does not need artificial hormones to grow tall. When you bite into a hot makki roti cooked over a slow-burning woodfire hearth, lathered with fresh white butter, your body instantly remembers what genuine food tastes like.',
+          'hearth-fire',
+          'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=80'
+        ],
+        [
+          'story-cauvery',
+          'cauvery',
+          'Sacred Waters of the Delta',
+          'Murugesan & Valliammai',
+          'Wetland Traditional Stewards',
+          'Ancient Wetland Stewardship',
+          'The river Cauvery does not just supply irrigation water; she brings living mineral silt from the mountains that gives our Samba rice its sacred healing power.',
+          'In our village near Kumbakonam, wet paddy fields are cultivated using ancient Chola canal networks. We allow wild ducks, native mud crabs, and indigenous river snails to live within the standing water of our rice paddies—they eliminate weed seeds naturally and aerate the muddy soil. Our Mappillai Samba rice is legendary across southern India for building strength and endurance.',
+          'river-flow',
+          'https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=80'
+        ]
+      ];
+
+      const stmtStory = db.prepare(`
+        INSERT OR REPLACE INTO stories (
+          id, region_id, title, farmer_name, role_title, category,
+          quote, full_story, ambient_sound, image_url
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+      seedStories.forEach(s => stmtStory.run(s));
+      stmtStory.finalize();
+
+      // 6. Produce Hampers table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS hampers (
+          id TEXT PRIMARY KEY,
+          region_id TEXT NOT NULL,
+          name TEXT NOT NULL,
+          price_usd INTEGER NOT NULL,
+          weight TEXT NOT NULL,
+          freshness_window TEXT NOT NULL,
+          inclusions TEXT NOT NULL,
+          steward TEXT NOT NULL,
+          stock_remaining INTEGER DEFAULT 20,
+          image_url TEXT NOT NULL,
+          FOREIGN KEY (region_id) REFERENCES regions (id)
+        )
+      `);
+
+      const seedHampers = [
+        [
+          'hamper-sahyadri',
+          'sahyadri',
+          'Sahyadri Monsoon & Wild Honey Crate',
+          48,
+          '5.5 kg',
+          'Harvested Nov 2026 • Dispatched Fresh within 48h',
+          'Indrayani Fragrant Rice (2kg), Raw Wild Mountain Honey (500g), Sprouted Nachni Ragi Flour (1kg), Sun-dried Kokum Rinds (250g), Hand-churned A2 Desi Cow Ghee (500ml)',
+          'Ramrao & Savitri Deshmukh',
+          18,
+          'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80'
+        ],
+        [
+          'hamper-deccan',
+          'deccan',
+          'Deccan Shade-Canopy Agroforest Crate',
+          54,
+          '4.8 kg',
+          'Estate Cured Nov 2026 • Small-batch Roast',
+          'Single-Origin Arabica Whole Beans (500g), Malabar Green Cardamom (150g), Cold-Pressed Native Sesame Oil (1L), Sprouted Foxtail Millet (1.5kg), Raw Turmeric Rhizomes (500g)',
+          'Ananya & Devraj',
+          14,
+          'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80'
+        ],
+        [
+          'hamper-cauvery',
+          'cauvery',
+          'Cauvery Wetland Heirloom Rice Crate',
+          46,
+          '6.2 kg',
+          'Slow Sun-Dried Nov 2026 • Ancestral Strains',
+          'Seeraga Samba Petite Rice (2kg), Mappillai Samba Medicinal Red Rice (2kg), Palmyra Palm Jaggery Block (1kg), Fresh Coconut Blossom Nectar (500ml), Hand-ground Idli Podi (300g)',
+          'Murugesan & Valliammai',
+          22,
+          'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=80'
+        ],
+        [
+          'hamper-punjab',
+          'punjab',
+          'Punjab Winter Hearth Harvest Crate',
+          52,
+          '7.0 kg',
+          'Freshly Milled Nov 2026 • Cold-Pressed Pure',
+          'Stone-Ground Sharbati Amber Wheat (3kg), Cold-Pressed Yellow Mustard Oil (1L), Desi Sugarcane Gur (1.5kg), Raw Clover Honey (500g), Hand-pounded Garam Masala Blend (250g)',
+          'Gurmehar Singh',
+          16,
+          'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80'
+        ]
+      ];
+
+      const stmtHamper = db.prepare(`
+        INSERT OR REPLACE INTO hampers (
+          id, region_id, name, price_usd, weight, freshness_window,
+          inclusions, steward, stock_remaining, image_url
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+      seedHampers.forEach(h => stmtHamper.run(h));
+      stmtHamper.finalize();
+
+      // 7. Hamper Orders table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS hamper_orders (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          order_ref TEXT UNIQUE NOT NULL,
+          hamper_id TEXT NOT NULL,
+          full_name TEXT NOT NULL,
+          email TEXT NOT NULL,
+          phone TEXT NOT NULL,
+          delivery_address TEXT NOT NULL,
+          frequency TEXT NOT NULL,
+          special_notes TEXT,
+          status TEXT DEFAULT 'confirmed',
+          qr_code_data TEXT NOT NULL,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          FOREIGN KEY (hamper_id) REFERENCES hampers (id)
+        )
+      `);
+
+      resolve();
     });
   });
 }
@@ -391,6 +563,118 @@ async function getTerroirById(idOrRegionId) {
   return row;
 }
 
+// Phase 3: Farmer Stories queries
+async function getStories() {
+  return all(`
+    SELECT s.*, r.name as region_name, r.farm_name, r.location as farm_location
+    FROM stories s
+    JOIN regions r ON s.region_id = r.id
+    ORDER BY s.id
+  `);
+}
+
+async function getStoryById(idOrRegionId) {
+  const cleanId = idOrRegionId ? idOrRegionId.replace(/^story-/, '') : '';
+  return get(`
+    SELECT s.*, r.name as region_name, r.farm_name, r.location as farm_location
+    FROM stories s
+    JOIN regions r ON s.region_id = r.id
+    WHERE s.id = ? OR s.region_id = ? OR s.region_id = ? OR s.id = 'story-' || ?
+  `, [idOrRegionId, idOrRegionId, cleanId, cleanId]);
+}
+
+// Phase 3: Produce Hampers queries
+async function getHampers() {
+  return all(`
+    SELECT h.*, r.name as region_name, r.farm_name
+    FROM hampers h
+    JOIN regions r ON h.region_id = r.id
+    ORDER BY h.id
+  `);
+}
+
+async function getHamperById(id) {
+  return get(`
+    SELECT h.*, r.name as region_name, r.farm_name, r.location as farm_location
+    FROM hampers h
+    JOIN regions r ON h.region_id = r.id
+    WHERE h.id = ?
+  `, [id]);
+}
+
+// Phase 3: Create Hamper Reservation / Subscription Order
+async function createHamperOrder(data) {
+  const {
+    hamperId,
+    fullName,
+    email,
+    phone,
+    deliveryAddress,
+    frequency = 'one_time',
+    specialNotes = ''
+  } = data;
+
+  const hamper = await getHamperById(hamperId);
+  if (!hamper) throw new Error('Selected harvest hamper not found.');
+  if (hamper.stock_remaining <= 0) throw new Error('This harvest hamper is currently fully reserved.');
+
+  // Generate unique order ref: ODK-BOX-YYYYMM-XXXX
+  const now = new Date();
+  const ym = String(now.getFullYear()).slice(2) + String(now.getMonth() + 1).padStart(2, '0');
+  const randSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+  const orderRef = `ODK-BOX-${ym}-${randSuffix}`;
+
+  const qrPayload = JSON.stringify({
+    orderRef,
+    hamper: hamper.name,
+    customer: fullName,
+    frequency,
+    dispatchedBy: hamper.steward,
+    verified: true
+  });
+
+  const qrCodeData = await QRCode.toDataURL(qrPayload, {
+    width: 260,
+    margin: 1,
+    color: {
+      dark: '#203C2B',
+      light: '#F5F1E8'
+    }
+  });
+
+  await run(`UPDATE hampers SET stock_remaining = stock_remaining - 1 WHERE id = ?`, [hamperId]);
+
+  await run(`
+    INSERT INTO hamper_orders (
+      order_ref, hamper_id, full_name, email, phone,
+      delivery_address, frequency, special_notes, status, qr_code_data
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'confirmed', ?)
+  `, [orderRef, hamperId, fullName, email, phone, deliveryAddress, frequency, specialNotes, qrCodeData]);
+
+  return getHamperOrderByRef(orderRef);
+}
+
+// Phase 3: Get Hamper Order by Reference
+async function getHamperOrderByRef(orderRef) {
+  return get(`
+    SELECT 
+      o.*,
+      h.name as hamper_name,
+      h.price_usd,
+      h.weight,
+      h.freshness_window,
+      h.inclusions,
+      h.steward,
+      h.image_url as hamper_image,
+      r.name as region_name,
+      r.farm_name
+    FROM hamper_orders o
+    JOIN hampers h ON o.hamper_id = h.id
+    JOIN regions r ON h.region_id = r.id
+    WHERE o.order_ref = ?
+  `, [orderRef]);
+}
+
 module.exports = {
   db,
   initDatabase,
@@ -401,5 +685,11 @@ module.exports = {
   createBooking,
   getBookingByRef,
   getTerroirs,
-  getTerroirById
+  getTerroirById,
+  getStories,
+  getStoryById,
+  getHampers,
+  getHamperById,
+  createHamperOrder,
+  getHamperOrderByRef
 };

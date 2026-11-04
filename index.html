@@ -952,10 +952,15 @@
     }
     .stories-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 24px;
       max-width: 1240px;
       margin: 0 auto;
+    }
+    @media (max-width: 1100px) {
+      .stories-grid, .hampers-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
     .story-card {
       position: relative;
@@ -1033,6 +1038,426 @@
       color: var(--forest);
       border-top: 1px solid var(--line);
       padding-top: 12px;
+    }
+
+    /* Story Card Read Lore & Audio Button */
+    .story-read-btn {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(32, 60, 43, 0.08);
+      color: var(--forest);
+      border: 1px solid rgba(32, 60, 43, 0.16);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      width: fit-content;
+    }
+    .story-read-btn:hover {
+      background: var(--forest);
+      color: var(--ivory);
+      border-color: var(--forest);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(32, 60, 43, 0.15);
+    }
+    .soundwave-icon {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 12px;
+    }
+    .soundwave-icon span {
+      width: 2.5px;
+      background: currentColor;
+      border-radius: 2px;
+      height: 4px;
+      animation: soundwaveBeat 1.2s ease-in-out infinite alternate;
+    }
+    .soundwave-icon span:nth-child(2) {
+      height: 11px;
+      animation-delay: 0.2s;
+    }
+    .soundwave-icon span:nth-child(3) {
+      height: 7px;
+      animation-delay: 0.4s;
+    }
+    @keyframes soundwaveBeat {
+      0% { height: 3px; }
+      100% { height: 12px; }
+    }
+
+    /* 04B. FARM-TO-FORK HARVEST HAMPERS */
+    .hampers-section {
+      position: relative;
+      padding: 110px 4vw;
+      background: #FFFFFF;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+    .hampers-container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .hampers-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .hampers-subtitle {
+      font-size: 15px;
+      color: #4a5445;
+      line-height: 1.6;
+    }
+    .hampers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      width: 100%;
+    }
+    .hamper-card {
+      position: relative;
+      border-radius: 22px;
+      background: var(--ivory);
+      border: 1px solid rgba(32, 60, 43, 0.1);
+      box-shadow: 0 14px 32px rgba(32, 60, 43, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s;
+    }
+    .hamper-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 44px rgba(32, 60, 43, 0.12);
+    }
+    .hamper-img-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+    .hamper-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+    }
+    .hamper-card:hover .hamper-img-wrap img {
+      transform: scale(1.06);
+    }
+    .hamper-region-pill {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(32, 60, 43, 0.88);
+      color: var(--ivory);
+      font-size: 11px;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+    }
+    .hamper-stock-pill {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(245, 241, 232, 0.94);
+      color: var(--forest);
+      font-size: 11px;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .hamper-body {
+      padding: 22px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+    .hamper-freshness-pill {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--harvest);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .hamper-title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--forest);
+      margin-bottom: 8px;
+    }
+    .hamper-steward {
+      font-size: 12px;
+      color: #616e5c;
+      margin-bottom: 14px;
+    }
+    .hamper-inclusions-box {
+      background: #FFFFFF;
+      border: 1px solid rgba(32, 60, 43, 0.08);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 18px;
+    }
+    .hamper-inclusions-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--forest);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 4px;
+    }
+    .hamper-inclusions-text {
+      font-size: 11.5px;
+      color: #4a5445;
+      line-height: 1.45;
+    }
+    .hamper-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid rgba(32, 60, 43, 0.1);
+      padding-top: 14px;
+      margin-top: auto;
+    }
+    .hamper-price-tag {
+      display: flex;
+      flex-direction: column;
+    }
+    .hamper-price-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--forest);
+    }
+    .hamper-price-sub {
+      font-size: 10.5px;
+      color: #7b8874;
+    }
+    .hamper-reserve-btn {
+      padding: 8px 16px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 999px;
+    }
+
+    /* Phase 3 Story Modal & Audio Synth Player */
+    .story-modal-card {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      max-height: 88vh;
+      overflow-y: auto;
+      background: var(--ivory);
+      border-radius: 24px;
+      border: 1px solid rgba(32, 60, 43, 0.18);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .story-modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(32, 60, 43, 0.12);
+      padding-bottom: 18px;
+    }
+    .story-modal-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--harvest);
+      box-shadow: 0 4px 12px rgba(32, 60, 43, 0.15);
+      flex-shrink: 0;
+    }
+    .story-modal-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--harvest);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 2px;
+    }
+    .story-modal-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1.2;
+    }
+    .story-modal-meta {
+      font-size: 12.5px;
+      color: #616e5c;
+      margin-top: 2px;
+    }
+    .soundscape-player {
+      background: #FFFFFF;
+      border: 1px solid rgba(32, 60, 43, 0.14);
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 4px 16px rgba(32, 60, 43, 0.04);
+    }
+    .soundscape-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .soundscape-play-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: var(--ivory);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+      flex-shrink: 0;
+    }
+    .soundscape-play-btn:hover {
+      transform: scale(1.06);
+      background: #182e21;
+    }
+    .soundscape-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--forest);
+    }
+    .soundscape-status {
+      font-size: 11px;
+      color: #6a7765;
+    }
+    .soundwave-anim {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 24px;
+    }
+    .soundwave-anim span {
+      width: 3px;
+      background: var(--harvest);
+      border-radius: 2px;
+      height: 6px;
+      transition: height 0.2s;
+    }
+    .soundwave-anim.is-active span {
+      animation: soundwaveFull 0.9s ease-in-out infinite alternate;
+    }
+    .soundwave-anim.is-active span:nth-child(2) { animation-delay: 0.15s; }
+    .soundwave-anim.is-active span:nth-child(3) { animation-delay: 0.3s; }
+    .soundwave-anim.is-active span:nth-child(4) { animation-delay: 0.45s; }
+    .soundwave-anim.is-active span:nth-child(5) { animation-delay: 0.6s; }
+    @keyframes soundwaveFull {
+      0% { height: 4px; }
+      100% { height: 22px; }
+    }
+    .story-modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .story-modal-quote {
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--forest);
+      border-left: 3px solid var(--harvest);
+      padding-left: 14px;
+      margin: 0;
+      background: rgba(217, 168, 92, 0.08);
+      padding: 12px 16px;
+      border-radius: 0 10px 10px 0;
+    }
+    .story-modal-narrative {
+      font-size: 14px;
+      color: #3b4537;
+      line-height: 1.65;
+    }
+    .story-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(32, 60, 43, 0.12);
+      padding-top: 18px;
+      margin-top: 8px;
+    }
+
+    /* Hamper Drawer & Pass Modal */
+    .hamper-modal-card {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--ivory);
+      border-radius: 24px;
+      border: 1px solid rgba(32, 60, 43, 0.18);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
+      padding: 30px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .hamper-preview-banner {
+      background: #FFFFFF;
+      border: 1px solid rgba(32, 60, 43, 0.12);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .hamper-preview-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--forest);
+    }
+    .hamper-preview-meta {
+      font-size: 12px;
+      color: #616e5c;
+    }
+    .hamper-preview-price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--harvest);
+    }
+    .hamper-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .hamper-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
     }
 
     /* 05. BOOKING EXPERIENCE (CTA) */
@@ -1696,9 +2121,12 @@
       .calendar-milestones {
         grid-template-columns: minmax(0, 1fr);
       }
-      .stories-grid {
-        grid-template-columns: 1fr;
+      .stories-grid, .hampers-grid {
+        grid-template-columns: minmax(0, 1fr);
         max-width: 580px;
+      }
+      .hamper-double-col {
+        grid-template-columns: minmax(0, 1fr) !important;
       }
       .booking-grid {
         grid-template-columns: minmax(0, 1fr);
@@ -1899,6 +2327,7 @@
         </a>
         <div style="display: flex; align-items: center; gap: 8px;">
           <a href="#terroirs" class="btn btn-nav-terroirs" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14);">Terroirs</a>
+          <a href="#hampers" class="btn btn-nav-hampers" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14);">Harvest Crates</a>
           <button id="navLookupBtn" type="button" class="btn" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14); cursor: pointer; display: inline-flex; align-items: center; gap: 5px;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
             <span>My Pass</span>
@@ -2180,10 +2609,10 @@
       <div class="stories-head">
         <span class="pill reveal">Stewards of the Earth</span>
         <h2 class="h2 split">Stories rooted in the soil.</h2>
-        <p style="font-size:15px;color:#4a5445;max-width:560px;">Meet the dedicated agrarian families who care for the land and welcome you to experience their heritage.</p>
+        <p style="font-size:15px;color:#4a5445;max-width:560px;">Meet the dedicated agrarian families who care for the land and welcome you to experience their living heritage.</p>
       </div>
       <div class="stories-grid">
-        <!-- Story 1 -->
+        <!-- Story 1: Sahyadri -->
         <article class="story-card">
           <div class="story-img-wrap">
             <img src="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80" alt="Hands in soil" loading="lazy">
@@ -2195,11 +2624,17 @@
               <h3 class="story-title">The Deshmukh Family</h3>
               <p class="story-quote">"We do not merely grow grain; we preserve sixty varieties of drought-resilient heirloom rice passed down through four generations."</p>
             </div>
-            <div class="story-author">Ramrao & Savitri Deshmukh • Sahyadri Foothills</div>
+            <div>
+              <div class="story-author">Ramrao &amp; Savitri Deshmukh • Sahyadri Foothills</div>
+              <button type="button" class="story-read-btn" data-story-id="story-sahyadri">
+                <span class="soundwave-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span>Listen &amp; Read Lore</span>
+              </button>
+            </div>
           </div>
         </article>
 
-        <!-- Story 2 -->
+        <!-- Story 2: Deccan -->
         <article class="story-card">
           <div class="story-img-wrap">
             <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80" alt="Green rice terrace" loading="lazy">
@@ -2211,11 +2646,17 @@
               <h3 class="story-title">From Cubicles to Crops</h3>
               <p class="story-quote">"Trading twelve hours of screen time for morning dew and seed sowing gave our family a living relationship with where our nourishment begins."</p>
             </div>
-            <div class="story-author">Ananya & Devraj • Certified Agroforest Stewards</div>
+            <div>
+              <div class="story-author">Ananya &amp; Devraj • Certified Agroforest Stewards</div>
+              <button type="button" class="story-read-btn" data-story-id="story-deccan">
+                <span class="soundwave-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span>Listen &amp; Read Lore</span>
+              </button>
+            </div>
           </div>
         </article>
 
-        <!-- Story 3 -->
+        <!-- Story 3: Punjab -->
         <article class="story-card">
           <div class="story-img-wrap">
             <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=80" alt="Farmer in fields" loading="lazy">
@@ -2227,9 +2668,173 @@
               <h3 class="story-title">Golden Mustard Harvests</h3>
               <p class="story-quote">"The aroma of fresh cold-pressed mustard oil and slow woodfire hearth cooking has the magic to bring three generations together at one wooden table."</p>
             </div>
-            <div class="story-author">Gurmehar Singh • Organic Wheat & Mustard Grower</div>
+            <div>
+              <div class="story-author">Gurmehar Singh • Organic Wheat &amp; Mustard Grower</div>
+              <button type="button" class="story-read-btn" data-story-id="story-punjab">
+                <span class="soundwave-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span>Listen &amp; Read Lore</span>
+              </button>
+            </div>
           </div>
         </article>
+
+        <!-- Story 4: Cauvery -->
+        <article class="story-card">
+          <div class="story-img-wrap">
+            <img src="https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=80" alt="Wetland delta farmer" loading="lazy">
+            <span class="story-badge">Cauvery Delta</span>
+          </div>
+          <div class="story-body">
+            <div>
+              <div class="story-meta">Ancient Wetlands</div>
+              <h3 class="story-title">Sacred Delta Waters</h3>
+              <p class="story-quote">"The river does not merely irrigate; she deposits living mineral silt that gives our traditional Samba rice its unbroken medicinal vitality."</p>
+            </div>
+            <div>
+              <div class="story-author">Murugesan &amp; Valliammai • Traditional Rice Stewards</div>
+              <button type="button" class="story-read-btn" data-story-id="story-cauvery">
+                <span class="soundwave-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span>Listen &amp; Read Lore</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 04B. FARM-TO-FORK HARVEST HAMPERS -->
+    <section class="hampers-section" id="hampers">
+      <div class="hampers-container">
+        <div class="hampers-header">
+          <span class="pill">Direct Agrarian Bounty</span>
+          <h2 class="h2 split">Farm-to-Fork Harvest Hampers.</h2>
+          <p class="hampers-subtitle">Hand-picked crates of ancestral grains, cold-pressed oils, wild mountain honey, and seasonal estate harvest. Packed fresh at origin and shipped direct to urban households.</p>
+        </div>
+        <div class="hampers-grid" id="hampersGrid">
+          <!-- Hamper 1: Cauvery -->
+          <article class="hamper-card">
+            <div>
+              <div class="hamper-img-wrap">
+                <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=80" alt="Heirloom rice crate" loading="lazy">
+                <span class="hamper-region-pill">Cauvery Delta</span>
+                <span class="hamper-stock-pill"><span class="pulse-dot"></span> 22 crates left</span>
+              </div>
+              <div class="hamper-body">
+                <div>
+                  <div class="hamper-freshness-pill">Slow Sun-Dried Nov 2026 • Ancestral Strains</div>
+                  <h3 class="hamper-title">Cauvery Wetland Heirloom Rice Crate</h3>
+                  <div class="hamper-steward">Curated by Murugesan &amp; Valliammai • 6.2 kg</div>
+                  <div class="hamper-inclusions-box">
+                    <div class="hamper-inclusions-label">Box Contents</div>
+                    <div class="hamper-inclusions-text">Seeraga Samba Petite Rice (2kg), Mappillai Samba Medicinal Red Rice (2kg), Palmyra Jaggery Block (1kg), Coconut Blossom Nectar (500ml), Hand-ground Idli Podi (300g)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 0 20px 24px;">
+              <div class="hamper-footer">
+                <div class="hamper-price-tag">
+                  <span class="hamper-price-val">$46</span>
+                  <span class="hamper-price-sub">$0 advance • Pay on dispatch</span>
+                </div>
+                <button type="button" class="btn btn-gold hamper-reserve-btn" data-hamper-id="hamper-cauvery">Reserve Crate</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Hamper 2: Deccan -->
+          <article class="hamper-card">
+            <div>
+              <div class="hamper-img-wrap">
+                <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80" alt="Shade-grown coffee and spices crate" loading="lazy">
+                <span class="hamper-region-pill">Deccan Plateau</span>
+                <span class="hamper-stock-pill"><span class="pulse-dot"></span> 14 crates left</span>
+              </div>
+              <div class="hamper-body">
+                <div>
+                  <div class="hamper-freshness-pill">Estate Cured Nov 2026 • Small-batch Roast</div>
+                  <h3 class="hamper-title">Deccan Shade-Canopy Agroforest Crate</h3>
+                  <div class="hamper-steward">Curated by Ananya &amp; Devraj • 4.8 kg</div>
+                  <div class="hamper-inclusions-box">
+                    <div class="hamper-inclusions-label">Box Contents</div>
+                    <div class="hamper-inclusions-text">Single-Origin Arabica Beans (500g), Malabar Green Cardamom (150g), Cold-Pressed Native Sesame Oil (1L), Sprouted Foxtail Millet (1.5kg), Raw Turmeric Rhizomes (500g)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 0 20px 24px;">
+              <div class="hamper-footer">
+                <div class="hamper-price-tag">
+                  <span class="hamper-price-val">$54</span>
+                  <span class="hamper-price-sub">$0 advance • Pay on dispatch</span>
+                </div>
+                <button type="button" class="btn btn-gold hamper-reserve-btn" data-hamper-id="hamper-deccan">Reserve Crate</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Hamper 3: Punjab -->
+          <article class="hamper-card">
+            <div>
+              <div class="hamper-img-wrap">
+                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80" alt="Cold pressed mustard and grains crate" loading="lazy">
+                <span class="hamper-region-pill">Punjab Plains</span>
+                <span class="hamper-stock-pill"><span class="pulse-dot"></span> 19 crates left</span>
+              </div>
+              <div class="hamper-body">
+                <div>
+                  <div class="hamper-freshness-pill">Cold-Pressed Nov 2026 • Wood-Kohl Churn</div>
+                  <h3 class="hamper-title">Punjab Cold-Pressed Mustard &amp; Emmer Crate</h3>
+                  <div class="hamper-steward">Curated by Gurmehar Singh • 7.5 kg</div>
+                  <div class="hamper-inclusions-box">
+                    <div class="hamper-inclusions-label">Box Contents</div>
+                    <div class="hamper-inclusions-text">Cold-Pressed Mustard Oil (1.5L), Sharbati Heirloom Whole Wheat (3kg), Wild Multi-Flora Raw Forest Honey (500g), Stone-Ground Makki Flour (1.5kg), Organic Black Chickpeas (1kg)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 0 20px 24px;">
+              <div class="hamper-footer">
+                <div class="hamper-price-tag">
+                  <span class="hamper-price-val">$49</span>
+                  <span class="hamper-price-sub">$0 advance • Pay on dispatch</span>
+                </div>
+                <button type="button" class="btn btn-gold hamper-reserve-btn" data-hamper-id="hamper-punjab">Reserve Crate</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Hamper 4: Sahyadri -->
+          <article class="hamper-card">
+            <div>
+              <div class="hamper-img-wrap">
+                <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?auto=format&fit=crop&w=800&q=80" alt="Wild mountain honey and grains" loading="lazy">
+                <span class="hamper-region-pill">Western Ghats</span>
+                <span class="hamper-stock-pill"><span class="pulse-dot"></span> 11 crates left</span>
+              </div>
+              <div class="hamper-body">
+                <div>
+                  <div class="hamper-freshness-pill">Foraged &amp; Hand-Packed Nov 2026 • Forest Guild</div>
+                  <h3 class="hamper-title">Sahyadri High-Altitude Wild Forest Box</h3>
+                  <div class="hamper-steward">Curated by Ramrao &amp; Savitri Deshmukh • 5.4 kg</div>
+                  <div class="hamper-inclusions-box">
+                    <div class="hamper-inclusions-label">Box Contents</div>
+                    <div class="hamper-inclusions-text">Wild Forest Raw Wildflower Honey (700g), Indrayani Aromatic Mountain Rice (2kg), Solapuri Roasted Chutney (400g), Amlaprash Preserve (500g), Sun-Dried Kokum (300g), Sprouted Ragi (1kg)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 0 20px 24px;">
+              <div class="hamper-footer">
+                <div class="hamper-price-tag">
+                  <span class="hamper-price-val">$58</span>
+                  <span class="hamper-price-sub">$0 advance • Pay on dispatch</span>
+                </div>
+                <button type="button" class="btn btn-gold hamper-reserve-btn" data-hamper-id="hamper-sahyadri">Reserve Crate</button>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -2367,6 +2972,7 @@
         <a href="#terroirs">Living Terroirs</a>
         <a href="#loop">Experiences</a>
         <a href="#stories">Farm Stories</a>
+        <a href="#hampers">Harvest Crates</a>
         <a href="#booking">Book A Day</a>
       </nav>
       <div class="f-social">
@@ -3125,18 +3731,199 @@
     <div class="lookup-card">
       <div style="display: flex; justify-content: space-between; align-items: flex-start;">
         <div>
-          <h3 id="lookupTitle">Retrieve Your Pass</h3>
-          <p>Enter your 13-character booking reference to view or reprint your gate pass.</p>
+          <h3 id="lookupTitle">Retrieve Your Pass or Dispatch</h3>
+          <p>Enter your 13-character booking or hamper reference (e.g. ODK-2604-W8TQ or ODK-BOX-2611-AUQD).</p>
         </div>
         <button type="button" class="pass-close-btn" id="closeLookupModalBtn" style="color: var(--forest); font-size: 24px; padding: 0 4px;" aria-label="Close Lookup Dialog">&times;</button>
       </div>
       <form id="lookupForm" style="display: flex; flex-direction: column; gap: 12px;">
-        <input type="text" id="lookupInput" class="lookup-input" placeholder="e.g. ODK-2604-W8TQ" required maxlength="20">
+        <input type="text" id="lookupInput" class="lookup-input" placeholder="e.g. ODK-2604-W8TQ or ODK-BOX-2611-AUQD" required maxlength="24">
         <div id="lookupErrorAlert" style="display: none; background: #fee2e2; border: 1px solid #ef4444; color: #991b1b; padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;"></div>
         <button type="submit" id="lookupSubmitBtn" class="btn btn-gold" style="width: 100%; height: 44px; font-weight: 700; cursor: pointer;">
-          Find Reservation Pass
+          Find Reservation / Order
         </button>
       </form>
+    </div>
+  </div>
+
+  <!-- Farmer Oral Story & Ambient Soundscape Modal -->
+  <div id="storyModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="storyModalTitle">
+    <div class="story-modal-card">
+      <div class="story-modal-header">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <img id="storyModalImg" class="story-modal-avatar" src="" alt="Agrarian Steward">
+          <div>
+            <span class="story-modal-badge" id="storyModalCategory">Heritage Stewardship</span>
+            <h2 id="storyModalTitle" class="story-modal-name">Farmer Name</h2>
+            <div class="story-modal-meta" id="storyModalMeta">Farm Estate • Region</div>
+          </div>
+        </div>
+        <button type="button" class="pass-close-btn" id="closeStoryModalBtn" aria-label="Close Story Dialog">&times;</button>
+      </div>
+
+      <!-- Live Web Audio Soundscape Player -->
+      <div class="soundscape-player" id="soundscapePlayer">
+        <div class="soundscape-left">
+          <button type="button" class="soundscape-play-btn" id="soundscapeToggleBtn" aria-label="Play ambient soundscape">
+            <svg id="soundPlayIcon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="soundPauseIcon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          <div>
+            <div class="soundscape-title" id="soundscapeTitle">Ambient Farm Atmosphere</div>
+            <div class="soundscape-status" id="soundscapeStatus">Synthesizing live field atmosphere...</div>
+          </div>
+        </div>
+        <div class="soundwave-anim" id="soundwaveBars" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="story-modal-body">
+        <blockquote class="story-modal-quote" id="storyModalQuote">“...”</blockquote>
+        <div class="story-modal-narrative" id="storyModalNarrative">...</div>
+      </div>
+
+      <div class="story-modal-actions">
+        <button type="button" class="btn btn-gold" id="storyModalBookBtn" style="cursor: pointer;">Visit This Farm ($0 Advance)</button>
+        <button type="button" class="btn" id="storyModalHamperBtn" style="background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32,60,43,0.16); cursor: pointer;">Explore Harvest Crate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hamper Reservation Drawer Modal -->
+  <div id="hamperModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="hamperModalTitle">
+    <div class="hamper-modal-card">
+      <div class="pass-header">
+        <div>
+          <span class="pass-status-pill">Farm Direct • $0 Advance</span>
+          <h2 id="hamperModalTitle" class="pass-brand-title">Reserve Harvest Crate</h2>
+        </div>
+        <button type="button" class="pass-close-btn" id="closeHamperModalBtn" aria-label="Close Hamper Dialog">&times;</button>
+      </div>
+
+      <div class="hamper-preview-banner">
+        <div>
+          <div class="hamper-preview-name" id="hamperPreviewName">Cauvery Wetland Heirloom Rice Crate</div>
+          <div class="hamper-preview-meta" id="hamperPreviewMeta">6.2 kg • Thanjavur Heirloom Rice Wetland</div>
+        </div>
+        <div class="hamper-preview-price" id="hamperPreviewPrice">$46</div>
+      </div>
+
+      <form id="hamperForm" class="hamper-form">
+        <input type="hidden" id="hamperIdInput" name="hamperId" value="">
+
+        <div class="hamper-field">
+          <label for="hamperFrequency" class="booking-label">Delivery Cadence</label>
+          <select id="hamperFrequency" class="booking-select" required>
+            <option value="one_time">Single Seasonal Harvest Crate (Ships next harvest run)</option>
+            <option value="monthly">Monthly Living Farm Subscription (Cancel anytime)</option>
+            <option value="quarterly">Quarterly Solstice Box (4 boxes/year)</option>
+          </select>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;" class="hamper-double-col">
+          <div class="hamper-field">
+            <label for="hamperFullName" class="booking-label">Full Name</label>
+            <input type="text" id="hamperFullName" class="booking-input" placeholder="e.g. Priya Sharma" required>
+          </div>
+          <div class="hamper-field">
+            <label for="hamperPhone" class="booking-label">Phone Number</label>
+            <input type="tel" id="hamperPhone" class="booking-input" placeholder="+91 98765 43210" required>
+          </div>
+        </div>
+
+        <div class="hamper-field">
+          <label for="hamperEmail" class="booking-label">Email Address (for Dispatch Tracking)</label>
+          <input type="email" id="hamperEmail" class="booking-input" placeholder="priya@example.com" required>
+        </div>
+
+        <div class="hamper-field">
+          <label for="hamperAddress" class="booking-label">Delivery Address (Door, Building, City & PIN)</label>
+          <textarea id="hamperAddress" class="booking-input" rows="2" placeholder="Flat 402, Banyan Haven, Indiranagar, Bengaluru 560038" required></textarea>
+        </div>
+
+        <div class="hamper-field">
+          <label for="hamperNotes" class="booking-label">Special Notes / Dietary Preferences (Optional)</label>
+          <input type="text" id="hamperNotes" class="booking-input" placeholder="e.g. Extra cardamom, leave with security gate">
+        </div>
+
+        <div id="hamperErrorAlert" style="display: none; background: #fee2e2; border: 1px solid #ef4444; color: #991b1b; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;"></div>
+
+        <button type="submit" id="hamperSubmitBtn" class="btn btn-gold" style="width: 100%; height: 48px; font-size: 14.5px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+          <span id="hamperSubmitText">Confirm Crate Dispatch • $0 Advance</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hamper Dispatch Ticket Pass Modal -->
+  <div id="hamperPassModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="hamperPassTitle">
+    <div class="pass-ticket" id="hamperTicketElement">
+      <div class="pass-header">
+        <div class="pass-header-info">
+          <span class="pass-status-pill">Dispatch Slated • $0 Advance</span>
+          <h2 id="hamperPassTitle" class="pass-brand-title">Harvest Hamper • Dispatch Pass</h2>
+        </div>
+        <button type="button" class="pass-close-btn" id="closeHamperPassModalBtn" aria-label="Close Dispatch Pass">&times;</button>
+      </div>
+      <div class="pass-body">
+        <div class="pass-ref-banner">
+          <div>
+            <div class="pass-ref-label">Dispatch Reference</div>
+            <div class="pass-ref-pill" id="hamperPassRefText">ODK-BOX-2611-XXXX</div>
+          </div>
+          <button type="button" class="pass-copy-btn" id="copyHamperRefBtn">Copy Code</button>
+        </div>
+
+        <div class="pass-grid">
+          <div class="pass-item">
+            <span class="pass-item-label">Customer / Recipient</span>
+            <span class="pass-item-value" id="hamperPassGuestName">—</span>
+          </div>
+          <div class="pass-item">
+            <span class="pass-item-label">Harvest Crate</span>
+            <span class="pass-item-value" id="hamperPassCrateName">—</span>
+          </div>
+          <div class="pass-item">
+            <span class="pass-item-label">Farm Origin</span>
+            <span class="pass-item-value" id="hamperPassFarmOrigin">—</span>
+          </div>
+          <div class="pass-item">
+            <span class="pass-item-label">Agrarian Steward</span>
+            <span class="pass-item-value" id="hamperPassSteward">—</span>
+          </div>
+          <div class="pass-item">
+            <span class="pass-item-label">Cadence & Weight</span>
+            <span class="pass-item-value" id="hamperPassWeight">—</span>
+          </div>
+          <div class="pass-item">
+            <span class="pass-item-label">Settlement Amount</span>
+            <span class="pass-item-value" id="hamperPassPrice">—</span>
+          </div>
+          <div class="pass-item pass-full-width">
+            <span class="pass-item-label">Shipping Address</span>
+            <span class="pass-item-value" id="hamperPassAddress">—</span>
+          </div>
+          <div class="pass-item pass-full-width">
+            <span class="pass-item-label">Crate Inclusions</span>
+            <span class="pass-item-value" style="font-size: 12px; color: #465243; line-height: 1.4;" id="hamperPassInclusions">—</span>
+          </div>
+        </div>
+
+        <div class="pass-qr-wrap">
+          <img id="hamperPassQrImg" class="pass-qr-img" src="" alt="Hamper Dispatch QR Code">
+          <div class="pass-qr-instruction">
+            <strong>Farm-to-Door Chain:</strong> Hand-packed at origin by the agrarian family. Scan this QR code to view live packing progress and courier handover.
+          </div>
+        </div>
+
+        <div class="pass-actions">
+          <button type="button" class="pass-btn-print" id="downloadPackingSlipBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download Packing Slip (.txt)
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -3452,7 +4239,7 @@
         }
       }
 
-      // Lookup Form Submit Handler
+      // Lookup Form Submit Handler (Passes & Hampers)
       async function handleLookupSubmit(e) {
         e.preventDefault();
         const ref = (lookupInput ? lookupInput.value : '').trim().toUpperCase();
@@ -3469,24 +4256,34 @@
         }
 
         try {
-          const res = await fetch(`/api/bookings/${encodeURIComponent(ref)}`);
-          const data = await res.json();
-          if (!res.ok || !data.success || !data.data) {
-            throw new Error(data.error || 'No active reservation found with reference ' + ref);
+          if (ref.includes('BOX')) {
+            const res = await fetch(`/api/hampers/orders/${encodeURIComponent(ref)}`);
+            const data = await res.json();
+            if (!res.ok || !data.success || !data.data) {
+              throw new Error(data.error || 'No active hamper order found with reference ' + ref);
+            }
+            closeModal(lookupModal);
+            renderHamperPass(data.data);
+            showToast('Hamper dispatch order found!');
+          } else {
+            const res = await fetch(`/api/bookings/${encodeURIComponent(ref)}`);
+            const data = await res.json();
+            if (!res.ok || !data.success || !data.data) {
+              throw new Error(data.error || 'No active reservation found with reference ' + ref);
+            }
+            closeModal(lookupModal);
+            renderBookingPass(data.data);
+            showToast('Reservation found!');
           }
-
-          closeModal(lookupModal);
-          renderBookingPass(data.data);
-          showToast('Reservation found!');
         } catch (err) {
           if (lookupErrorAlert) {
-            lookupErrorAlert.textContent = err.message || 'Pass not found. Please verify reference code.';
+            lookupErrorAlert.textContent = err.message || 'Pass or Order not found. Please verify reference code.';
             lookupErrorAlert.style.display = 'block';
           }
         } finally {
           if (lookupSubmitBtn) {
             lookupSubmitBtn.disabled = false;
-            lookupSubmitBtn.textContent = 'Find Reservation Pass';
+            lookupSubmitBtn.textContent = 'Find Reservation / Order';
           }
         }
       }
@@ -3542,6 +4339,9 @@
         if (e.key === 'Escape') {
           closeModal(passModal);
           closeModal(lookupModal);
+          closeStoryModal();
+          closeModal(hamperModal);
+          closeModal(hamperPassModal);
         }
       });
 
@@ -3755,6 +4555,622 @@
           }
         });
       }
+
+      // ==========================================
+      // PHASE 3: ORAL STORIES & HARVEST HAMPERS
+      // ==========================================
+
+      // Web Audio Ambient Soundscapes Synthesizer
+      const Soundscape = (function() {
+        let ctx = null;
+        let activeNodes = [];
+        let isPlaying = false;
+        let currentType = null;
+        let masterGain = null;
+
+        function initCtx() {
+          if (!ctx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) ctx = new AudioCtx();
+          }
+          if (ctx && ctx.state === 'suspended') {
+            ctx.resume();
+          }
+        }
+
+        function stop() {
+          activeNodes.forEach(n => {
+            try { if (n.stop) n.stop(); if (n.disconnect) n.disconnect(); } catch (e) {}
+          });
+          activeNodes = [];
+          isPlaying = false;
+          currentType = null;
+          updateSoundUI();
+        }
+
+        function start(type) {
+          initCtx();
+          if (!ctx) return;
+          stop();
+
+          masterGain = ctx.createGain();
+          masterGain.gain.setValueAtTime(0.01, ctx.currentTime);
+          masterGain.gain.exponentialRampToValueAtTime(0.18, ctx.currentTime + 1.0);
+          masterGain.connect(ctx.destination);
+
+          const bufferSize = ctx.sampleRate * 2;
+          const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            output[i] = Math.random() * 2 - 1;
+          }
+
+          if (type === 'river-flow' || type === 'rain-paddy') {
+            const noise = ctx.createBufferSource();
+            noise.buffer = noiseBuffer;
+            noise.loop = true;
+
+            const filter = ctx.createBiquadFilter();
+            filter.type = type === 'river-flow' ? 'bandpass' : 'lowpass';
+            filter.frequency.value = type === 'river-flow' ? 620 : 850;
+            filter.Q.value = 1.3;
+
+            const lfo = ctx.createOscillator();
+            lfo.frequency.value = 0.28;
+            const lfoGain = ctx.createGain();
+            lfoGain.gain.value = 160;
+            lfo.connect(filter.frequency);
+
+            noise.connect(filter);
+            filter.connect(masterGain);
+
+            noise.start();
+            lfo.start();
+            activeNodes.push(noise, lfo, filter, masterGain);
+          } else if (type === 'canopy-breeze') {
+            const noise = ctx.createBufferSource();
+            noise.buffer = noiseBuffer;
+            noise.loop = true;
+
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.value = 380;
+
+            const lfo = ctx.createOscillator();
+            lfo.frequency.value = 0.16;
+            const lfoGain = ctx.createGain();
+            lfoGain.gain.value = 200;
+            lfo.connect(filter.frequency);
+
+            noise.connect(filter);
+            filter.connect(masterGain);
+
+            noise.start();
+            lfo.start();
+            activeNodes.push(noise, lfo, filter, masterGain);
+          } else if (type === 'hearth-fire') {
+            const hum = ctx.createOscillator();
+            hum.type = 'triangle';
+            hum.frequency.value = 115;
+            const humGain = ctx.createGain();
+            humGain.gain.value = 0.06;
+
+            const noise = ctx.createBufferSource();
+            noise.buffer = noiseBuffer;
+            noise.loop = true;
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'highpass';
+            filter.frequency.value = 1400;
+
+            hum.connect(humGain);
+            humGain.connect(masterGain);
+            noise.connect(filter);
+            filter.connect(masterGain);
+
+            hum.start();
+            noise.start();
+            activeNodes.push(hum, humGain, noise, filter, masterGain);
+          }
+
+          isPlaying = true;
+          currentType = type;
+          updateSoundUI();
+        }
+
+        function updateSoundUI() {
+          const playIcon = document.getElementById('soundPlayIcon');
+          const pauseIcon = document.getElementById('soundPauseIcon');
+          const statusText = document.getElementById('soundscapeStatus');
+          const bars = document.getElementById('soundwaveBars');
+
+          if (playIcon) playIcon.style.display = isPlaying ? 'none' : 'block';
+          if (pauseIcon) pauseIcon.style.display = isPlaying ? 'block' : 'none';
+          if (bars) bars.classList.toggle('is-active', isPlaying);
+          if (statusText) {
+            statusText.textContent = isPlaying ? 'Playing synthetic organic field atmosphere' : 'Click to listen to live synthesized farm atmosphere';
+          }
+        }
+
+        return {
+          start,
+          stop,
+          toggle(type) {
+            if (isPlaying) {
+              stop();
+            } else {
+              start(type || 'canopy-breeze');
+            }
+          },
+          isPlaying() { return isPlaying; },
+          currentType() { return currentType; }
+        };
+      })();
+
+      // Fallback Stories Data
+      const fallbackStories = {
+        'story-sahyadri': {
+          id: 'story-sahyadri',
+          region_id: 'sahyadri',
+          farmer_name: 'Ramrao & Savitri Deshmukh',
+          role_title: 'Heirloom Rice & Native Banyan Conservators',
+          category: 'Indigenous Seeds',
+          farm_name: 'Sahyadri Heritage Agroforest',
+          farm_location: 'Sahyadri Foothills, Maharashtra',
+          quote: 'We do not merely grow grain; we preserve sixty varieties of drought-resilient heirloom rice passed down through four generations.',
+          full_story: 'For forty-five years, Ramrao and Savitri have lived on the terraced basalt slopes of the Western Ghats. When modern green revolution chemical seeds swept through the valley, the Deshmukhs chose a different path: collecting, cataloging, and replanting sixty-four rare landraces of aromatic rice and native millets that thrive without chemical fertilizers or heavy mechanical tilling.\n\n"When city families walk into our rice paddies with bare feet, they realize in ten minutes what took agricultural universities thirty years to study: the soil is alive. Millions of microbial organisms create the natural fragrance of our Indrayani rice. Every visitor who comes to our farm helps keep these ancestral seeds in the living earth instead of cold museum vaults."',
+          ambient_sound: 'canopy-breeze',
+          image_url: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80'
+        },
+        'story-deccan': {
+          id: 'story-deccan',
+          region_id: 'deccan',
+          farmer_name: 'Ananya & Devraj',
+          role_title: 'Regenerative Agroforestry Stewards',
+          category: 'Regenerative Farming',
+          farm_name: 'Ananya & Devraj Living Farm',
+          farm_location: 'Deccan Agroforest Plateau, Karnataka',
+          quote: 'Trading twelve hours of screen time for morning dew and seed sowing gave our family a living relationship with where our nourishment begins.',
+          full_story: 'We used to be senior software architects in Whitefield, Bangalore. After twelve years of artificial office air conditioning, chronic fatigue, and grocery store food with no aroma, we bought eight acres of barren granite boulder land on the Deccan plateau. Using multi-layered Syntropic Agroforestry—planting jackfruit, coffee, cardamom, and native leguminous shade trees—we created an oasis with its own microclimate that remains 4°C cooler than surrounding towns.\n\n"We invite modern tech workers and urban families to participate directly in our pruning and mulch-laying cycles. Seeing an adult touch living black soil for the first time is deeply emotional. In a single day away from the computer monitor, people rediscover a sense of biological peace that no app can ever simulate."',
+          ambient_sound: 'rain-paddy',
+          image_url: 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80'
+        },
+        'story-punjab': {
+          id: 'story-punjab',
+          region_id: 'punjab',
+          farmer_name: 'Gurmehar Singh',
+          role_title: 'Organic Wheat & Mustard Grower',
+          category: 'Ancestral Foodways',
+          farm_name: 'Singh Ancestral Wheat & Mustard Farm',
+          farm_location: 'Canal Plains Organic Estate, Punjab',
+          quote: 'The aroma of fresh cold-pressed mustard oil and slow woodfire hearth cooking has the magic to bring three generations together at one wooden table.',
+          full_story: 'Gurmehar’s family has tilled the fertile alluvial canal banks of Punjab since 1888. A decade ago, witnessing the soil depletion caused by synthetic inputs, Gurmehar transitioned his 25-acre estate entirely to natural vermicomposting, traditional mustard rotation, and heirloom Sharbati amber wheat.\n\n"When winter arrives, our fields become a shimmering sea of bright yellow mustard blossoms. Visitors sit around our open earthen hearth (chulha) while my mother bakes golden makki di roti and slow-churns fresh white butter from indigenous Sahiwal cows. To see modern children discard their mobile phones to feed the calves and run through the mustard furrows reminds us why preserving our agrarian soul is the greatest gift to the next generation."',
+          ambient_sound: 'hearth-fire',
+          image_url: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=80'
+        },
+        'story-cauvery': {
+          id: 'story-cauvery',
+          region_id: 'cauvery',
+          farmer_name: 'Murugesan & Valliammai',
+          role_title: 'Wetland Traditional Stewards',
+          category: 'Ancient Wetland Stewardship',
+          farm_name: 'Thanjavur Heirloom Rice Wetland',
+          farm_location: 'Kumbakonam Belt, Tamil Nadu',
+          quote: 'The river Cauvery does not just supply irrigation water; she brings living mineral silt from the mountains that gives our Samba rice its sacred healing power.',
+          full_story: 'In our village near Kumbakonam, wet paddy fields are cultivated using ancient Chola canal networks. We allow wild ducks, native mud crabs, and indigenous river snails to live within the standing water of our rice paddies—they eliminate weed seeds naturally and aerate the muddy soil. Our Mappillai Samba rice is legendary across southern India for building strength and endurance.\n\n"When guests spend a morning transplanting seedlings knee-deep in fertile river silt, their fatigue disappears into the warmth of the mud. Later, we share hot fragrant rice served on fresh banana leaves with wood-pressed sesame oil. You cannot buy this connection in a supermarket aisle; it can only be received through the earth."',
+          ambient_sound: 'river-flow',
+          image_url: 'https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=80'
+        }
+      };
+
+      // Story Modal DOM Elements
+      const storyModal = document.getElementById('storyModal');
+      const closeStoryModalBtn = document.getElementById('closeStoryModalBtn');
+      const storyModalImg = document.getElementById('storyModalImg');
+      const storyModalCategory = document.getElementById('storyModalCategory');
+      const storyModalTitle = document.getElementById('storyModalTitle');
+      const storyModalMeta = document.getElementById('storyModalMeta');
+      const storyModalQuote = document.getElementById('storyModalQuote');
+      const storyModalNarrative = document.getElementById('storyModalNarrative');
+      const soundscapeToggleBtn = document.getElementById('soundscapeToggleBtn');
+      const soundscapeTitle = document.getElementById('soundscapeTitle');
+      const storyModalBookBtn = document.getElementById('storyModalBookBtn');
+      const storyModalHamperBtn = document.getElementById('storyModalHamperBtn');
+
+      let currentActiveStory = null;
+
+      async function openStoryModal(storyId) {
+        let story = fallbackStories[storyId];
+        try {
+          const res = await fetch(`/api/stories/${encodeURIComponent(storyId)}`);
+          if (res.ok) {
+            const json = await res.json();
+            if (json.success && json.data) story = json.data;
+          }
+        } catch (e) {}
+
+        if (!story) return;
+        currentActiveStory = story;
+
+        if (storyModalImg) storyModalImg.src = story.image_url;
+        if (storyModalCategory) storyModalCategory.textContent = story.category || 'Heritage Stewardship';
+        if (storyModalTitle) storyModalTitle.textContent = story.farmer_name;
+        if (storyModalMeta) storyModalMeta.textContent = `${story.role_title} • ${story.farm_name}`;
+        if (storyModalQuote) storyModalQuote.textContent = `“${story.quote}”`;
+        if (storyModalNarrative) {
+          storyModalNarrative.innerHTML = story.full_story.split('\n\n').map(p => `<p style="margin-bottom: 12px;">${p}</p>`).join('');
+        }
+        if (soundscapeTitle) {
+          const titles = {
+            'river-flow': 'Cauvery River Stream & Birdsong (Web Audio)',
+            'rain-paddy': 'Gentle Monsoon Dew & Paddy Frogs (Web Audio)',
+            'canopy-breeze': 'Western Ghats Highland Wind & Banyans (Web Audio)',
+            'hearth-fire': 'Clay Chulha Hearth & Evening Crickets (Web Audio)'
+          };
+          soundscapeTitle.textContent = titles[story.ambient_sound] || 'Ambient Farm Soundscape (Web Audio)';
+        }
+
+        Soundscape.stop();
+        openModal(storyModal);
+      }
+
+      function closeStoryModal() {
+        Soundscape.stop();
+        closeModal(storyModal);
+      }
+
+      if (closeStoryModalBtn) closeStoryModalBtn.addEventListener('click', closeStoryModal);
+      if (storyModal) {
+        storyModal.addEventListener('click', (e) => {
+          if (e.target === storyModal) closeStoryModal();
+        });
+      }
+
+      if (soundscapeToggleBtn) {
+        soundscapeToggleBtn.addEventListener('click', () => {
+          if (currentActiveStory && currentActiveStory.ambient_sound) {
+            Soundscape.toggle(currentActiveStory.ambient_sound);
+          }
+        });
+      }
+
+      if (storyModalBookBtn) {
+        storyModalBookBtn.addEventListener('click', () => {
+          closeStoryModal();
+          if (currentActiveStory && currentActiveStory.region_id && regionSelect) {
+            regionSelect.value = currentActiveStory.region_id;
+            regionSelect.dispatchEvent(new Event('change'));
+          }
+          const bookingEl = document.getElementById('booking');
+          if (bookingEl) {
+            if (window.__lenis) window.__lenis.scrollTo(bookingEl, { duration: 1.4 });
+            else bookingEl.scrollIntoView({ behavior: 'smooth' });
+          }
+          showToast(`Selected: ${currentActiveStory ? currentActiveStory.farm_name : 'Farm Experience'}`);
+        });
+      }
+
+      if (storyModalHamperBtn) {
+        storyModalHamperBtn.addEventListener('click', () => {
+          closeStoryModal();
+          const hamperId = 'hamper-' + (currentActiveStory ? currentActiveStory.region_id : 'cauvery');
+          openHamperModal(hamperId);
+        });
+      }
+
+      // Attach story triggers
+      document.querySelectorAll('.story-read-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const storyId = btn.getAttribute('data-story-id');
+          if (storyId) openStoryModal(storyId);
+        });
+      });
+
+      // ==========================================
+      // HARVEST HAMPERS RESERVATION & PASS
+      // ==========================================
+
+      const fallbackHampers = {
+        'hamper-cauvery': {
+          id: 'hamper-cauvery',
+          region_id: 'cauvery',
+          name: 'Cauvery Wetland Heirloom Rice Crate',
+          price_usd: 46,
+          weight: '6.2 kg',
+          freshness_window: 'Slow Sun-Dried Nov 2026 • Ancestral Strains',
+          inclusions: 'Seeraga Samba Petite Rice (2kg), Mappillai Samba Medicinal Red Rice (2kg), Palmyra Palm Jaggery Block (1kg), Fresh Coconut Blossom Nectar (500ml), Hand-ground Idli Podi (300g)',
+          steward: 'Murugesan & Valliammai',
+          farm_name: 'Thanjavur Heirloom Rice Wetland',
+          region_name: 'Cauvery Delta Wetlands',
+          stock_remaining: 22
+        },
+        'hamper-deccan': {
+          id: 'hamper-deccan',
+          region_id: 'deccan',
+          name: 'Deccan Shade-Canopy Agroforest Crate',
+          price_usd: 54,
+          weight: '4.8 kg',
+          freshness_window: 'Estate Cured Nov 2026 • Small-batch Roast',
+          inclusions: 'Single-Origin Arabica Whole Beans (500g), Malabar Green Cardamom (150g), Cold-Pressed Native Sesame Oil (1L), Sprouted Foxtail Millet (1.5kg), Raw Turmeric Rhizomes (500g)',
+          steward: 'Ananya & Devraj',
+          farm_name: 'Ananya & Devraj Living Farm',
+          region_name: 'Deccan Agroforest Plateau',
+          stock_remaining: 14
+        },
+        'hamper-punjab': {
+          id: 'hamper-punjab',
+          region_id: 'punjab',
+          name: 'Punjab Cold-Pressed Mustard & Emmer Crate',
+          price_usd: 49,
+          weight: '7.5 kg',
+          freshness_window: 'Cold-Pressed Nov 2026 • Wood-Kohl Churn',
+          inclusions: 'Cold-Pressed Mustard Oil (1.5L), Sharbati Heirloom Whole Wheat Flour (3kg), Wild Multi-Flora Raw Forest Honey (500g), Hand-Stone Ground Makki Flour (1.5kg), Organic Black Chickpeas (1kg)',
+          steward: 'Gurmehar Singh',
+          farm_name: 'Singh Ancestral Wheat & Mustard Farm',
+          region_name: 'Canal Plains Organic Estate',
+          stock_remaining: 19
+        },
+        'hamper-sahyadri': {
+          id: 'hamper-sahyadri',
+          region_id: 'sahyadri',
+          name: 'Sahyadri High-Altitude Wild Forest Box',
+          price_usd: 58,
+          weight: '5.4 kg',
+          freshness_window: 'Foraged & Hand-Packed Nov 2026 • Forest Guild',
+          inclusions: 'Wild Forest Raw Wildflower Honey (700g), Indrayani Aromatic Mountain Rice (2kg), Solapuri Roasted Groundnut Chutney (400g), Handcrafted Amlaprash Immunity Herbal Preserve (500g), Sun-Dried Kokum Rinds (300g), Sprouted Ragi Flour (1kg)',
+          steward: 'Ramrao & Savitri Deshmukh',
+          farm_name: 'Sahyadri Heritage Agroforest',
+          region_name: 'Western Ghats Foothills',
+          stock_remaining: 11
+        }
+      };
+
+      let currentActiveHamper = null;
+      let currentActiveHamperOrder = null;
+
+      const hamperModal = document.getElementById('hamperModal');
+      const closeHamperModalBtn = document.getElementById('closeHamperModalBtn');
+      const hamperPreviewName = document.getElementById('hamperPreviewName');
+      const hamperPreviewMeta = document.getElementById('hamperPreviewMeta');
+      const hamperPreviewPrice = document.getElementById('hamperPreviewPrice');
+      const hamperForm = document.getElementById('hamperForm');
+      const hamperIdInput = document.getElementById('hamperIdInput');
+      const hamperFrequency = document.getElementById('hamperFrequency');
+      const hamperFullName = document.getElementById('hamperFullName');
+      const hamperPhone = document.getElementById('hamperPhone');
+      const hamperEmail = document.getElementById('hamperEmail');
+      const hamperAddress = document.getElementById('hamperAddress');
+      const hamperNotes = document.getElementById('hamperNotes');
+      const hamperErrorAlert = document.getElementById('hamperErrorAlert');
+      const hamperSubmitBtn = document.getElementById('hamperSubmitBtn');
+      const hamperSubmitText = document.getElementById('hamperSubmitText');
+
+      const hamperPassModal = document.getElementById('hamperPassModal');
+      const closeHamperPassModalBtn = document.getElementById('closeHamperPassModalBtn');
+      const hamperPassRefText = document.getElementById('hamperPassRefText');
+      const copyHamperRefBtn = document.getElementById('copyHamperRefBtn');
+      const hamperPassGuestName = document.getElementById('hamperPassGuestName');
+      const hamperPassCrateName = document.getElementById('hamperPassCrateName');
+      const hamperPassFarmOrigin = document.getElementById('hamperPassFarmOrigin');
+      const hamperPassSteward = document.getElementById('hamperPassSteward');
+      const hamperPassWeight = document.getElementById('hamperPassWeight');
+      const hamperPassPrice = document.getElementById('hamperPassPrice');
+      const hamperPassAddress = document.getElementById('hamperPassAddress');
+      const hamperPassInclusions = document.getElementById('hamperPassInclusions');
+      const hamperPassQrImg = document.getElementById('hamperPassQrImg');
+      const downloadPackingSlipBtn = document.getElementById('downloadPackingSlipBtn');
+
+      async function openHamperModal(hamperId) {
+        let hamper = fallbackHampers[hamperId];
+        try {
+          const res = await fetch(`/api/hampers/${encodeURIComponent(hamperId)}`);
+          if (res.ok) {
+            const json = await res.json();
+            if (json.success && json.data) hamper = json.data;
+          }
+        } catch (e) {}
+
+        if (!hamper) return;
+        currentActiveHamper = hamper;
+
+        if (hamperIdInput) hamperIdInput.value = hamper.id;
+        if (hamperPreviewName) hamperPreviewName.textContent = hamper.name;
+        if (hamperPreviewMeta) hamperPreviewMeta.textContent = `${hamper.weight} • ${hamper.farm_name || hamper.region_name}`;
+        if (hamperPreviewPrice) hamperPreviewPrice.textContent = `$${hamper.price_usd}`;
+
+        if (hamperErrorAlert) {
+          hamperErrorAlert.style.display = 'none';
+          hamperErrorAlert.textContent = '';
+        }
+
+        openModal(hamperModal);
+      }
+
+      function renderHamperPass(order) {
+        currentActiveHamperOrder = order;
+
+        if (hamperPassRefText) hamperPassRefText.textContent = order.order_ref || 'ODK-BOX-PENDING';
+        if (hamperPassGuestName) hamperPassGuestName.textContent = order.full_name || 'Valued Subscriber';
+        if (hamperPassCrateName) hamperPassCrateName.textContent = order.hamper_name || 'Seasonal Harvest Crate';
+        if (hamperPassFarmOrigin) hamperPassFarmOrigin.textContent = `${order.farm_name || 'Living Farm'} (${order.region_name || 'Organic Region'})`;
+        if (hamperPassSteward) hamperPassSteward.textContent = order.steward || 'Heritage Farmer Stewards';
+        if (hamperPassWeight) {
+          const cadences = {
+            'one_time': 'Single Harvest Run',
+            'monthly': 'Monthly Living Subscription',
+            'quarterly': 'Quarterly Solstice Box'
+          };
+          hamperPassWeight.textContent = `${order.weight || '5.5 kg'} • ${cadences[order.frequency] || order.frequency}`;
+        }
+        if (hamperPassPrice) hamperPassPrice.textContent = `$${order.price_usd || 48} ($0 advance • pay on dispatch)`;
+        if (hamperPassAddress) hamperPassAddress.textContent = order.delivery_address || 'Provided at booking';
+        if (hamperPassInclusions) hamperPassInclusions.textContent = order.inclusions || 'Curated farm-to-table seasonal harvest';
+
+        if (hamperPassQrImg) {
+          const ref = order.order_ref || 'ODK-BOX';
+          hamperPassQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fonedaykissan.com%2Ftrack%2F${encodeURIComponent(ref)}&color=20-60-43&bgcolor=F5-F1-E8`;
+        }
+
+        openModal(hamperPassModal);
+      }
+
+      function downloadPackingSlip(order) {
+        if (!order) return;
+        const slipText = [
+          '======================================================',
+          'ONE DAY KISSAN™ — AGRARIAN DISPATCH PACKING SLIP',
+          '======================================================',
+          `Order Reference:  ${order.order_ref}`,
+          `Dispatch Date:    Fresh Autumn Harvest (Nov 2026)`,
+          `Status:           Slated for Field Packing ($0 Advance)`,
+          '------------------------------------------------------',
+          `Recipient:        ${order.full_name}`,
+          `Phone:            ${order.phone}`,
+          `Email:            ${order.email}`,
+          `Shipping Address: ${order.delivery_address}`,
+          '------------------------------------------------------',
+          `Harvest Crate:    ${order.hamper_name}`,
+          `Estate Origin:    ${order.farm_name} (${order.region_name})`,
+          `Curator Steward:  ${order.steward}`,
+          `Net Weight:       ${order.weight}`,
+          `Settlement:       $${order.price_usd} (Pay upon Courier Handover)`,
+          '------------------------------------------------------',
+          'CRATE INCLUSIONS:',
+          order.inclusions,
+          '------------------------------------------------------',
+          order.special_notes ? `Steward Notes:    ${order.special_notes}\r\n------------------------------------------------------` : '',
+          'Grown without synthetic pesticides or chemical fertilizers.',
+          'Packed by hand at the farm gate with living care.',
+          'https://onedaykissan.com — Reconnecting Cities to the Soil',
+          '======================================================'
+        ].filter(Boolean).join('\r\n');
+
+        const blob = new Blob([slipText], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${order.order_ref || 'ODK-BOX'}-Packing-Slip.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Packing slip (.txt) downloaded!');
+      }
+
+      async function handleHamperSubmit(e) {
+        e.preventDefault();
+        if (hamperErrorAlert) {
+          hamperErrorAlert.style.display = 'none';
+          hamperErrorAlert.textContent = '';
+        }
+
+        const payload = {
+          hamperId: (hamperIdInput ? hamperIdInput.value : 'hamper-cauvery'),
+          fullName: (hamperFullName ? hamperFullName.value : '').trim(),
+          email: (hamperEmail ? hamperEmail.value : '').trim(),
+          phone: (hamperPhone ? hamperPhone.value : '').trim(),
+          deliveryAddress: (hamperAddress ? hamperAddress.value : '').trim(),
+          frequency: (hamperFrequency ? hamperFrequency.value : 'one_time'),
+          specialNotes: (hamperNotes ? hamperNotes.value : '').trim()
+        };
+
+        if (!payload.fullName || !payload.email || !payload.phone || !payload.deliveryAddress) {
+          if (hamperErrorAlert) {
+            hamperErrorAlert.textContent = 'Please complete all required fields including shipping address.';
+            hamperErrorAlert.style.display = 'block';
+          }
+          return;
+        }
+
+        if (hamperSubmitBtn) hamperSubmitBtn.disabled = true;
+        if (hamperSubmitText) hamperSubmitText.textContent = 'Reserving Fresh Crate...';
+
+        try {
+          const res = await fetch('/api/hampers/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json();
+          if (!res.ok || !data.success) {
+            throw new Error(data.error || 'Failed to reserve harvest crate.');
+          }
+
+          closeModal(hamperModal);
+          hamperForm.reset();
+          renderHamperPass(data.data);
+          showToast('Harvest crate reserved! $0 advance deposit.');
+        } catch (err) {
+          console.warn('Hamper order API fallback:', err);
+          const fallbackOrderRef = 'ODK-BOX-' + new Date().toISOString().slice(2, 7).replace('-', '') + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+          const baseHamper = fallbackHampers[payload.hamperId] || fallbackHampers['hamper-cauvery'];
+          const fallbackOrder = {
+            order_ref: fallbackOrderRef,
+            full_name: payload.fullName,
+            phone: payload.phone,
+            email: payload.email,
+            delivery_address: payload.deliveryAddress,
+            frequency: payload.frequency,
+            special_notes: payload.specialNotes,
+            hamper_name: baseHamper.name,
+            farm_name: baseHamper.farm_name,
+            region_name: baseHamper.region_name,
+            steward: baseHamper.steward,
+            weight: baseHamper.weight,
+            price_usd: baseHamper.price_usd,
+            inclusions: baseHamper.inclusions
+          };
+          closeModal(hamperModal);
+          hamperForm.reset();
+          renderHamperPass(fallbackOrder);
+          showToast('Harvest crate reserved (Offline Mode)!');
+        } finally {
+          if (hamperSubmitBtn) hamperSubmitBtn.disabled = false;
+          if (hamperSubmitText) hamperSubmitText.textContent = 'Confirm Crate Dispatch • $0 Advance';
+        }
+      }
+
+      if (closeHamperModalBtn) closeHamperModalBtn.addEventListener('click', () => closeModal(hamperModal));
+      if (hamperModal) {
+        hamperModal.addEventListener('click', (e) => {
+          if (e.target === hamperModal) closeModal(hamperModal);
+        });
+      }
+
+      if (closeHamperPassModalBtn) closeHamperPassModalBtn.addEventListener('click', () => closeModal(hamperPassModal));
+      if (hamperPassModal) {
+        hamperPassModal.addEventListener('click', (e) => {
+          if (e.target === hamperPassModal) closeModal(hamperPassModal);
+        });
+      }
+
+      if (copyHamperRefBtn) {
+        copyHamperRefBtn.addEventListener('click', () => {
+          if (currentActiveHamperOrder && currentActiveHamperOrder.order_ref) {
+            navigator.clipboard.writeText(currentActiveHamperOrder.order_ref).then(() => {
+              showToast('Dispatch code copied to clipboard!');
+            }).catch(() => {
+              showToast('Dispatch Ref: ' + currentActiveHamperOrder.order_ref);
+            });
+          }
+        });
+      }
+
+      if (downloadPackingSlipBtn) {
+        downloadPackingSlipBtn.addEventListener('click', () => {
+          downloadPackingSlip(currentActiveHamperOrder);
+        });
+      }
+
+      if (hamperForm) hamperForm.addEventListener('submit', handleHamperSubmit);
+
+      // Attach hamper reserve buttons
+      document.querySelectorAll('.hamper-reserve-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-hamper-id');
+          if (id) openHamperModal(id);
+        });
+      });
 
       // Init on load
       initDateInput();
