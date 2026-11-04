@@ -76,7 +76,131 @@ function initDatabase() {
 
       const stmtExp = db.prepare('INSERT OR IGNORE INTO experiences (id, title, duration, inclusions) VALUES (?, ?, ?, ?)');
       seedExp.forEach(e => stmtExp.run(e));
-      stmtExp.finalize(err => {
+      stmtExp.finalize();
+
+      // 4. Terroirs table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS terroirs (
+          id TEXT PRIMARY KEY,
+          region_id TEXT UNIQUE NOT NULL,
+          soil_type TEXT NOT NULL,
+          climate TEXT NOT NULL,
+          elevation TEXT NOT NULL,
+          primary_crops TEXT NOT NULL,
+          current_season TEXT NOT NULL,
+          distance_city TEXT NOT NULL,
+          tagline TEXT NOT NULL,
+          weather_temp TEXT NOT NULL,
+          weather_cond TEXT NOT NULL,
+          soil_ph TEXT NOT NULL,
+          steward_quote TEXT NOT NULL,
+          image_url TEXT NOT NULL,
+          calendar_json TEXT NOT NULL,
+          FOREIGN KEY (region_id) REFERENCES regions (id)
+        )
+      `);
+
+      // Seed Terroirs
+      const seedTerroirs = [
+        [
+          'terroir-sahyadri',
+          'sahyadri',
+          'Volcanic Basalt & Rich Mountain Humus',
+          'Montane Mist & Highland Monsoon Rains',
+          '1,250m Elevation',
+          'Indrayani Fragrant Rice, Wild Forest Honey, Nachni (Ragi)',
+          'Autumn Sowing & Terrace Paddy Ripening',
+          '95 km from Pune / 110 km from Mumbai',
+          'Mist-veiled terraced paddy slopes and native banyans overlooking Western Ghats.',
+          '22°C',
+          'Crisp Highland Air & Morning Mist',
+          '6.8 pH Balanced',
+          'When city families put their bare feet into living paddy mud, centuries of separation from nature dissolve in minutes.',
+          'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
+          JSON.stringify([
+            { month: 'Oct – Nov', stage: 'Autumn Sowing', detail: 'Transplanting heirloom winter grains & wild honey collection' },
+            { month: 'Dec – Feb', stage: 'Breezy Ripening', detail: 'Slow sun-drying of paddy sheaves & cane crushing feast' },
+            { month: 'Mar – May', stage: 'Soil Resting', detail: 'Cover crop green manuring & earthen hearth baking workshops' },
+            { month: 'Jun – Sep', stage: 'Monsoon Splendor', detail: 'Mud transplanting in cascading mountain terraces' }
+          ])
+        ],
+        [
+          'terroir-deccan',
+          'deccan',
+          'Deep Red Laterite & Native Clay Loam with Dense Mulch',
+          'Breezy Semi-Arid Plateau with Cool Starry Nights',
+          '820m Elevation',
+          'Arabica Shade Coffee, Tree Cardamom, Native Foxtail Millet, Moringa',
+          'Coffee Berry Ripening & Millet Reaping',
+          '140 km from Bengaluru / 220 km from Hyderabad',
+          'A regenerative multi-layered food forest cultivating biodiversity under a natural canopy.',
+          '25°C',
+          'Breezy Sunlit Canopy & Low Humidity',
+          '6.5 pH Mineral Rich',
+          'We do not purchase industrial fertilizers. The fallen teak leaves and free-grazing indigenous cows generate all the living fertility our earth needs.',
+          'https://images.unsplash.com/photo-1592417817098-8f3d6ef2c6e6?auto=format&fit=crop&w=1200&q=80',
+          JSON.stringify([
+            { month: 'Oct – Dec', stage: 'Coffee Berry Picking', detail: 'Selective hand-picking of ruby coffee cherries under shade canopy' },
+            { month: 'Jan – Mar', stage: 'Millet Harvesting', detail: 'Traditional stone-milling of native foxtail & pearl millets' },
+            { month: 'Apr – May', stage: 'Hearth Drying', detail: 'Artisanal sun roasting and cardamom pod curing' },
+            { month: 'Jun – Sep', stage: 'Agroforest Regeneration', detail: 'Planting native timber, fruit saplings, and nitrogen fixers' }
+          ])
+        ],
+        [
+          'terroir-cauvery',
+          'cauvery',
+          'Heavy Alluvial River Silt & Mineral-Dense Wetland Clay',
+          'Tropical Riverine Plains with Coastal Morning Dew',
+          '120m Elevation',
+          'Seeraga Samba Petite Rice, Mappillai Samba, Coconut Palms, Sweet Betel',
+          'Winter Samba Rice Transplantation',
+          '45 km from Thanjavur / 80 km from Trichy',
+          'Sacred river silt deltas sustaining continuous regenerative agriculture for two millennia.',
+          '27°C',
+          'Tropical River Breeze & Morning Dew',
+          '7.2 pH Silty Clay',
+          'Our ancient Samba grains take five full months under winter sun. Fast hybrid seeds can never produce this fragrance or healing nourishment.',
+          'https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=1200&q=80',
+          JSON.stringify([
+            { month: 'Sep – Nov', stage: 'Samba Planting', detail: 'Nursery seedling lifting & knee-deep alluvial transplantation' },
+            { month: 'Dec – Jan', stage: 'Heirloom Tending', detail: 'Bio-dynamic herbal pest decoctions & duck foraging in waterways' },
+            { month: 'Feb – Apr', stage: 'Grand Harvest Feast', detail: 'Pongal woodfire cooking of freshly husked fragrant rice' },
+            { month: 'May – Aug', stage: 'River Silt Restoration', detail: 'Sun baking clay beds and canal irrigation silt dredging' }
+          ])
+        ],
+        [
+          'terroir-punjab',
+          'punjab',
+          'Golden Canal Silt Loam enriched with Vermicompost',
+          'Continental Riverine Basin with Crisp Foggy Mornings',
+          '280m Elevation',
+          'Sharbati Amber Wheat, Yellow Mustard (Sarson), Desi Sugarcane, Chickpeas',
+          'Golden Mustard Flowering & Winter Wheat Emergence',
+          '70 km from Chandigarh / 240 km from New Delhi',
+          'Endless golden mustard horizons, ancestral canals, and traditional clay woodfire hearths.',
+          '19°C',
+          'Crisp Morning Fog & Radiant Afternoon Sun',
+          '7.0 pH Neutral Alluvium',
+          'The scent of flowering mustard in late autumn and hot makki roti from a clay hearth is an unbroken heritage passed across six generations.',
+          'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=1200&q=80',
+          JSON.stringify([
+            { month: 'Oct – Nov', stage: 'Winter Sowing', detail: 'Broadcasting indigenous amber wheat & yellow mustard seeds' },
+            { month: 'Dec – Jan', stage: 'Yellow Bloom & Cane Crushing', detail: 'Walking blooming mustard seas & fresh sugarcane boiling' },
+            { month: 'Feb – Mar', stage: 'Grain Maturation', detail: 'Ears turning golden under radiant spring sun' },
+            { month: 'Apr – May', stage: 'Baisakhi Harvest', detail: 'Community sickle harvesting, folk singing, and wheat threshing' }
+          ])
+        ]
+      ];
+
+      const stmtTerroir = db.prepare(`
+        INSERT OR REPLACE INTO terroirs (
+          id, region_id, soil_type, climate, elevation, primary_crops,
+          current_season, distance_city, tagline, weather_temp,
+          weather_cond, soil_ph, steward_quote, image_url, calendar_json
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+      seedTerroirs.forEach(t => stmtTerroir.run(t));
+      stmtTerroir.finalize(err => {
         if (err) reject(err);
         else resolve();
       });
@@ -219,6 +343,54 @@ async function getBookingByRef(bookingRef) {
   `, [bookingRef]);
 }
 
+// Get all Terroirs with joined region metadata
+async function getTerroirs() {
+  const rows = await all(`
+    SELECT 
+      t.*,
+      r.name as region_name,
+      r.farm_name,
+      r.host_name,
+      r.location as farm_location,
+      r.daily_capacity
+    FROM terroirs t
+    JOIN regions r ON t.region_id = r.id
+    ORDER BY r.id
+  `);
+  return rows.map(r => {
+    try {
+      r.calendar = JSON.parse(r.calendar_json);
+    } catch (e) {
+      r.calendar = [];
+    }
+    return r;
+  });
+}
+
+// Get single Terroir by ID or region ID
+async function getTerroirById(idOrRegionId) {
+  const row = await get(`
+    SELECT 
+      t.*,
+      r.name as region_name,
+      r.farm_name,
+      r.host_name,
+      r.location as farm_location,
+      r.daily_capacity
+    FROM terroirs t
+    JOIN regions r ON t.region_id = r.id
+    WHERE t.id = ? OR t.region_id = ?
+  `, [idOrRegionId, idOrRegionId]);
+
+  if (!row) return null;
+  try {
+    row.calendar = JSON.parse(row.calendar_json);
+  } catch (e) {
+    row.calendar = [];
+  }
+  return row;
+}
+
 module.exports = {
   db,
   initDatabase,
@@ -227,5 +399,7 @@ module.exports = {
   run,
   getAvailability,
   createBooking,
-  getBookingByRef
+  getBookingByRef,
+  getTerroirs,
+  getTerroirById
 };

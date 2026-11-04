@@ -476,6 +476,328 @@
       fill: currentColor;
     }
 
+    /* 02.5 LIVING TERROIRS EXPLORER */
+    .terroirs-section {
+      position: relative;
+      background: var(--ivory);
+      padding: 96px 4vw 84px;
+      z-index: 4;
+      border-top: 1px solid rgba(32, 60, 43, 0.08);
+    }
+    .terroirs-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .terroirs-header {
+      text-align: center;
+      max-width: 680px;
+      margin-bottom: 34px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .terroirs-header .h2 {
+      font-size: clamp(28px, 3.4vw, 44px);
+      line-height: 1.18;
+    }
+    .terroirs-subtitle {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #4c5747;
+    }
+
+    /* Terroir Tabs */
+    .terroirs-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      background: rgba(32, 60, 43, 0.06);
+      padding: 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(32, 60, 43, 0.1);
+    }
+    .terroir-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--forest);
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+    .terroir-tab:hover {
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .terroir-tab.is-active {
+      background: var(--forest);
+      color: var(--ivory);
+      box-shadow: 0 4px 14px rgba(32, 60, 43, 0.2);
+    }
+    .tab-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(217, 168, 92, 0.25);
+      color: var(--harvest);
+    }
+    .terroir-tab.is-active .tab-badge {
+      background: var(--harvest);
+      color: var(--forest);
+    }
+
+    /* Terroir Card */
+    .terroir-card {
+      width: 100%;
+      background: #FFFFFF;
+      border-radius: 26px;
+      border: 1px solid rgba(32, 60, 43, 0.12);
+      box-shadow: 0 20px 50px rgba(18, 36, 25, 0.08);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+      min-height: 520px;
+      transition: opacity .25s ease;
+    }
+    .terroir-media {
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+      background: var(--forest);
+    }
+    .terroir-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s ease;
+    }
+    .terroir-card:hover .terroir-media img {
+      transform: scale(1.03);
+    }
+    .terroir-media-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(18, 32, 23, 0.88) 0%, rgba(18, 32, 23, 0.25) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px;
+    }
+    .terroir-tag-pill {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(245, 241, 232, 0.94);
+      color: var(--forest);
+      font-size: 12px;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .terroir-spec-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .terroir-mini-pill {
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--forest);
+      padding: 4px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+
+    .terroir-content {
+      padding: 34px 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      background: #FFFFFF;
+    }
+    .terroir-estate-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .terroir-region-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--harvest);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .terroir-farm-name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(24px, 2.4vw, 32px);
+      color: var(--forest);
+      margin: 0;
+      line-height: 1.2;
+    }
+    .terroir-tagline {
+      font-size: 14px;
+      color: #555f52;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .terroir-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      background: var(--ivory);
+      border: 1px solid rgba(32, 60, 43, 0.1);
+      border-radius: 14px;
+      padding: 14px 18px;
+    }
+    .spec-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .spec-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #6b7764;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .spec-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.35;
+    }
+
+    /* Steward Quote */
+    .terroir-quote {
+      border-left: 3px solid var(--harvest);
+      padding-left: 14px;
+      margin: 0;
+      font-style: italic;
+      color: #3b4438;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .terroir-quote cite {
+      display: block;
+      margin-top: 4px;
+      font-size: 11.5px;
+      font-style: normal;
+      font-weight: 700;
+      color: var(--forest);
+    }
+
+    /* Crop Calendar Collapsible */
+    .crop-calendar-wrap {
+      border: 1px solid rgba(32, 60, 43, 0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #faf8f3;
+    }
+    .calendar-toggle-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      cursor: pointer;
+      user-select: none;
+      transition: background .2s;
+    }
+    .calendar-toggle-bar:hover {
+      background: rgba(32, 60, 43, 0.05);
+    }
+    .calendar-toggle-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--forest);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .calendar-toggle-icon {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--forest);
+    }
+    .calendar-body {
+      padding: 12px 16px 14px;
+      border-top: 1px dashed rgba(32, 60, 43, 0.15);
+    }
+    .calendar-milestones {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .milestone-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      background: #FFFFFF;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(32, 60, 43, 0.08);
+    }
+    .milestone-month {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--harvest);
+      letter-spacing: .04em;
+    }
+    .milestone-stage {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--forest);
+    }
+    .milestone-detail {
+      font-size: 11px;
+      color: #555f52;
+      line-height: 1.35;
+    }
+
+    .terroir-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .terroir-book-btn {
+      height: 44px;
+      padding: 0 24px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .terroir-capacity-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--forest);
+    }
+
     /* 03. FARMING EXPERIENCES (3-PANEL ACCORDION) */
     section.loop {
       position: relative;
@@ -1356,6 +1678,24 @@
 
     /* RESPONSIVE DESIGN */
     @media (max-width: 990px) {
+      .terroirs-section {
+        padding: 56px 4vw 56px;
+      }
+      .terroir-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .terroir-content {
+        padding: 24px 20px;
+      }
+      .terroirs-tabs {
+        border-radius: 16px;
+      }
+      .terroir-specs-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .calendar-milestones {
+        grid-template-columns: minmax(0, 1fr);
+      }
       .stories-grid {
         grid-template-columns: 1fr;
         max-width: 580px;
@@ -1558,6 +1898,7 @@
           <span>One Day Kissan</span>
         </a>
         <div style="display: flex; align-items: center; gap: 8px;">
+          <a href="#terroirs" class="btn btn-nav-terroirs" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14);">Terroirs</a>
           <button id="navLookupBtn" type="button" class="btn" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14); cursor: pointer; display: inline-flex; align-items: center; gap: 5px;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
             <span>My Pass</span>
@@ -1634,6 +1975,136 @@
             </div>
             <div class="logo-item">Rainforest Alliance</div>
             <div class="logo-item" style="font-size: 13px;">Indigenous Seed Bank</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02.5 LIVING TERROIRS & AGROFOREST ESTATES -->
+    <section class="terroirs-section" id="terroirs">
+      <div class="terroirs-container">
+        <div class="terroirs-header">
+          <span class="pill">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+            Living Agrarian Terroirs
+          </span>
+          <h2 class="h2">Four distinct agroforests.<br>Four ancestral soil profiles.</h2>
+          <p class="terroirs-subtitle">Each agrarian terroir preserves distinct microclimates, ancestral heirloom seeds, indigenous tree canopies, and generational agrarian stewardship.</p>
+        </div>
+
+        <!-- Interactive Terroir Tabs -->
+        <div class="terroirs-tabs" role="tablist" aria-label="Agrarian Terroirs" id="terroirTabs">
+          <button type="button" class="terroir-tab is-active" role="tab" aria-selected="true" data-region="sahyadri" id="tab-sahyadri">
+            <span class="tab-name">Western Ghats</span>
+            <span class="tab-badge">1,250m</span>
+          </button>
+          <button type="button" class="terroir-tab" role="tab" aria-selected="false" data-region="deccan" id="tab-deccan">
+            <span class="tab-name">Deccan Plateau</span>
+            <span class="tab-badge">820m</span>
+          </button>
+          <button type="button" class="terroir-tab" role="tab" aria-selected="false" data-region="cauvery" id="tab-cauvery">
+            <span class="tab-name">Cauvery Wetlands</span>
+            <span class="tab-badge">120m</span>
+          </button>
+          <button type="button" class="terroir-tab" role="tab" aria-selected="false" data-region="punjab" id="tab-punjab">
+            <span class="tab-name">Punjab Canal Plains</span>
+            <span class="tab-badge">280m</span>
+          </button>
+        </div>
+
+        <!-- Terroir Showcase Card (Populated Dynamically via API) -->
+        <div class="terroir-card" id="terroirCard">
+          <div class="terroir-media">
+            <img id="terroirImg" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80" alt="Terroir landscape" loading="lazy">
+            <div class="terroir-media-overlay">
+              <div class="terroir-tag-pill" id="terroirWeatherTag">
+                <span class="pulse-dot"></span>
+                <span id="terroirWeatherText">22°C • Crisp Highland Air & Morning Mist</span>
+              </div>
+              <div class="terroir-spec-pills">
+                <span class="terroir-mini-pill" id="terroirElevationPill">1,250m Elevation</span>
+                <span class="terroir-mini-pill" id="terroirPhPill">6.8 pH Balanced</span>
+                <span class="terroir-mini-pill" id="terroirDistancePill">95 km from Pune</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="terroir-content">
+            <div class="terroir-estate-header">
+              <span class="terroir-region-name" id="terroirRegionName">Western Ghats Foothills</span>
+              <h3 class="terroir-farm-name" id="terroirFarmName">Sahyadri Heritage Agroforest</h3>
+              <p class="terroir-tagline" id="terroirTagline">Mist-veiled terraced paddy slopes and native banyans overlooking Western Ghats.</p>
+            </div>
+
+            <div class="terroir-specs-grid">
+              <div class="spec-cell">
+                <span class="spec-label">Soil Profile</span>
+                <span class="spec-value" id="terroirSoilType">Volcanic Basalt & Mountain Humus</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Farmer Stewards</span>
+                <span class="spec-value" id="terroirHostName">Ramrao & Savitri Deshmukh</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Heritage Crops</span>
+                <span class="spec-value" id="terroirCrops">Indrayani Fragrant Rice, Wild Honey, Nachni</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Current Agrarian Cycle</span>
+                <span class="spec-value" id="terroirSeason">Autumn Sowing & Terrace Paddy Ripening</span>
+              </div>
+            </div>
+
+            <!-- Steward Quote Callout -->
+            <blockquote class="terroir-quote" id="terroirQuote">
+              <p id="terroirQuoteText">“When city families put their bare feet into living paddy mud, centuries of separation from nature dissolve in minutes.”</p>
+              <cite id="terroirQuoteAuthor">— Ramrao Deshmukh • Master Agroforest Steward</cite>
+            </blockquote>
+
+            <!-- Seasonal Agrarian Calendar Expandable -->
+            <div class="crop-calendar-wrap">
+              <div class="calendar-toggle-bar" id="calendarToggleBtn">
+                <span class="calendar-toggle-title">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+                  Seasonal Agrarian Calendar & Milestones
+                </span>
+                <span class="calendar-toggle-icon" id="calToggleIcon">+</span>
+              </div>
+              <div class="calendar-body" id="calendarBody" style="display: none;">
+                <div class="calendar-milestones" id="calendarMilestonesList">
+                  <div class="milestone-item">
+                    <span class="milestone-month">Oct – Nov</span>
+                    <span class="milestone-stage">Autumn Sowing</span>
+                    <span class="milestone-detail">Transplanting heirloom winter grains & wild honey collection</span>
+                  </div>
+                  <div class="milestone-item">
+                    <span class="milestone-month">Dec – Feb</span>
+                    <span class="milestone-stage">Breezy Ripening</span>
+                    <span class="milestone-detail">Slow sun-drying of paddy sheaves & cane crushing feast</span>
+                  </div>
+                  <div class="milestone-item">
+                    <span class="milestone-month">Mar – May</span>
+                    <span class="milestone-stage">Soil Resting</span>
+                    <span class="milestone-detail">Cover crop green manuring & earthen hearth baking workshops</span>
+                  </div>
+                  <div class="milestone-item">
+                    <span class="milestone-month">Jun – Sep</span>
+                    <span class="milestone-stage">Monsoon Splendor</span>
+                    <span class="milestone-detail">Mud transplanting in cascading mountain terraces</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terroir CTA Action Bar -->
+            <div class="terroir-actions">
+              <button type="button" class="btn btn-gold terroir-book-btn" id="terroirBookBtn">
+                <span>Experience This Terroir →</span>
+              </button>
+              <span class="terroir-capacity-hint" id="terroirCapacityHint">
+                <span class="pulse-dot"></span> 25 spots/day maximum capacity
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -1893,6 +2364,7 @@
       <nav class="f-links">
         <a href="#hero">Farm Trails</a>
         <a href="#stats">Our Philosophy</a>
+        <a href="#terroirs">Living Terroirs</a>
         <a href="#loop">Experiences</a>
         <a href="#stories">Farm Stories</a>
         <a href="#booking">Book A Day</a>
@@ -2119,6 +2591,7 @@
         easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true
       });
+      window.__lenis = lenis;
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add(t => lenis.raf(t * 1000));
       gsap.ticker.lagSmoothing(0);
@@ -3071,6 +3544,217 @@
           closeModal(lookupModal);
         }
       });
+
+      // Phase 2: Living Terroirs Explorer
+      let currentTerroirRegion = 'sahyadri';
+      const terroirTabs = document.querySelectorAll('.terroir-tab');
+      const terroirCard = document.getElementById('terroirCard');
+      const terroirImg = document.getElementById('terroirImg');
+      const terroirWeatherText = document.getElementById('terroirWeatherText');
+      const terroirElevationPill = document.getElementById('terroirElevationPill');
+      const terroirPhPill = document.getElementById('terroirPhPill');
+      const terroirDistancePill = document.getElementById('terroirDistancePill');
+      const terroirRegionName = document.getElementById('terroirRegionName');
+      const terroirFarmName = document.getElementById('terroirFarmName');
+      const terroirTagline = document.getElementById('terroirTagline');
+      const terroirSoilType = document.getElementById('terroirSoilType');
+      const terroirHostName = document.getElementById('terroirHostName');
+      const terroirCrops = document.getElementById('terroirCrops');
+      const terroirSeason = document.getElementById('terroirSeason');
+      const terroirQuoteText = document.getElementById('terroirQuoteText');
+      const terroirQuoteAuthor = document.getElementById('terroirQuoteAuthor');
+      const terroirCapacityHint = document.getElementById('terroirCapacityHint');
+      const calendarToggleBtn = document.getElementById('calendarToggleBtn');
+      const calendarBody = document.getElementById('calendarBody');
+      const calToggleIcon = document.getElementById('calToggleIcon');
+      const calendarMilestonesList = document.getElementById('calendarMilestonesList');
+      const terroirBookBtn = document.getElementById('terroirBookBtn');
+
+      const fallbackTerroirs = {
+        sahyadri: {
+          region_id: 'sahyadri',
+          region_name: 'Western Ghats Foothills',
+          farm_name: 'Sahyadri Heritage Agroforest',
+          tagline: 'Mist-veiled terraced paddy slopes and native banyans overlooking Western Ghats.',
+          elevation: '1,250m Elevation',
+          soil_ph: '6.8 pH Balanced',
+          distance_city: '95 km from Pune / 110 km from Mumbai',
+          weather_temp: '22°C',
+          weather_cond: 'Crisp Highland Air & Morning Mist',
+          soil_type: 'Volcanic Basalt & Rich Mountain Humus',
+          host_name: 'Ramrao & Savitri Deshmukh',
+          primary_crops: 'Indrayani Fragrant Rice, Wild Forest Honey, Nachni (Ragi)',
+          current_season: 'Autumn Sowing & Terrace Paddy Ripening',
+          steward_quote: 'When city families put their bare feet into living paddy mud, centuries of separation from nature dissolve in minutes.',
+          daily_capacity: 25,
+          image_url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
+          calendar: [
+            { month: 'Oct – Nov', stage: 'Autumn Sowing', detail: 'Transplanting heirloom winter grains & wild honey collection' },
+            { month: 'Dec – Feb', stage: 'Breezy Ripening', detail: 'Slow sun-drying of paddy sheaves & cane crushing feast' },
+            { month: 'Mar – May', stage: 'Soil Resting', detail: 'Cover crop green manuring & earthen hearth baking workshops' },
+            { month: 'Jun – Sep', stage: 'Monsoon Splendor', detail: 'Mud transplanting in cascading mountain terraces' }
+          ]
+        },
+        deccan: {
+          region_id: 'deccan',
+          region_name: 'Deccan Agroforest Plateau',
+          farm_name: 'Ananya & Devraj Living Farm',
+          tagline: 'A regenerative multi-layered food forest cultivating biodiversity under a natural canopy.',
+          elevation: '820m Elevation',
+          soil_ph: '6.5 pH Mineral Rich',
+          distance_city: '140 km from Bengaluru / 220 km from Hyderabad',
+          weather_temp: '25°C',
+          weather_cond: 'Breezy Sunlit Canopy & Low Humidity',
+          soil_type: 'Deep Red Laterite & Native Clay Loam with Dense Mulch',
+          host_name: 'Ananya & Devraj',
+          primary_crops: 'Arabica Shade Coffee, Tree Cardamom, Native Foxtail Millet, Moringa',
+          current_season: 'Coffee Berry Ripening & Millet Reaping',
+          steward_quote: 'We do not purchase industrial fertilizers. The fallen teak leaves and free-grazing indigenous cows generate all the living fertility our earth needs.',
+          daily_capacity: 25,
+          image_url: 'https://images.unsplash.com/photo-1592417817098-8f3d6ef2c6e6?auto=format&fit=crop&w=1200&q=80',
+          calendar: [
+            { month: 'Oct – Dec', stage: 'Coffee Berry Picking', detail: 'Selective hand-picking of ruby coffee cherries under shade canopy' },
+            { month: 'Jan – Mar', stage: 'Millet Harvesting', detail: 'Traditional stone-milling of native foxtail & pearl millets' },
+            { month: 'Apr – May', stage: 'Hearth Drying', detail: 'Artisanal sun roasting and cardamom pod curing' },
+            { month: 'Jun – Sep', stage: 'Agroforest Regeneration', detail: 'Planting native timber, fruit saplings, and nitrogen fixers' }
+          ]
+        },
+        cauvery: {
+          region_id: 'cauvery',
+          region_name: 'Cauvery Delta Wetlands',
+          farm_name: 'Thanjavur Heirloom Rice Wetland',
+          tagline: 'Sacred river silt deltas sustaining continuous regenerative agriculture for two millennia.',
+          elevation: '120m Elevation',
+          soil_ph: '7.2 pH Silty Clay',
+          distance_city: '45 km from Thanjavur / 80 km from Trichy',
+          weather_temp: '27°C',
+          weather_cond: 'Tropical River Breeze & Morning Dew',
+          soil_type: 'Heavy Alluvial River Silt & Mineral-Dense Wetland Clay',
+          host_name: 'Murugesan & Valliammai',
+          primary_crops: 'Seeraga Samba Petite Rice, Mappillai Samba, Coconut Palms, Sweet Betel',
+          current_season: 'Winter Samba Rice Transplantation',
+          steward_quote: 'Our ancient Samba grains take five full months under winter sun. Fast hybrid seeds can never produce this fragrance or healing nourishment.',
+          daily_capacity: 20,
+          image_url: 'https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=1200&q=80',
+          calendar: [
+            { month: 'Sep – Nov', stage: 'Samba Planting', detail: 'Nursery seedling lifting & knee-deep alluvial transplantation' },
+            { month: 'Dec – Jan', stage: 'Heirloom Tending', detail: 'Bio-dynamic herbal pest decoctions & duck foraging in waterways' },
+            { month: 'Feb – Apr', stage: 'Grand Harvest Feast', detail: 'Pongal woodfire cooking of freshly husked fragrant rice' },
+            { month: 'May – Aug', stage: 'River Silt Restoration', detail: 'Sun baking clay beds and canal irrigation silt dredging' }
+          ]
+        },
+        punjab: {
+          region_id: 'punjab',
+          region_name: 'Canal Plains Organic Estate',
+          farm_name: 'Singh Ancestral Wheat & Mustard Farm',
+          tagline: 'Endless golden mustard horizons, ancestral canals, and traditional clay woodfire hearths.',
+          elevation: '280m Elevation',
+          soil_ph: '7.0 pH Neutral Alluvium',
+          distance_city: '70 km from Chandigarh / 240 km from New Delhi',
+          weather_temp: '19°C',
+          weather_cond: 'Crisp Morning Fog & Radiant Afternoon Sun',
+          soil_type: 'Golden Canal Silt Loam enriched with Vermicompost',
+          host_name: 'Gurmehar Singh',
+          primary_crops: 'Sharbati Amber Wheat, Yellow Mustard (Sarson), Desi Sugarcane, Chickpeas',
+          current_season: 'Golden Mustard Flowering & Winter Wheat Emergence',
+          steward_quote: 'The scent of flowering mustard in late autumn and hot makki roti from a clay hearth is an unbroken heritage passed across six generations.',
+          daily_capacity: 30,
+          image_url: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=1200&q=80',
+          calendar: [
+            { month: 'Oct – Nov', stage: 'Winter Sowing', detail: 'Broadcasting indigenous amber wheat & yellow mustard seeds' },
+            { month: 'Dec – Jan', stage: 'Yellow Bloom & Cane Crushing', detail: 'Walking blooming mustard seas & fresh sugarcane boiling' },
+            { month: 'Feb – Mar', stage: 'Grain Maturation', detail: 'Ears turning golden under radiant spring sun' },
+            { month: 'Apr – May', stage: 'Baisakhi Harvest', detail: 'Community sickle harvesting, folk singing, and wheat threshing' }
+          ]
+        }
+      };
+
+      async function switchTerroir(regionId) {
+        currentTerroirRegion = regionId;
+
+        terroirTabs.forEach(tab => {
+          const isActive = tab.getAttribute('data-region') === regionId;
+          tab.classList.toggle('is-active', isActive);
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        let data = fallbackTerroirs[regionId];
+        try {
+          const res = await fetch(`/api/terroirs/${encodeURIComponent(regionId)}`);
+          if (res.ok) {
+            const json = await res.json();
+            if (json.success && json.data) data = json.data;
+          }
+        } catch (e) {}
+
+        if (!data) return;
+
+        if (terroirCard) terroirCard.style.opacity = '0.3';
+        setTimeout(() => {
+          if (terroirImg) terroirImg.src = data.image_url;
+          if (terroirWeatherText) terroirWeatherText.textContent = `${data.weather_temp} • ${data.weather_cond}`;
+          if (terroirElevationPill) terroirElevationPill.textContent = data.elevation;
+          if (terroirPhPill) terroirPhPill.textContent = data.soil_ph;
+          if (terroirDistancePill) terroirDistancePill.textContent = data.distance_city;
+          if (terroirRegionName) terroirRegionName.textContent = data.region_name;
+          if (terroirFarmName) terroirFarmName.textContent = data.farm_name;
+          if (terroirTagline) terroirTagline.textContent = data.tagline;
+          if (terroirSoilType) terroirSoilType.textContent = data.soil_type;
+          if (terroirHostName) terroirHostName.textContent = data.host_name;
+          if (terroirCrops) terroirCrops.textContent = data.primary_crops;
+          if (terroirSeason) terroirSeason.textContent = data.current_season;
+          if (terroirQuoteText) terroirQuoteText.textContent = `“${data.steward_quote}”`;
+          if (terroirQuoteAuthor) terroirQuoteAuthor.textContent = `— ${data.host_name} • Master Agroforest Steward`;
+          if (terroirCapacityHint) {
+            terroirCapacityHint.innerHTML = `<span class="pulse-dot"></span> ${data.daily_capacity} spots/day maximum capacity`;
+          }
+
+          if (calendarMilestonesList && Array.isArray(data.calendar)) {
+            calendarMilestonesList.innerHTML = data.calendar.map(m => `
+              <div class="milestone-item">
+                <span class="milestone-month">${m.month}</span>
+                <span class="milestone-stage">${m.stage}</span>
+                <span class="milestone-detail">${m.detail}</span>
+              </div>
+            `).join('');
+          }
+
+          if (terroirCard) terroirCard.style.opacity = '1';
+        }, 120);
+      }
+
+      terroirTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const region = tab.getAttribute('data-region');
+          if (region) switchTerroir(region);
+        });
+      });
+
+      if (calendarToggleBtn && calendarBody) {
+        calendarToggleBtn.addEventListener('click', () => {
+          const isOpen = calendarBody.style.display !== 'none';
+          calendarBody.style.display = isOpen ? 'none' : 'block';
+          if (calToggleIcon) calToggleIcon.textContent = isOpen ? '+' : '−';
+        });
+      }
+
+      if (terroirBookBtn) {
+        terroirBookBtn.addEventListener('click', () => {
+          if (regionSelect) {
+            regionSelect.value = currentTerroirRegion;
+            regionSelect.dispatchEvent(new Event('change'));
+          }
+          const bookingEl = document.getElementById('booking');
+          if (bookingEl) {
+            if (window.__lenis) {
+              window.__lenis.scrollTo(bookingEl, { duration: 1.4 });
+            } else {
+              bookingEl.scrollIntoView({ behavior: 'smooth' });
+            }
+            showToast(`Selected: ${terroirFarmName ? terroirFarmName.textContent : currentTerroirRegion}`);
+          }
+        });
+      }
 
       // Init on load
       initDateInput();

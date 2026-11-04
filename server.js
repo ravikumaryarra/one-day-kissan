@@ -7,7 +7,9 @@ const {
   get,
   getAvailability,
   createBooking,
-  getBookingByRef
+  getBookingByRef,
+  getTerroirs,
+  getTerroirById
 } = require('./database');
 
 const app = express();
@@ -35,6 +37,29 @@ app.get('/api/experiences', async (req, res) => {
   try {
     const experiences = await all('SELECT * FROM experiences ORDER BY id');
     res.json({ success: true, data: experiences });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 2: Get all ancestral terroirs with soil, climate & seasonal calendar
+app.get('/api/terroirs', async (req, res) => {
+  try {
+    const terroirs = await getTerroirs();
+    res.json({ success: true, count: terroirs.length, data: terroirs });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 2: Get single terroir by ID or region ID
+app.get('/api/terroirs/:id', async (req, res) => {
+  try {
+    const terroir = await getTerroirById(req.params.id);
+    if (!terroir) {
+      return res.status(404).json({ success: false, error: 'Terroir not found.' });
+    }
+    res.json({ success: true, data: terroir });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
