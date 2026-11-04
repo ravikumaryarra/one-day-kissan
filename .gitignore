@@ -1,4 +1,10 @@
 .DS_Store
 Thumbs.db
 *.log
+node_modules/
+package.json
+package-lock.json
+screenshots/
+test-results/
+run_inspection.js
 
