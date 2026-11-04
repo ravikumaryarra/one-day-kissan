@@ -375,6 +375,237 @@ function initDatabase() {
         )
       `);
 
+      // 8. Phase 4: Seasonal Agrarian Workshops / Masterclasses
+      db.run(`
+        CREATE TABLE IF NOT EXISTS workshops (
+          id TEXT PRIMARY KEY,
+          region_id TEXT NOT NULL,
+          title TEXT NOT NULL,
+          subtitle TEXT NOT NULL,
+          instructor TEXT NOT NULL,
+          role_title TEXT NOT NULL,
+          difficulty TEXT NOT NULL,
+          duration TEXT NOT NULL,
+          schedule TEXT NOT NULL,
+          price_usd INTEGER NOT NULL,
+          max_participants INTEGER NOT NULL,
+          remaining_seats INTEGER NOT NULL,
+          curriculum TEXT NOT NULL,
+          takeaways TEXT NOT NULL,
+          image_url TEXT NOT NULL,
+          FOREIGN KEY (region_id) REFERENCES regions (id)
+        )
+      `);
+
+      const seedWorkshops = [
+        [
+          'ws-jeevamrutha',
+          'sahyadri',
+          'Jeevamrutha & Living Soil Microbiology',
+          'Brew ancient microbial nectar to revitalize degraded soil naturally',
+          'Ramrao & Savitri Deshmukh',
+          'Master Agroforest Stewards',
+          'All Ages & Beginners',
+          '3.5 Hours',
+          'Every Saturday • 9:30 AM',
+          35,
+          14,
+          6,
+          '1. Microbial Soil Ecology & Earthworm Habitats • 2. Fermenting Desi Cow Dung & Jaggery Inoculum • 3. Application on Basalt Terraces',
+          'Active Jeevamrutha culture flask, Sahyadri heirloom seed envelope, Cotton garden apron, Woodfire hearth lunch',
+          'https://images.unsplash.com/photo-1592417817098-8f3d6ef2c6e6?auto=format&fit=crop&w=800&q=80'
+        ],
+        [
+          'ws-chulha-baking',
+          'punjab',
+          'Clay Chulha Hearth & Heirloom Grains',
+          'Hand-knead ancestral emmer & bake rustic flatbreads on open clay embers',
+          'Gurmehar Singh & Family',
+          'Heritage Wheat Conservators',
+          'Family & Food Enthusiasts',
+          '4.0 Hours',
+          'Every Sunday • 10:00 AM',
+          42,
+          16,
+          5,
+          '1. Stone-Milling Sharbati & Makki Grains • 2. Shaping Earthen Clay Tandoor & Wood Embers • 3. Slow Hearth Cooking & Fresh Makhan Churning',
+          'Cast-iron hearth paddle, 2kg stone-ground flour pouch, Fresh white butter crock, Family communal feast',
+          'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80'
+        ],
+        [
+          'ws-syntropic-canopy',
+          'deccan',
+          'Syntropic Agroforestry & Shade Coffee',
+          'Design multi-layered edible forests that harvest rainwater and create microclimates',
+          'Ananya & Devraj',
+          'Regenerative Forest Designers',
+          'Enthusiasts & Permaculturists',
+          '4.5 Hours',
+          'Saturdays • 8:30 AM',
+          48,
+          12,
+          4,
+          '1. Stratification: Canopy, Sub-canopy, Root Layers • 2. Biomass Pruning & Living Mulch Matrices • 3. Harvesting Shade-Grown Arabica & Cardamom',
+          'Estate Arabica roast sample, Grafted sapling of native nitrogen fixer, Syntropic design blueprint, Farmhouse lunch',
+          'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80'
+        ],
+        [
+          'ws-wetland-heirloom',
+          'cauvery',
+          'Ancient Wetland Rice & Silt Stewardship',
+          'Wade into delta mud, transplant ancestral Samba rice, and learn natural aquatic weed control',
+          'Murugesan & Valliammai',
+          'Traditional Wetland Stewards',
+          'Family & Nature Lovers',
+          '3.5 Hours',
+          'Every Sunday • 9:00 AM',
+          38,
+          15,
+          7,
+          '1. Ancient Chola Waterways & Alluvial Silt Science • 2. Barefoot Rice Paddy Transplanting & Duck Foraging • 3. Banana Leaf Feast with Fragrant Seeraga Samba',
+          'Sprouted Samba seedling bundle, Palmyra palm jaggery brick, Traditional farmer headcloth, Banana leaf temple lunch',
+          'https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=80'
+        ]
+      ];
+
+      const stmtWorkshop = db.prepare(`
+        INSERT OR REPLACE INTO workshops (
+          id, region_id, title, subtitle, instructor, role_title,
+          difficulty, duration, schedule, price_usd, max_participants,
+          remaining_seats, curriculum, takeaways, image_url
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+      seedWorkshops.forEach(w => stmtWorkshop.run(w));
+      stmtWorkshop.finalize();
+
+      // 9. Phase 4: Workshop Registrations table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS workshop_registrations (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          ticket_ref TEXT UNIQUE NOT NULL,
+          workshop_id TEXT NOT NULL,
+          full_name TEXT NOT NULL,
+          email TEXT NOT NULL,
+          phone TEXT NOT NULL,
+          session_date TEXT NOT NULL,
+          seats INTEGER NOT NULL DEFAULT 1,
+          special_notes TEXT,
+          status TEXT DEFAULT 'confirmed',
+          qr_code_data TEXT NOT NULL,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          FOREIGN KEY (workshop_id) REFERENCES workshops (id)
+        )
+      `);
+
+      // 10. Phase 4: Verified Community Reviews & Guest Logbook
+      db.run(`
+        CREATE TABLE IF NOT EXISTS reviews (
+          id TEXT PRIMARY KEY,
+          booking_ref TEXT,
+          region_id TEXT NOT NULL,
+          guest_name TEXT NOT NULL,
+          city TEXT NOT NULL,
+          rating INTEGER NOT NULL DEFAULT 5,
+          title TEXT NOT NULL,
+          comment TEXT NOT NULL,
+          farm_response TEXT,
+          visit_date TEXT NOT NULL,
+          helpful_count INTEGER DEFAULT 0,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          FOREIGN KEY (region_id) REFERENCES regions (id)
+        )
+      `);
+
+      const seedReviews = [
+        [
+          'rev-1',
+          'ODK-2610-8KWQ',
+          'deccan',
+          'Kavita Ramachandran',
+          'Bengaluru',
+          5,
+          'An unforgettable reset for our tech-weary family',
+          'My husband and I work 60+ hour weeks in software. Bringing our 8-year-old twins to Ananya and Devraj’s living farm was transformative. Seeing our children gently hold earthworms and plant cardamom saplings instead of staring at iPads brought tears to our eyes. The food was heaven.',
+          'Ananya says: Watching the twins run through the coffee grove reminded us why we turned our back on corporate cubicles!',
+          'October 2026',
+          38
+        ],
+        [
+          'rev-2',
+          'ODK-2610-P4TM',
+          'sahyadri',
+          'Arun & Sunita Kulkarni',
+          'Pune',
+          5,
+          'Wading into living paddy mud cured my chronic anxiety',
+          'Ramrao and Savitri treated us like long-lost family. Putting bare feet into cool basalt mud while learning about 60 ancestral rice varieties made all my city stress vanish. The woodfire Indrayani rice lunch under the ancient banyan tree was the best meal of my life.',
+          'Ramrao says: The rice you helped transplant is already heading into golden bloom, Arun! Come back for harvest feast.',
+          'October 2026',
+          44
+        ],
+        [
+          'rev-3',
+          'ODK-2609-M9LA',
+          'punjab',
+          'Siddharth Verma',
+          'New Delhi',
+          5,
+          'The aroma of woodfire hearth & golden mustard seas',
+          'I brought my elderly parents back to Punjab where they grew up. Gurmehar’s farm is pure magic. We sat around the clay chulha while his mother served hot makki di roti dripping with fresh white butter. It bridged three generations in an afternoon.',
+          'Gurmehar says: Your father’s folk stories around our evening chulha will be remembered for years to come!',
+          'September 2026',
+          29
+        ],
+        [
+          'rev-4',
+          'ODK-2610-3TXR',
+          'cauvery',
+          'Dr. Lakshmi Venkatesh',
+          'Chennai',
+          5,
+          'A living communion with 2,000 years of agricultural wisdom',
+          'As a botanist, I was astonished by the ecological harmony in Murugesan’s wetlands. Ducks eating weeds, mud crabs aerating the roots, and river silt carrying mountain minerals. This is not just farming; it is living regenerative poetry.',
+          'Murugesan says: The river Cauvery is our common mother, Dr. Lakshmi. Her blessings feed us all.',
+          'October 2026',
+          51
+        ],
+        [
+          'rev-5',
+          'ODK-2611-L2PQ',
+          'sahyadri',
+          'Nikhil & Tanya Merchant',
+          'Mumbai',
+          5,
+          'Pure bliss 2 hours from Mumbai',
+          'The highland air was crisp, the honey was warm right from the hive, and the Deshmukh family’s warmth is unmatched. Zero advance deposit required made booking completely stress-free. We have already subscribed to their monthly harvest box!',
+          'Savitri says: Your wild mountain honey jar was hand-packed this Monday, Tanya!',
+          'November 2026',
+          19
+        ],
+        [
+          'rev-6',
+          'ODK-2610-9WRQ',
+          'deccan',
+          'Rohan Mehra',
+          'Hyderabad',
+          5,
+          'The Syntropic workshop opened my eyes to real sustainability',
+          'Devraj explained how multi-tier canopies cool the ground and capture morning moisture. We planted 30 native trees together and shared filter coffee under shade trees. Truly an essential experience for every urban citizen.',
+          'Devraj says: Your jackfruit tree seedling has taken root beautifully, Rohan.',
+          'October 2026',
+          22
+        ]
+      ];
+
+      const stmtReview = db.prepare(`
+        INSERT OR REPLACE INTO reviews (
+          id, booking_ref, region_id, guest_name, city, rating,
+          title, comment, farm_response, visit_date, helpful_count
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+      seedReviews.forEach(r => stmtReview.run(r));
+      stmtReview.finalize();
+
       resolve();
     });
   });
@@ -675,6 +906,173 @@ async function getHamperOrderByRef(orderRef) {
   `, [orderRef]);
 }
 
+// Phase 4: Workshop queries
+async function getWorkshops(regionId = null) {
+  if (regionId && regionId !== 'all') {
+    return all(`
+      SELECT w.*, r.name as region_name, r.farm_name, r.location as farm_location
+      FROM workshops w
+      JOIN regions r ON w.region_id = r.id
+      WHERE w.region_id = ?
+      ORDER BY w.price_usd ASC
+    `, [regionId]);
+  }
+  return all(`
+    SELECT w.*, r.name as region_name, r.farm_name, r.location as farm_location
+    FROM workshops w
+    JOIN regions r ON w.region_id = r.id
+    ORDER BY w.price_usd ASC
+  `);
+}
+
+async function getWorkshopById(id) {
+  return get(`
+    SELECT w.*, r.name as region_name, r.farm_name, r.location as farm_location
+    FROM workshops w
+    JOIN regions r ON w.region_id = r.id
+    WHERE w.id = ?
+  `, [id]);
+}
+
+async function registerWorkshop({ workshopId, fullName, email, phone, sessionDate, seats = 1, specialNotes = '' }) {
+  const workshop = await getWorkshopById(workshopId);
+  if (!workshop) {
+    throw new Error('Workshop not found.');
+  }
+
+  const seatCount = parseInt(seats, 10) || 1;
+  if (workshop.remaining_seats < seatCount) {
+    throw new Error(`Only ${workshop.remaining_seats} seats remaining for this masterclass.`);
+  }
+
+  const datePart = (sessionDate || new Date().toISOString().slice(0, 10)).replace(/-/g, '').slice(2, 6);
+  const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+  const ticketRef = `ODK-WS-${datePart}-${randomSuffix}`;
+
+  const qrPayload = JSON.stringify({
+    type: 'WORKSHOP_PASS',
+    ref: ticketRef,
+    workshop: workshop.title,
+    instructor: workshop.instructor,
+    farm: workshop.farm_name,
+    guest: fullName,
+    date: sessionDate,
+    seats: seatCount,
+    verification: 'CONFIRMED_ZERO_ADVANCE'
+  });
+
+  const qrCodeData = await QRCode.toDataURL(qrPayload, {
+    width: 260,
+    margin: 1,
+    color: {
+      dark: '#203C2B',
+      light: '#F5F1E8'
+    }
+  });
+
+  await run(`UPDATE workshops SET remaining_seats = remaining_seats - ? WHERE id = ?`, [seatCount, workshopId]);
+
+  await run(`
+    INSERT INTO workshop_registrations (
+      ticket_ref, workshop_id, full_name, email, phone,
+      session_date, seats, special_notes, status, qr_code_data
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'confirmed', ?)
+  `, [ticketRef, workshopId, fullName, email, phone, sessionDate, seatCount, specialNotes, qrCodeData]);
+
+  return getWorkshopRegistrationByRef(ticketRef);
+}
+
+async function getWorkshopRegistrationByRef(ticketRef) {
+  return get(`
+    SELECT 
+      wr.*,
+      w.title as workshop_title,
+      w.subtitle as workshop_subtitle,
+      w.instructor,
+      w.role_title,
+      w.duration,
+      w.schedule,
+      w.price_usd,
+      w.takeaways,
+      w.curriculum,
+      w.image_url as workshop_image,
+      r.name as region_name,
+      r.farm_name,
+      r.location as farm_location
+    FROM workshop_registrations wr
+    JOIN workshops w ON wr.workshop_id = w.id
+    JOIN regions r ON w.region_id = r.id
+    WHERE wr.ticket_ref = ?
+  `, [ticketRef]);
+}
+
+// Phase 4: Reviews & Guest Logbook queries
+async function getReviews(regionId = null) {
+  let reviews;
+  if (regionId && regionId !== 'all') {
+    reviews = await all(`
+      SELECT rv.*, r.name as region_name, r.farm_name
+      FROM reviews rv
+      JOIN regions r ON rv.region_id = r.id
+      WHERE rv.region_id = ?
+      ORDER BY rv.helpful_count DESC, rv.id DESC
+    `, [regionId]);
+  } else {
+    reviews = await all(`
+      SELECT rv.*, r.name as region_name, r.farm_name
+      FROM reviews rv
+      JOIN regions r ON rv.region_id = r.id
+      ORDER BY rv.helpful_count DESC, rv.id DESC
+    `);
+  }
+
+  const allRatings = reviews.map(r => r.rating);
+  const avgRating = allRatings.length ? (allRatings.reduce((a, b) => a + b, 0) / allRatings.length).toFixed(2) : '5.00';
+
+  return {
+    reviews,
+    stats: {
+      total_reviews: reviews.length,
+      average_rating: parseFloat(avgRating),
+      verified_percentage: 100,
+      five_star_count: reviews.filter(r => r.rating === 5).length
+    }
+  };
+}
+
+async function createReview({ bookingRef = '', regionId, guestName, city, rating = 5, title, comment }) {
+  const newId = 'rev-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 5);
+  const dateStr = new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' });
+
+  const stewardReplies = {
+    sahyadri: 'Ramrao & Savitri Deshmukh say: Thank you for stepping barefoot into our mountain soil! You are always welcome back.',
+    deccan: 'Ananya & Devraj say: We are so happy the living agroforest gave your family biological peace and deep nourishment.',
+    punjab: 'Gurmehar Singh says: Warm hearth fires and hot makki roti will always be waiting for your family at our farm.',
+    cauvery: 'Murugesan & Valliammai say: The sacred river waters and traditional rice paddies send you our deepest blessings.'
+  };
+
+  const farmResponse = stewardReplies[regionId] || 'Our agrarian stewards thank you warmly for honoring our living earth.';
+
+  await run(`
+    INSERT INTO reviews (
+      id, booking_ref, region_id, guest_name, city, rating,
+      title, comment, farm_response, visit_date, helpful_count
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+  `, [newId, bookingRef, regionId, guestName, city, parseInt(rating, 10) || 5, title, comment, farmResponse, dateStr]);
+
+  return get(`
+    SELECT rv.*, r.name as region_name, r.farm_name
+    FROM reviews rv
+    JOIN regions r ON rv.region_id = r.id
+    WHERE rv.id = ?
+  `, [newId]);
+}
+
+async function likeReview(id) {
+  await run(`UPDATE reviews SET helpful_count = helpful_count + 1 WHERE id = ?`, [id]);
+  return get(`SELECT id, helpful_count FROM reviews WHERE id = ?`, [id]);
+}
+
 module.exports = {
   db,
   initDatabase,
@@ -691,5 +1089,12 @@ module.exports = {
   getHampers,
   getHamperById,
   createHamperOrder,
-  getHamperOrderByRef
+  getHamperOrderByRef,
+  getWorkshops,
+  getWorkshopById,
+  registerWorkshop,
+  getWorkshopRegistrationByRef,
+  getReviews,
+  createReview,
+  likeReview
 };

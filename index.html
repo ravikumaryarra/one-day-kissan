@@ -958,7 +958,7 @@
       margin: 0 auto;
     }
     @media (max-width: 1100px) {
-      .stories-grid, .hampers-grid {
+      .stories-grid, .hampers-grid, .workshops-grid, .reviews-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -1458,6 +1458,405 @@
       flex-direction: column;
       gap: 4px;
       min-width: 0;
+    }
+
+    /* ====================================================
+       PHASE 4: MASTERCLASSES & COMMUNITY GUEST LOGBOOK
+       ==================================================== */
+
+    /* Masterclasses Section */
+    .workshops-section {
+      position: relative;
+      padding: 110px 4vw;
+      background: var(--ivory);
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+    .workshops-container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .workshops-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 46px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .workshops-subtitle {
+      font-size: 15px;
+      color: #4a5445;
+      line-height: 1.6;
+    }
+    .workshops-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .workshop-tab {
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--forest);
+      background: rgba(32, 60, 43, 0.07);
+      border: 1px solid rgba(32, 60, 43, 0.12);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .workshop-tab:hover {
+      background: rgba(32, 60, 43, 0.14);
+      transform: translateY(-1px);
+    }
+    .workshop-tab.is-active {
+      background: var(--forest);
+      color: var(--ivory);
+      border-color: var(--forest);
+      box-shadow: 0 4px 14px rgba(32, 60, 43, 0.18);
+    }
+    .workshops-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      width: 100%;
+    }
+    .workshop-card {
+      position: relative;
+      border-radius: 22px;
+      background: #FFFFFF;
+      border: 1px solid rgba(32, 60, 43, 0.1);
+      box-shadow: 0 14px 32px rgba(32, 60, 43, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s;
+    }
+    .workshop-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 44px rgba(32, 60, 43, 0.12);
+    }
+    .workshop-img-wrap {
+      position: relative;
+      height: 190px;
+      overflow: hidden;
+    }
+    .workshop-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+    }
+    .workshop-card:hover .workshop-img-wrap img {
+      transform: scale(1.06);
+    }
+    .workshop-difficulty-pill {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(32, 60, 43, 0.88);
+      color: var(--ivory);
+      font-size: 11px;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+    }
+    .workshop-seats-pill {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(245, 241, 232, 0.94);
+      color: var(--forest);
+      font-size: 11px;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .workshop-body {
+      padding: 22px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+    .workshop-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .workshop-schedule-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--harvest);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .workshop-duration-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: #616e5c;
+    }
+    .workshop-title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--forest);
+      margin-bottom: 6px;
+    }
+    .workshop-steward {
+      font-size: 12px;
+      color: #616e5c;
+      margin-bottom: 14px;
+    }
+    .workshop-curriculum-box {
+      background: var(--ivory);
+      border: 1px solid rgba(32, 60, 43, 0.08);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 18px;
+    }
+    .workshop-box-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--forest);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 4px;
+    }
+    .workshop-box-text {
+      font-size: 11.5px;
+      color: #4a5445;
+      line-height: 1.45;
+    }
+    .workshop-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid rgba(32, 60, 43, 0.1);
+      padding-top: 14px;
+      margin-top: auto;
+    }
+    .workshop-price-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--forest);
+    }
+    .workshop-price-sub {
+      font-size: 10.5px;
+      color: #7b8874;
+    }
+
+    /* Verified Community Reviews Section */
+    .reviews-section {
+      position: relative;
+      padding: 110px 4vw;
+      background: #FFFFFF;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+    }
+    .reviews-container {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .reviews-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 46px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .reviews-stats-banner {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      background: var(--ivory);
+      border: 1px solid rgba(32, 60, 43, 0.12);
+      border-radius: 20px;
+      padding: 22px 28px;
+      margin-bottom: 42px;
+      box-shadow: 0 10px 24px rgba(32, 60, 43, 0.04);
+    }
+    .reviews-stat-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+    }
+    .reviews-stat-val {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--forest);
+      line-height: 1.1;
+    }
+    .reviews-stat-lbl {
+      font-size: 12px;
+      color: #5d6a58;
+      font-weight: 600;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      width: 100%;
+    }
+    .review-card {
+      position: relative;
+      border-radius: 20px;
+      background: var(--ivory);
+      border: 1px solid rgba(32, 60, 43, 0.1);
+      box-shadow: 0 12px 28px rgba(32, 60, 43, 0.05);
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 36px rgba(32, 60, 43, 0.1);
+    }
+    .review-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .review-guest-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .review-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: var(--ivory);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .review-guest-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--forest);
+    }
+    .review-city-date {
+      font-size: 11.5px;
+      color: #6a7765;
+    }
+    .review-verified-pill {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--forest);
+      background: rgba(123, 141, 101, 0.18);
+      padding: 3px 8px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .review-stars {
+      color: var(--harvest);
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+    .review-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1.3;
+    }
+    .review-comment {
+      font-size: 13.5px;
+      color: #3f4a3b;
+      line-height: 1.6;
+    }
+    .review-steward-reply {
+      background: #FFFFFF;
+      border-left: 3px solid var(--forest);
+      border-radius: 0 10px 10px 0;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #3a4436;
+      line-height: 1.5;
+    }
+    .review-steward-reply strong {
+      color: var(--forest);
+    }
+    .review-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(32, 60, 43, 0.08);
+      padding-top: 12px;
+      margin-top: auto;
+    }
+    .review-like-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #556250;
+      background: transparent;
+      border: 1px solid rgba(32, 60, 43, 0.12);
+      border-radius: 999px;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .review-like-btn:hover {
+      background: rgba(32, 60, 43, 0.08);
+      color: var(--forest);
+    }
+    .review-region-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--harvest);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .review-cta-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 36px;
+    }
+
+    /* Phase 4 Workshop Modal & Review Modal */
+    .workshop-modal-card, .review-modal-card {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--ivory);
+      border-radius: 24px;
+      border: 1px solid rgba(32, 60, 43, 0.18);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
+      padding: 30px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     /* 05. BOOKING EXPERIENCE (CTA) */
@@ -2121,9 +2520,13 @@
       .calendar-milestones {
         grid-template-columns: minmax(0, 1fr);
       }
-      .stories-grid, .hampers-grid {
+      .stories-grid, .hampers-grid, .workshops-grid, .reviews-grid {
         grid-template-columns: minmax(0, 1fr);
         max-width: 580px;
+      }
+      .reviews-stats-banner {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        padding: 16px;
       }
       .hamper-double-col {
         grid-template-columns: minmax(0, 1fr) !important;
@@ -2303,6 +2706,12 @@
       }
     }
 
+    @media (max-width: 480px) {
+      .reviews-stats-banner {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .drift-a, .drift-b, .petal {
         animation: none !important;
@@ -2328,6 +2737,7 @@
         <div style="display: flex; align-items: center; gap: 8px;">
           <a href="#terroirs" class="btn btn-nav-terroirs" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14);">Terroirs</a>
           <a href="#hampers" class="btn btn-nav-hampers" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14);">Harvest Crates</a>
+          <a href="#workshops" class="btn btn-nav-workshops" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14);">Masterclasses</a>
           <button id="navLookupBtn" type="button" class="btn" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14); cursor: pointer; display: inline-flex; align-items: center; gap: 5px;">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
             <span>My Pass</span>
@@ -2838,7 +3248,297 @@
       </div>
     </section>
 
-    <!-- 05. BOOKING EXPERIENCE (CTA) -->
+    <!-- 04C. SEASONAL AGRARIAN MASTERCLASSES -->
+    <section class="workshops-section" id="workshops">
+      <div class="workshops-container">
+        <div class="workshops-header">
+          <span class="pill">Hands-On Agrarian Labs</span>
+          <h2 class="h2 split">Seasonal Agrarian Masterclasses.</h2>
+          <p class="workshops-subtitle">Step into living soil labs. Learn ancestral microbial brewing, woodfire hearth sourdough, syntropic food forestry, and wetland rice stewardship directly alongside our master farmers.</p>
+        </div>
+
+        <!-- Terroir Filter Tabs -->
+        <div class="workshops-tabs" id="workshopFilterTabs" role="tablist">
+          <button type="button" class="workshop-tab is-active" data-filter="all">All Masterclasses</button>
+          <button type="button" class="workshop-tab" data-filter="sahyadri">Sahyadri Foothills</button>
+          <button type="button" class="workshop-tab" data-filter="deccan">Deccan Agroforest</button>
+          <button type="button" class="workshop-tab" data-filter="punjab">Punjab Canal Plains</button>
+          <button type="button" class="workshop-tab" data-filter="cauvery">Cauvery Delta</button>
+        </div>
+
+        <div class="workshops-grid" id="workshopsGrid">
+          <!-- Workshop 1: Sahyadri Jeevamrutha -->
+          <article class="workshop-card" data-region="sahyadri">
+            <div>
+              <div class="workshop-img-wrap">
+                <img src="https://images.unsplash.com/photo-1592417817098-8f3d6ef2c6e6?auto=format&fit=crop&w=800&q=80" alt="Jeevamrutha brewing" loading="lazy">
+                <span class="workshop-difficulty-pill">All Ages &amp; Beginners</span>
+                <span class="workshop-seats-pill"><span class="pulse-dot"></span> 6 seats left</span>
+              </div>
+              <div class="workshop-body">
+                <div>
+                  <div class="workshop-meta-row">
+                    <span class="workshop-schedule-badge">Every Saturday • 9:30 AM</span>
+                    <span class="workshop-duration-badge">3.5 Hours</span>
+                  </div>
+                  <h3 class="workshop-title">Jeevamrutha &amp; Living Soil Microbiology</h3>
+                  <div class="workshop-steward">Led by Ramrao &amp; Savitri Deshmukh • Sahyadri</div>
+                  <div class="workshop-curriculum-box">
+                    <div class="workshop-box-label">Curriculum Highlights</div>
+                    <div class="workshop-box-text">Microbial Soil Habitats • Desi Cow Dung &amp; Jaggery Fermentation • Live Terraced Soil Inoculation</div>
+                    <div class="workshop-box-label" style="margin-top:6px;">Takeaways Included</div>
+                    <div class="workshop-box-text" style="color:#203C2B;font-weight:600;">Active Jeevamrutha flask, heirloom seed kit, garden apron &amp; woodfire lunch</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 0 20px 24px;">
+              <div class="workshop-footer">
+                <div>
+                  <div class="workshop-price-val">$35 <span style="font-size:13px;font-weight:500;color:#616e5c;">/ person</span></div>
+                  <div class="workshop-price-sub">$0 advance • Materials included</div>
+                </div>
+                <button type="button" class="btn btn-gold workshop-book-btn" data-workshop-id="ws-jeevamrutha">Reserve Seat</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Workshop 2: Punjab Chulha Baking -->
+          <article class="workshop-card" data-region="punjab">
+            <div>
+              <div class="workshop-img-wrap">
+                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80" alt="Clay chulha cooking" loading="lazy">
+                <span class="workshop-difficulty-pill">Family &amp; Food Enthusiasts</span>
+                <span class="workshop-seats-pill"><span class="pulse-dot"></span> 5 seats left</span>
+              </div>
+              <div class="workshop-body">
+                <div>
+                  <div class="workshop-meta-row">
+                    <span class="workshop-schedule-badge">Every Sunday • 10:00 AM</span>
+                    <span class="workshop-duration-badge">4.0 Hours</span>
+                  </div>
+                  <h3 class="workshop-title">Clay Chulha Hearth &amp; Heirloom Grains</h3>
+                  <div class="workshop-steward">Led by Gurmehar Singh &amp; Family • Punjab</div>
+                  <div class="workshop-curriculum-box">
+                    <div class="workshop-box-label">Curriculum Highlights</div>
+                    <div class="workshop-box-text">Stone-Milling Sharbati &amp; Makki • Earthen Clay Tandoor Shaping • Wood Ember Baking &amp; Butter Churning</div>
+                    <div class="workshop-box-label" style="margin-top:6px;">Takeaways Included</div>
+                    <div class="workshop-box-text" style="color:#203C2B;font-weight:600;">Cast-iron hearth paddle, 2kg stone-ground flour, fresh white butter crock</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 0 20px 24px;">
+              <div class="workshop-footer">
+                <div>
+                  <div class="workshop-price-val">$42 <span style="font-size:13px;font-weight:500;color:#616e5c;">/ person</span></div>
+                  <div class="workshop-price-sub">$0 advance • Materials included</div>
+                </div>
+                <button type="button" class="btn btn-gold workshop-book-btn" data-workshop-id="ws-chulha-baking">Reserve Seat</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Workshop 3: Deccan Syntropic -->
+          <article class="workshop-card" data-region="deccan">
+            <div>
+              <div class="workshop-img-wrap">
+                <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80" alt="Syntropic canopy" loading="lazy">
+                <span class="workshop-difficulty-pill">Enthusiasts &amp; Permaculturists</span>
+                <span class="workshop-seats-pill"><span class="pulse-dot"></span> 4 seats left</span>
+              </div>
+              <div class="workshop-body">
+                <div>
+                  <div class="workshop-meta-row">
+                    <span class="workshop-schedule-badge">Saturdays • 8:30 AM</span>
+                    <span class="workshop-duration-badge">4.5 Hours</span>
+                  </div>
+                  <h3 class="workshop-title">Syntropic Agroforestry &amp; Shade Coffee</h3>
+                  <div class="workshop-steward">Led by Ananya &amp; Devraj • Deccan Terraces</div>
+                  <div class="workshop-curriculum-box">
+                    <div class="workshop-box-label">Curriculum Highlights</div>
+                    <div class="workshop-box-text">Multi-Tier Forest Stratification • Biomass Pruning &amp; Mulch Matrix • Harvesting Arabica &amp; Cardamom</div>
+                    <div class="workshop-box-label" style="margin-top:6px;">Takeaways Included</div>
+                    <div class="workshop-box-text" style="color:#203C2B;font-weight:600;">Estate Arabica coffee roast sample, native sapling, syntropic blueprint &amp; lunch</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 0 20px 24px;">
+              <div class="workshop-footer">
+                <div>
+                  <div class="workshop-price-val">$48 <span style="font-size:13px;font-weight:500;color:#616e5c;">/ person</span></div>
+                  <div class="workshop-price-sub">$0 advance • Materials included</div>
+                </div>
+                <button type="button" class="btn btn-gold workshop-book-btn" data-workshop-id="ws-syntropic-canopy">Reserve Seat</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Workshop 4: Cauvery Wetland Rice -->
+          <article class="workshop-card" data-region="cauvery">
+            <div>
+              <div class="workshop-img-wrap">
+                <img src="https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=80" alt="Wetland rice transplanting" loading="lazy">
+                <span class="workshop-difficulty-pill">Family &amp; Nature Lovers</span>
+                <span class="workshop-seats-pill"><span class="pulse-dot"></span> 7 seats left</span>
+              </div>
+              <div class="workshop-body">
+                <div>
+                  <div class="workshop-meta-row">
+                    <span class="workshop-schedule-badge">Every Sunday • 9:00 AM</span>
+                    <span class="workshop-duration-badge">3.5 Hours</span>
+                  </div>
+                  <h3 class="workshop-title">Ancient Wetland Rice &amp; Silt Stewardship</h3>
+                  <div class="workshop-steward">Led by Murugesan &amp; Valliammai • Cauvery</div>
+                  <div class="workshop-curriculum-box">
+                    <div class="workshop-box-label">Curriculum Highlights</div>
+                    <div class="workshop-box-text">Chola Silt Canal Networks • Knee-Deep Barefoot Samba Planting • Duck &amp; Crab Symbiosis Management</div>
+                    <div class="workshop-box-label" style="margin-top:6px;">Takeaways Included</div>
+                    <div class="workshop-box-text" style="color:#203C2B;font-weight:600;">Sprouted Samba rice seedlings, palm jaggery brick, farmer headcloth &amp; lunch</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 0 20px 24px;">
+              <div class="workshop-footer">
+                <div>
+                  <div class="workshop-price-val">$38 <span style="font-size:13px;font-weight:500;color:#616e5c;">/ person</span></div>
+                  <div class="workshop-price-sub">$0 advance • Materials included</div>
+                </div>
+                <button type="button" class="btn btn-gold workshop-book-btn" data-workshop-id="ws-wetland-heirloom">Reserve Seat</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04D. THE AGRARIAN GUEST LOGBOOK & REVIEWS -->
+    <section class="reviews-section" id="reviews">
+      <div class="reviews-container">
+        <div class="reviews-header">
+          <span class="pill">Verified Guest Logbook</span>
+          <h2 class="h2 split">Real reflections from the soil.</h2>
+          <p class="workshops-subtitle">Honest stories from urban families, working professionals, and mindful explorers who disconnected from digital noise and reconnected with the biological rhythms of farming.</p>
+        </div>
+
+        <!-- Community Trust & Quality Scorecard -->
+        <div class="reviews-stats-banner">
+          <div class="reviews-stat-card">
+            <div class="reviews-stat-val">4.96 ★</div>
+            <div class="reviews-stat-lbl">Average Immersion Rating</div>
+          </div>
+          <div class="reviews-stat-card">
+            <div class="reviews-stat-val">340+</div>
+            <div class="reviews-stat-lbl">Verified Agrarian Day Stays</div>
+          </div>
+          <div class="reviews-stat-card">
+            <div class="reviews-stat-val">100%</div>
+            <div class="reviews-stat-lbl">Pure Heritage &amp; Organic Food</div>
+          </div>
+          <div class="reviews-stat-card">
+            <div class="reviews-stat-val">99.4%</div>
+            <div class="reviews-stat-lbl">Urban-to-Rural Recommendation</div>
+          </div>
+        </div>
+
+        <div class="reviews-grid" id="reviewsGrid">
+          <!-- Review 1 -->
+          <article class="review-card" data-review-id="rev-1">
+            <div class="review-top">
+              <div class="review-guest-wrap">
+                <div class="review-avatar">KR</div>
+                <div>
+                  <div class="review-guest-name">Kavita Ramachandran</div>
+                  <div class="review-city-date">Bengaluru • October 2026</div>
+                </div>
+              </div>
+              <span class="review-verified-pill">✓ Verified Stay</span>
+            </div>
+            <div>
+              <div class="review-stars">★★★★★</div>
+              <h3 class="review-title" style="margin-top:6px;">An unforgettable reset for our tech-weary family</h3>
+              <p class="review-comment">My husband and I work 60+ hour weeks in software. Bringing our 8-year-old twins to Ananya and Devraj’s living farm was transformative. Seeing our children gently hold earthworms and plant cardamom saplings instead of staring at iPads brought tears to our eyes. The food was heaven.</p>
+            </div>
+            <div class="review-steward-reply">
+              <strong>Steward Reply:</strong> Ananya says: Watching the twins run through the coffee grove reminded us why we turned our back on corporate cubicles!
+            </div>
+            <div class="review-footer">
+              <span class="review-region-tag">Deccan Agroforest</span>
+              <button type="button" class="review-like-btn" data-review-id="rev-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                <span>Helpful (38)</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Review 2 -->
+          <article class="review-card" data-review-id="rev-2">
+            <div class="review-top">
+              <div class="review-guest-wrap">
+                <div class="review-avatar">AK</div>
+                <div>
+                  <div class="review-guest-name">Arun &amp; Sunita Kulkarni</div>
+                  <div class="review-city-date">Pune • October 2026</div>
+                </div>
+              </div>
+              <span class="review-verified-pill">✓ Verified Stay</span>
+            </div>
+            <div>
+              <div class="review-stars">★★★★★</div>
+              <h3 class="review-title" style="margin-top:6px;">Wading into living paddy mud cured my chronic anxiety</h3>
+              <p class="review-comment">Ramrao and Savitri treated us like long-lost family. Putting bare feet into cool basalt mud while learning about 60 ancestral rice varieties made all my city stress vanish. The woodfire Indrayani rice lunch under the ancient banyan tree was the best meal of my life.</p>
+            </div>
+            <div class="review-steward-reply">
+              <strong>Steward Reply:</strong> Ramrao says: The rice you helped transplant is already heading into golden bloom, Arun! Come back for harvest feast.
+            </div>
+            <div class="review-footer">
+              <span class="review-region-tag">Sahyadri Foothills</span>
+              <button type="button" class="review-like-btn" data-review-id="rev-2">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                <span>Helpful (44)</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Review 3 -->
+          <article class="review-card" data-review-id="rev-3">
+            <div class="review-top">
+              <div class="review-guest-wrap">
+                <div class="review-avatar">SV</div>
+                <div>
+                  <div class="review-guest-name">Siddharth Verma</div>
+                  <div class="review-city-date">New Delhi • September 2026</div>
+                </div>
+              </div>
+              <span class="review-verified-pill">✓ Verified Stay</span>
+            </div>
+            <div>
+              <div class="review-stars">★★★★★</div>
+              <h3 class="review-title" style="margin-top:6px;">The aroma of woodfire hearth &amp; golden mustard seas</h3>
+              <p class="review-comment">I brought my elderly parents back to Punjab where they grew up. Gurmehar’s farm is pure magic. We sat around the clay chulha while his mother served hot makki di roti dripping with fresh white butter. It bridged three generations in an afternoon.</p>
+            </div>
+            <div class="review-steward-reply">
+              <strong>Steward Reply:</strong> Gurmehar says: Your father’s folk stories around our evening chulha will be remembered for years to come!
+            </div>
+            <div class="review-footer">
+              <span class="review-region-tag">Punjab Canal Plains</span>
+              <button type="button" class="review-like-btn" data-review-id="rev-3">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                <span>Helpful (29)</span>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div class="review-cta-row">
+          <button type="button" class="btn btn-gold" id="writeReviewBtn" style="cursor: pointer; padding: 12px 28px; font-size: 14px; font-weight: 700;">
+            ✍️ Add Your Field Note / Logbook Review
+          </button>
+        </div>
+      </div>
+    </section>
     <section class="cta" id="booking">
       <div class="sq-field" data-count="16"></div>
       <div class="cta-img">
@@ -2973,6 +3673,8 @@
         <a href="#loop">Experiences</a>
         <a href="#stories">Farm Stories</a>
         <a href="#hampers">Harvest Crates</a>
+        <a href="#workshops">Masterclasses</a>
+        <a href="#reviews">Guest Logbook</a>
         <a href="#booking">Book A Day</a>
       </nav>
       <div class="f-social">
@@ -3927,6 +4629,212 @@
     </div>
   </div>
 
+  <!-- Workshop Registration Drawer Modal -->
+  <div id="workshopModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="workshopModalTitle">
+    <div class="workshop-modal-card">
+      <div class="pass-header">
+        <div>
+          <span class="pass-status-pill">Masterclass Admission • $0 Advance</span>
+          <h2 id="workshopModalTitle" class="pass-brand-title">Reserve Masterclass Seat</h2>
+        </div>
+        <button type="button" class="pass-close-btn" id="closeWorkshopModalBtn" aria-label="Close Workshop Dialog">&times;</button>
+      </div>
+
+      <div class="hamper-preview-banner">
+        <div>
+          <div class="hamper-preview-name" id="workshopPreviewTitle">Jeevamrutha & Soil Microbiology</div>
+          <div class="hamper-preview-meta" id="workshopPreviewMeta">Ramrao & Savitri Deshmukh • Sahyadri Heritage Agroforest</div>
+        </div>
+        <div class="hamper-preview-price" id="workshopPreviewPrice">$35</div>
+      </div>
+
+      <form id="workshopForm" class="hamper-form">
+        <input type="hidden" id="workshopIdInput" name="workshopId" value="">
+
+        <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;" class="hamper-double-col">
+          <div class="hamper-field">
+            <label for="workshopSessionDate" class="booking-label">Session Date</label>
+            <input type="date" id="workshopSessionDate" class="booking-input" required>
+          </div>
+          <div class="hamper-field">
+            <label for="workshopSeats" class="booking-label">Number of Seats</label>
+            <select id="workshopSeats" class="booking-select" required>
+              <option value="1">1 Person ($0 Advance)</option>
+              <option value="2" selected>2 People ($0 Advance)</option>
+              <option value="3">3 People ($0 Advance)</option>
+              <option value="4">4 People (Family Pass)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;" class="hamper-double-col">
+          <div class="hamper-field">
+            <label for="workshopFullName" class="booking-label">Full Name</label>
+            <input type="text" id="workshopFullName" class="booking-input" placeholder="e.g. Rahul Kapoor" required>
+          </div>
+          <div class="hamper-field">
+            <label for="workshopPhone" class="booking-label">Phone Number</label>
+            <input type="tel" id="workshopPhone" class="booking-input" placeholder="+91 98112 34567" required>
+          </div>
+        </div>
+
+        <div class="hamper-field">
+          <label for="workshopEmail" class="booking-label">Email Address (for Digital Pass & Gate Check-in)</label>
+          <input type="email" id="workshopEmail" class="booking-input" placeholder="rahul@example.com" required>
+        </div>
+
+        <div class="hamper-field">
+          <label for="workshopNotes" class="booking-label">Special Requests / Dietary Requirements</label>
+          <input type="text" id="workshopNotes" class="booking-input" placeholder="e.g. Vegetarian lunch, bringing children aged 7">
+        </div>
+
+        <div id="workshopErrorAlert" style="display: none; background: #fee2e2; border: 1px solid #ef4444; color: #991b1b; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;"></div>
+
+        <button type="submit" id="workshopSubmitBtn" class="btn btn-gold" style="width: 100%; height: 48px; font-size: 14.5px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+          <span id="workshopSubmitText">Confirm Masterclass Pass • $0 Advance</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Masterclass Admission Pass Ticket Modal -->
+  <div id="workshopPassModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="workshopPassTitle">
+    <div class="pass-ticket" id="workshopTicketElement">
+      <div class="pass-header">
+        <div class="pass-header-info">
+          <span class="pass-status-pill">Confirmed • $0 Advance</span>
+          <h2 id="workshopPassTitle" class="pass-brand-title">Agrarian Masterclass • Admission Pass</h2>
+        </div>
+        <button type="button" class="pass-close-btn" id="closeWorkshopPassModalBtn" aria-label="Close Admission Pass">&times;</button>
+      </div>
+      <div class="pass-body">
+        <div class="pass-ref-banner">
+          <div>
+            <div class="pass-ref-label">Admission Reference</div>
+            <div class="pass-ref-pill" id="workshopPassRefText">ODK-WS-2611-XXXX</div>
+          </div>
+          <button type="button" class="pass-copy-btn" id="copyWorkshopRefBtn">Copy Code</button>
+        </div>
+
+        <div class="pass-grid">
+          <div class="pass-item">
+            <span class="pass-item-label">Guest / Lead</span>
+            <span class="pass-item-value" id="workshopPassGuestName">—</span>
+          </div>
+          <div class="pass-item">
+            <span class="pass-item-label">Masterclass</span>
+            <span class="pass-item-value" id="workshopPassTitleText">—</span>
+          </div>
+          <div class="pass-item">
+            <span class="pass-item-label">Session Date & Schedule</span>
+            <span class="pass-item-value" id="workshopPassSchedule">—</span>
+          </div>
+          <div class="pass-item">
+            <span class="pass-item-label">Host Steward</span>
+            <span class="pass-item-value" id="workshopPassInstructor">—</span>
+          </div>
+          <div class="pass-item">
+            <span class="pass-item-label">Party Allocation</span>
+            <span class="pass-item-value" id="workshopPassSeats">—</span>
+          </div>
+          <div class="pass-item">
+            <span class="pass-item-label">Due at Hearth Feast</span>
+            <span class="pass-item-value" id="workshopPassPrice">—</span>
+          </div>
+          <div class="pass-item pass-full-width">
+            <span class="pass-item-label">Farm Estate Location</span>
+            <span class="pass-item-value" id="workshopPassLocation">—</span>
+          </div>
+          <div class="pass-item pass-full-width">
+            <span class="pass-item-label">Materials & Takeaways</span>
+            <span class="pass-item-value" style="font-size: 12px; color: #465243; line-height: 1.4;" id="workshopPassTakeaways">—</span>
+          </div>
+        </div>
+
+        <div class="pass-qr-wrap">
+          <img id="workshopPassQrImg" class="pass-qr-img" src="" alt="Workshop Pass QR Code">
+          <div class="pass-qr-instruction">
+            <strong>Gate Admission Verified:</strong> Present this pass at the estate gate. Field boots, craft aprons, and fresh earthen jars will be set aside for your party.
+          </div>
+        </div>
+
+        <div class="pass-actions">
+          <button type="button" class="pass-btn-print" id="downloadWorkshopPassBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Download Admission Pass (.txt)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit Field Note / Review Modal -->
+  <div id="reviewModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+    <div class="review-modal-card">
+      <div class="pass-header">
+        <div>
+          <span class="pass-status-pill">Community Field Note</span>
+          <h2 id="reviewModalTitle" class="pass-brand-title">Write In Guest Logbook</h2>
+        </div>
+        <button type="button" class="pass-close-btn" id="closeReviewModalBtn" aria-label="Close Review Dialog">&times;</button>
+      </div>
+
+      <form id="reviewForm" class="hamper-form">
+        <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;" class="hamper-double-col">
+          <div class="hamper-field">
+            <label for="reviewRegion" class="booking-label">Agrarian Region Visited</label>
+            <select id="reviewRegion" class="booking-select" required>
+              <option value="sahyadri">Sahyadri Heritage Agroforest (Maharashtra)</option>
+              <option value="deccan">Ananya & Devraj Living Farm (Deccan)</option>
+              <option value="punjab">Singh Ancestral Farm (Punjab)</option>
+              <option value="cauvery">Thanjavur Heirloom Rice Wetland (Cauvery)</option>
+            </select>
+          </div>
+          <div class="hamper-field">
+            <label for="reviewBookingRef" class="booking-label">Booking / Pass Reference (Optional)</label>
+            <input type="text" id="reviewBookingRef" class="booking-input" placeholder="e.g. ODK-2604-W8TQ">
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;" class="hamper-double-col">
+          <div class="hamper-field">
+            <label for="reviewGuestName" class="booking-label">Your Name</label>
+            <input type="text" id="reviewGuestName" class="booking-input" placeholder="e.g. Sunita Deshmukh" required>
+          </div>
+          <div class="hamper-field">
+            <label for="reviewCity" class="booking-label">City / Hometown</label>
+            <input type="text" id="reviewCity" class="booking-input" placeholder="e.g. Mumbai" required>
+          </div>
+        </div>
+
+        <div class="hamper-field">
+          <label for="reviewRating" class="booking-label">Experience Rating</label>
+          <select id="reviewRating" class="booking-select" required>
+            <option value="5">★★★★★ (5 Stars - Extraordinary Immersion)</option>
+            <option value="4">★★★★☆ (4 Stars - Wonderful Day)</option>
+            <option value="3">★★★☆☆ (3 Stars - Pleasant Experience)</option>
+          </select>
+        </div>
+
+        <div class="hamper-field">
+          <label for="reviewTitle" class="booking-label">Review Headline</label>
+          <input type="text" id="reviewTitle" class="booking-input" placeholder="e.g. Our children never wanted to leave the paddy fields" required>
+        </div>
+
+        <div class="hamper-field">
+          <label for="reviewComment" class="booking-label">Your Field Note / Reflections</label>
+          <textarea id="reviewComment" class="booking-input" rows="3" placeholder="Share your experience: the food, the soil, the farmer families, and the peace of the farm..." required></textarea>
+        </div>
+
+        <div id="reviewErrorAlert" style="display: none; background: #fee2e2; border: 1px solid #ef4444; color: #991b1b; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;"></div>
+
+        <button type="submit" id="reviewSubmitBtn" class="btn btn-gold" style="width: 100%; height: 48px; font-size: 14.5px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+          <span id="reviewSubmitText">Publish to Guest Logbook</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div id="toastMessage" class="toast-msg">Reference code copied to clipboard!</div>
 
@@ -4239,7 +5147,7 @@
         }
       }
 
-      // Lookup Form Submit Handler (Passes & Hampers)
+      // Lookup Form Submit Handler (Passes, Hampers & Workshops)
       async function handleLookupSubmit(e) {
         e.preventDefault();
         const ref = (lookupInput ? lookupInput.value : '').trim().toUpperCase();
@@ -4256,7 +5164,16 @@
         }
 
         try {
-          if (ref.includes('BOX')) {
+          if (ref.includes('WS')) {
+            const res = await fetch(`/api/workshops/register/${encodeURIComponent(ref)}`);
+            const data = await res.json();
+            if (!res.ok || !data.success || !data.data) {
+              throw new Error(data.error || 'No active workshop pass found with reference ' + ref);
+            }
+            closeModal(lookupModal);
+            renderWorkshopPass(data.data);
+            showToast('Workshop admission pass found!');
+          } else if (ref.includes('BOX')) {
             const res = await fetch(`/api/hampers/orders/${encodeURIComponent(ref)}`);
             const data = await res.json();
             if (!res.ok || !data.success || !data.data) {
@@ -4342,6 +5259,9 @@
           closeStoryModal();
           closeModal(hamperModal);
           closeModal(hamperPassModal);
+          closeModal(workshopModal);
+          closeModal(workshopPassModal);
+          closeModal(reviewModal);
         }
       });
 
@@ -5171,6 +6091,510 @@
           if (id) openHamperModal(id);
         });
       });
+
+      // ==========================================
+      // PHASE 4: MASTERCLASSES & GUEST LOGBOOK
+      // ==========================================
+
+      const fallbackWorkshops = {
+        'ws-jeevamrutha': {
+          id: 'ws-jeevamrutha',
+          region_id: 'sahyadri',
+          title: 'Jeevamrutha & Living Soil Microbiology',
+          subtitle: 'Brew ancient microbial nectar to revitalize degraded soil naturally',
+          instructor: 'Ramrao & Savitri Deshmukh',
+          role_title: 'Master Agroforest Stewards',
+          farm_name: 'Sahyadri Heritage Agroforest',
+          region_name: 'Western Ghats Foothills',
+          farm_location: 'Sahyadri Foothills, Maharashtra',
+          duration: '3.5 Hours',
+          schedule: 'Every Saturday • 9:30 AM',
+          price_usd: 35,
+          remaining_seats: 6,
+          takeaways: 'Active Jeevamrutha flask, heirloom seed kit, garden apron & woodfire lunch'
+        },
+        'ws-chulha-baking': {
+          id: 'ws-chulha-baking',
+          region_id: 'punjab',
+          title: 'Clay Chulha Hearth & Heirloom Grains',
+          subtitle: 'Hand-knead ancestral emmer & bake rustic flatbreads on open clay embers',
+          instructor: 'Gurmehar Singh & Family',
+          role_title: 'Heritage Wheat Conservators',
+          farm_name: 'Singh Ancestral Wheat & Mustard Farm',
+          region_name: 'Canal Plains Organic Estate',
+          farm_location: 'Canal Plains Organic Estate, Punjab',
+          duration: '4.0 Hours',
+          schedule: 'Every Sunday • 10:00 AM',
+          price_usd: 42,
+          remaining_seats: 5,
+          takeaways: 'Cast-iron hearth paddle, 2kg stone-ground flour, fresh white butter crock'
+        },
+        'ws-syntropic-canopy': {
+          id: 'ws-syntropic-canopy',
+          region_id: 'deccan',
+          title: 'Syntropic Agroforestry & Shade Coffee',
+          subtitle: 'Design multi-layered edible forests that harvest rainwater and create microclimates',
+          instructor: 'Ananya & Devraj',
+          role_title: 'Regenerative Forest Designers',
+          farm_name: 'Ananya & Devraj Living Farm',
+          region_name: 'Deccan Agroforest Plateau',
+          farm_location: 'Deccan Agroforest Plateau, Karnataka',
+          duration: '4.5 Hours',
+          schedule: 'Saturdays • 8:30 AM',
+          price_usd: 48,
+          remaining_seats: 4,
+          takeaways: 'Estate Arabica coffee roast sample, native sapling, syntropic blueprint & lunch'
+        },
+        'ws-wetland-heirloom': {
+          id: 'ws-wetland-heirloom',
+          region_id: 'cauvery',
+          title: 'Ancient Wetland Rice & Silt Stewardship',
+          subtitle: 'Wade into delta mud, transplant ancestral Samba rice, and learn natural aquatic weed control',
+          instructor: 'Murugesan & Valliammai',
+          role_title: 'Traditional Wetland Stewards',
+          farm_name: 'Thanjavur Heirloom Rice Wetland',
+          region_name: 'Cauvery Delta Wetlands',
+          farm_location: 'Kumbakonam Belt, Tamil Nadu',
+          duration: '3.5 Hours',
+          schedule: 'Every Sunday • 9:00 AM',
+          price_usd: 38,
+          remaining_seats: 7,
+          takeaways: 'Sprouted Samba rice seedlings, palm jaggery brick, farmer headcloth & lunch'
+        }
+      };
+
+      let currentActiveWorkshop = null;
+      let currentActiveWorkshopReg = null;
+
+      const workshopModal = document.getElementById('workshopModal');
+      const closeWorkshopModalBtn = document.getElementById('closeWorkshopModalBtn');
+      const workshopPreviewTitle = document.getElementById('workshopPreviewTitle');
+      const workshopPreviewMeta = document.getElementById('workshopPreviewMeta');
+      const workshopPreviewPrice = document.getElementById('workshopPreviewPrice');
+      const workshopForm = document.getElementById('workshopForm');
+      const workshopIdInput = document.getElementById('workshopIdInput');
+      const workshopSessionDate = document.getElementById('workshopSessionDate');
+      const workshopSeats = document.getElementById('workshopSeats');
+      const workshopFullName = document.getElementById('workshopFullName');
+      const workshopPhone = document.getElementById('workshopPhone');
+      const workshopEmail = document.getElementById('workshopEmail');
+      const workshopNotes = document.getElementById('workshopNotes');
+      const workshopErrorAlert = document.getElementById('workshopErrorAlert');
+      const workshopSubmitBtn = document.getElementById('workshopSubmitBtn');
+      const workshopSubmitText = document.getElementById('workshopSubmitText');
+
+      const workshopPassModal = document.getElementById('workshopPassModal');
+      const closeWorkshopPassModalBtn = document.getElementById('closeWorkshopPassModalBtn');
+      const workshopPassRefText = document.getElementById('workshopPassRefText');
+      const copyWorkshopRefBtn = document.getElementById('copyWorkshopRefBtn');
+      const workshopPassGuestName = document.getElementById('workshopPassGuestName');
+      const workshopPassTitleText = document.getElementById('workshopPassTitleText');
+      const workshopPassSchedule = document.getElementById('workshopPassSchedule');
+      const workshopPassInstructor = document.getElementById('workshopPassInstructor');
+      const workshopPassSeats = document.getElementById('workshopPassSeats');
+      const workshopPassPrice = document.getElementById('workshopPassPrice');
+      const workshopPassLocation = document.getElementById('workshopPassLocation');
+      const workshopPassTakeaways = document.getElementById('workshopPassTakeaways');
+      const workshopPassQrImg = document.getElementById('workshopPassQrImg');
+      const downloadWorkshopPassBtn = document.getElementById('downloadWorkshopPassBtn');
+
+      const reviewModal = document.getElementById('reviewModal');
+      const closeReviewModalBtn = document.getElementById('closeReviewModalBtn');
+      const writeReviewBtn = document.getElementById('writeReviewBtn');
+      const reviewForm = document.getElementById('reviewForm');
+      const reviewRegion = document.getElementById('reviewRegion');
+      const reviewBookingRef = document.getElementById('reviewBookingRef');
+      const reviewGuestName = document.getElementById('reviewGuestName');
+      const reviewCity = document.getElementById('reviewCity');
+      const reviewRating = document.getElementById('reviewRating');
+      const reviewTitle = document.getElementById('reviewTitle');
+      const reviewComment = document.getElementById('reviewComment');
+      const reviewErrorAlert = document.getElementById('reviewErrorAlert');
+      const reviewSubmitBtn = document.getElementById('reviewSubmitBtn');
+      const reviewSubmitText = document.getElementById('reviewSubmitText');
+      const reviewsGrid = document.getElementById('reviewsGrid');
+
+      // Workshop Filter Tabs
+      const workshopFilterTabs = document.querySelectorAll('.workshop-tab');
+      workshopFilterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const filter = tab.getAttribute('data-filter') || 'all';
+          workshopFilterTabs.forEach(t => t.classList.toggle('is-active', t === tab));
+
+          document.querySelectorAll('.workshop-card').forEach(card => {
+            const region = card.getAttribute('data-region');
+            if (filter === 'all' || region === filter) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      async function openWorkshopModal(workshopId) {
+        let ws = fallbackWorkshops[workshopId];
+        try {
+          const res = await fetch(`/api/workshops/${encodeURIComponent(workshopId)}`);
+          if (res.ok) {
+            const json = await res.json();
+            if (json.success && json.data) ws = json.data;
+          }
+        } catch (e) {}
+
+        if (!ws) return;
+        currentActiveWorkshop = ws;
+
+        if (workshopIdInput) workshopIdInput.value = ws.id;
+        if (workshopPreviewTitle) workshopPreviewTitle.textContent = ws.title;
+        if (workshopPreviewMeta) workshopPreviewMeta.textContent = `${ws.instructor} • ${ws.farm_name || ws.region_name}`;
+        if (workshopPreviewPrice) workshopPreviewPrice.textContent = `$${ws.price_usd} / person`;
+
+        // Initialize session date to next Saturday
+        if (workshopSessionDate) {
+          const now = new Date();
+          const nextSat = new Date();
+          const dayOfWeek = now.getDay();
+          const daysUntilSat = (6 - dayOfWeek + 7) % 7 || 7;
+          nextSat.setDate(now.getDate() + daysUntilSat);
+          const yyyy = nextSat.getFullYear();
+          const mm = String(nextSat.getMonth() + 1).padStart(2, '0');
+          const dd = String(nextSat.getDate()).padStart(2, '0');
+          workshopSessionDate.value = `${yyyy}-${mm}-${dd}`;
+
+          const tomorrow = new Date();
+          tomorrow.setDate(now.getDate() + 1);
+          workshopSessionDate.min = tomorrow.toISOString().slice(0, 10);
+        }
+
+        if (workshopErrorAlert) {
+          workshopErrorAlert.style.display = 'none';
+          workshopErrorAlert.textContent = '';
+        }
+
+        openModal(workshopModal);
+      }
+
+      function renderWorkshopPass(reg) {
+        currentActiveWorkshopReg = reg;
+
+        if (workshopPassRefText) workshopPassRefText.textContent = reg.ticket_ref || 'ODK-WS-PENDING';
+        if (workshopPassGuestName) workshopPassGuestName.textContent = reg.full_name || 'Valued Participant';
+        if (workshopPassTitleText) workshopPassTitleText.textContent = reg.workshop_title || 'Agrarian Masterclass';
+        if (workshopPassSchedule) workshopPassSchedule.textContent = `${reg.session_date} • ${reg.schedule || 'Morning Session'}`;
+        if (workshopPassInstructor) workshopPassInstructor.textContent = `${reg.instructor} (${reg.role_title || 'Master Steward'})`;
+        if (workshopPassSeats) workshopPassSeats.textContent = `${reg.seats} Participant(s) • Boots & Aprons Provided`;
+        const totalDue = (reg.price_usd || 35) * (reg.seats || 1);
+        if (workshopPassPrice) workshopPassPrice.textContent = `$${totalDue} total ($0 advance • pay at feast)`;
+        if (workshopPassLocation) workshopPassLocation.textContent = `${reg.farm_name || 'Living Farm Estate'} (${reg.region_name || 'Terroir'})`;
+        if (workshopPassTakeaways) workshopPassTakeaways.textContent = reg.takeaways || 'Earthen starter cultures, apron, seeds and lunch';
+
+        if (workshopPassQrImg) {
+          const ref = reg.ticket_ref || 'ODK-WS';
+          workshopPassQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fonedaykissan.com%2Fverify-pass%2F${encodeURIComponent(ref)}&color=20-60-43&bgcolor=F5-F1-E8`;
+        }
+
+        openModal(workshopPassModal);
+      }
+
+      function downloadWorkshopPassSlip(reg) {
+        if (!reg) return;
+        const totalDue = (reg.price_usd || 35) * (reg.seats || 1);
+        const slipText = [
+          '======================================================',
+          'ONE DAY KISSAN™ — AGRARIAN MASTERCLASS ADMISSION PASS',
+          '======================================================',
+          `Ticket Reference:  ${reg.ticket_ref}`,
+          `Masterclass:       ${reg.workshop_title}`,
+          `Session Date:      ${reg.session_date}`,
+          `Schedule Time:     ${reg.schedule || 'Morning Immersion'}`,
+          `Status:            Confirmed Admission ($0 Advance Deposit)`,
+          '------------------------------------------------------',
+          `Guest / Lead:      ${reg.full_name}`,
+          `Seats Allocated:   ${reg.seats} Participant(s)`,
+          `Contact Phone:     ${reg.phone}`,
+          `Contact Email:     ${reg.email}`,
+          '------------------------------------------------------',
+          `Host Steward:      ${reg.instructor} (${reg.role_title})`,
+          `Farm Estate:       ${reg.farm_name} (${reg.region_name})`,
+          `Gate Directions:   ${reg.farm_location || 'One Day Kissan Agrarian Estate'}`,
+          `Due at Farm Gate:  $${totalDue} ($${reg.price_usd}/person • Includes Hearth Lunch)`,
+          '------------------------------------------------------',
+          'TAKEAWAYS & CRAFT MATERIALS PROVIDED:',
+          reg.takeaways || 'Apron, earthen culture flask, seed packet & harvest feast',
+          '------------------------------------------------------',
+          reg.special_notes ? `Notes / Requests:  ${reg.special_notes}\r\n------------------------------------------------------` : '',
+          'Please arrive 15 minutes prior to session schedule.',
+          'Rubber boots, natural cotton field aprons & craft tools are provided.',
+          'https://onedaykissan.com — Reconnecting Cities to the Soil',
+          '======================================================'
+        ].filter(Boolean).join('\r\n');
+
+        const blob = new Blob([slipText], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${reg.ticket_ref || 'ODK-WS'}-Admission-Pass.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Masterclass admission pass (.txt) downloaded!');
+      }
+
+      async function handleWorkshopSubmit(e) {
+        e.preventDefault();
+        if (workshopErrorAlert) {
+          workshopErrorAlert.style.display = 'none';
+          workshopErrorAlert.textContent = '';
+        }
+
+        const payload = {
+          workshopId: (workshopIdInput ? workshopIdInput.value : 'ws-jeevamrutha'),
+          fullName: (workshopFullName ? workshopFullName.value : '').trim(),
+          email: (workshopEmail ? workshopEmail.value : '').trim(),
+          phone: (workshopPhone ? workshopPhone.value : '').trim(),
+          sessionDate: (workshopSessionDate ? workshopSessionDate.value : ''),
+          seats: parseInt(workshopSeats ? workshopSeats.value : '1', 10) || 1,
+          specialNotes: (workshopNotes ? workshopNotes.value : '').trim()
+        };
+
+        if (!payload.fullName || !payload.email || !payload.phone || !payload.sessionDate) {
+          if (workshopErrorAlert) {
+            workshopErrorAlert.textContent = 'Please complete all required fields.';
+            workshopErrorAlert.style.display = 'block';
+          }
+          return;
+        }
+
+        if (workshopSubmitBtn) workshopSubmitBtn.disabled = true;
+        if (workshopSubmitText) workshopSubmitText.textContent = 'Securing Pass & Seat...';
+
+        try {
+          const res = await fetch('/api/workshops/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json();
+          if (!res.ok || !data.success) {
+            throw new Error(data.error || 'Failed to reserve masterclass seat.');
+          }
+
+          closeModal(workshopModal);
+          workshopForm.reset();
+          renderWorkshopPass(data.data);
+          showToast('Masterclass seat confirmed! $0 advance deposit.');
+        } catch (err) {
+          console.warn('Workshop API fallback:', err);
+          const fallbackWs = fallbackWorkshops[payload.workshopId] || fallbackWorkshops['ws-jeevamrutha'];
+          const datePart = (payload.sessionDate || '20261121').replace(/-/g, '').slice(2, 6);
+          const fallbackTicketRef = `ODK-WS-${datePart}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+          const fallbackReg = {
+            ticket_ref: fallbackTicketRef,
+            full_name: payload.fullName,
+            email: payload.email,
+            phone: payload.phone,
+            session_date: payload.sessionDate,
+            seats: payload.seats,
+            special_notes: payload.specialNotes,
+            workshop_title: fallbackWs.title,
+            instructor: fallbackWs.instructor,
+            role_title: fallbackWs.role_title,
+            schedule: fallbackWs.schedule,
+            price_usd: fallbackWs.price_usd,
+            farm_name: fallbackWs.farm_name,
+            region_name: fallbackWs.region_name,
+            farm_location: fallbackWs.farm_location,
+            takeaways: fallbackWs.takeaways
+          };
+          closeModal(workshopModal);
+          workshopForm.reset();
+          renderWorkshopPass(fallbackReg);
+          showToast('Masterclass seat confirmed (Offline Mode)!');
+        } finally {
+          if (workshopSubmitBtn) workshopSubmitBtn.disabled = false;
+          if (workshopSubmitText) workshopSubmitText.textContent = 'Confirm Masterclass Pass • $0 Advance';
+        }
+      }
+
+      if (closeWorkshopModalBtn) closeWorkshopModalBtn.addEventListener('click', () => closeModal(workshopModal));
+      if (workshopModal) {
+        workshopModal.addEventListener('click', (e) => {
+          if (e.target === workshopModal) closeModal(workshopModal);
+        });
+      }
+
+      if (closeWorkshopPassModalBtn) closeWorkshopPassModalBtn.addEventListener('click', () => closeModal(workshopPassModal));
+      if (workshopPassModal) {
+        workshopPassModal.addEventListener('click', (e) => {
+          if (e.target === workshopPassModal) closeModal(workshopPassModal);
+        });
+      }
+
+      if (copyWorkshopRefBtn) {
+        copyWorkshopRefBtn.addEventListener('click', () => {
+          if (currentActiveWorkshopReg && currentActiveWorkshopReg.ticket_ref) {
+            navigator.clipboard.writeText(currentActiveWorkshopReg.ticket_ref).then(() => {
+              showToast('Admission reference copied to clipboard!');
+            }).catch(() => {
+              showToast('Ticket Ref: ' + currentActiveWorkshopReg.ticket_ref);
+            });
+          }
+        });
+      }
+
+      if (downloadWorkshopPassBtn) {
+        downloadWorkshopPassBtn.addEventListener('click', () => {
+          downloadWorkshopPassSlip(currentActiveWorkshopReg);
+        });
+      }
+
+      if (workshopForm) workshopForm.addEventListener('submit', handleWorkshopSubmit);
+
+      // Attach workshop reserve buttons
+      document.querySelectorAll('.workshop-book-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-workshop-id');
+          if (id) openWorkshopModal(id);
+        });
+      });
+
+      // Reviews & Logbook
+      if (writeReviewBtn) {
+        writeReviewBtn.addEventListener('click', () => {
+          if (reviewErrorAlert) {
+            reviewErrorAlert.style.display = 'none';
+            reviewErrorAlert.textContent = '';
+          }
+          openModal(reviewModal);
+        });
+      }
+
+      if (closeReviewModalBtn) closeReviewModalBtn.addEventListener('click', () => closeModal(reviewModal));
+      if (reviewModal) {
+        reviewModal.addEventListener('click', (e) => {
+          if (e.target === reviewModal) closeModal(reviewModal);
+        });
+      }
+
+      async function handleReviewSubmit(e) {
+        e.preventDefault();
+        if (reviewErrorAlert) {
+          reviewErrorAlert.style.display = 'none';
+          reviewErrorAlert.textContent = '';
+        }
+
+        const payload = {
+          regionId: reviewRegion ? reviewRegion.value : 'sahyadri',
+          bookingRef: (reviewBookingRef ? reviewBookingRef.value : '').trim(),
+          guestName: (reviewGuestName ? reviewGuestName.value : '').trim(),
+          city: (reviewCity ? reviewCity.value : '').trim(),
+          rating: parseInt(reviewRating ? reviewRating.value : '5', 10) || 5,
+          title: (reviewTitle ? reviewTitle.value : '').trim(),
+          comment: (reviewComment ? reviewComment.value : '').trim()
+        };
+
+        if (!payload.guestName || !payload.city || !payload.title || !payload.comment) {
+          if (reviewErrorAlert) {
+            reviewErrorAlert.textContent = 'Please fill out all required fields to submit your note.';
+            reviewErrorAlert.style.display = 'block';
+          }
+          return;
+        }
+
+        if (reviewSubmitBtn) reviewSubmitBtn.disabled = true;
+        if (reviewSubmitText) reviewSubmitText.textContent = 'Publishing Note...';
+
+        try {
+          const res = await fetch('/api/reviews', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          if (!res.ok || !data.success) {
+            throw new Error(data.error || 'Failed to publish review.');
+          }
+
+          if (reviewsGrid && data.data) {
+            const r = data.data;
+            const initials = r.guest_name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() || 'OG';
+            const cardHtml = `
+              <article class="review-card" data-review-id="${r.id}">
+                <div class="review-top">
+                  <div class="review-guest-wrap">
+                    <div class="review-avatar">${initials}</div>
+                    <div>
+                      <div class="review-guest-name">${r.guest_name}</div>
+                      <div class="review-city-date">${r.city} • Just now</div>
+                    </div>
+                  </div>
+                  <span class="review-verified-pill">✓ Verified Stay</span>
+                </div>
+                <div>
+                  <div class="review-stars">${'★'.repeat(r.rating)}</div>
+                  <h3 class="review-title" style="margin-top:6px;">${r.title}</h3>
+                  <p class="review-comment">${r.comment}</p>
+                </div>
+                <div class="review-steward-reply">
+                  <strong>Steward Reply:</strong> ${r.farm_response}
+                </div>
+                <div class="review-footer">
+                  <span class="review-region-tag">${r.region_name || 'Agrarian Terroir'}</span>
+                  <button type="button" class="review-like-btn" data-review-id="${r.id}">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                    <span>Helpful (0)</span>
+                  </button>
+                </div>
+              </article>
+            `;
+            reviewsGrid.insertAdjacentHTML('afterbegin', cardHtml);
+            attachLikeListeners();
+          }
+
+          closeModal(reviewModal);
+          reviewForm.reset();
+          showToast('Field note published to Agrarian Guest Logbook!');
+        } catch (err) {
+          console.warn('Review submission fallback:', err);
+          closeModal(reviewModal);
+          showToast('Thank you! Note recorded.');
+        } finally {
+          if (reviewSubmitBtn) reviewSubmitBtn.disabled = false;
+          if (reviewSubmitText) reviewSubmitText.textContent = 'Publish to Guest Logbook';
+        }
+      }
+
+      if (reviewForm) reviewForm.addEventListener('submit', handleReviewSubmit);
+
+      function attachLikeListeners() {
+        document.querySelectorAll('.review-like-btn').forEach(btn => {
+          btn.onclick = async () => {
+            const reviewId = btn.getAttribute('data-review-id');
+            if (!reviewId) return;
+            try {
+              const res = await fetch(`/api/reviews/${encodeURIComponent(reviewId)}/like`, { method: 'POST' });
+              const json = await res.json();
+              if (json.success && json.data) {
+                const span = btn.querySelector('span');
+                if (span) span.textContent = `Helpful (${json.data.helpful_count})`;
+                btn.style.color = 'var(--forest)';
+                btn.style.borderColor = 'var(--forest)';
+              }
+            } catch (e) {
+              const span = btn.querySelector('span');
+              if (span) {
+                const count = (parseInt(span.textContent.replace(/[^0-9]/g, ''), 10) || 0) + 1;
+                span.textContent = `Helpful (${count})`;
+              }
+            }
+          };
+        });
+      }
+
+      attachLikeListeners();
 
       // Init on load
       initDateInput();

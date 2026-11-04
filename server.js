@@ -15,7 +15,14 @@ const {
   getHampers,
   getHamperById,
   createHamperOrder,
-  getHamperOrderByRef
+  getHamperOrderByRef,
+  getWorkshops,
+  getWorkshopById,
+  registerWorkshop,
+  getWorkshopRegistrationByRef,
+  getReviews,
+  createReview,
+  likeReview
 } = require('./database');
 
 const app = express();
@@ -163,6 +170,151 @@ app.get('/api/hampers/orders/:ref', async (req, res) => {
       return res.status(404).json({ success: false, error: 'Hamper order reservation not found.' });
     }
     res.json({ success: true, data: order });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 4: Agrarian Masterclasses & Workshops API
+app.get('/api/workshops', async (req, res) => {
+  try {
+    const { regionId } = req.query;
+    const workshops = await getWorkshops(regionId);
+    res.json({ success: true, count: workshops.length, data: workshops });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/workshops/:id', async (req, res) => {
+  try {
+    const workshop = await getWorkshopById(req.params.id);
+    if (!workshop) {
+      return res.status(404).json({ success: false, error: 'Masterclass not found.' });
+    }
+    res.json({ success: true, data: workshop });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 4: Register for a Workshop
+app.post('/api/workshops/register', async (req, res) => {
+  try {
+    const {
+      workshopId,
+      fullName,
+      email,
+      phone,
+      sessionDate,
+      seats = 1,
+      specialNotes
+    } = req.body;
+
+    if (!workshopId || !fullName || !email || !phone || !sessionDate) {
+      return res.status(400).json({
+        success: false,
+        error: 'Please fill in all required fields: workshopId, fullName, email, phone, sessionDate.'
+      });
+    }
+
+    const registration = await registerWorkshop({
+      workshopId,
+      fullName: fullName.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      sessionDate,
+      seats: parseInt(seats, 10) || 1,
+      specialNotes: specialNotes ? specialNotes.trim() : ''
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'Masterclass seat confirmed with $0 advance deposit. Field boots & materials included.',
+      data: registration
+    });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 4: Lookup Workshop Registration by Reference
+app.get('/api/workshops/register/:ref', async (req, res) => {
+  try {
+    const reg = await getWorkshopRegistrationByRef(req.params.ref.toUpperCase());
+    if (!reg) {
+      return res.status(404).json({ success: false, error: 'Workshop pass not found.' });
+    }
+    res.json({ success: true, data: reg });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 4: Community Logbook & Reviews API
+app.get('/api/reviews', async (req, res) => {
+  try {
+    const { regionId } = req.query;
+    const result = await getReviews(regionId);
+    res.json({
+      success: true,
+      count: result.reviews.length,
+      stats: result.stats,
+      data: result.reviews
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 4: Submit a Review
+app.post('/api/reviews', async (req, res) => {
+  try {
+    const {
+      bookingRef,
+      regionId,
+      guestName,
+      city,
+      rating = 5,
+      title,
+      comment
+    } = req.body;
+
+    if (!regionId || !guestName || !city || !title || !comment) {
+      return res.status(400).json({
+        success: false,
+        error: 'Please complete all fields: regionId, guestName, city, title, comment.'
+      });
+    }
+
+    const review = await createReview({
+      bookingRef: bookingRef ? bookingRef.trim().toUpperCase() : '',
+      regionId,
+      guestName: guestName.trim(),
+      city: city.trim(),
+      rating: parseInt(rating, 10) || 5,
+      title: title.trim(),
+      comment: comment.trim()
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'Thank you for contributing to the Agrarian Guest Logbook!',
+      data: review
+    });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+// Phase 4: Upvote Helpful Review
+app.post('/api/reviews/:id/like', async (req, res) => {
+  try {
+    const liked = await likeReview(req.params.id);
+    if (!liked) {
+      return res.status(404).json({ success: false, error: 'Review not found.' });
+    }
+    res.json({ success: true, data: liked });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
