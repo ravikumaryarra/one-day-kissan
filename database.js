@@ -56,6 +56,8 @@ function initDatabase() {
 
       // Seed Regions
       const seedRegions = [
+        ['bhongir', 'Bhongir (Main Farm)', 'One Day Kisan Bhongir', 'One Day Kisan Team', 'Hotel Vivera, Hyderabad–Warangal Highway, Bhongir Bypass, Bhongir, Telangana – 508116', 300, 'Telangana'],
+        ['moinabad', 'Moinabad (Branch Farm)', 'One Day Kisan Moinabad', 'One Day Kisan Team', 'Kapil Agro Farms, Sriramnagar, Moinabad, Telangana – 501504', 300, 'Telangana'],
         ['sahyadri', 'Western Ghats Foothills', 'Sahyadri Heritage Agroforest', 'Ramrao & Savitri Deshmukh', 'Near Lonavala / Pune Valley, Maharashtra', 25, '1,250m'],
         ['deccan', 'Deccan Agroforest Plateau', 'Ananya & Devraj Living Farm', 'Ananya & Devraj', 'Kanipakam Valley, Andhra / Karnataka Border', 25, '820m'],
         ['cauvery', 'Cauvery Delta Wetlands', 'Thanjavur Heirloom Rice Wetland', 'Murugesan & Valliammai', 'Kumbakonam Belt, Tamil Nadu', 20, '120m'],

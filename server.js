@@ -55,27 +55,67 @@ app.get('/api/experiences', async (req, res) => {
   }
 });
 
-// Phase 2: Get all ancestral terroirs with soil, climate & seasonal calendar
-app.get('/api/terroirs', async (req, res) => {
-  try {
-    const terroirs = await getTerroirs();
-    res.json({ success: true, count: terroirs.length, data: terroirs });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+// Verified One Day Kissan Locations in Telangana
+const FARM_LOCATIONS = [
+  {
+    id: 'bhongir',
+    tag: 'LOCATION 01',
+    label: 'Main Farm',
+    name: 'Bhongir',
+    full_title: 'Location 01 — Bhongir (Main Farm)',
+    address: 'Hotel Vivera, Hyderabad–Warangal Highway, Bhongir Bypass, Bhongir, Telangana – 508116.',
+    landmark: 'Hotel Vivera, Bhongir Bypass (NH 163)',
+    district: 'Yadadri Bhuvanagiri District, Telangana',
+    maps_url: 'https://www.google.com/maps/search/?api=1&query=Hotel+Vivera+Bhongir+Bypass+Telangana+508116',
+    image_url: '/assets/locations/bhongir_main_farm.jpg',
+    visual_features: [
+      'Realistic Telangana farmland',
+      'Open agricultural fields',
+      'Traditional farming activities',
+      'Rural surroundings and local landscapes'
+    ]
+  },
+  {
+    id: 'moinabad',
+    tag: 'LOCATION 02',
+    label: 'Branch Farm',
+    name: 'Moinabad',
+    full_title: 'Location 02 — Moinabad (Branch Farm)',
+    address: 'Kapil Agro Farms, Sriramnagar, Moinabad, Telangana – 501504.',
+    landmark: 'Kapil Agro Farms, Sriramnagar',
+    district: 'Ranga Reddy District, Telangana',
+    maps_url: 'https://www.google.com/maps/search/?api=1&query=Kapil+Agro+Farms+Sriramnagar+Moinabad+Telangana+501504',
+    image_url: '/assets/locations/moinabad_branch_farm.jpg',
+    visual_features: [
+      'Telangana countryside',
+      'Green agricultural fields',
+      'Farm activities and rural surroundings',
+      'Natural vegetation and farm life'
+    ]
   }
+];
+
+// Verified One Day Kissan Locations API
+app.get('/api/locations', (req, res) => {
+  res.json({ success: true, count: FARM_LOCATIONS.length, data: FARM_LOCATIONS });
 });
 
-// Phase 2: Get single terroir by ID or region ID
-app.get('/api/terroirs/:id', async (req, res) => {
-  try {
-    const terroir = await getTerroirById(req.params.id);
-    if (!terroir) {
-      return res.status(404).json({ success: false, error: 'Terroir not found.' });
-    }
-    res.json({ success: true, data: terroir });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+app.get('/api/locations/:id', (req, res) => {
+  const loc = FARM_LOCATIONS.find(l => l.id.toLowerCase() === req.params.id.toLowerCase());
+  if (!loc) {
+    return res.status(404).json({ success: false, error: 'Location not found.' });
   }
+  res.json({ success: true, data: loc });
+});
+
+// Backward-compatible terroirs endpoint returning verified locations
+app.get('/api/terroirs', async (req, res) => {
+  res.json({ success: true, count: FARM_LOCATIONS.length, data: FARM_LOCATIONS });
+});
+
+app.get('/api/terroirs/:id', async (req, res) => {
+  const loc = FARM_LOCATIONS.find(l => l.id.toLowerCase() === req.params.id.toLowerCase()) || FARM_LOCATIONS[0];
+  res.json({ success: true, data: loc });
 });
 
 // Phase 3: Farmer Stories API
