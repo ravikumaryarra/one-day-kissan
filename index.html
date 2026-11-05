@@ -5783,20 +5783,20 @@
       <footer class="farm360-hud-footer">
         <div class="footer-sectors-nav" role="tablist" aria-label="Estate Sectors">
           <span class="sectors-title">Jump to Sector:</span>
-          <button type="button" class="sector-pill-btn is-active" data-hotspot-id="thotti-house">
-            <span>🏡</span> Ancestral Thotti
+          <button type="button" class="sector-pill-btn is-active" data-hotspot-id="desi-sanctuary">
+            <span>🐄</span> Desi Cattle Pasture
           </button>
           <button type="button" class="sector-pill-btn" data-hotspot-id="paddy-terraces">
-            <span>🌾</span> Paddy Terraces
+            <span>🌾</span> Mountain Terraces
+          </button>
+          <button type="button" class="sector-pill-btn" data-hotspot-id="cardamom-stream">
+            <span>🚶</span> Bund Walk & Farmers
+          </button>
+          <button type="button" class="sector-pill-btn" data-hotspot-id="thotti-house">
+            <span>🏡</span> Estate Banana Lane
           </button>
           <button type="button" class="sector-pill-btn" data-hotspot-id="shola-peak">
             <span>⛰️</span> Cloud Shola Ridge
-          </button>
-          <button type="button" class="sector-pill-btn" data-hotspot-id="desi-sanctuary">
-            <span>🐄</span> Desi Cattle
-          </button>
-          <button type="button" class="sector-pill-btn" data-hotspot-id="cardamom-stream">
-            <span>🌿</span> Cardamom Spring
           </button>
         </div>
 
@@ -7613,72 +7613,72 @@
 
       if (!openBtn || !modal || !canvas) return;
 
-      // Hotspots data (Western Ghats / Sahyadri South Indian Hill Estate)
+      // Hotspots data (Authentic Real South Indian Hill Farm & Paddy Terraces)
       const HOTSPOTS = [
         {
-          id: 'thotti-house',
-          name: 'Ancestral Thotti Courtyard',
-          tag: 'Heritage Architecture • 1894',
-          icon: '🏡',
-          elevation: '960m Elevation',
-          climate: '21°C Mountain Breeze',
-          crops: 'Spiced Decoction • Arecanut • Vanilla',
-          coords: { x: 280, y: -30, z: -320, yaw: 40, pitch: -5 },
-          desc: 'Step into the traditional courtyard estate (Thotti Mane) framed by volcanic laterite stone and four sloping red-tile roofs. The central sunken stone tank (Angala) collects pure highland rainwater, naturally air-conditioning the verandas where guests join the farming family for woodfire meals.',
-          img: 'https://images.unsplash.com/photo-1592417817098-8f3d6ef2c6e6?auto=format&fit=crop&w=800&q=80',
-          highlights: ['Rainwater Courtyard Tank', 'Ancestral Teak Verandas', 'Woodfire Hearth Breakfast', 'Fresh Filter Decoction Tasting']
+          id: 'desi-sanctuary',
+          name: 'Indigenous Cattle Sanctuary & Bund Pasture',
+          tag: 'Living Soil Fertility Center',
+          icon: '🐄',
+          elevation: '940m Elevation',
+          climate: '22°C Pasture Breeze',
+          crops: 'Native Bund Grasses • Jeevamrutha',
+          coords: { x: 360, y: -70, z: 200, yaw: 45, pitch: -8 },
+          desc: 'Free-ranging indigenous Malnad Gidda and Hallikar miniature hill cattle grazing peacefully along the green clay terrace bunds in the morning mist. Their daily manure and herbal grazing form the foundation for all biodynamic bio-fertilizers across the entire estate.',
+          img: '/assets/farm_tour/morning_misty_paddy_cattle.jpg',
+          highlights: ['Malnad Gidda Native Cattle', 'Jeevamrutha Mixing Vat', 'Zero Chemical Input Hub', 'Gentle Animal Interaction']
         },
         {
           id: 'paddy-terraces',
-          name: 'Cascading Mountain Terraces',
+          name: 'Cascading Mountain Rice Terraces',
           tag: 'Regenerative Wetland Rice',
           icon: '🌾',
           elevation: '920m Elevation',
           climate: '23°C Stream Breeze',
           crops: 'Gandhakasala Fragrant Rice • Vetiver',
           coords: { x: -340, y: -90, z: -260, yaw: -140, pitch: -12 },
-          desc: 'Seven stepped terraces sculpted into the hillside slope, fed continuously by living natural mountain aquifers. Guests can walk barefoot along the clay bunds, practice traditional transplantation, and learn ancestral gravity-fed water stewardship.',
-          img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80',
-          highlights: ['Barefoot Clay Bund Walks', 'Natural Gravity Flumes', 'Duckweed Eco-Fertility', 'Fragrant Winter Rice Harvest']
+          desc: 'Stepped clay terraces sculpted into the hillside slope, fed continuously by living natural mountain aquifers and reflecting the morning sky. Guests can walk barefoot along the clay bunds, practice traditional transplantation, and learn ancestral gravity-fed water stewardship.',
+          img: '/assets/farm_tour/morning_misty_paddy_cattle.jpg',
+          highlights: ['Barefoot Clay Bund Walks', 'Gravity Water Channels', 'Organic Duck Weed Control', 'Ancestral Fragrant Grains']
+        },
+        {
+          id: 'thotti-house',
+          name: 'Ancestral Thotti Estate Lane & Banana Canopy',
+          tag: 'Heritage Architecture & Farm Lane',
+          icon: '🏡',
+          elevation: '960m Elevation',
+          climate: '21°C Mountain Breeze',
+          crops: 'Nendran Bananas • Coconut • Betel',
+          coords: { x: 280, y: -30, z: -320, yaw: 180, pitch: -6 },
+          desc: 'Scenic country lane flanked by lush Nendran banana groves, betel palms, and flooded paddies leading to the traditional red-tiled courtyard homestead (Thotti Mane). Experience the living verandas where guests join the farming family for fresh woodfire meals and filter decoction.',
+          img: '/assets/farm_tour/rural_estate_country_lane.jpg',
+          highlights: ['Nendran Banana Agroforest', 'Rainwater Courtyard Tank', 'Woodfire Hearth Breakfast', 'Fresh Filter Decoction']
         },
         {
           id: 'shola-peak',
-          name: 'Misty Shola Peak & Cloud Deck',
+          name: 'Cloud-Veiled Shola Ridge & Mist Deck',
           tag: 'Montane Rainforest Canopy',
           icon: '⛰️',
           elevation: '1,240m Ridge Crest',
           climate: '18°C Drifting Cloud Vapor',
           crops: 'Wild Forest Honey • Shade Arabica • Malabar Pepper',
           coords: { x: -220, y: 160, z: 360, yaw: 125, pitch: 20 },
-          desc: 'The highest ridge of the estate where rolling clouds break over ancient Shola evergreens. A panoramic viewing deck overlooking three valley passes. Early mornings offer breathtaking cloud inversions as the mist carpets the lower valleys.',
-          img: 'https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=80',
+          desc: 'The highest ridge of the estate where rolling clouds break over ancient Shola evergreens and tall coconut palms. A panoramic viewing deck overlooking three valley passes. Early mornings offer breathtaking cloud inversions as the mist carpets the lower valleys.',
+          img: '/assets/farm_tour/morning_misty_paddy_cattle.jpg',
           highlights: ['360° Valley Cloud Inversion', 'Highland Coffee Canopy', 'Wild Honey Tree Hives', 'Panoramic Meditation Deck']
         },
         {
-          id: 'desi-sanctuary',
-          name: 'Indigenous Cattle Sanctuary',
-          tag: 'Living Soil Fertility Center',
-          icon: '🐄',
-          elevation: '940m Elevation',
-          climate: '22°C Open Pasture Breeze',
-          crops: 'Jeevamrutha Bio-Fertilizer • Native Pasture Grasses',
-          coords: { x: 360, y: -70, z: 200, yaw: 60, pitch: -10 },
-          desc: 'Home to 24 free-ranging Malnad Gidda and Hallikar native cows. These miniature hill cattle thrive on indigenous mountain herbs. Their daily dung and urine form the foundation for all biodynamic bio-fertilizers across the entire 45-acre estate.',
-          img: 'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=800&q=80',
-          highlights: ['Malnad Gidda Native Cattle', 'Jeevamrutha Mixing Vat', 'Zero Chemical Input Hub', 'Gentle Animal Interaction']
-        },
-        {
           id: 'cardamom-stream',
-          name: 'Perennial Spring & Spice Stream',
-          tag: 'Sub-Canopy Agroforest',
+          name: 'Active Rice Transplantation & Mud Bunds',
+          tag: 'Generational Agrarian Stewardship',
           icon: '🌿',
           elevation: '890m Valley Bed',
           climate: '20°C Humid Spice Microclimate',
-          crops: 'Green Malabar Cardamom • Cinnamon • Nutmeg',
-          coords: { x: 40, y: -150, z: 420, yaw: 175, pitch: -18 },
-          desc: 'A crystal-clear natural mountain spring bubbling over granite boulders, shaded by wild cardamom clusters and climbing black pepper vines. Guests can dip their feet into cool mountain water and crush fresh cardamom leaves between their fingers.',
-          img: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=80',
-          highlights: ['Sweet Natural Spring Water', 'Cardamom & Pepper Canopy', 'Granite Rock Seating', 'Sensory Leaf Tasting']
+          crops: 'Heirloom Samba Rice • Wetland Greens',
+          coords: { x: 40, y: -150, z: 420, yaw: -45, pitch: -10 },
+          desc: 'Vibrant flooded emerald paddy fields where local agrarian farmers in traditional lungis and saris walk the clay bunds, transplanting heirloom Samba rice seedlings under the mist-covered mountain backdrop.',
+          img: '/assets/farm_tour/monsoon_farmers_rice_paddy.jpg',
+          highlights: ['Heirloom Samba Seedling Planting', 'Barefoot Bund Walking', 'Monsoon Water Management', 'Farming Family Wisdom']
         }
       ];
 
@@ -7718,280 +7718,67 @@
       let windGain = null;
       let chimeInterval = null;
 
-      // 1. PROCEDURAL 360 PANORAMA GENERATOR (South Indian Hills, Clouds, Thotti Estate & Terraces)
-      function createPanoramaCanvas(atmosphere) {
-        const pCanvas = document.createElement('canvas');
-        pCanvas.width = 2048;
-        pCanvas.height = 1024;
-        const ctx = pCanvas.getContext('2d');
-        const W = pCanvas.width;
-        const H = pCanvas.height;
+      // Preload 4K Photorealistic Panoramas (Built from User Reference Real Farm Photos)
+      const textureLoader = new THREE.TextureLoader();
+      const panoTextures = {};
+      const atmoUrls = {
+        morning: '/assets/farm_tour/pano_morning.jpg',
+        monsoon: '/assets/farm_tour/pano_monsoon.jpg',
+        golden: '/assets/farm_tour/pano_golden.jpg'
+      };
 
-        // Atmospheres configuration
-        const atmoConfigs = {
-          morning: {
-            skyTop: '#182b3a',
-            skyMid: '#44667a',
-            skyHorizon: '#cce2d9',
-            hillFar: '#4a6758',
-            hillMid: '#2d4d38',
-            hillNear: '#1c3b24',
-            sunColor: 'rgba(255, 248, 220, 0.45)',
-            cloudTint: 'rgba(255, 255, 255, 0.55)',
-            mistColor: 'rgba(215, 235, 228, 0.4)'
-          },
-          golden: {
-            skyTop: '#24172c',
-            skyMid: '#7a3b3a',
-            skyHorizon: '#f4b868',
-            hillFar: '#5c4530',
-            hillMid: '#4a371c',
-            hillNear: '#2b220e',
-            sunColor: 'rgba(255, 200, 100, 0.65)',
-            cloudTint: 'rgba(255, 215, 170, 0.5)',
-            mistColor: 'rgba(250, 210, 160, 0.35)'
-          },
-          monsoon: {
-            skyTop: '#141e22',
-            skyMid: '#263a3d',
-            skyHorizon: '#5a786a',
-            hillFar: '#22382c',
-            hillMid: '#162e21',
-            hillNear: '#0d1f14',
-            sunColor: 'rgba(180, 210, 200, 0.25)',
-            cloudTint: 'rgba(220, 235, 230, 0.45)',
-            mistColor: 'rgba(190, 215, 205, 0.5)'
+      Object.keys(atmoUrls).forEach(key => {
+        textureLoader.load(atmoUrls[key], (tex) => {
+          tex.wrapS = THREE.RepeatWrapping;
+          tex.generateMipmaps = true;
+          tex.minFilter = THREE.LinearMipmapLinearFilter;
+          panoTextures[key] = tex;
+          if (key === currentAtmo && sphereMesh) {
+            sphereMesh.material.map = tex;
+            sphereMesh.material.needsUpdate = true;
           }
-        };
+        });
+      });
 
-        const cfg = atmoConfigs[atmosphere] || atmoConfigs.morning;
-
-        // Sky background gradient
-        const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
-        skyGrad.addColorStop(0, cfg.skyTop);
-        skyGrad.addColorStop(0.35, cfg.skyMid);
-        skyGrad.addColorStop(0.52, cfg.skyHorizon);
-        skyGrad.addColorStop(0.65, cfg.hillNear);
-        skyGrad.addColorStop(1, '#08120b');
-        ctx.fillStyle = skyGrad;
-        ctx.fillRect(0, 0, W, H);
-
-        // Sun / Atmospheric glow
-        const sunX = atmosphere === 'golden' ? W * 0.45 : W * 0.22;
-        const sunY = H * 0.48;
-        const sunGrad = ctx.createRadialGradient(sunX, sunY, 10, sunX, sunY, 340);
-        sunGrad.addColorStop(0, cfg.sunColor);
-        sunGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.12)');
-        sunGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        ctx.fillStyle = sunGrad;
-        ctx.fillRect(0, 0, W, H);
-
-        // Function to draw continuous organic mountain ridges
-        function drawRidge(baseY, amp1, freq1, amp2, freq2, fillStyle) {
-          ctx.beginPath();
-          ctx.moveTo(0, H);
-          for (let x = 0; x <= W; x += 10) {
-            const y = baseY + Math.sin(x * freq1) * amp1 + Math.cos(x * freq2) * amp2;
-            if (x === 0) ctx.lineTo(x, y);
-            else ctx.lineTo(x, y);
-          }
-          ctx.lineTo(W, H);
-          ctx.closePath();
-          ctx.fillStyle = fillStyle;
-          ctx.fill();
-        }
-
-        // Layer 1: Distant Western Ghats / Sahyadri high ridges
-        drawRidge(H * 0.46, 50, 0.0035, 25, 0.007, cfg.hillFar);
-
-        // Distant Valley Mist Band
-        ctx.fillStyle = cfg.mistColor;
-        ctx.fillRect(0, H * 0.48, W, 36);
-
-        // Layer 2: Mid-distance rolling spice & tea hills
-        drawRidge(H * 0.52, 65, 0.0045, 35, 0.009, cfg.hillMid);
-
-        // Midground Mist Swirls
-        for (let i = 0; i < 8; i++) {
-          const mx = (W / 8) * i + 80;
-          const my = H * 0.54 + Math.sin(i) * 20;
-          const mGrad = ctx.createRadialGradient(mx, my, 10, mx, my, 160);
-          mGrad.addColorStop(0, cfg.cloudTint);
-          mGrad.addColorStop(1, 'transparent');
-          ctx.fillStyle = mGrad;
-          ctx.fillRect(mx - 180, my - 60, 360, 120);
-        }
-
-        // Layer 3: Living Farm Basin & Terraced Slopes
-        drawRidge(H * 0.58, 45, 0.0055, 25, 0.012, cfg.hillNear);
-
-        // SPECIFIC LANDMARK 1: Ancestral South Indian Thotti Courtyard Homestead (X: 340 to 600)
-        (function drawThottiMane() {
-          const bx = 340;
-          const by = H * 0.56;
-          // Red Mangalore Terracotta Roofs
-          ctx.fillStyle = '#9e4331';
-          ctx.beginPath();
-          ctx.moveTo(bx - 30, by + 40);
-          ctx.lineTo(bx + 70, by);
-          ctx.lineTo(bx + 170, by);
-          ctx.lineTo(bx + 260, by + 40);
-          ctx.lineTo(bx + 200, by + 65);
-          ctx.lineTo(bx + 30, by + 65);
-          ctx.closePath();
-          ctx.fill();
-
-          // Roof tile ridge highlights
-          ctx.strokeStyle = '#c4604a';
-          ctx.lineWidth = 2;
-          ctx.stroke();
-
-          // Inner Open Courtyard (Angala)
-          ctx.fillStyle = '#223828';
-          ctx.fillRect(bx + 60, by + 28, 110, 32);
-
-          // Central Sunken Water Fountain / Tank
-          ctx.fillStyle = '#4a7570';
-          ctx.fillRect(bx + 85, by + 36, 60, 18);
-
-          // Courtyard Stone Verandas & Pillars
-          ctx.fillStyle = '#d6b88d';
-          for (let p = 0; p < 6; p++) {
-            ctx.fillRect(bx + 40 + p * 34, by + 65, 6, 28);
-          }
-
-          // Warm Lantern Light in Verandas
-          ctx.fillStyle = 'rgba(255, 215, 120, 0.6)';
-          ctx.beginPath();
-          ctx.arc(bx + 115, by + 50, 22, 0, Math.PI * 2);
-          ctx.fill();
-        })();
-
-        // SPECIFIC LANDMARK 2: Cascading Paddy Terraces with Reflective Water (X: 750 to 1180)
-        (function drawTerraces() {
-          const tx = 750;
-          const ty = H * 0.57;
-          for (let step = 0; step < 6; step++) {
-            const py = ty + step * 24;
-            // Clay terrace bund
-            ctx.strokeStyle = '#5c452e';
-            ctx.lineWidth = 5;
-            ctx.beginPath();
-            ctx.moveTo(tx - 40, py);
-            ctx.bezierCurveTo(tx + 120, py - 12, tx + 280, py + 18, tx + 420, py);
-            ctx.stroke();
-
-            // Water reflection in terrace basin
-            ctx.fillStyle = atmosphere === 'golden' ? 'rgba(235, 175, 95, 0.55)' : 'rgba(140, 195, 185, 0.5)';
-            ctx.beginPath();
-            ctx.moveTo(tx - 38, py + 2);
-            ctx.bezierCurveTo(tx + 120, py - 10, tx + 280, py + 20, tx + 418, py + 2);
-            ctx.lineTo(tx + 418, py + 20);
-            ctx.bezierCurveTo(tx + 280, py + 38, tx + 120, py + 8, tx - 38, py + 20);
-            ctx.closePath();
-            ctx.fill();
-
-            // Lush green rice saplings (padi)
-            ctx.fillStyle = '#488c3a';
-            for (let r = 0; r < 20; r++) {
-              ctx.fillRect(tx - 20 + r * 22, py + 6, 3, 8);
-            }
-          }
-        })();
-
-        // SPECIFIC LANDMARK 3: Towering Tropical Palms (Coconut & Arecanut) (X: 1300 to 1600)
-        (function drawPalms() {
-          const palms = [
-            { x: 1340, y: H * 0.58, h: 120 },
-            { x: 1400, y: H * 0.56, h: 150 },
-            { x: 1470, y: H * 0.59, h: 130 },
-            { x: 1540, y: H * 0.57, h: 160 }
-          ];
-
-          palms.forEach(p => {
-            // Trunk
-            ctx.strokeStyle = '#5a4632';
-            ctx.lineWidth = 4;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y + 40);
-            ctx.quadraticCurveTo(p.x + 12, p.y - p.h * 0.5, p.x + 6, p.y - p.h);
-            ctx.stroke();
-
-            // Palm fronds
-            const topX = p.x + 6;
-            const topY = p.y - p.h;
-            ctx.strokeStyle = '#2f5a2a';
-            ctx.lineWidth = 3;
-            for (let f = 0; f < 8; f++) {
-              const ang = (Math.PI / 4) * f;
-              ctx.beginPath();
-              ctx.moveTo(topX, topY);
-              ctx.quadraticCurveTo(
-                topX + Math.cos(ang) * 45,
-                topY + Math.sin(ang) * 25 - 10,
-                topX + Math.cos(ang) * 65,
-                topY + Math.sin(ang) * 45 + 15
-              );
-              ctx.stroke();
-            }
-          });
-        })();
-
-        // SPECIFIC LANDMARK 4: Cloud Shola Waterfall / Notch (X: 1750 to 1950)
-        (function drawCloudWaterfall() {
-          const cx = 1850;
-          const cy = H * 0.49;
-          const cGrad = ctx.createLinearGradient(cx, cy - 30, cx, cy + 90);
-          cGrad.addColorStop(0, 'rgba(255, 255, 255, 0.85)');
-          cGrad.addColorStop(0.6, 'rgba(235, 248, 242, 0.65)');
-          cGrad.addColorStop(1, 'transparent');
-          ctx.fillStyle = cGrad;
-          ctx.beginPath();
-          ctx.ellipse(cx, cy + 20, 95, 60, 0, 0, Math.PI * 2);
-          ctx.fill();
-        })();
-
-        // Foreground lush slope texture & tea bush clusters
-        ctx.fillStyle = cfg.hillNear;
-        ctx.fillRect(0, H * 0.72, W, H * 0.28);
-
-        return pCanvas;
-      }
-
-      // 2. PROCEDURAL 3D CLOUD SPRITE TEXTURE GENERATOR
-      function createCloudSpriteTexture() {
+      // Soft Volumetric Mist Sprite Texture
+      function createSoftMistTexture() {
         const cCanvas = document.createElement('canvas');
         cCanvas.width = 256;
         cCanvas.height = 256;
         const cCtx = cCanvas.getContext('2d');
-
-        // Draw multiple overlapping soft gaussian radial bursts
-        const puffs = [
-          { x: 128, y: 128, r: 65, a: 0.75 },
-          { x: 95, y: 135, r: 52, a: 0.65 },
-          { x: 165, y: 135, r: 52, a: 0.65 },
-          { x: 75, y: 145, r: 42, a: 0.5 },
-          { x: 185, y: 145, r: 42, a: 0.5 },
-          { x: 128, y: 105, r: 48, a: 0.6 }
-        ];
-
-        puffs.forEach(p => {
-          const g = cCtx.createRadialGradient(p.x, p.y, 4, p.x, p.y, p.r);
-          g.addColorStop(0, `rgba(255, 255, 255, ${p.a})`);
-          g.addColorStop(0.5, `rgba(240, 248, 245, ${p.a * 0.6})`);
-          g.addColorStop(1, 'rgba(255, 255, 255, 0)');
-          cCtx.fillStyle = g;
-          cCtx.beginPath();
-          cCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          cCtx.fill();
-        });
-
+        const g = cCtx.createRadialGradient(128, 128, 10, 128, 128, 120);
+        g.addColorStop(0, 'rgba(255, 255, 255, 0.35)');
+        g.addColorStop(0.5, 'rgba(235, 248, 242, 0.15)');
+        g.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        cCtx.fillStyle = g;
+        cCtx.beginPath();
+        cCtx.arc(128, 128, 120, 0, Math.PI * 2);
+        cCtx.fill();
         const texture = new THREE.CanvasTexture(cCanvas);
         texture.needsUpdate = true;
         return texture;
       }
 
-      // 3. THREE.JS SCENE INITIALIZATION
+      // Soft Dew Dust Particle Texture
+      function createSoftDewTexture() {
+        const c = document.createElement('canvas');
+        c.width = 64;
+        c.height = 64;
+        const ctx = c.getContext('2d');
+        const g = ctx.createRadialGradient(32, 32, 2, 32, 32, 28);
+        g.addColorStop(0, 'rgba(255, 255, 235, 0.85)');
+        g.addColorStop(0.4, 'rgba(240, 250, 245, 0.30)');
+        g.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(32, 32, 28, 0, Math.PI * 2);
+        ctx.fill();
+        const tex = new THREE.CanvasTexture(c);
+        tex.needsUpdate = true;
+        return tex;
+      }
+
+      // 3. THREE.JS SCENE INITIALIZATION (Photorealistic South Indian Hill Estate)
       function initThreeScene() {
         if (isInitialized) return;
 
@@ -8012,82 +7799,89 @@
         camera = new THREE.PerspectiveCamera(fov, width / height, 1, 1200);
         camera.target = new THREE.Vector3(0, 0, 0);
 
-        // Lights
-        hemiLight = new THREE.HemisphereLight(0xffffff, 0x223322, 1.1);
+        // Ambient & Directional Lights
+        hemiLight = new THREE.HemisphereLight(0xffffff, 0x243322, 1.15);
         scene.add(hemiLight);
 
-        dirLight = new THREE.DirectionalLight(0xfff4db, 0.85);
-        dirLight.position.set(200, 300, 150);
+        dirLight = new THREE.DirectionalLight(0xfff5e1, 0.95);
+        dirLight.position.set(200, 320, 160);
         scene.add(dirLight);
 
-        // 360 Inverted Panorama Sphere
+        // 360 Inverted Panorama Sphere with Real Photo Texture
         const sphereGeo = new THREE.SphereGeometry(500, 64, 36);
         sphereGeo.scale(-1, 1, 1);
 
-        const panoramaCanvas = createPanoramaCanvas(currentAtmo);
-        const panoramaTexture = new THREE.CanvasTexture(panoramaCanvas);
-        panoramaTexture.wrapS = THREE.RepeatWrapping;
-        panoramaTexture.repeat.x = 1;
-
         const sphereMat = new THREE.MeshBasicMaterial({
-          map: panoramaTexture
+          map: panoTextures[currentAtmo] || null,
+          color: 0xffffff
         });
         sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
         scene.add(sphereMesh);
 
-        // 3D Dynamic Drifting Volumetric Cloud Group
+        // If texture wasn't loaded yet, load it directly
+        if (!panoTextures[currentAtmo]) {
+          textureLoader.load(atmoUrls[currentAtmo], (tex) => {
+            tex.wrapS = THREE.RepeatWrapping;
+            tex.generateMipmaps = true;
+            panoTextures[currentAtmo] = tex;
+            sphereMesh.material.map = tex;
+            sphereMesh.material.needsUpdate = true;
+          });
+        }
+
+        // 3D Soft Volumetric Mist Sheet Group (Delicate drifting mountain fog)
         cloudGroup = new THREE.Group();
-        const cloudTexture = createCloudSpriteTexture();
-        const cloudMaterial = new THREE.SpriteMaterial({
-          map: cloudTexture,
+        const mistTexture = createSoftMistTexture();
+        const mistMaterial = new THREE.SpriteMaterial({
+          map: mistTexture,
           transparent: true,
-          opacity: 0.72,
+          opacity: 0.55,
           depthWrite: false
         });
 
-        // Instantiate 18 cloud clusters orbiting the hills at different altitudes & radii
-        const cloudCount = 18;
-        for (let i = 0; i < cloudCount; i++) {
-          const sprite = new THREE.Sprite(cloudMaterial.clone());
-          const angle = (i / cloudCount) * Math.PI * 2 + (Math.random() * 0.4);
-          const radius = 280 + Math.random() * 120;
+        // 12 soft mist clusters floating over the mountain ridges & water paddies
+        const mistCount = 12;
+        for (let i = 0; i < mistCount; i++) {
+          const sprite = new THREE.Sprite(mistMaterial.clone());
+          const angle = (i / mistCount) * Math.PI * 2 + (Math.random() * 0.3);
+          const radius = 260 + Math.random() * 140;
           const x = Math.cos(angle) * radius;
           const z = Math.sin(angle) * radius;
-          const y = 45 + Math.random() * 110;
+          const y = 30 + Math.random() * 90;
           sprite.position.set(x, y, z);
 
-          const scale = 110 + Math.random() * 80;
-          sprite.scale.set(scale, scale * 0.55, 1);
+          const scale = 140 + Math.random() * 100;
+          sprite.scale.set(scale, scale * 0.5, 1);
           sprite.userData = {
             baseY: y,
             seed: Math.random() * 10,
-            speed: 0.0003 + Math.random() * 0.0005
+            speed: 0.0002 + Math.random() * 0.0004
           };
           cloudGroup.add(sprite);
         }
         scene.add(cloudGroup);
 
-        // Valley Mist Particle Field (300 floating mist dew particles)
-        const mistGeo = new THREE.BufferGeometry();
-        const mistCount = 300;
-        const mistPositions = new Float32Array(mistCount * 3);
-        for (let i = 0; i < mistCount * 3; i += 3) {
+        // Soft Sunlit Dew Particle Field (180 gentle particles)
+        const dewGeo = new THREE.BufferGeometry();
+        const dewCount = 180;
+        const dewPositions = new Float32Array(dewCount * 3);
+        for (let i = 0; i < dewCount * 3; i += 3) {
           const angle = Math.random() * Math.PI * 2;
-          const r = 140 + Math.random() * 240;
-          mistPositions[i] = Math.cos(angle) * r;
-          mistPositions[i + 1] = -40 + Math.random() * 80;
-          mistPositions[i + 2] = Math.sin(angle) * r;
+          const r = 120 + Math.random() * 260;
+          dewPositions[i] = Math.cos(angle) * r;
+          dewPositions[i + 1] = -50 + Math.random() * 70;
+          dewPositions[i + 2] = Math.sin(angle) * r;
         }
-        mistGeo.setAttribute('position', new THREE.BufferAttribute(mistPositions, 3));
+        dewGeo.setAttribute('position', new THREE.BufferAttribute(dewPositions, 3));
 
-        const mistMat = new THREE.PointsMaterial({
-          color: 0xebf7f0,
-          size: 4.5,
+        const dewMat = new THREE.PointsMaterial({
+          map: createSoftDewTexture(),
+          size: 6.5,
           transparent: true,
-          opacity: 0.45,
+          opacity: 0.50,
           depthWrite: false
         });
-        mistParticles = new THREE.Points(mistGeo, mistMat);
+        mistParticles = new THREE.Points(dewGeo, dewMat);
         scene.add(mistParticles);
 
         // Populate Hotspot DOM Pins
@@ -8165,7 +7959,7 @@
         targetLon = hs.coords.yaw;
         targetLat = hs.coords.pitch;
 
-        // Populate Drawer
+        // Populate Drawer with Real Farm Image & Sector Details
         if (drawerBadge) drawerBadge.textContent = hs.tag;
         if (drawerTitle) drawerTitle.textContent = hs.name;
         if (drawerElevation) drawerElevation.textContent = `⛰️ ${hs.elevation}`;
@@ -8260,7 +8054,7 @@
         });
       }
 
-      // 6. ATMOSPHERE SWITCHER (Morning Mist, Golden Hour, Monsoon Dew)
+      // 6. ATMOSPHERE SWITCHER (Photorealistic Real Panorama Switching)
       function switchAtmosphere(newAtmo) {
         if (newAtmo === currentAtmo) return;
         currentAtmo = newAtmo;
@@ -8270,31 +8064,28 @@
           btn.classList.toggle('is-active', btn.getAttribute('data-atmo') === newAtmo);
         });
 
-        // Re-generate texture
-        if (sphereMesh) {
-          const newCanvas = createPanoramaCanvas(newAtmo);
-          const newTexture = new THREE.CanvasTexture(newCanvas);
-          sphereMesh.material.map.dispose();
-          sphereMesh.material.map = newTexture;
+        // Switch to corresponding real 4K photographic panorama
+        if (sphereMesh && panoTextures[newAtmo]) {
+          sphereMesh.material.map = panoTextures[newAtmo];
           sphereMesh.material.needsUpdate = true;
         }
 
         // Adjust lighting & fog
         if (newAtmo === 'morning') {
           hemiLight.color.setHex(0xffffff);
-          hemiLight.groundColor.setHex(0x223322);
-          dirLight.color.setHex(0xfff4db);
-          dirLight.intensity = 0.9;
+          hemiLight.groundColor.setHex(0x243322);
+          dirLight.color.setHex(0xfff5e1);
+          dirLight.intensity = 0.95;
         } else if (newAtmo === 'golden') {
           hemiLight.color.setHex(0xffd1a4);
           hemiLight.groundColor.setHex(0x442211);
           dirLight.color.setHex(0xffaa55);
-          dirLight.intensity = 1.2;
+          dirLight.intensity = 1.25;
         } else if (newAtmo === 'monsoon') {
           hemiLight.color.setHex(0xaec2bd);
           hemiLight.groundColor.setHex(0x112218);
           dirLight.color.setHex(0xc2dad4);
-          dirLight.intensity = 0.65;
+          dirLight.intensity = 0.70;
         }
       }
 
