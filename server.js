@@ -425,83 +425,83 @@ app.get('/api/bookings', async (req, res) => {
   }
 });
 
-// 360 Realtime Farm Tour API (South Indian Hill Estate & Terroir Sectors)
+// 360 Realtime Farm Tour API (Tamil Nadu Hill Village Farm & Agrarian Sectors)
 app.get('/api/farm-360', (req, res) => {
   res.json({
     success: true,
     estate: {
-      name: "Sahyadri & Nilgiri Foothill Sanctuary",
-      style: "South Indian Heritage Thotti Farm",
-      location: "Western Ghats Ridge • Coorg & Wayanad Foothills",
-      elevation: "1,180m Montane Mist Belt",
-      primary_crops: "Gandhakasala Fragrant Rice, Shade Arabica, Malabar Pepper & Cardamom",
-      tagline: "Mist-veiled rolling hills, cascading paddy terraces, and ancestral courtyard homestead surrounded by drifting clouds."
+      name: "Tamil Nadu Hill Village Farm Sanctuary",
+      style: "Authentic South Indian Hill Homestead & Terraced Paddies",
+      location: "Nilgiris & Kolli Hills Foothills • Tamil Nadu, India",
+      elevation: "1,180m Mist-Clad Hill Slope",
+      primary_crops: "Traditional Heirloom Kichili Samba Rice, Coconut Palms, Mountain Bananas & Pepper",
+      tagline: "Mist-veiled rolling hills, terraced paddies, clay walking bunds, and traditional red-tiled farmhouse plinth surrounded by drifting clouds."
     },
     atmospheres: [
-      { id: "morning", name: "Morning Mist", sub: "Prabhat", desc: "Cool silver mountain dew and rising valley fog" },
-      { id: "golden", name: "Golden Hour", sub: "Sandhya", desc: "Radiant amber sunset glow over Western Ghats ridges" },
-      { id: "monsoon", name: "Monsoon Dew", sub: "Varsha", desc: "Dramatic swirling rain clouds and verdant emerald slopes" }
+      { id: "morning", name: "Morning Mist", sub: "Kaalai", desc: "Cool silver mountain mist and soft rising valley clouds" },
+      { id: "golden", name: "Golden Hour", sub: "Maalai", desc: "Warm amber sunlight glowing over rolling Tamil Nadu hill ridges" },
+      { id: "monsoon", name: "Monsoon Dew", sub: "Mazhai", desc: "Swirling rain clouds, lush wet soil, and vibrant emerald slopes" }
     ],
     sectors: [
       {
         id: "desi-sanctuary",
-        name: "Indigenous Cattle Sanctuary & Bund Pasture",
-        tag: "Living Soil Fertility Center",
+        name: "Indigenous Kangayam Cattle & Ridge Pasture",
+        tag: "Native Soil Fertility Hub",
         icon: "🐄",
         elevation: "940m Elevation",
         microclimate: "22°C • Open Meadow Breeze",
         coords: { x: 360, y: -70, z: 200, yaw: 45, pitch: -8 },
-        desc: "Free-ranging indigenous Malnad Gidda and Hallikar miniature hill cattle grazing peacefully along the green clay terrace bunds in the morning mist. Their daily manure and herbal grazing form the foundation for all biodynamic bio-fertilizers across the entire estate.",
-        img: "/assets/farm_tour/morning_misty_paddy_cattle.jpg",
-        highlights: ["Malnad Gidda Native Cattle", "Jeevamrutha Mixing Vat", "Zero Chemical Input Hub", "Gentle Animal Interaction"]
+        desc: "Authentic indigenous Kangayam hill cattle grazing quietly along the reddish clay terrace bunds in the morning mist. Their daily organic manure nourishes the multi-tiered agroforest and terraced paddies.",
+        img: "/assets/farm_tour/tamil_nadu_hill_farm_360_master.jpg",
+        highlights: ["Indigenous Kangayam Native Cattle", "Natural Clay Bund Grazing", "Traditional Organic Composting", "Gentle Farm Animal Interaction"]
       },
       {
         id: "paddy-terraces",
-        name: "Cascading Mountain Rice Terraces",
-        tag: "Regenerative Wetland Rice",
+        name: "Stepped Wetland Paddy Terraces",
+        tag: "Heirloom Samba Rice Terraces",
         icon: "🌾",
         elevation: "920m Elevation",
         microclimate: "23°C • Mountain Stream Breeze",
         coords: { x: -340, y: -90, z: -260, yaw: -140, pitch: -12 },
-        desc: "Stepped clay terraces sculpted into the hillside slope, fed continuously by living natural mountain aquifers and reflecting the morning sky. Guests can walk barefoot along the clay bunds, practice traditional transplantation, and learn ancestral gravity-fed water stewardship.",
-        img: "/assets/farm_tour/morning_misty_paddy_cattle.jpg",
-        highlights: ["Barefoot Clay Bund Walks", "Gravity Water Channels", "Organic Duck Weed Control", "Ancestral Fragrant Grains"]
+        desc: "Naturally stepped clay terraces sculpted along the gentle Tamil Nadu hill slope, fed by living mountain water channels and reflecting open tropical skies. Visitors walk barefoot on firm clay bunds.",
+        img: "/assets/farm_tour/pano_morning.jpg",
+        highlights: ["Barefoot Clay Bund Walks", "Living Gravity Runoff Channels", "Heirloom Kichili Samba Rice", "Chemical-Free Soil Regeneration"]
       },
       {
         id: "thotti-house",
-        name: "Ancestral Thotti Estate Lane & Banana Canopy",
-        tag: "Heritage Architecture & Farm Lane",
+        name: "Traditional Tamil Rural Farmhouse & Veranda",
+        tag: "Heritage Homestead & Walking Path",
         icon: "🏡",
         elevation: "960m Elevation",
-        microclimate: "21°C • Cool Veranda Breeze",
+        microclimate: "21°C • Shaded Veranda Breeze",
         coords: { x: 280, y: -30, z: -320, yaw: 180, pitch: -6 },
-        desc: "Scenic country lane flanked by lush Nendran banana groves, betel palms, and flooded paddies leading to the traditional red-tiled courtyard homestead (Thotti Mane). Experience the living verandas where guests join the farming family for fresh woodfire meals and filter decoction.",
-        img: "/assets/farm_tour/rural_estate_country_lane.jpg",
-        highlights: ["Nendran Banana Agroforest", "Rainwater Courtyard Tank", "Woodfire Hearth Breakfast", "Fresh Filter Decoction"]
+        desc: "Traditional Tamil rural farmhouse featuring sloping terracotta clay tiles, granite stone plinth, and shaded timber veranda nestled beside wild banana clusters and curving coconut palms.",
+        img: "/assets/farm_tour/pano_golden.jpg",
+        highlights: ["Terracotta-Tiled Rural Architecture", "Granite Stone Foundation Plinth", "Shaded Timber Living Veranda", "Woodfire Farm Hearth & Meals"]
       },
       {
         id: "shola-peak",
-        name: "Cloud-Veiled Shola Ridge & Mist Deck",
-        tag: "Montane Rainforest Canopy",
+        name: "Misty Mountain Ridge & Open Cloud Sky",
+        tag: "Layered Western Ghats Horizon",
         icon: "⛰️",
         elevation: "1,240m Ridge Crest",
-        microclimate: "18°C • Drifting Cloud Vapor",
+        microclimate: "18°C • Drifting Cloud Mist",
         coords: { x: -220, y: 160, z: 360, yaw: 125, pitch: 20 },
-        desc: "The highest ridge of the estate where rolling clouds break over ancient Shola evergreens and tall coconut palms. A panoramic viewing deck overlooking three valley passes. Early mornings offer breathtaking cloud inversions as the mist carpets the lower valleys.",
-        img: "/assets/farm_tour/morning_misty_paddy_cattle.jpg",
-        highlights: ["360° Valley Cloud Inversion", "Highland Coffee Canopy", "Wild Honey Tree Hives", "Panoramic Meditation Deck"]
+        desc: "Layered rolling green hills and distant mountain ranges enveloped in natural morning mist and realistic cloud depth. The eye-level standing viewpoint captures the authentic tranquil atmosphere of a remote hill village.",
+        img: "/assets/farm_tour/pano_morning.jpg",
+        highlights: ["360° Layered Mountain Vistas", "Atmospheric Cloud Inversions", "Shola Evergreen Canopy", "Natural Daylight & Horizon Depth"]
       },
       {
         id: "cardamom-stream",
-        name: "Active Rice Transplantation & Mud Bunds",
-        tag: "Generational Agrarian Stewardship",
+        name: "Clay Walking Bund & Water Channels",
+        tag: "Natural Agrarian Pathway",
         icon: "🌿",
         elevation: "890m Valley Bed",
-        microclimate: "20°C • Humid Spice Microclimate",
+        microclimate: "20°C • Moist Earth & Foliage",
         coords: { x: 40, y: -150, z: 420, yaw: -45, pitch: -10 },
-        desc: "Vibrant flooded emerald paddy fields where local agrarian farmers in traditional lungis and saris walk the clay bunds, transplanting heirloom Samba rice seedlings under the mist-covered mountain backdrop.",
-        img: "/assets/farm_tour/monsoon_farmers_rice_paddy.jpg",
-        highlights: ["Heirloom Samba Seedling Planting", "Barefoot Bund Walking", "Monsoon Water Management", "Farming Family Wisdom"]
+        desc: "Natural walking path of uneven reddish loamy soil, grass tufts, and river stones winding between the flooded plots where crystal-clear spring runoff sustains the heirloom crop.",
+        img: "/assets/farm_tour/pano_monsoon.jpg",
+        highlights: ["Natural Soil & Stone Walking Paths", "Uneven Earthen Bund Formations", "Living Gravity Irrigation Channels", "Traditional Tamil Agrarian Rhythm"]
       }
     ]
   });

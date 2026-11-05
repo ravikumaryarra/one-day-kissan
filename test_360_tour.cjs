@@ -67,7 +67,7 @@ async function run() {
   const apiRes = await makeRequest('GET', '/api/farm-360');
   assert(apiRes.status === 200, 'GET /api/farm-360 returns 200 OK');
   assert(apiRes.data.success === true, 'API returns success: true');
-  assert(apiRes.data.estate && apiRes.data.estate.name.includes('Sahyadri'), 'Estate name includes Sahyadri');
+  assert(apiRes.data.estate && (apiRes.data.estate.name.includes('Tamil Nadu') || apiRes.data.estate.name.includes('Sanctuary')), 'Estate name includes Tamil Nadu / Sanctuary');
   assert(apiRes.data.sectors && apiRes.data.sectors.length === 5, '5 estate sectors returned by API');
   assert(apiRes.data.atmospheres && apiRes.data.atmospheres.length === 3, '3 atmospheres returned');
 
@@ -181,10 +181,10 @@ async function run() {
   assert(isDrawerOpen, 'Hotspot details drawer opened with is-open');
 
   const drawerTitle = await page.textContent('#drawerTitle');
-  assert(drawerTitle.includes('Ancestral Thotti'), `Drawer title verified: "${drawerTitle}"`);
+  assert(drawerTitle.includes('Tamil') || drawerTitle.includes('Farmhouse') || drawerTitle.includes('Thotti'), `Drawer title verified: "${drawerTitle}"`);
 
   const drawerDesc = await page.textContent('#drawerDesc');
-  assert(drawerDesc.includes('courtyard') || drawerDesc.includes('Thotti'), 'Drawer description verified');
+  assert(drawerDesc.includes('Tamil') || drawerDesc.includes('farmhouse') || drawerDesc.includes('courtyard') || drawerDesc.includes('Thotti'), 'Drawer description verified');
 
   const highlightsCount = await page.locator('#drawerHighlightsList li').count();
   assert(highlightsCount >= 3, `Sector highlights rendered (${highlightsCount} items)`);
