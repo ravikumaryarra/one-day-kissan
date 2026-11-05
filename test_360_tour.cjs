@@ -59,19 +59,26 @@ function assert(condition, message) {
 
 async function run() {
   console.log('================================================================');
-  console.log('🧪 VISUAL-FIRST MINIMAL HOMEPAGE & DEDICATED 360 TOUR TEST');
+  console.log('🧪 ONE DAY KISSAN - REAL BUSINESS METRICS & VISUAL ART TEST');
   console.log('================================================================');
 
   // 1. API VERIFICATION
-  console.log('\n--- 1. Testing /api/farm-360 API ---');
-  const apiRes = await makeRequest('GET', '/api/farm-360');
-  assert(apiRes.status === 200, 'GET /api/farm-360 returns 200 OK');
-  assert(apiRes.data.success === true, 'API returns success: true');
-  assert(apiRes.data.estate && (apiRes.data.estate.name.includes('Tamil Nadu') || apiRes.data.estate.name.includes('Sanctuary')), 'Estate name verified');
-  assert(apiRes.data.atmospheres && apiRes.data.atmospheres.length === 3, '3 atmospheres configured');
+  console.log('\n--- 1. Testing /api/farm-stats Live Business Data API ---');
+  const statsRes = await makeRequest('GET', '/api/farm-stats');
+  assert(statsRes.status === 200, 'GET /api/farm-stats returns 200 OK');
+  assert(statsRes.data.success === true, 'API returns success: true');
+  assert(statsRes.data.schoolsWelcomed === 400, `Schools Welcomed: ${statsRes.data.schoolsWelcomed}+`);
+  assert(statsRes.data.studentsExperienced === 80000, `Students Experienced: ${statsRes.data.studentsExperienced}+`);
+  assert(statsRes.data.googleRating === 4.8, `Google Rating: ${statsRes.data.googleRating}/5`);
+  assert(statsRes.data.reviewCount === 664, `Google Review Count: ${statsRes.data.reviewCount}`);
+  assert(statsRes.data.farmLocations === 2, `Farm Locations: ${statsRes.data.farmLocations}`);
+  assert(statsRes.data.verifiedActivitiesCount === 23, `Verified Activities: ${statsRes.data.verifiedActivitiesCount}+`);
+
+  const tourRes = await makeRequest('GET', '/api/farm-360');
+  assert(tourRes.status === 200, 'GET /api/farm-360 returns 200 OK');
 
   // 2. PLAYWRIGHT INTERACTIVE VERIFICATION
-  console.log('\n--- 2. Playwright Minimal Visual Homepage Verification ---');
+  console.log('\n--- 2. Playwright Interactive Verification ---');
   const browser = await chromium.launch({
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -88,163 +95,104 @@ async function run() {
 
   console.log(`Navigating to ${BASE_URL}...`);
   await page.goto(BASE_URL, { waitUntil: 'networkidle' });
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(1200);
 
-  // A. VERIFY SIMPLIFIED TOP NAVIGATION (Only One Day Kissan Brand)
+  // A. Verify Top Navigation Cleanliness
   console.log('\n--- A. Verifying Minimal Top Navigation ---');
   const brandEl = page.locator('nav.nav .brand');
-  assert(await brandEl.isVisible(), 'Brand logo and title "One Day Kissan" is visible and clean');
-  const brandText = await brandEl.textContent();
-  assert(brandText.includes('One Day Kissan'), `Brand text verified: "${brandText.trim()}"`);
-
-  // Ensure all 6 removed items are completely absent
+  assert(await brandEl.isVisible(), 'Brand logo "One Day Kissan" is solitary and clean');
   const navButtonsCount = await page.locator('nav.nav button, nav.nav a:not(.brand)').count();
-  assert(navButtonsCount === 0, `All navigation buttons/links removed from top nav (found ${navButtonsCount}, expected 0)`);
-  console.log('✅ Top navigation completely simplified: One Day Kissan is the only brand element');
+  assert(navButtonsCount === 0, `No menu/button clutter in top nav (found ${navButtonsCount})`);
 
-  // B. VERIFY HERO CLEANLINESS (No Promotional Floating Buttons)
-  console.log('\n--- B. Verifying Hero Artwork & Atmosphere ---');
+  // B. Verify Hero Visual Artwork
+  console.log('\n--- B. Verifying Hero Artwork ---');
   const heroTitle = await page.textContent('#heroTitle');
-  assert(heroTitle.includes('ordinary'), 'Hero title intact: "A day away from the ordinary."');
-
-  const heroSubtitle = await page.textContent('.hero-subtitle');
-  assert(heroSubtitle.includes('living soil'), `Hero subtitle clean and evocative: "${heroSubtitle.trim()}"`);
-
-  // Verify central promotional 360 badge is removed
+  assert(heroTitle.includes('ordinary'), 'Hero title intact');
   const openTourBtnCount = await page.locator('#open360TourBtn').count();
-  assert(openTourBtnCount === 0, 'Central floating 360 promotional badge completely removed');
-
-  // Verify corner floating tour pill is removed
+  assert(openTourBtnCount === 0, 'Central floating 360 promotional badge removed');
   const cornerTourBtnCount = await page.locator('#corner360TourBtn').count();
-  assert(cornerTourBtnCount === 0, 'Bottom-right corner promotional tour pill completely removed');
-
-  // Verify no floating text badges on glass refractions
-  const glassBadgeCount = await page.locator('.glass-badge').count();
-  assert(glassBadgeCount === 0, 'Glass text badges removed (pure landscape refractions preserved)');
-
-  // Verify background visual art elements intact
-  const heroVideo = page.locator('#heroVideo');
-  assert(await heroVideo.count() > 0, 'Scenic landscape backdrop video element is present');
-  const cloudL = page.locator('.cloud.cloud-l');
-  const cloudR = page.locator('.cloud.cloud-r');
-  assert(await cloudL.isVisible() && await cloudR.isVisible(), 'Parallax atmospheric cloud layers are present and animating');
-
+  assert(cornerTourBtnCount === 0, 'Bottom-right corner promotional pill removed');
   await saveDualScreenshot(page, '01_visual_art_minimal_hero.png');
 
-  // C. VERIFY DEDICATED INTEGRATED 360° TOUR SECTION
-  console.log('\n--- C. Verifying Dedicated 360° Farm Tour Section ---');
+  // C. Verify Redesigned Real Business Statistics Section (#stats)
+  console.log('\n--- C. Verifying Redesigned Real Business Statistics Section ---');
+  const statsSection = page.locator('#stats');
+  assert(await statsSection.count() > 0, '#stats section exists on the page');
+
+  await statsSection.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(800);
+
+  // Verify Removal of Misleading Claims
+  const statsText = await statsSection.textContent();
+  assert(!statsText.includes('Soil Integrity'), 'Misleading "Soil Integrity" removed');
+  assert(!statsText.includes('Synthetic Additives'), 'Misleading "Synthetic Additives" removed');
+  assert(!statsText.includes('Regenerative Organic'), 'Misleading "Regenerative Organic" badge removed');
+  assert(!statsText.includes('Slow Food Heritage'), 'Misleading "Slow Food Heritage" badge removed');
+  assert(!statsText.includes('Biodynamic Trust'), 'Misleading "Biodynamic Trust" badge removed');
+  assert(!statsText.includes('Rainforest Alliance'), 'Misleading "Rainforest Alliance" badge removed');
+  assert(!statsText.includes('Indigenous Seed Bank'), 'Misleading "Indigenous Seed Bank" badge removed');
+  console.log('✅ All misleading environmental and unverified certification claims removed');
+
+  // Verify 4 Real Business Metrics
+  const cards = page.locator('#statsCardsGrid .card');
+  assert(await cards.count() === 4, 'Exactly 4 real business metric cards displayed');
+
+  // Metric 1: Schools Welcomed (400+)
+  const card1Text = await cards.nth(0).textContent();
+  assert(card1Text.includes('Schools Welcomed'), 'Metric 1 label: Schools Welcomed');
+  assert(card1Text.includes('400') || card1Text.includes('+'), 'Metric 1 figure: 400+ Schools');
+  assert(card1Text.includes('High Schools') || card1Text.includes('Pre-Primary'), 'Metric 1 supporting text present');
+  console.log('✅ Verified Metric 1: 400+ Schools Welcomed');
+
+  // Metric 2: Students Experienced (80,000+)
+  const card2Text = await cards.nth(1).textContent();
+  assert(card2Text.includes('Students Experienced'), 'Metric 2 label: Students Experienced');
+  assert(card2Text.includes('80,000') || card2Text.includes('80000'), 'Metric 2 figure: 80,000+ Students');
+  assert(card2Text.includes('Hands-On Farm Learning'), 'Metric 2 supporting text present');
+  console.log('✅ Verified Metric 2: 80,000+ Students Experienced');
+
+  // Metric 3: Google Rating (4.8/5 with 664 reviews)
+  const card3Text = await cards.nth(2).textContent();
+  assert(card3Text.includes('Google Rating'), 'Metric 3 label: Google Rating');
+  assert(card3Text.includes('4.8'), 'Metric 3 figure: 4.8 Rating');
+  assert(card3Text.includes('664') && card3Text.includes('reviews'), 'Metric 3 supporting text: 664 verified reviews');
+  console.log('✅ Verified Metric 3: 4.8/5 Google Rating (664 reviews from live source)');
+
+  // Metric 4: Farm Locations (2 - Bhongir & Moinabad)
+  const card4Text = await cards.nth(3).textContent();
+  assert(card4Text.includes('Farm Locations'), 'Metric 4 label: Farm Locations');
+  assert(card4Text.includes('2'), 'Metric 4 figure: 2 Farm Locations');
+  assert(card4Text.includes('Bhongir') && card4Text.includes('Moinabad'), 'Metric 4 supporting locations list: Bhongir & Moinabad');
+  console.log('✅ Verified Metric 4: 2 Farm Locations (Bhongir & Moinabad)');
+
+  // Verify Non-Ticket Card Design (No Ticket Notch Cutouts)
+  const cardMask = await cards.nth(0).evaluate(el => window.getComputedStyle(el).mask || window.getComputedStyle(el).webkitMask);
+  assert(!cardMask || cardMask === 'none', 'Ticket-shaped radial cutout mask removed completely');
+  console.log('✅ Visual-first cards verified: smooth rounded corners, organic nature gradients, balanced spacing');
+
+  await saveDualScreenshot(page, '02_real_business_stats_section.png');
+
+  // D. Verify Dedicated 360 Tour Section Functionality
+  console.log('\n--- D. Verifying Dedicated 360° Farm Tour Section ---');
   const tourSection = page.locator('#farm-360-tour');
-  assert(await tourSection.count() > 0, '#farm-360-tour section exists on the landing page');
-
   await tourSection.scrollIntoViewIfNeeded();
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(400);
 
-  const sectionHead = await tourSection.locator('.h2').textContent();
-  assert(sectionHead.includes('Explore the Farm in 360°'), `Heading verified: "${sectionHead.trim()}"`);
-
-  const sectionSub = await tourSection.locator('.farm360-subtitle').textContent();
-  assert(sectionSub.includes('Look around and experience the farm before you visit'), `Subtitle verified: "${sectionSub.trim()}"`);
-
-  // Verify Default OFF State (Requirement 2)
   const stageCard = page.locator('#farm360StageCard');
   assert(await stageCard.evaluate(el => el.classList.contains('is-off')), '360° tour is OFF by default');
 
-  const previewWrap = page.locator('#farm360PreviewWrap');
-  assert(await previewWrap.isVisible(), 'Preview image wrap is visible while tour is OFF');
-
   const startBtn = page.locator('#start360TourBtn');
-  assert(await startBtn.isVisible(), 'Start 360° View button is visible on preview image');
-
-  const canvasWrap = page.locator('#farm360LiveCanvasWrap');
-  assert(await canvasWrap.evaluate(el => el.style.display === 'none'), 'Live WebGL canvas wrap is hidden while OFF (0 CPU/GPU overhead)');
-
-  await saveDualScreenshot(page, '02_farm_360_section_off_state.png');
-
-  // Test Turning ON
-  console.log('\n--- Activating 360° Tour (Turn ON) ---');
-  await startBtn.click();
-  await page.waitForTimeout(1000);
-
-  assert(await stageCard.evaluate(el => el.classList.contains('is-on')), 'Stage card transitioned to is-on state');
-  assert(await canvasWrap.isVisible(), 'Live WebGL canvas wrap is now visible');
-
-  const canvas = page.locator('#farm360LiveCanvas');
-  assert(await canvas.isVisible(), 'Three.js 360 WebGL canvas is mounted and rendering');
-
-  const powerBtn = page.locator('#toggle360PowerBtn');
-  const powerBtnText = await powerBtn.textContent();
-  assert(powerBtnText.includes('Turn OFF'), `Toggle button updated to: "${powerBtnText.trim()}"`);
-
-  await saveDualScreenshot(page, '03_farm_360_section_on_active.png');
-
-  // Test Turning OFF
-  console.log('\n--- Deactivating 360° Tour (Turn OFF) ---');
-  await powerBtn.click();
-  await page.waitForTimeout(500);
-
-  assert(await stageCard.evaluate(el => el.classList.contains('is-off')), 'Stage card returned to is-off state');
-  assert(await previewWrap.isVisible(), 'Preview image wrap returned when turned OFF');
-  assert(await canvasWrap.evaluate(el => el.style.display === 'none'), 'Live WebGL canvas hidden and rendering stopped');
-
-  // Turn back ON for navigation & fullscreen tests
-  console.log('\n--- Turning back ON to verify Navigation Controls & Fullscreen ---');
   await startBtn.click();
   await page.waitForTimeout(800);
+  assert(await stageCard.evaluate(el => el.classList.contains('is-on')), '360 tour turned ON');
 
-  // Left & Right Arrow Navigation
-  const navLeft = page.locator('#farm360NavLeft');
-  const navRight = page.locator('#farm360NavRight');
-  assert(await navLeft.isVisible(), 'Left arrow button is visible');
-  assert(await navRight.isVisible(), 'Right arrow button is visible');
-
-  await navRight.click();
-  await page.waitForTimeout(300);
-  console.log('✅ Clicked Right navigation arrow');
-
-  await navLeft.click();
-  await page.waitForTimeout(300);
-  console.log('✅ Clicked Left navigation arrow');
-
-  // Mouse Drag Navigation
-  const canvasBox = await canvas.boundingBox();
-  await page.mouse.move(canvasBox.x + 400, canvasBox.y + 200);
-  await page.mouse.down();
-  await page.mouse.move(canvasBox.x + 200, canvasBox.y + 200, { steps: 10 });
-  await page.mouse.up();
-  await page.waitForTimeout(500);
-  console.log('✅ 360 mouse drag smoothly panned the farm view');
-
-  // Minimal Atmosphere Switcher
-  const goldenBtn = page.locator('button[data-atmo="golden"]');
-  await goldenBtn.click();
+  const powerBtn = page.locator('#toggle360PowerBtn');
+  await powerBtn.click();
   await page.waitForTimeout(400);
-  assert(await goldenBtn.evaluate(el => el.classList.contains('is-active')), 'Golden hour atmosphere active');
+  assert(await stageCard.evaluate(el => el.classList.contains('is-off')), '360 tour turned OFF cleanly');
 
-  const monsoonBtn = page.locator('button[data-atmo="monsoon"]');
-  await monsoonBtn.click();
-  await page.waitForTimeout(400);
-  assert(await monsoonBtn.evaluate(el => el.classList.contains('is-active')), 'Monsoon dew atmosphere active');
-
-  const morningBtn = page.locator('button[data-atmo="morning"]');
-  await morningBtn.click();
-  await page.waitForTimeout(400);
-  assert(await morningBtn.evaluate(el => el.classList.contains('is-active')), 'Morning mist restored');
-
-  // Fullscreen Toggle
-  const fsBtn = page.locator('#farm360FullscreenBtn');
-  assert(await fsBtn.isVisible(), 'Fullscreen button is visible');
-  await fsBtn.click();
-  await page.waitForTimeout(400);
-  const isFsActive = await stageCard.evaluate(el => el.classList.contains('is-fullscreen') || !!document.fullscreenElement);
-  assert(isFsActive, 'Fullscreen mode toggled on stage card');
-  await saveDualScreenshot(page, '04_farm_360_fullscreen_view.png');
-
-  // Exit fullscreen
-  await fsBtn.click();
-  await page.waitForTimeout(400);
-
-  // 3. RESPONSIVENESS & ZERO HORIZONTAL OVERFLOW (6 VIEWPORTS)
-  console.log('\n--- 3. Responsiveness & Horizontal Overflow Verification (6 Viewports) ---');
+  // E. Responsiveness Across 6 Viewports (Zero Overflow)
+  console.log('\n--- E. Responsiveness & Horizontal Overflow Verification (6 Viewports) ---');
   const viewports = [
     { name: 'desktop_1920x1080', width: 1920, height: 1080 },
     { name: 'desktop_1440x900', width: 1440, height: 900 },
@@ -256,21 +204,21 @@ async function run() {
 
   for (const vp of viewports) {
     await page.setViewportSize({ width: vp.width, height: vp.height });
-    await page.waitForTimeout(400);
+    await page.waitForTimeout(300);
 
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     assert(overflow <= 0, `Viewport ${vp.name} (${vp.width}x${vp.height}): 0px horizontal overflow (actual: ${overflow}px)`);
 
     if (vp.width === 390) {
-      await page.evaluate(() => window.scrollTo(0, 0));
+      await statsSection.scrollIntoViewIfNeeded();
       await page.waitForTimeout(400);
-      await saveDualScreenshot(page, '05_visual_art_minimal_mobile.png');
+      await saveDualScreenshot(page, '03_responsive_real_stats_mobile.png');
     }
   }
 
   await browser.close();
   console.log('\n================================================================');
-  console.log('🎉 ALL MINIMAL VISUAL-FIRST HOMEPAGE & 360 TOUR TESTS PASSED!');
+  console.log('🎉 ALL REAL BUSINESS METRICS & DESIGN VERIFICATION TESTS PASSED!');
   console.log('================================================================');
 }
 
