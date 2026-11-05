@@ -199,28 +199,30 @@
     }
     .nav {
       position: absolute;
-      top: 22px;
+      top: 24px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 20;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 40px;
-      padding: 6px 6px 6px 20px;
+      justify-content: center;
+      padding: 10px 24px;
       border-radius: 999px;
-      background: rgba(245, 241, 232, 0.92);
-      box-shadow: 0 0 0 1px rgba(32, 60, 43, .08), 0 8px 24px rgba(32, 60, 43, .08);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(245, 241, 232, 0.90);
+      box-shadow: 0 0 0 1px rgba(32, 60, 43, .08), 0 8px 24px rgba(32, 60, 43, .06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
     }
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       font-size: 20px;
       font-weight: 700;
-      letter-spacing: -.03em;
+      letter-spacing: -.02em;
       color: var(--forest);
+      text-decoration: none;
     }
     .brand svg {
       width: 28px;
@@ -3326,17 +3328,6 @@
           </svg>
           <span>One Day Kissan</span>
         </a>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <a href="#farm-360-tour" class="btn btn-nav-360" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14);">360° Tour</a>
-          <a href="#terroirs" class="btn btn-nav-terroirs" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14);">Terroirs</a>
-          <a href="#hampers" class="btn btn-nav-hampers" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14);">Harvest Crates</a>
-          <a href="#workshops" class="btn btn-nav-workshops" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14);">Masterclasses</a>
-          <button id="navLookupBtn" type="button" class="btn" style="padding: 7px 14px; font-size: 13px; background: rgba(32, 60, 43, 0.08); color: var(--forest); border: 1px solid rgba(32, 60, 43, 0.14); cursor: pointer; display: inline-flex; align-items: center; gap: 5px;">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-            <span>My Pass</span>
-          </button>
-          <a href="#booking" class="btn">Explore Experiences</a>
-        </div>
       </nav>
 
       <div class="cloud cloud-l" data-par="-60">
@@ -3353,37 +3344,7 @@
         </span>
         <h1 id="heroTitle" class="split">A day away from<br><em>the ordinary.</em></h1>
         <p class="hero-subtitle">Breathe clean country air, touch living soil, and experience authentic farm life.</p>
-        
-        <div class="hero-actions-cluster">
-          <button type="button" class="hero-360-badge" id="open360TourBtn" aria-label="Explore 360 Realtime Farm Tour">
-            <div class="badge-360-indicator">
-              <span class="badge-360-ring"></span>
-              <span class="badge-360-dot"></span>
-              <svg viewBox="0 0 24 24" class="badge-360-icon" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(-25 12 12)"></ellipse>
-                <path d="M12 2a10 10 0 1 0 10 10"></path>
-              </svg>
-            </div>
-            <div class="badge-360-copy">
-              <span class="badge-360-label"><span class="badge-live-tag">LIVE 360°</span> South Indian Hill Estate Tour</span>
-              <span class="badge-360-sub">Surrounded by Western Ghats hills & drifting clouds • Explore before booking</span>
-            </div>
-            <span class="badge-360-arrow">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </span>
-          </button>
-        </div>
       </div>
-
-      <button type="button" class="hero-corner-tour-pill" id="corner360TourBtn" aria-label="Open 360° Hill Farm Experience">
-        <span class="tour-radar-pulse"></span>
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          <path d="M2 12h20"/>
-        </svg>
-        <span>360° Realtime Hill Farm Tour</span>
-      </button>
 
       <div class="hero-media">
         <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093331_5998f443-1b9c-4b62-820c-8219c73c72c4.mp4"></video>
@@ -4514,19 +4475,6 @@
           sq.style.aspectRatio = '1';
           sq.style.left = `${x}%`;
           sq.style.top = `${y}%`;
-
-          // Add subtle elevation & crop tag to key markers
-          if (idx === 0) {
-            sq.innerHTML = '<div class="glass-badge"><span>🌾 1,250m</span></div>';
-            sq.style.aspectRatio = 'auto';
-            sq.style.height = '32px';
-            sq.style.width = 'auto';
-          } else if (idx === 10) {
-            sq.innerHTML = '<div class="glass-badge"><span>🍃 Wet Terraces</span></div>';
-            sq.style.aspectRatio = 'auto';
-            sq.style.height = '32px';
-            sq.style.width = 'auto';
-          }
 
           glassContainer.appendChild(sq);
         });
