@@ -425,6 +425,88 @@ app.get('/api/bookings', async (req, res) => {
   }
 });
 
+// 360 Realtime Farm Tour API (South Indian Hill Estate & Terroir Sectors)
+app.get('/api/farm-360', (req, res) => {
+  res.json({
+    success: true,
+    estate: {
+      name: "Sahyadri & Nilgiri Foothill Sanctuary",
+      style: "South Indian Heritage Thotti Farm",
+      location: "Western Ghats Ridge • Coorg & Wayanad Foothills",
+      elevation: "1,180m Montane Mist Belt",
+      primary_crops: "Gandhakasala Fragrant Rice, Shade Arabica, Malabar Pepper & Cardamom",
+      tagline: "Mist-veiled rolling hills, cascading paddy terraces, and ancestral courtyard homestead surrounded by drifting clouds."
+    },
+    atmospheres: [
+      { id: "morning", name: "Morning Mist", sub: "Prabhat", desc: "Cool silver mountain dew and rising valley fog" },
+      { id: "golden", name: "Golden Hour", sub: "Sandhya", desc: "Radiant amber sunset glow over Western Ghats ridges" },
+      { id: "monsoon", name: "Monsoon Dew", sub: "Varsha", desc: "Dramatic swirling rain clouds and verdant emerald slopes" }
+    ],
+    sectors: [
+      {
+        id: "thotti-house",
+        name: "Ancestral Thotti Courtyard",
+        tag: "Heritage Architecture • 1894",
+        icon: "🏡",
+        elevation: "960m Elevation",
+        microclimate: "21°C • Cool Veranda Breeze",
+        coords: { x: 280, y: -30, z: -320, yaw: 40, pitch: -5 },
+        desc: "Step into the traditional courtyard estate (Thotti Mane) framed by volcanic laterite stone and four sloping red-tile roofs. The central sunken stone tank collects pure highland rainwater, naturally air-conditioning the verandas where guests join the farming family for woodfire meals.",
+        img: "https://images.unsplash.com/photo-1592417817098-8f3d6ef2c6e6?auto=format&fit=crop&w=800&q=80",
+        highlights: ["Rainwater Courtyard", "Teakwood Verandas", "Woodfire Hearth Breakfast", "Fresh Filter Decoction"]
+      },
+      {
+        id: "paddy-terraces",
+        name: "Cascading Mountain Terraces",
+        tag: "Regenerative Wetland Rice",
+        icon: "🌾",
+        elevation: "920m Elevation",
+        microclimate: "23°C • Mountain Stream Breeze",
+        coords: { x: -340, y: -90, z: -260, yaw: -140, pitch: -12 },
+        desc: "Seven stepped terraces sculpted into the hillside slope, fed continuously by living natural mountain aquifers. Guests can walk barefoot along the clay bunds, practice traditional transplantation, and learn ancestral gravity-fed water stewardship.",
+        img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+        highlights: ["Barefoot Clay Bund Walks", "Gravity Water Channels", "Organic Duck Weed Control", "Ancestral Fragrant Grains"]
+      },
+      {
+        id: "shola-peak",
+        name: "Misty Shola Peak & Cloud Deck",
+        tag: "Montane Rainforest Canopy",
+        icon: "⛰️",
+        elevation: "1,240m Ridge Crest",
+        microclimate: "18°C • Drifting Cloud Vapor",
+        coords: { x: -220, y: 160, z: 360, yaw: 125, pitch: 20 },
+        desc: "The highest ridge of the estate where rolling clouds break over ancient Shola evergreens. A panoramic viewing deck overlooking three valley passes. Early mornings offer breathtaking cloud inversions as the mist carpets the lower valleys.",
+        img: "https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=80",
+        highlights: ["360° Valley Cloud Inversion", "Highland Coffee Canopy", "Wild Honey Tree Hives", "Panoramic Meditation Deck"]
+      },
+      {
+        id: "desi-sanctuary",
+        name: "Indigenous Cattle Sanctuary",
+        tag: "Living Soil Fertility Center",
+        icon: "🐄",
+        elevation: "940m Elevation",
+        microclimate: "22°C • Open Meadow Breeze",
+        coords: { x: 360, y: -70, z: 200, yaw: 60, pitch: -10 },
+        desc: "Home to 24 free-ranging Malnad Gidda and Hallikar native cows. These miniature hill cattle thrive on indigenous mountain herbs. Their daily dung and urine form the foundation for all biodynamic bio-fertilizers across the entire 45-acre estate.",
+        img: "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=800&q=80",
+        highlights: ["Malnad Gidda Native Cattle", "Jeevamrutha Mixing Vat", "Zero Chemical Input Hub", "Gentle Animal Interaction"]
+      },
+      {
+        id: "cardamom-stream",
+        name: "Perennial Spring & Spice Stream",
+        tag: "Sub-Canopy Agroforest",
+        icon: "🌿",
+        elevation: "890m Valley Bed",
+        microclimate: "20°C • Humid Spice Microclimate",
+        coords: { x: 40, y: -150, z: 420, yaw: 175, pitch: -18 },
+        desc: "A crystal-clear natural mountain spring bubbling over granite boulders, shaded by wild cardamom clusters and climbing black pepper vines. Guests can dip their feet into cool mountain water and crush fresh cardamom leaves between their fingers.",
+        img: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=800&q=80",
+        highlights: ["Sweet Natural Spring Water", "Cardamom & Pepper Canopy", "Granite Rock Seating", "Sensory Leaf Tasting"]
+      }
+    ]
+  });
+});
+
 // Fallback to index.html for root routing
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));

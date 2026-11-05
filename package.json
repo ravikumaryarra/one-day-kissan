@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "test": "node test_phase4.cjs"
+    "test": "node test_360_tour.cjs",
+    "test:all": "node test_360_tour.cjs && node test_phase4.cjs"
   },
   "dependencies": {
     "cors": "^2.8.6",
