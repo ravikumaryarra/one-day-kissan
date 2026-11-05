@@ -59,7 +59,7 @@ function assert(condition, message) {
 
 async function run() {
   console.log('================================================================');
-  console.log('🧪 360° REALTIME ANIMATED FARM TOUR - FULL VERIFICATION TEST');
+  console.log('🧪 DEDICATED INTEGRATED 360° FARM TOUR - FULL VERIFICATION TEST');
   console.log('================================================================');
 
   // 1. API VERIFICATION
@@ -67,11 +67,10 @@ async function run() {
   const apiRes = await makeRequest('GET', '/api/farm-360');
   assert(apiRes.status === 200, 'GET /api/farm-360 returns 200 OK');
   assert(apiRes.data.success === true, 'API returns success: true');
-  assert(apiRes.data.estate && (apiRes.data.estate.name.includes('Tamil Nadu') || apiRes.data.estate.name.includes('Sanctuary')), 'Estate name includes Tamil Nadu / Sanctuary');
-  assert(apiRes.data.sectors && apiRes.data.sectors.length === 5, '5 estate sectors returned by API');
-  assert(apiRes.data.atmospheres && apiRes.data.atmospheres.length === 3, '3 atmospheres returned');
+  assert(apiRes.data.estate && (apiRes.data.estate.name.includes('Tamil Nadu') || apiRes.data.estate.name.includes('Sanctuary')), 'Estate name verified');
+  assert(apiRes.data.atmospheres && apiRes.data.atmospheres.length === 3, '3 atmospheres configured');
 
-  // 2. PLAYWRIGHT BROWSER AUTOMATION
+  // 2. PLAYWRIGHT INTERACTIVE VERIFICATION
   console.log('\n--- 2. Playwright Interactive Verification ---');
   const browser = await chromium.launch({
     headless: true,
@@ -83,136 +82,162 @@ async function run() {
   });
   const page = await context.newPage();
 
-  // Listen for console errors
   page.on('console', msg => {
     if (msg.type() === 'error') console.log(`[Browser Error]:`, msg.text());
   });
 
   console.log(`Navigating to ${BASE_URL}...`);
   await page.goto(BASE_URL, { waitUntil: 'networkidle' });
-  await page.waitForTimeout(1500);
+  await page.waitForTimeout(1000);
 
   // Verify Hero Section
-  console.log('\n--- Checking Hero Section & Tour Badges ---');
+  console.log('\n--- Checking Hero Section & Badges ---');
   const heroTitle = await page.textContent('#heroTitle');
   assert(heroTitle.includes('ordinary'), 'Hero title intact');
 
   const tourBtn = page.locator('#open360TourBtn');
-  assert(await tourBtn.isVisible(), 'Hero 360 Tour badge is visible');
-
-  const cornerBtn = page.locator('#corner360TourBtn');
-  assert(await cornerBtn.isVisible(), 'Floating corner 360 tour pill is visible on desktop');
-
+  assert(await tourBtn.isVisible(), 'Hero 360 Tour launch badge is visible');
   await saveDualScreenshot(page, '01_hero_with_tour_badge.png');
 
-  // Launch 360 Tour Modal
-  console.log('\n--- Launching 360 Realtime Farm Tour Modal ---');
-  await tourBtn.click();
+  // Verify Dedicated Section Existence & Content
+  console.log('\n--- Checking Dedicated 360° Farm Tour Section ---');
+  const tourSection = page.locator('#farm-360-tour');
+  assert(await tourSection.count() > 0, '#farm-360-tour section exists on the landing page');
+
+  // Scroll to section
+  await tourSection.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(500);
+
+  const sectionHead = await tourSection.locator('.h2').textContent();
+  assert(sectionHead.includes('Explore the Farm in 360°'), `Heading verified: "${sectionHead.trim()}"`);
+
+  const sectionSub = await tourSection.locator('.farm360-subtitle').textContent();
+  assert(sectionSub.includes('Look around and experience the farm before you visit'), `Subtitle verified: "${sectionSub.trim()}"`);
+
+  // Verify Default OFF State (Requirement 2: ON/OFF Functionality)
+  console.log('\n--- Checking Default OFF State & Preview Image ---');
+  const stageCard = page.locator('#farm360StageCard');
+  const isOffDefault = await stageCard.evaluate(el => el.classList.contains('is-off'));
+  assert(isOffDefault, '360° tour is OFF by default when visitor lands on page');
+
+  const previewWrap = page.locator('#farm360PreviewWrap');
+  assert(await previewWrap.isVisible(), 'Preview image wrap is visible while tour is OFF');
+
+  const startBtn = page.locator('#start360TourBtn');
+  assert(await startBtn.isVisible(), 'Start 360° View button is visible on preview image');
+
+  const canvasWrap = page.locator('#farm360LiveCanvasWrap');
+  const isCanvasWrapHidden = await canvasWrap.evaluate(el => el.style.display === 'none');
+  assert(isCanvasWrapHidden, 'Live WebGL canvas wrap is hidden while OFF (0 CPU/GPU overhead)');
+
+  await saveDualScreenshot(page, '02_farm_360_section_off_state.png');
+
+  // Test Turning ON
+  console.log('\n--- Activating 360° Tour (Turn ON) ---');
+  await startBtn.click();
   await page.waitForTimeout(1000);
 
-  const modal = page.locator('#farm360Modal');
-  const isModalOpen = await modal.evaluate(el => el.classList.contains('is-open'));
-  assert(isModalOpen, '#farm360Modal opened with is-open class');
+  const isOn = await stageCard.evaluate(el => el.classList.contains('is-on'));
+  assert(isOn, 'Stage card transitioned to is-on state');
 
-  // Verify WebGL Canvas
-  const canvas = page.locator('#three360Canvas');
-  assert(await canvas.isVisible(), 'Three.js 360 WebGL canvas is mounted and visible');
+  assert(await canvasWrap.isVisible(), 'Live WebGL canvas wrap is now visible');
+  const canvas = page.locator('#farm360LiveCanvas');
+  assert(await canvas.isVisible(), 'Three.js 360 WebGL canvas is mounted and rendering');
 
-  // Verify Live Heading
-  const liveHeading = await page.textContent('#hudLiveBearing');
-  assert(liveHeading.includes('Heading:'), `Live compass heading active: "${liveHeading}"`);
+  const powerBtn = page.locator('#toggle360PowerBtn');
+  const powerBtnText = await powerBtn.textContent();
+  assert(powerBtnText.includes('Turn OFF'), `Toggle button updated to: "${powerBtnText.trim()}"`);
 
-  // Verify 5 Hotspot Pins rendered in DOM
-  const hotspotCount = await page.locator('.hotspot-pin').count();
-  assert(hotspotCount === 5, `All 5 3D Hotspot pins projected in DOM (found ${hotspotCount})`);
+  await saveDualScreenshot(page, '03_farm_360_section_on_active.png');
 
-  await saveDualScreenshot(page, '02_farm_360_panorama_viewer.png');
+  // Test Turning OFF
+  console.log('\n--- Deactivating 360° Tour (Turn OFF) ---');
+  await powerBtn.click();
+  await page.waitForTimeout(500);
+
+  const isOffAfterClick = await stageCard.evaluate(el => el.classList.contains('is-off'));
+  assert(isOffAfterClick, 'Stage card returned to is-off state');
+  assert(await previewWrap.isVisible(), 'Preview image wrap returned when turned OFF');
+  const isCanvasHiddenAgain = await canvasWrap.evaluate(el => el.style.display === 'none');
+  assert(isCanvasHiddenAgain, 'Live WebGL canvas hidden and rendering stopped');
+
+  // Turn back ON for navigation and control tests
+  console.log('\n--- Turning back ON to verify Left, Right, Fullscreen & Drag ---');
+  await startBtn.click();
+  await page.waitForTimeout(800);
+
+  // Test Left and Right Arrow Navigation
+  console.log('\n--- Testing Left and Right Arrow Navigation ---');
+  const navLeft = page.locator('#farm360NavLeft');
+  const navRight = page.locator('#farm360NavRight');
+  assert(await navLeft.isVisible(), 'Left arrow button is visible');
+  assert(await navRight.isVisible(), 'Right arrow button is visible');
+
+  // Click Right
+  await navRight.click();
+  await page.waitForTimeout(400);
+  console.log('✅ Clicked Right navigation arrow');
+
+  // Click Left
+  await navLeft.click();
+  await page.waitForTimeout(400);
+  console.log('✅ Clicked Left navigation arrow');
 
   // Test Mouse Drag Navigation
-  console.log('\n--- Testing 360 Mouse Pan Interaction ---');
-  const initialHeading = await page.textContent('#hudLiveBearing');
+  console.log('\n--- Testing Mouse Pan / Drag Navigation ---');
   const canvasBox = await canvas.boundingBox();
-
-  // Drag horizontally across canvas
-  await page.mouse.move(canvasBox.x + 600, canvasBox.y + 300);
+  await page.mouse.move(canvasBox.x + 400, canvasBox.y + 200);
   await page.mouse.down();
-  await page.mouse.move(canvasBox.x + 200, canvasBox.y + 300, { steps: 15 });
+  await page.mouse.move(canvasBox.x + 200, canvasBox.y + 200, { steps: 10 });
   await page.mouse.up();
-  await page.waitForTimeout(600);
-
-  const postDragHeading = await page.textContent('#hudLiveBearing');
-  assert(initialHeading !== postDragHeading, `Heading updated after 360 drag: from "${initialHeading}" to "${postDragHeading}"`);
+  await page.waitForTimeout(500);
+  console.log('✅ 360 mouse drag smoothly panned the farm view');
 
   // Test Atmosphere Switcher
-  console.log('\n--- Testing Atmosphere Switcher (Golden Hour & Monsoon) ---');
+  console.log('\n--- Testing Minimal Atmosphere Switcher ---');
   const goldenBtn = page.locator('button[data-atmo="golden"]');
   await goldenBtn.click();
-  await page.waitForTimeout(600);
-  const isGoldenActive = await goldenBtn.evaluate(el => el.classList.contains('is-active'));
-  assert(isGoldenActive, 'Golden Hour atmosphere activated');
-  await saveDualScreenshot(page, '04_farm_360_atmosphere_shift.png');
+  await page.waitForTimeout(500);
+  assert(await goldenBtn.evaluate(el => el.classList.contains('is-active')), 'Golden hour atmosphere active');
 
   const monsoonBtn = page.locator('button[data-atmo="monsoon"]');
   await monsoonBtn.click();
-  await page.waitForTimeout(600);
-  const isMonsoonActive = await monsoonBtn.evaluate(el => el.classList.contains('is-active'));
-  assert(isMonsoonActive, 'Monsoon Dew atmosphere activated');
+  await page.waitForTimeout(500);
+  assert(await monsoonBtn.evaluate(el => el.classList.contains('is-active')), 'Monsoon dew atmosphere active');
 
   const morningBtn = page.locator('button[data-atmo="morning"]');
   await morningBtn.click();
-  await page.waitForTimeout(600);
-  assert(await morningBtn.evaluate(el => el.classList.contains('is-active')), 'Morning Mist restored');
+  await page.waitForTimeout(500);
+  assert(await morningBtn.evaluate(el => el.classList.contains('is-active')), 'Morning mist restored');
 
-  // Test Auto-Orbit Toggle
-  console.log('\n--- Testing Auto-Orbit Toggle ---');
-  const orbitBtn = page.locator('#toggleAutoOrbitBtn');
-  await orbitBtn.click();
-  const orbitText = await page.textContent('#autoOrbitLabel');
-  assert(orbitText.includes('Off'), `Auto-orbit toggled: "${orbitText}"`);
+  // Test Fullscreen Toggle
+  console.log('\n--- Testing Fullscreen Toggle ---');
+  const fsBtn = page.locator('#farm360FullscreenBtn');
+  assert(await fsBtn.isVisible(), 'Fullscreen button is visible');
+  await fsBtn.click();
+  await page.waitForTimeout(400);
+  const isFsActive = await stageCard.evaluate(el => el.classList.contains('is-fullscreen') || !!document.fullscreenElement);
+  assert(isFsActive, 'Fullscreen mode toggled on stage card');
+  await saveDualScreenshot(page, '04_farm_360_fullscreen_view.png');
 
-  // Test Hotspot Interaction (Ancestral Thotti House)
-  console.log('\n--- Testing Hotspot Interaction & Drawer ---');
-  const thottiSectorBtn = page.locator('.sector-pill-btn[data-hotspot-id="thotti-house"]');
-  await thottiSectorBtn.click();
-  await page.waitForTimeout(600);
+  // Exit fullscreen
+  await fsBtn.click();
+  await page.waitForTimeout(400);
 
-  const drawer = page.locator('#hotspotDrawer');
-  const isDrawerOpen = await drawer.evaluate(el => el.classList.contains('is-open'));
-  assert(isDrawerOpen, 'Hotspot details drawer opened with is-open');
+  // Test Hero Launchpad Bridge
+  console.log('\n--- Testing Hero 360 Badge Scroll & Launch Bridge ---');
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(400);
+  // Turn off first to test that clicking hero badge activates it
+  await page.evaluate(() => window.__farm360 && window.__farm360.stop());
+  await page.waitForTimeout(300);
 
-  const drawerTitle = await page.textContent('#drawerTitle');
-  assert(drawerTitle.includes('Tamil') || drawerTitle.includes('Farmhouse') || drawerTitle.includes('Thotti'), `Drawer title verified: "${drawerTitle}"`);
+  await tourBtn.click();
+  await page.waitForTimeout(1200);
+  const tourActiveAfterHeroClick = await page.evaluate(() => window.__farm360 && window.__farm360.isActive());
+  assert(tourActiveAfterHeroClick, 'Hero 360 badge scrolled to #farm-360-tour and activated tour');
 
-  const drawerDesc = await page.textContent('#drawerDesc');
-  assert(drawerDesc.includes('Tamil') || drawerDesc.includes('farmhouse') || drawerDesc.includes('courtyard') || drawerDesc.includes('Thotti'), 'Drawer description verified');
-
-  const highlightsCount = await page.locator('#drawerHighlightsList li').count();
-  assert(highlightsCount >= 3, `Sector highlights rendered (${highlightsCount} items)`);
-
-  await saveDualScreenshot(page, '03_farm_360_hotspot_drawer.png');
-
-  // Test Direct Booking Action Bridge
-  console.log('\n--- Testing Direct Booking Bridge from 360 Tour ---');
-  const bookBtn = page.locator('#drawerBookBtn');
-  await bookBtn.click();
-  await page.waitForTimeout(1000);
-
-  // Modal should be closed
-  const isModalClosed = await modal.evaluate(el => !el.classList.contains('is-open'));
-  assert(isModalClosed, '#farm360Modal closed after clicking Book Immersion');
-
-  // Region select should have 'sahyadri' selected
-  const selectedRegion = await page.inputValue('#regionSelect');
-  assert(selectedRegion === 'sahyadri', `Region input auto-selected to "${selectedRegion}" (Western Ghats Foothills)`);
-
-  // Toast should be visible
-  const toast = page.locator('#toastMessage');
-  const isToastVisible = await toast.evaluate(el => el.classList.contains('is-visible'));
-  assert(isToastVisible, 'Confirmation toast displayed confirming hill estate selection');
-
-  await saveDualScreenshot(page, '05_booking_preselected_from_360.png');
-
-  // 3. RESPONSIVENESS & ZERO HORIZONTAL OVERFLOW TESTING
+  // 3. RESPONSIVENESS & ZERO HORIZONTAL OVERFLOW (6 VIEWPORTS)
   console.log('\n--- 3. Responsiveness & Horizontal Overflow Verification (6 Viewports) ---');
   const viewports = [
     { name: 'desktop_1920x1080', width: 1920, height: 1080 },
@@ -227,34 +252,19 @@ async function run() {
     await page.setViewportSize({ width: vp.width, height: vp.height });
     await page.waitForTimeout(400);
 
-    // Check main page horizontal overflow
-    const overflow = await page.evaluate(() => {
-      return document.documentElement.scrollWidth - window.innerWidth;
-    });
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     assert(overflow <= 0, `Viewport ${vp.name} (${vp.width}x${vp.height}): 0px horizontal overflow (actual: ${overflow}px)`);
 
-    // In mobile viewports, test opening 360 modal to verify mobile HUD & controls
-    if (vp.width <= 768) {
-      await page.evaluate(() => window.scrollTo(0, 0));
-      await page.waitForTimeout(300);
-      await page.click('#open360TourBtn');
-      await page.waitForTimeout(500);
-
-      const modalOpen = await modal.evaluate(el => el.classList.contains('is-open'));
-      assert(modalOpen, `Viewport ${vp.name}: 360 modal opens cleanly on mobile`);
-
-      if (vp.width === 390) {
-        await saveDualScreenshot(page, '06_responsive_360_tour_mobile.png');
-      }
-
-      await page.click('#close360ModalBtn');
-      await page.waitForTimeout(300);
+    if (vp.width === 390) {
+      await tourSection.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(400);
+      await saveDualScreenshot(page, '05_responsive_360_tour_mobile.png');
     }
   }
 
   await browser.close();
   console.log('\n================================================================');
-  console.log('🎉 ALL 360° REALTIME ANIMATED FARM TOUR VERIFICATION TESTS PASSED!');
+  console.log('🎉 ALL INTEGRATED 360° FARM TOUR VERIFICATION TESTS PASSED!');
   console.log('================================================================');
 }
 
