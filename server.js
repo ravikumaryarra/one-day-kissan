@@ -140,6 +140,22 @@ app.get('/api/stories/:id', async (req, res) => {
   }
 });
 
+// Authentic One Day Kisan Farm Experiences API
+app.get('/api/experiences', (req, res) => {
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const experiencesPath = path.join(__dirname, 'official_activities.json');
+    if (fs.existsSync(experiencesPath)) {
+      const activities = JSON.parse(fs.readFileSync(experiencesPath, 'utf8'));
+      return res.json({ success: true, count: activities.length, data: activities });
+    }
+    res.json({ success: true, count: 0, data: [] });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Phase 3: Farm-to-Table Harvest Hampers API
 app.get('/api/hampers', async (req, res) => {
   try {
