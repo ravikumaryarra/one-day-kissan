@@ -1894,201 +1894,409 @@
     }
 
     /* ====================================================
-       PHASE 4: MASTERCLASSES & COMMUNITY GUEST LOGBOOK
+       PHASE 4: EXPLORE LIFE AT THE FARM & COMMUNITY GUEST LOGBOOK
        ==================================================== */
 
-    /* Masterclasses Section */
-    .workshops-section {
+    /* 04C. EXPLORE LIFE AT THE FARM (PREMIUM 5-CHAPTER SIDE-BY-SIDE SCROLL EXPERIENCE) */
+    .farm-life-scroll-section {
       position: relative;
-      padding: 110px 4vw;
+      height: 480vh;
       background: var(--ivory);
+      border-top: 1px solid rgba(32, 60, 43, 0.08);
+      z-index: 3;
+    }
+
+    /* Pinned Sticky Viewport (Locks in place as user scrolls through the 480vh) */
+    .farm-life-sticky-wrap {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
       overflow: hidden;
-      border-top: 1px solid var(--line);
-    }
-    .workshops-container {
-      max-width: 1240px;
-      margin: 0 auto;
-    }
-    .workshops-header {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 46px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-    .workshops-subtitle {
-      font-size: 15px;
-      color: #4a5445;
-      line-height: 1.6;
-    }
-    .workshops-tabs {
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 36px;
+      background: var(--ivory);
     }
-    .workshop-tab {
-      padding: 8px 18px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--forest);
-      background: rgba(32, 60, 43, 0.07);
-      border: 1px solid rgba(32, 60, 43, 0.12);
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-    .workshop-tab:hover {
-      background: rgba(32, 60, 43, 0.14);
-      transform: translateY(-1px);
-    }
-    .workshop-tab.is-active {
-      background: var(--forest);
-      color: var(--ivory);
-      border-color: var(--forest);
-      box-shadow: 0 4px 14px rgba(32, 60, 43, 0.18);
-    }
-    .workshops-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
+
+    .farm-life-editorial-container {
       width: 100%;
-    }
-    .workshop-card {
-      position: relative;
-      border-radius: 22px;
-      background: #FFFFFF;
-      border: 1px solid rgba(32, 60, 43, 0.1);
-      box-shadow: 0 14px 32px rgba(32, 60, 43, 0.06);
-      overflow: hidden;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 4vw;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s;
+      justify-content: center;
+      height: 100%;
+      box-sizing: border-box;
     }
-    .workshop-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 22px 44px rgba(32, 60, 43, 0.12);
+
+    /* Section Editorial Header */
+    .farm-life-editorial-header {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
     }
-    .workshop-img-wrap {
+    .farm-life-section-title {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(26px, 3vw, 40px);
+      color: var(--forest);
+      line-height: 1.18;
+      margin: 0;
+      max-width: 840px;
+    }
+
+    /* Main Two-Column Side-by-Side Grid */
+    .farm-life-side-by-side {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.85fr) minmax(480px, 1.35fr);
+      gap: 5vw;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* LEFT COLUMN: Oversized Chapter Numbers */
+    .farm-life-col-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       position: relative;
-      height: 190px;
-      overflow: hidden;
     }
-    .workshop-img-wrap img {
+    .farm-life-number-stage {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: visible;
+    }
+    .farm-life-giant-display {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      will-change: transform, opacity;
+    }
+    .farm-life-digit {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(110px, 14vw, 190px);
+      font-weight: 800;
+      line-height: 0.82;
+      letter-spacing: -0.04em;
+      display: block;
+      user-select: none;
+      will-change: transform, opacity;
+    }
+    .farm-life-digit.num-color-1 {
+      color: #1B3B22;
+      text-shadow: 0 8px 30px rgba(27, 59, 34, 0.12);
+    }
+    .farm-life-digit.num-color-2 {
+      color: #2E5A36;
+      text-shadow: 0 8px 30px rgba(46, 90, 54, 0.12);
+    }
+    .farm-life-digit.num-color-3 {
+      color: #9E6728;
+      text-shadow: 0 8px 30px rgba(158, 103, 40, 0.12);
+    }
+    .farm-life-digit.num-color-4 {
+      color: #24657B;
+      text-shadow: 0 8px 30px rgba(36, 101, 123, 0.12);
+    }
+    .farm-life-digit.num-color-5 {
+      color: #D48B28;
+      text-shadow: 0 8px 30px rgba(212, 139, 40, 0.12);
+    }
+
+    .farm-life-sub-label {
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--harvest);
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      will-change: transform, opacity;
+    }
+    .farm-life-sub-label::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    /* Chapter Progress Track */
+    .farm-life-progress-track {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .farm-life-progress-line {
+      width: 120px;
+      height: 3px;
+      background: rgba(32, 60, 43, 0.12);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .farm-life-progress-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 20%;
+      background: var(--forest);
+      border-radius: 999px;
+      transition: width .15s ease-out;
+    }
+    .farm-life-track-dots {
+      display: inline-flex;
+      gap: 6px;
+    }
+    .farm-life-dot {
+      border: 1px solid rgba(32, 60, 43, 0.12);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #556250;
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+    .farm-life-dot:hover {
+      background: #FFFFFF;
+      color: var(--forest);
+      border-color: var(--forest);
+    }
+    .farm-life-dot.is-active {
+      background: var(--forest);
+      color: #FFFFFF;
+      border-color: var(--forest);
+      box-shadow: 0 4px 12px rgba(27, 59, 34, 0.2);
+    }
+
+    /* RIGHT COLUMN: Viewport Card */
+    .farm-life-col-right {
+      position: relative;
+      width: 100%;
+    }
+    .farm-life-viewport-card {
+      position: relative;
+      width: 100%;
+      height: 570px;
+      max-height: 72vh;
+      border-radius: 26px;
+      overflow: hidden;
+      background: #FFFFFF;
+      border: 1px solid rgba(32, 60, 43, 0.12);
+      box-shadow: 0 24px 60px rgba(18, 36, 25, 0.09);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Visual Frame (Upper 55%) */
+    .farm-life-visual-frame {
+      position: relative;
+      width: 100%;
+      height: 55%;
+      overflow: hidden;
+      background: #1B3B22;
+    }
+    .farm-life-slide-image {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+      display: block;
+      opacity: 0;
+      transform: scale(1.04);
+      pointer-events: none;
+      will-change: transform, opacity;
     }
-    .workshop-card:hover .workshop-img-wrap img {
-      transform: scale(1.06);
+    .farm-life-slide-image.is-active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
     }
-    .workshop-difficulty-pill {
+    .farm-life-visual-overlay {
       position: absolute;
-      top: 12px;
-      left: 12px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(32, 60, 43, 0.88);
-      color: var(--ivory);
-      font-size: 11px;
-      font-weight: 600;
-      backdrop-filter: blur(8px);
+      inset: 0;
+      background: linear-gradient(to top, rgba(14, 28, 18, 0.65) 0%, rgba(14, 28, 18, 0.1) 50%, rgba(14, 28, 18, 0.25) 100%);
+      pointer-events: none;
+      z-index: 2;
     }
-    .workshop-seats-pill {
+    .farm-life-visual-badge {
       position: absolute;
-      bottom: 12px;
-      right: 12px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(245, 241, 232, 0.94);
-      color: var(--forest);
+      top: 16px;
+      left: 16px;
       font-size: 11px;
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(14, 28, 18, 0.78);
+      color: #FFFFFF;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      z-index: 3;
+      will-change: opacity, transform;
+    }
+
+    /* Editorial Caption (Lower 45%) */
+    .farm-life-editorial-copy {
+      padding: 22px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 45%;
+      background: #FFFFFF;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+      will-change: opacity, transform;
+      overflow-y: auto;
+    }
+    .farm-life-copy-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .farm-life-step-prefix {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--harvest);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: block;
+    }
+    .farm-life-editorial-heading {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(20px, 2vw, 28px);
+      color: var(--forest);
+      margin: 0;
+      line-height: 1.2;
+    }
+    .farm-life-editorial-desc {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #435041;
+      margin: 0;
+    }
+    .farm-life-activity-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .farm-life-chip {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(32, 60, 43, 0.05);
+      color: var(--forest);
+      border: 1px solid rgba(32, 60, 43, 0.09);
       display: inline-flex;
       align-items: center;
       gap: 5px;
     }
-    .workshop-body {
-      padding: 22px 20px 24px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      justify-content: space-between;
+    .chip-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--harvest);
+      display: inline-block;
     }
-    .workshop-meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 6px;
-    }
-    .workshop-schedule-badge {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--harvest);
-      letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-    .workshop-duration-badge {
-      font-size: 11px;
-      font-weight: 600;
-      color: #616e5c;
-    }
-    .workshop-title {
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 1.3;
-      color: var(--forest);
-      margin-bottom: 6px;
-    }
-    .workshop-steward {
-      font-size: 12px;
-      color: #616e5c;
-      margin-bottom: 14px;
-    }
-    .workshop-curriculum-box {
-      background: var(--ivory);
-      border: 1px solid rgba(32, 60, 43, 0.08);
-      border-radius: 12px;
-      padding: 10px 12px;
-      margin-bottom: 18px;
-    }
-    .workshop-box-label {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--forest);
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-bottom: 4px;
-    }
-    .workshop-box-text {
-      font-size: 11.5px;
-      color: #4a5445;
-      line-height: 1.45;
-    }
-    .workshop-footer {
+    .farm-life-action-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      border-top: 1px solid rgba(32, 60, 43, 0.1);
-      padding-top: 14px;
-      margin-top: auto;
+      gap: 16px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(32, 60, 43, 0.08);
     }
-    .workshop-price-val {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--forest);
+    .farm-life-plan-btn {
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(200, 155, 83, 0.25);
     }
-    .workshop-price-sub {
-      font-size: 10.5px;
-      color: #7b8874;
+    .farm-life-note {
+      font-size: 11px;
+      color: #616e5c;
+      font-style: italic;
+    }
+
+    @media (max-width: 900px) {
+      .farm-life-scroll-section {
+        height: auto;
+        padding: 80px 4vw;
+      }
+      .farm-life-sticky-wrap {
+        position: relative;
+        height: auto;
+        overflow: visible;
+      }
+      .farm-life-editorial-container {
+        padding: 0;
+        height: auto;
+      }
+      .farm-life-side-by-side {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .farm-life-col-left {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .farm-life-number-stage {
+        height: 70px;
+        width: 140px;
+      }
+      .farm-life-giant-display {
+        height: 100%;
+      }
+      .farm-life-digit {
+        font-size: clamp(54px, 12vw, 76px);
+        line-height: 0.9;
+      }
+      .farm-life-sub-label {
+        display: none;
+      }
+      .farm-life-progress-track {
+        margin-top: 0;
+      }
+      .farm-life-viewport-card {
+        height: auto;
+        max-height: none;
+      }
+      .farm-life-visual-frame {
+        height: 240px;
+      }
+      .farm-life-editorial-copy {
+        height: auto;
+        padding: 20px 18px;
+      }
+      .farm-life-action-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
     }
 
     /* Verified Community Reviews Section */
@@ -2111,6 +2319,11 @@
       flex-direction: column;
       align-items: center;
       gap: 16px;
+    }
+    .reviews-subtitle {
+      font-size: 15px;
+      color: #4a5445;
+      line-height: 1.6;
     }
     .reviews-stats-banner {
       display: grid;
@@ -2964,7 +3177,7 @@
       .loc-maps-link {
         justify-content: center;
       }
-      .stories-grid, .hampers-grid, .workshops-grid, .reviews-grid {
+      .stories-grid, .hampers-grid, .reviews-grid {
         grid-template-columns: minmax(0, 1fr);
         max-width: 580px;
       }
@@ -4265,168 +4478,96 @@
       </div>
     </section>
 
-    <!-- 04C. SEASONAL AGRARIAN MASTERCLASSES -->
-    <section class="workshops-section" id="workshops">
-      <div class="workshops-container">
-        <div class="workshops-header">
-          <span class="pill">Hands-On Agrarian Labs</span>
-          <h2 class="h2 split">Seasonal Agrarian Masterclasses.</h2>
-          <p class="workshops-subtitle">Step into living soil labs. Learn ancestral microbial brewing, woodfire hearth sourdough, syntropic food forestry, and wetland rice stewardship directly alongside our master farmers.</p>
-        </div>
+    <!-- 04C. EXPLORE LIFE AT THE FARM (PREMIUM 5-CHAPTER SIDE-BY-SIDE SCROLL EXPERIENCE) -->
+    <section class="farm-life-scroll-section" id="farm-activities" aria-label="Explore Life at the Farm">
+      <!-- Hidden anchor to ensure backward compatibility with #workshops links -->
+      <span id="workshops" style="position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></span>
+      <div class="farm-life-sticky-wrap" id="farmLifeStickyWrap">
+        <div class="farm-life-editorial-container">
 
-        <!-- Terroir Filter Tabs -->
-        <div class="workshops-tabs" id="workshopFilterTabs" role="tablist">
-          <button type="button" class="workshop-tab is-active" data-filter="all">All Masterclasses</button>
-          <button type="button" class="workshop-tab" data-filter="sahyadri">Sahyadri Foothills</button>
-          <button type="button" class="workshop-tab" data-filter="deccan">Deccan Agroforest</button>
-          <button type="button" class="workshop-tab" data-filter="punjab">Punjab Canal Plains</button>
-          <button type="button" class="workshop-tab" data-filter="cauvery">Cauvery Delta</button>
-        </div>
+          <!-- Section Editorial Header -->
+          <div class="farm-life-editorial-header">
+            <span class="pill">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+              Explore Life at the Farm
+            </span>
+            <h2 class="farm-life-section-title">More than 23 ways to discover, learn and experience the joy of farming.</h2>
+          </div>
 
-        <div class="workshops-grid" id="workshopsGrid">
-          <!-- Workshop 1: Sahyadri Jeevamrutha -->
-          <article class="workshop-card" data-region="sahyadri">
-            <div>
-              <div class="workshop-img-wrap">
-                <img src="https://images.unsplash.com/photo-1592417817098-8f3d6ef2c6e6?auto=format&fit=crop&w=800&q=80" alt="Jeevamrutha brewing" loading="lazy">
-                <span class="workshop-difficulty-pill">All Ages &amp; Beginners</span>
-                <span class="workshop-seats-pill"><span class="pulse-dot"></span> 6 seats left</span>
-              </div>
-              <div class="workshop-body">
-                <div>
-                  <div class="workshop-meta-row">
-                    <span class="workshop-schedule-badge">Every Saturday • 9:30 AM</span>
-                    <span class="workshop-duration-badge">3.5 Hours</span>
-                  </div>
-                  <h3 class="workshop-title">Jeevamrutha &amp; Living Soil Microbiology</h3>
-                  <div class="workshop-steward">Led by Ramrao &amp; Savitri Deshmukh • Sahyadri</div>
-                  <div class="workshop-curriculum-box">
-                    <div class="workshop-box-label">Curriculum Highlights</div>
-                    <div class="workshop-box-text">Microbial Soil Habitats • Desi Cow Dung &amp; Jaggery Fermentation • Live Terraced Soil Inoculation</div>
-                    <div class="workshop-box-label" style="margin-top:6px;">Takeaways Included</div>
-                    <div class="workshop-box-text" style="color:#203C2B;font-weight:600;">Active Jeevamrutha flask, heirloom seed kit, garden apron &amp; woodfire lunch</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style="padding: 0 20px 24px;">
-              <div class="workshop-footer">
-                <div>
-                  <div class="workshop-price-val">$35 <span style="font-size:13px;font-weight:500;color:#616e5c;">/ person</span></div>
-                  <div class="workshop-price-sub">$0 advance • Materials included</div>
-                </div>
-                <button type="button" class="btn btn-gold workshop-book-btn" data-workshop-id="ws-jeevamrutha">Reserve Seat</button>
-              </div>
-            </div>
-          </article>
+          <!-- Main Two-Column Side-by-Side Grid -->
+          <div class="farm-life-side-by-side">
 
-          <!-- Workshop 2: Punjab Chulha Baking -->
-          <article class="workshop-card" data-region="punjab">
-            <div>
-              <div class="workshop-img-wrap">
-                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=800&q=80" alt="Clay chulha cooking" loading="lazy">
-                <span class="workshop-difficulty-pill">Family &amp; Food Enthusiasts</span>
-                <span class="workshop-seats-pill"><span class="pulse-dot"></span> 5 seats left</span>
-              </div>
-              <div class="workshop-body">
-                <div>
-                  <div class="workshop-meta-row">
-                    <span class="workshop-schedule-badge">Every Sunday • 10:00 AM</span>
-                    <span class="workshop-duration-badge">4.0 Hours</span>
-                  </div>
-                  <h3 class="workshop-title">Clay Chulha Hearth &amp; Heirloom Grains</h3>
-                  <div class="workshop-steward">Led by Gurmehar Singh &amp; Family • Punjab</div>
-                  <div class="workshop-curriculum-box">
-                    <div class="workshop-box-label">Curriculum Highlights</div>
-                    <div class="workshop-box-text">Stone-Milling Sharbati &amp; Makki • Earthen Clay Tandoor Shaping • Wood Ember Baking &amp; Butter Churning</div>
-                    <div class="workshop-box-label" style="margin-top:6px;">Takeaways Included</div>
-                    <div class="workshop-box-text" style="color:#203C2B;font-weight:600;">Cast-iron hearth paddle, 2kg stone-ground flour, fresh white butter crock</div>
-                  </div>
+            <!-- LEFT COLUMN: Oversized Chapter Numbers (Single Shared Display) -->
+            <div class="farm-life-col-left">
+              <div class="farm-life-number-stage" id="farmLifeNumberStage">
+                <!-- Single Shared Giant Number Display - guarantees no overlapping numbers -->
+                <div class="farm-life-giant-display" id="farmLifeGiantDisplay" data-stage="0">
+                  <span class="giant-digit farm-life-digit num-color-1" id="farmLifeGiantDigit">01</span>
+                  <span class="num-sub-label farm-life-sub-label" id="farmLifeSubLabel">The Art of Farming</span>
                 </div>
               </div>
-            </div>
-            <div style="padding: 0 20px 24px;">
-              <div class="workshop-footer">
-                <div>
-                  <div class="workshop-price-val">$42 <span style="font-size:13px;font-weight:500;color:#616e5c;">/ person</span></div>
-                  <div class="workshop-price-sub">$0 advance • Materials included</div>
-                </div>
-                <button type="button" class="btn btn-gold workshop-book-btn" data-workshop-id="ws-chulha-baking">Reserve Seat</button>
-              </div>
-            </div>
-          </article>
 
-          <!-- Workshop 3: Deccan Syntropic -->
-          <article class="workshop-card" data-region="deccan">
-            <div>
-              <div class="workshop-img-wrap">
-                <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80" alt="Syntropic canopy" loading="lazy">
-                <span class="workshop-difficulty-pill">Enthusiasts &amp; Permaculturists</span>
-                <span class="workshop-seats-pill"><span class="pulse-dot"></span> 4 seats left</span>
-              </div>
-              <div class="workshop-body">
-                <div>
-                  <div class="workshop-meta-row">
-                    <span class="workshop-schedule-badge">Saturdays • 8:30 AM</span>
-                    <span class="workshop-duration-badge">4.5 Hours</span>
-                  </div>
-                  <h3 class="workshop-title">Syntropic Agroforestry &amp; Shade Coffee</h3>
-                  <div class="workshop-steward">Led by Ananya &amp; Devraj • Deccan Terraces</div>
-                  <div class="workshop-curriculum-box">
-                    <div class="workshop-box-label">Curriculum Highlights</div>
-                    <div class="workshop-box-text">Multi-Tier Forest Stratification • Biomass Pruning &amp; Mulch Matrix • Harvesting Arabica &amp; Cardamom</div>
-                    <div class="workshop-box-label" style="margin-top:6px;">Takeaways Included</div>
-                    <div class="workshop-box-text" style="color:#203C2B;font-weight:600;">Estate Arabica coffee roast sample, native sapling, syntropic blueprint &amp; lunch</div>
-                  </div>
+              <!-- Chapter Progress Track (01 - 05) -->
+              <div class="farm-life-progress-track" aria-label="Farm Activities Chapters Progress">
+                <div class="farm-life-progress-line">
+                  <div class="farm-life-progress-bar" id="farmLifeProgressBar"></div>
+                </div>
+                <div class="farm-life-track-dots">
+                  <button type="button" class="farm-life-dot is-active" data-jump="0" aria-label="Chapter 01: The Art of Farming">01</button>
+                  <button type="button" class="farm-life-dot" data-jump="1" aria-label="Chapter 02: Life Around the Farm">02</button>
+                  <button type="button" class="farm-life-dot" data-jump="2" aria-label="Chapter 03: Village Traditions">03</button>
+                  <button type="button" class="farm-life-dot" data-jump="3" aria-label="Chapter 04: The Wisdom of Water">04</button>
+                  <button type="button" class="farm-life-dot" data-jump="4" aria-label="Chapter 05: Fun on the Farm">05</button>
                 </div>
               </div>
             </div>
-            <div style="padding: 0 20px 24px;">
-              <div class="workshop-footer">
-                <div>
-                  <div class="workshop-price-val">$48 <span style="font-size:13px;font-weight:500;color:#616e5c;">/ person</span></div>
-                  <div class="workshop-price-sub">$0 advance • Materials included</div>
-                </div>
-                <button type="button" class="btn btn-gold workshop-book-btn" data-workshop-id="ws-syntropic-canopy">Reserve Seat</button>
-              </div>
-            </div>
-          </article>
 
-          <!-- Workshop 4: Cauvery Wetland Rice -->
-          <article class="workshop-card" data-region="cauvery">
-            <div>
-              <div class="workshop-img-wrap">
-                <img src="https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=80" alt="Wetland rice transplanting" loading="lazy">
-                <span class="workshop-difficulty-pill">Family &amp; Nature Lovers</span>
-                <span class="workshop-seats-pill"><span class="pulse-dot"></span> 7 seats left</span>
-              </div>
-              <div class="workshop-body">
-                <div>
-                  <div class="workshop-meta-row">
-                    <span class="workshop-schedule-badge">Every Sunday • 9:00 AM</span>
-                    <span class="workshop-duration-badge">3.5 Hours</span>
-                  </div>
-                  <h3 class="workshop-title">Ancient Wetland Rice &amp; Silt Stewardship</h3>
-                  <div class="workshop-steward">Led by Murugesan &amp; Valliammai • Cauvery</div>
-                  <div class="workshop-curriculum-box">
-                    <div class="workshop-box-label">Curriculum Highlights</div>
-                    <div class="workshop-box-text">Chola Silt Canal Networks • Knee-Deep Barefoot Samba Planting • Duck &amp; Crab Symbiosis Management</div>
-                    <div class="workshop-box-label" style="margin-top:6px;">Takeaways Included</div>
-                    <div class="workshop-box-text" style="color:#203C2B;font-weight:600;">Sprouted Samba rice seedlings, palm jaggery brick, farmer headcloth &amp; lunch</div>
+            <!-- RIGHT COLUMN: Visual & Activity Story Card -->
+            <div class="farm-life-col-right">
+              <div class="farm-life-viewport-card" id="farmLifeViewportCard">
+
+                <!-- Visual Frame with 5 Authentic One Day Kisan Photographs -->
+                <div class="farm-life-visual-frame" id="farmLifeVisualFrame">
+                  <img id="farmLifeImg-0" src="/assets/experiences/gallery/gallery-02.webp" alt="01 – The Art of Farming: Students ploughing and transplanting paddy in the farm fields" class="farm-life-slide-image is-active" loading="lazy">
+                  <img id="farmLifeImg-1" src="/assets/experiences/gallery/gallery-05.webp" alt="02 – Life Around the Farm: Animal care, walk-in bird aviary, and indigenous livestock" class="farm-life-slide-image" loading="lazy">
+                  <img id="farmLifeImg-2" src="/assets/experiences/gallery/gallery-06.webp" alt="03 – Village Traditions: Traditional pottery wheel, dung cake making and artisan crafts" class="farm-life-slide-image" loading="lazy">
+                  <img id="farmLifeImg-3" src="/assets/experiences/gallery/gallery-07.webp" alt="04 – The Wisdom of Water: Ancient Persian wheel, Archimedes screw and reservoir heritage" class="farm-life-slide-image" loading="lazy">
+                  <img id="farmLifeImg-4" src="/assets/experiences/gallery/gallery-10.webp" alt="05 – Fun on the Farm: Open tractor ride, hay castle adventures and farm festivities" class="farm-life-slide-image" loading="lazy">
+                  <div class="farm-life-visual-overlay"></div>
+                  <div class="farm-life-visual-badge" id="farmLifeVisualBadge">Chapter 01 • The Art of Farming</div>
+                </div>
+
+                <!-- Single Shared Editorial Copy Container (No overlapping text) -->
+                <div class="farm-life-editorial-copy" id="farmLifeEditorialCopy">
+                  <div class="farm-life-copy-inner">
+                    <span class="farm-life-step-prefix" id="farmLifeStepPrefix">Chapter 01</span>
+                    <h3 class="farm-life-editorial-heading" id="farmLifeHeading">The Art of Farming</h3>
+                    <p class="farm-life-editorial-desc" id="farmLifeDesc">Step barefoot into wetland fields. Prepare living soil, transplant tender paddy seedlings, trace the rice mill, and discover the journey from seed to harvest.</p>
+                    
+                    <!-- Activity List Chips -->
+                    <div class="farm-life-activity-chips" id="farmLifeActivityChips">
+                      <span class="farm-life-chip"><span class="chip-dot"></span>Ploughing and paddy transplantation</span>
+                      <span class="farm-life-chip"><span class="chip-dot"></span>Paddy life cycle and rice mill activity</span>
+                      <span class="farm-life-chip"><span class="chip-dot"></span>Cotton life cycle</span>
+                      <span class="farm-life-chip"><span class="chip-dot"></span>Vegetable and food grain field exploration</span>
+                    </div>
+
+                    <!-- Subtle "Plan Your Farm Visit" action at the end -->
+                    <div class="farm-life-action-row" id="farmLifeActionRow">
+                      <a href="#booking" class="btn btn-gold farm-life-plan-btn" id="farmLifePlanBtn">
+                        <span>Plan Your Farm Visit</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                      </a>
+                      <span class="farm-life-note">Experience all 23+ activities across our Telangana farms</span>
+                    </div>
                   </div>
                 </div>
+
               </div>
             </div>
-            <div style="padding: 0 20px 24px;">
-              <div class="workshop-footer">
-                <div>
-                  <div class="workshop-price-val">$38 <span style="font-size:13px;font-weight:500;color:#616e5c;">/ person</span></div>
-                  <div class="workshop-price-sub">$0 advance • Materials included</div>
-                </div>
-                <button type="button" class="btn btn-gold workshop-book-btn" data-workshop-id="ws-wetland-heirloom">Reserve Seat</button>
-              </div>
-            </div>
-          </article>
+
+          </div>
+
         </div>
       </div>
     </section>
@@ -4437,7 +4578,7 @@
         <div class="reviews-header">
           <span class="pill">Verified Guest Logbook</span>
           <h2 class="h2 split">Real reflections from the soil.</h2>
-          <p class="workshops-subtitle">Honest stories from urban families, working professionals, and mindful explorers who disconnected from digital noise and reconnected with the biological rhythms of farming.</p>
+          <p class="reviews-subtitle">Honest stories from urban families, working professionals, and mindful explorers who disconnected from digital noise and reconnected with the biological rhythms of farming.</p>
         </div>
 
         <!-- Community Trust & Quality Scorecard -->
@@ -4688,7 +4829,7 @@
         <a href="#loop">Experiences</a>
         <a href="#stories">Farm Stories</a>
         <a href="#experiences">Farm Experiences</a>
-        <a href="#workshops">Masterclasses</a>
+        <a href="#farm-activities">Explore Farm Life</a>
         <a href="#reviews">Guest Logbook</a>
         <a href="#booking">Book A Day</a>
       </nav>
@@ -5583,6 +5724,358 @@
           });
         }
 
+
+        // ------------------------------------------------------------------
+        // Premium Side-by-Side Scroll Storytelling: Explore Life at the Farm
+        // Single-Source-of-Truth Controller across 5 Chapters (01 <-> 05)
+        // ------------------------------------------------------------------
+        const farmLifeSection = document.getElementById('farm-activities');
+        const farmLifeGiantDisplay = document.getElementById('farmLifeGiantDisplay');
+        const farmLifeGiantDigit = document.getElementById('farmLifeGiantDigit');
+        const farmLifeSubLabel = document.getElementById('farmLifeSubLabel');
+        const farmLifeProgressBar = document.getElementById('farmLifeProgressBar');
+        const farmLifeDots = document.querySelectorAll('.farm-life-dot');
+        const farmLifeImgs = [
+          document.getElementById('farmLifeImg-0'),
+          document.getElementById('farmLifeImg-1'),
+          document.getElementById('farmLifeImg-2'),
+          document.getElementById('farmLifeImg-3'),
+          document.getElementById('farmLifeImg-4')
+        ];
+        const farmLifeVisualBadge = document.getElementById('farmLifeVisualBadge');
+        const farmLifeEditorialCopy = document.getElementById('farmLifeEditorialCopy');
+        const farmLifeStepPrefix = document.getElementById('farmLifeStepPrefix');
+        const farmLifeHeading = document.getElementById('farmLifeHeading');
+        const farmLifeDesc = document.getElementById('farmLifeDesc');
+        const farmLifeActivityChips = document.getElementById('farmLifeActivityChips');
+        const farmLifePlanBtn = document.getElementById('farmLifePlanBtn');
+
+        if (farmLifeSection && farmLifeGiantDigit && farmLifeSubLabel && farmLifeEditorialCopy) {
+          const FARM_LIFE_CHAPTERS = [
+            {
+              chapterIndex: 0,
+              num: '01',
+              numClass: 'num-color-1',
+              label: 'The Art of Farming',
+              badge: 'Chapter 01 • The Art of Farming',
+              step: 'Chapter 01',
+              heading: 'The Art of Farming',
+              desc: 'Step barefoot into fertile fields. Prepare living soil, transplant tender paddy seedlings, trace the rice mill, and discover the journey from seed to harvest.',
+              activities: [
+                'Ploughing and paddy transplantation',
+                'Paddy life cycle and rice mill activity',
+                'Cotton life cycle',
+                'Vegetable and food grain field exploration'
+              ]
+            },
+            {
+              chapterIndex: 1,
+              num: '02',
+              numClass: 'num-color-2',
+              label: 'Life Around the Farm',
+              badge: 'Chapter 02 • Life Around the Farm',
+              step: 'Chapter 02',
+              heading: 'Life Around the Farm',
+              desc: 'Encounter indigenous livestock and avian wonders. Interact with friendly farm animals, walk through our bird aviary, and observe the architectural genius of wild bird nests.',
+              activities: [
+                'Domestic animals and birds',
+                'Exotic birds',
+                'Walk-in bird aviary',
+                'Bird nest exploration'
+              ]
+            },
+            {
+              chapterIndex: 2,
+              num: '03',
+              numClass: 'num-color-3',
+              label: 'Village Traditions',
+              badge: 'Chapter 03 • Village Traditions',
+              step: 'Chapter 03',
+              heading: 'Village Traditions',
+              desc: 'Revive timeless rural arts passed down through generations. Shape wet Deccan clay on the potter\'s wheel, craft natural dung cakes, erect straw scarecrows, and grind grain on stone chakki.',
+              activities: [
+                'Pottery',
+                'Dung cake making',
+                'Scarecrow making',
+                'Traditional hand grinding'
+              ]
+            },
+            {
+              chapterIndex: 3,
+              num: '04',
+              numClass: 'num-color-4',
+              label: 'The Wisdom of Water',
+              badge: 'Chapter 04 • The Wisdom of Water',
+              step: 'Chapter 04',
+              heading: 'The Wisdom of Water',
+              desc: 'Discover ancestral hydraulic engineering and natural soil life. Operate the Persian wheel, marvel at the Archimedes screw, explore Mota Bavi step-wells, and learn rainwater percolation.',
+              activities: [
+                'Earthworm experience',
+                'Working reservoir model',
+                'Persian wheel',
+                'Archimedes screw',
+                'Hand water pump',
+                'Vintage domestic water well',
+                'Mota Bavi',
+                'Rainwater harvesting model'
+              ]
+            },
+            {
+              chapterIndex: 4,
+              num: '05',
+              numClass: 'num-color-5',
+              label: 'Fun on the Farm',
+              badge: 'Chapter 05 • Fun on the Farm',
+              step: 'Chapter 05',
+              heading: 'Fun on the Farm',
+              desc: 'Unwind with laughter, fresh open air, and rural celebrations. Hop on scenic tractor trailer rides, conquer the grass castle, gaze from the farmer watch tower, and celebrate with DJ music.',
+              activities: [
+                'Grass castle',
+                'Polyhouse experience',
+                'Farmer watch tower',
+                'Tractor ride',
+                'DJ music and fun games'
+              ]
+            }
+          ];
+
+          let currentFarmChapter = 0;
+          let activeFarmTransition = null;
+
+          function applyFarmChapterDOM(targetIdx) {
+            const data = FARM_LIFE_CHAPTERS[targetIdx];
+            if (!data) return;
+            farmLifeGiantDigit.textContent = data.num;
+            farmLifeGiantDigit.className = 'giant-digit farm-life-digit ' + data.numClass;
+            farmLifeSubLabel.textContent = data.label;
+            if (farmLifeGiantDisplay) farmLifeGiantDisplay.setAttribute('data-stage', String(targetIdx));
+
+            if (farmLifeStepPrefix) farmLifeStepPrefix.textContent = data.step;
+            if (farmLifeHeading) farmLifeHeading.textContent = data.heading;
+            if (farmLifeDesc) farmLifeDesc.textContent = data.desc;
+            if (farmLifeVisualBadge) farmLifeVisualBadge.textContent = data.badge;
+
+            if (farmLifeActivityChips) {
+              farmLifeActivityChips.innerHTML = data.activities
+                .map(a => '<span class="farm-life-chip"><span class="chip-dot"></span>' + a + '</span>')
+                .join('');
+            }
+          }
+
+          function transitionToFarmChapter(targetIdx, immediate = false, direction = 1) {
+            if (targetIdx === currentFarmChapter && !immediate) return;
+
+            const prevIdx = currentFarmChapter;
+            currentFarmChapter = targetIdx;
+
+            // Update chapter dots
+            farmLifeDots.forEach((dot, i) => {
+              dot.classList.toggle('is-active', i === targetIdx);
+            });
+
+            // Kill in-flight transition
+            if (activeFarmTransition) {
+              activeFarmTransition.kill();
+              activeFarmTransition = null;
+            }
+
+            const data = FARM_LIFE_CHAPTERS[targetIdx];
+            if (!data) return;
+
+            const isDown = direction >= 0;
+            const outDigitY = isDown ? -30 : 30;
+            const inDigitY = isDown ? 30 : -30;
+            const outCopyY = isDown ? -16 : 16;
+            const inCopyY = isDown ? 16 : -16;
+
+            if (immediate || reduce) {
+              applyFarmChapterDOM(targetIdx);
+              gsap.set([farmLifeGiantDigit, farmLifeSubLabel, farmLifeEditorialCopy, farmLifeVisualBadge], { opacity: 1, y: 0 });
+              farmLifeImgs.forEach((img, i) => {
+                if (img) {
+                  img.classList.toggle('is-active', i === targetIdx);
+                  gsap.set(img, { opacity: i === targetIdx ? 1 : 0, scale: 1 });
+                }
+              });
+              return;
+            }
+
+            const tl = gsap.timeline({
+              defaults: { ease: 'power2.out' },
+              onComplete: () => {
+                activeFarmTransition = null;
+              }
+            });
+            activeFarmTransition = tl;
+
+            // Slide & fade out previous elements
+            tl.to(farmLifeGiantDigit, { opacity: 0, y: outDigitY, duration: 0.20, ease: 'power2.in' }, 0)
+              .to(farmLifeSubLabel, { opacity: 0, y: outDigitY * 0.5, duration: 0.16, ease: 'power2.in' }, 0)
+              .to(farmLifeEditorialCopy, { opacity: 0, y: outCopyY, duration: 0.20, ease: 'power2.in' }, 0)
+              .to(farmLifeVisualBadge, { opacity: 0, duration: 0.16 }, 0);
+
+            // Switch DOM at midpoint
+            tl.add(() => {
+              applyFarmChapterDOM(targetIdx);
+              gsap.set(farmLifeGiantDigit, { y: inDigitY, opacity: 0 });
+              gsap.set(farmLifeSubLabel, { y: inDigitY * 0.5, opacity: 0 });
+              gsap.set(farmLifeEditorialCopy, { y: inCopyY, opacity: 0 });
+              gsap.set(farmLifeVisualBadge, { opacity: 0 });
+            });
+
+            // Animate in incoming number, label, and copy
+            tl.to(farmLifeGiantDigit, { opacity: 1, y: 0, duration: 0.34, ease: 'power2.out' }, '+=0.02')
+              .to(farmLifeSubLabel, { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out' }, '-=0.24')
+              .to(farmLifeEditorialCopy, { opacity: 1, y: 0, duration: 0.34, ease: 'power2.out' }, '-=0.28')
+              .to(farmLifeVisualBadge, { opacity: 1, duration: 0.26 }, '-=0.22');
+
+            // Synchronized photograph crossfade
+            farmLifeImgs.forEach((img, i) => {
+              if (!img) return;
+              if (i === targetIdx) {
+                img.classList.add('is-active');
+                tl.fromTo(img,
+                  { opacity: 0, scale: isDown ? 1.05 : 0.98 },
+                  { opacity: 1, scale: 1, duration: 0.48, ease: 'power2.out' },
+                  0.04
+                );
+              } else if (i === prevIdx) {
+                tl.to(img, {
+                  opacity: 0,
+                  scale: isDown ? 0.98 : 1.05,
+                  duration: 0.42,
+                  ease: 'power2.inOut',
+                  onComplete: () => {
+                    img.classList.remove('is-active');
+                  }
+                }, 0);
+              } else {
+                img.classList.remove('is-active');
+                gsap.set(img, { opacity: 0, scale: 1 });
+              }
+            });
+          }
+
+          // Initial state: Chapter 01
+          transitionToFarmChapter(0, true, 1);
+
+          // ScrollTrigger for Farm Activities (480vh with 5 stages)
+          const farmST = ScrollTrigger.create({
+            trigger: farmLifeSection,
+            start: 'top top',
+            end: 'bottom bottom',
+            refreshPriority: -2,
+            onEnter: () => {
+              transitionToFarmChapter(0, false, 1);
+            },
+            onLeaveBack: () => {
+              transitionToFarmChapter(0, false, -1);
+            },
+            onEnterBack: () => {
+              transitionToFarmChapter(4, false, -1);
+            },
+            onLeave: () => {
+              transitionToFarmChapter(4, false, 1);
+            },
+            onUpdate: (self) => {
+              const p = self.progress;
+              const dir = self.direction;
+
+              if (farmLifeProgressBar) {
+                farmLifeProgressBar.style.width = `${Math.min(100, Math.max(0, p * 100))}%`;
+              }
+
+              if (p <= 0.04) {
+                if (currentFarmChapter !== 0) transitionToFarmChapter(0, false, dir);
+                return;
+              }
+              if (p >= 0.96) {
+                if (currentFarmChapter !== 4) transitionToFarmChapter(4, false, dir);
+                return;
+              }
+
+              let targetChapter = currentFarmChapter;
+              if (dir >= 0) {
+                // Scrolling Down (01 -> 02 -> 03 -> 04 -> 05)
+                if (p >= 0.80) targetChapter = 4;
+                else if (p >= 0.60) targetChapter = 3;
+                else if (p >= 0.40) targetChapter = 2;
+                else if (p >= 0.20) targetChapter = 1;
+                else targetChapter = 0;
+              } else {
+                // Scrolling Up (05 -> 04 -> 03 -> 02 -> 01)
+                if (p <= 0.20) targetChapter = 0;
+                else if (p <= 0.40) targetChapter = 1;
+                else if (p <= 0.60) targetChapter = 2;
+                else if (p <= 0.80) targetChapter = 3;
+                else targetChapter = 4;
+              }
+
+              if (targetChapter !== currentFarmChapter) {
+                transitionToFarmChapter(targetChapter, false, dir);
+              }
+            }
+          });
+
+          if (farmST.progress > 0) {
+            let initialTarget = 0;
+            const p = farmST.progress;
+            if (p >= 0.80) initialTarget = 4;
+            else if (p >= 0.60) initialTarget = 3;
+            else if (p >= 0.40) initialTarget = 2;
+            else if (p >= 0.20) initialTarget = 1;
+            transitionToFarmChapter(initialTarget, true, 1);
+            if (farmLifeProgressBar) {
+              farmLifeProgressBar.style.width = `${Math.min(100, Math.max(0, p * 100))}%`;
+            }
+          }
+
+          // Chapter dots click navigation
+          farmLifeDots.forEach((dot) => {
+            dot.addEventListener('click', (e) => {
+              e.preventDefault();
+              const jumpIdx = parseInt(dot.getAttribute('data-jump'), 10) || 0;
+              const fractions = [0.05, 0.28, 0.50, 0.72, 0.95];
+              const fraction = fractions[jumpIdx] !== undefined ? fractions[jumpIdx] : 0.05;
+              const st = ScrollTrigger.getAll().find(t => t.trigger === farmLifeSection);
+              let targetY = farmLifeSection.offsetTop + fraction * (farmLifeSection.offsetHeight - window.innerHeight);
+              if (st && st.end > st.start) {
+                targetY = st.start + fraction * (st.end - st.start);
+              }
+              const scrollDir = jumpIdx >= currentFarmChapter ? 1 : -1;
+              transitionToFarmChapter(jumpIdx, false, scrollDir);
+
+              if (window.__lenis) {
+                window.__lenis.scrollTo(targetY, { duration: 1.0 });
+              } else {
+                window.scrollTo({ top: targetY, behavior: 'smooth' });
+              }
+            });
+          });
+
+          // Connect "Plan Your Farm Visit" CTA button to booking section
+          if (farmLifePlanBtn) {
+            farmLifePlanBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              const bookingSection = document.getElementById('booking');
+              if (bookingSection) {
+                const notes = document.getElementById('dietaryNotes');
+                if (notes) {
+                  notes.value = 'Interested in: Farm Visit (All 23+ Activities & 5 Chapters)';
+                }
+                if (window.__lenis) {
+                  window.__lenis.scrollTo(bookingSection, { duration: 1.2, offset: -20 });
+                } else {
+                  bookingSection.scrollIntoView({ behavior: 'smooth' });
+                }
+                if (window.__showToast) {
+                  window.__showToast('Ready to plan your visit! Choose your preferred farm date.');
+                }
+              }
+            });
+          }
+        }
+
         // CTA Parallax & Entrance
         gsap.fromTo('#ctaImg', {
           yPercent: -12
@@ -5833,145 +6326,6 @@
           <a href="https://wa.me/919989912345?text=Hi%20One%20Day%20Kissan,%20I%20would%20like%20to%20enquire%20about%20the%20activities" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="height: 46px; padding: 0 18px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
             WhatsApp Us
           </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Workshop Registration Drawer Modal -->
-  <div id="workshopModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="workshopModalTitle">
-    <div class="workshop-modal-card">
-      <div class="pass-header">
-        <div>
-          <span class="pass-status-pill">Masterclass Admission • $0 Advance</span>
-          <h2 id="workshopModalTitle" class="pass-brand-title">Reserve Masterclass Seat</h2>
-        </div>
-        <button type="button" class="pass-close-btn" id="closeWorkshopModalBtn" aria-label="Close Workshop Dialog">&times;</button>
-      </div>
-
-      <div class="hamper-preview-banner">
-        <div>
-          <div class="hamper-preview-name" id="workshopPreviewTitle">Jeevamrutha & Soil Microbiology</div>
-          <div class="hamper-preview-meta" id="workshopPreviewMeta">Ramrao & Savitri Deshmukh • Sahyadri Heritage Agroforest</div>
-        </div>
-        <div class="hamper-preview-price" id="workshopPreviewPrice">$35</div>
-      </div>
-
-      <form id="workshopForm" class="hamper-form">
-        <input type="hidden" id="workshopIdInput" name="workshopId" value="">
-
-        <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;" class="hamper-double-col">
-          <div class="hamper-field">
-            <label for="workshopSessionDate" class="booking-label">Session Date</label>
-            <input type="date" id="workshopSessionDate" class="booking-input" required>
-          </div>
-          <div class="hamper-field">
-            <label for="workshopSeats" class="booking-label">Number of Seats</label>
-            <select id="workshopSeats" class="booking-select" required>
-              <option value="1">1 Person ($0 Advance)</option>
-              <option value="2" selected>2 People ($0 Advance)</option>
-              <option value="3">3 People ($0 Advance)</option>
-              <option value="4">4 People (Family Pass)</option>
-            </select>
-          </div>
-        </div>
-
-        <div style="display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;" class="hamper-double-col">
-          <div class="hamper-field">
-            <label for="workshopFullName" class="booking-label">Full Name</label>
-            <input type="text" id="workshopFullName" class="booking-input" placeholder="e.g. Rahul Kapoor" required>
-          </div>
-          <div class="hamper-field">
-            <label for="workshopPhone" class="booking-label">Phone Number</label>
-            <input type="tel" id="workshopPhone" class="booking-input" placeholder="+91 98112 34567" required>
-          </div>
-        </div>
-
-        <div class="hamper-field">
-          <label for="workshopEmail" class="booking-label">Email Address (for Digital Pass & Gate Check-in)</label>
-          <input type="email" id="workshopEmail" class="booking-input" placeholder="rahul@example.com" required>
-        </div>
-
-        <div class="hamper-field">
-          <label for="workshopNotes" class="booking-label">Special Requests / Dietary Requirements</label>
-          <input type="text" id="workshopNotes" class="booking-input" placeholder="e.g. Vegetarian lunch, bringing children aged 7">
-        </div>
-
-        <div id="workshopErrorAlert" style="display: none; background: #fee2e2; border: 1px solid #ef4444; color: #991b1b; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;"></div>
-
-        <button type="submit" id="workshopSubmitBtn" class="btn btn-gold" style="width: 100%; height: 48px; font-size: 14.5px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-          <span id="workshopSubmitText">Confirm Masterclass Pass • $0 Advance</span>
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Masterclass Admission Pass Ticket Modal -->
-  <div id="workshopPassModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="workshopPassTitle">
-    <div class="pass-ticket" id="workshopTicketElement">
-      <div class="pass-header">
-        <div class="pass-header-info">
-          <span class="pass-status-pill">Confirmed • $0 Advance</span>
-          <h2 id="workshopPassTitle" class="pass-brand-title">Agrarian Masterclass • Admission Pass</h2>
-        </div>
-        <button type="button" class="pass-close-btn" id="closeWorkshopPassModalBtn" aria-label="Close Admission Pass">&times;</button>
-      </div>
-      <div class="pass-body">
-        <div class="pass-ref-banner">
-          <div>
-            <div class="pass-ref-label">Admission Reference</div>
-            <div class="pass-ref-pill" id="workshopPassRefText">ODK-WS-2611-XXXX</div>
-          </div>
-          <button type="button" class="pass-copy-btn" id="copyWorkshopRefBtn">Copy Code</button>
-        </div>
-
-        <div class="pass-grid">
-          <div class="pass-item">
-            <span class="pass-item-label">Guest / Lead</span>
-            <span class="pass-item-value" id="workshopPassGuestName">—</span>
-          </div>
-          <div class="pass-item">
-            <span class="pass-item-label">Masterclass</span>
-            <span class="pass-item-value" id="workshopPassTitleText">—</span>
-          </div>
-          <div class="pass-item">
-            <span class="pass-item-label">Session Date & Schedule</span>
-            <span class="pass-item-value" id="workshopPassSchedule">—</span>
-          </div>
-          <div class="pass-item">
-            <span class="pass-item-label">Host Steward</span>
-            <span class="pass-item-value" id="workshopPassInstructor">—</span>
-          </div>
-          <div class="pass-item">
-            <span class="pass-item-label">Party Allocation</span>
-            <span class="pass-item-value" id="workshopPassSeats">—</span>
-          </div>
-          <div class="pass-item">
-            <span class="pass-item-label">Due at Hearth Feast</span>
-            <span class="pass-item-value" id="workshopPassPrice">—</span>
-          </div>
-          <div class="pass-item pass-full-width">
-            <span class="pass-item-label">Farm Estate Location</span>
-            <span class="pass-item-value" id="workshopPassLocation">—</span>
-          </div>
-          <div class="pass-item pass-full-width">
-            <span class="pass-item-label">Materials & Takeaways</span>
-            <span class="pass-item-value" style="font-size: 12px; color: #465243; line-height: 1.4;" id="workshopPassTakeaways">—</span>
-          </div>
-        </div>
-
-        <div class="pass-qr-wrap">
-          <img id="workshopPassQrImg" class="pass-qr-img" src="" alt="Workshop Pass QR Code">
-          <div class="pass-qr-instruction">
-            <strong>Gate Admission Verified:</strong> Present this pass at the estate gate. Field boots, craft aprons, and fresh earthen jars will be set aside for your party.
-          </div>
-        </div>
-
-        <div class="pass-actions">
-          <button type="button" class="pass-btn-print" id="downloadWorkshopPassBtn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-            Download Admission Pass (.txt)
-          </button>
         </div>
       </div>
     </div>
@@ -6376,34 +6730,14 @@
         }
 
         try {
-          if (ref.includes('WS')) {
-            const res = await fetch(`/api/workshops/register/${encodeURIComponent(ref)}`);
-            const data = await res.json();
-            if (!res.ok || !data.success || !data.data) {
-              throw new Error(data.error || 'No active workshop pass found with reference ' + ref);
-            }
-            closeModal(lookupModal);
-            renderWorkshopPass(data.data);
-            showToast('Workshop admission pass found!');
-          } else if (ref.includes('BOX')) {
-            const res = await fetch(`/api/hampers/orders/${encodeURIComponent(ref)}`);
-            const data = await res.json();
-            if (!res.ok || !data.success || !data.data) {
-              throw new Error(data.error || 'No active hamper order found with reference ' + ref);
-            }
-            closeModal(lookupModal);
-            renderHamperPass(data.data);
-            showToast('Hamper dispatch order found!');
-          } else {
-            const res = await fetch(`/api/bookings/${encodeURIComponent(ref)}`);
-            const data = await res.json();
-            if (!res.ok || !data.success || !data.data) {
-              throw new Error(data.error || 'No active reservation found with reference ' + ref);
-            }
-            closeModal(lookupModal);
-            renderBookingPass(data.data);
-            showToast('Reservation found!');
+          const res = await fetch(`/api/bookings/${encodeURIComponent(ref)}`);
+          const data = await res.json();
+          if (!res.ok || !data.success || !data.data) {
+            throw new Error(data.error || 'No active reservation found with reference ' + ref);
           }
+          closeModal(lookupModal);
+          renderBookingPass(data.data);
+          showToast('Reservation found!');
         } catch (err) {
           if (lookupErrorAlert) {
             lookupErrorAlert.textContent = err.message || 'Pass or Order not found. Please verify reference code.';
@@ -6470,8 +6804,6 @@
           closeModal(lookupModal);
           closeStoryModal();
           closeModal(experienceModal);
-          closeModal(workshopModal);
-          closeModal(workshopPassModal);
           closeModal(reviewModal);
           if (window.__closeFarm360Tour) window.__closeFarm360Tour();
         }
@@ -7361,373 +7693,8 @@
       renderExperienceCategory(0);
 
       // ==========================================
-      // PHASE 4: MASTERCLASSES & GUEST LOGBOOK
+      // PHASE 4: GUEST LOGBOOK & REVIEWS
       // ==========================================
-
-      const fallbackWorkshops = {
-        'ws-jeevamrutha': {
-          id: 'ws-jeevamrutha',
-          region_id: 'sahyadri',
-          title: 'Jeevamrutha & Living Soil Microbiology',
-          subtitle: 'Brew ancient microbial nectar to revitalize degraded soil naturally',
-          instructor: 'Ramrao & Savitri Deshmukh',
-          role_title: 'Master Agroforest Stewards',
-          farm_name: 'Sahyadri Heritage Agroforest',
-          region_name: 'Western Ghats Foothills',
-          farm_location: 'Sahyadri Foothills, Maharashtra',
-          duration: '3.5 Hours',
-          schedule: 'Every Saturday • 9:30 AM',
-          price_usd: 35,
-          remaining_seats: 6,
-          takeaways: 'Active Jeevamrutha flask, heirloom seed kit, garden apron & woodfire lunch'
-        },
-        'ws-chulha-baking': {
-          id: 'ws-chulha-baking',
-          region_id: 'punjab',
-          title: 'Clay Chulha Hearth & Heirloom Grains',
-          subtitle: 'Hand-knead ancestral emmer & bake rustic flatbreads on open clay embers',
-          instructor: 'Gurmehar Singh & Family',
-          role_title: 'Heritage Wheat Conservators',
-          farm_name: 'Singh Ancestral Wheat & Mustard Farm',
-          region_name: 'Canal Plains Organic Estate',
-          farm_location: 'Canal Plains Organic Estate, Punjab',
-          duration: '4.0 Hours',
-          schedule: 'Every Sunday • 10:00 AM',
-          price_usd: 42,
-          remaining_seats: 5,
-          takeaways: 'Cast-iron hearth paddle, 2kg stone-ground flour, fresh white butter crock'
-        },
-        'ws-syntropic-canopy': {
-          id: 'ws-syntropic-canopy',
-          region_id: 'deccan',
-          title: 'Syntropic Agroforestry & Shade Coffee',
-          subtitle: 'Design multi-layered edible forests that harvest rainwater and create microclimates',
-          instructor: 'Ananya & Devraj',
-          role_title: 'Regenerative Forest Designers',
-          farm_name: 'Ananya & Devraj Living Farm',
-          region_name: 'Deccan Agroforest Plateau',
-          farm_location: 'Deccan Agroforest Plateau, Karnataka',
-          duration: '4.5 Hours',
-          schedule: 'Saturdays • 8:30 AM',
-          price_usd: 48,
-          remaining_seats: 4,
-          takeaways: 'Estate Arabica coffee roast sample, native sapling, syntropic blueprint & lunch'
-        },
-        'ws-wetland-heirloom': {
-          id: 'ws-wetland-heirloom',
-          region_id: 'cauvery',
-          title: 'Ancient Wetland Rice & Silt Stewardship',
-          subtitle: 'Wade into delta mud, transplant ancestral Samba rice, and learn natural aquatic weed control',
-          instructor: 'Murugesan & Valliammai',
-          role_title: 'Traditional Wetland Stewards',
-          farm_name: 'Thanjavur Heirloom Rice Wetland',
-          region_name: 'Cauvery Delta Wetlands',
-          farm_location: 'Kumbakonam Belt, Tamil Nadu',
-          duration: '3.5 Hours',
-          schedule: 'Every Sunday • 9:00 AM',
-          price_usd: 38,
-          remaining_seats: 7,
-          takeaways: 'Sprouted Samba rice seedlings, palm jaggery brick, farmer headcloth & lunch'
-        }
-      };
-
-      let currentActiveWorkshop = null;
-      let currentActiveWorkshopReg = null;
-
-      const workshopModal = document.getElementById('workshopModal');
-      const closeWorkshopModalBtn = document.getElementById('closeWorkshopModalBtn');
-      const workshopPreviewTitle = document.getElementById('workshopPreviewTitle');
-      const workshopPreviewMeta = document.getElementById('workshopPreviewMeta');
-      const workshopPreviewPrice = document.getElementById('workshopPreviewPrice');
-      const workshopForm = document.getElementById('workshopForm');
-      const workshopIdInput = document.getElementById('workshopIdInput');
-      const workshopSessionDate = document.getElementById('workshopSessionDate');
-      const workshopSeats = document.getElementById('workshopSeats');
-      const workshopFullName = document.getElementById('workshopFullName');
-      const workshopPhone = document.getElementById('workshopPhone');
-      const workshopEmail = document.getElementById('workshopEmail');
-      const workshopNotes = document.getElementById('workshopNotes');
-      const workshopErrorAlert = document.getElementById('workshopErrorAlert');
-      const workshopSubmitBtn = document.getElementById('workshopSubmitBtn');
-      const workshopSubmitText = document.getElementById('workshopSubmitText');
-
-      const workshopPassModal = document.getElementById('workshopPassModal');
-      const closeWorkshopPassModalBtn = document.getElementById('closeWorkshopPassModalBtn');
-      const workshopPassRefText = document.getElementById('workshopPassRefText');
-      const copyWorkshopRefBtn = document.getElementById('copyWorkshopRefBtn');
-      const workshopPassGuestName = document.getElementById('workshopPassGuestName');
-      const workshopPassTitleText = document.getElementById('workshopPassTitleText');
-      const workshopPassSchedule = document.getElementById('workshopPassSchedule');
-      const workshopPassInstructor = document.getElementById('workshopPassInstructor');
-      const workshopPassSeats = document.getElementById('workshopPassSeats');
-      const workshopPassPrice = document.getElementById('workshopPassPrice');
-      const workshopPassLocation = document.getElementById('workshopPassLocation');
-      const workshopPassTakeaways = document.getElementById('workshopPassTakeaways');
-      const workshopPassQrImg = document.getElementById('workshopPassQrImg');
-      const downloadWorkshopPassBtn = document.getElementById('downloadWorkshopPassBtn');
-
-      const reviewModal = document.getElementById('reviewModal');
-      const closeReviewModalBtn = document.getElementById('closeReviewModalBtn');
-      const writeReviewBtn = document.getElementById('writeReviewBtn');
-      const reviewForm = document.getElementById('reviewForm');
-      const reviewRegion = document.getElementById('reviewRegion');
-      const reviewBookingRef = document.getElementById('reviewBookingRef');
-      const reviewGuestName = document.getElementById('reviewGuestName');
-      const reviewCity = document.getElementById('reviewCity');
-      const reviewRating = document.getElementById('reviewRating');
-      const reviewTitle = document.getElementById('reviewTitle');
-      const reviewComment = document.getElementById('reviewComment');
-      const reviewErrorAlert = document.getElementById('reviewErrorAlert');
-      const reviewSubmitBtn = document.getElementById('reviewSubmitBtn');
-      const reviewSubmitText = document.getElementById('reviewSubmitText');
-      const reviewsGrid = document.getElementById('reviewsGrid');
-
-      // Workshop Filter Tabs
-      const workshopFilterTabs = document.querySelectorAll('.workshop-tab');
-      workshopFilterTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          const filter = tab.getAttribute('data-filter') || 'all';
-          workshopFilterTabs.forEach(t => t.classList.toggle('is-active', t === tab));
-
-          document.querySelectorAll('.workshop-card').forEach(card => {
-            const region = card.getAttribute('data-region');
-            if (filter === 'all' || region === filter) {
-              card.style.display = 'flex';
-            } else {
-              card.style.display = 'none';
-            }
-          });
-        });
-      });
-
-      async function openWorkshopModal(workshopId) {
-        let ws = fallbackWorkshops[workshopId];
-        try {
-          const res = await fetch(`/api/workshops/${encodeURIComponent(workshopId)}`);
-          if (res.ok) {
-            const json = await res.json();
-            if (json.success && json.data) ws = json.data;
-          }
-        } catch (e) {}
-
-        if (!ws) return;
-        currentActiveWorkshop = ws;
-
-        if (workshopIdInput) workshopIdInput.value = ws.id;
-        if (workshopPreviewTitle) workshopPreviewTitle.textContent = ws.title;
-        if (workshopPreviewMeta) workshopPreviewMeta.textContent = `${ws.instructor} • ${ws.farm_name || ws.region_name}`;
-        if (workshopPreviewPrice) workshopPreviewPrice.textContent = `$${ws.price_usd} / person`;
-
-        // Initialize session date to next Saturday
-        if (workshopSessionDate) {
-          const now = new Date();
-          const nextSat = new Date();
-          const dayOfWeek = now.getDay();
-          const daysUntilSat = (6 - dayOfWeek + 7) % 7 || 7;
-          nextSat.setDate(now.getDate() + daysUntilSat);
-          const yyyy = nextSat.getFullYear();
-          const mm = String(nextSat.getMonth() + 1).padStart(2, '0');
-          const dd = String(nextSat.getDate()).padStart(2, '0');
-          workshopSessionDate.value = `${yyyy}-${mm}-${dd}`;
-
-          const tomorrow = new Date();
-          tomorrow.setDate(now.getDate() + 1);
-          workshopSessionDate.min = tomorrow.toISOString().slice(0, 10);
-        }
-
-        if (workshopErrorAlert) {
-          workshopErrorAlert.style.display = 'none';
-          workshopErrorAlert.textContent = '';
-        }
-
-        openModal(workshopModal);
-      }
-
-      function renderWorkshopPass(reg) {
-        currentActiveWorkshopReg = reg;
-
-        if (workshopPassRefText) workshopPassRefText.textContent = reg.ticket_ref || 'ODK-WS-PENDING';
-        if (workshopPassGuestName) workshopPassGuestName.textContent = reg.full_name || 'Valued Participant';
-        if (workshopPassTitleText) workshopPassTitleText.textContent = reg.workshop_title || 'Agrarian Masterclass';
-        if (workshopPassSchedule) workshopPassSchedule.textContent = `${reg.session_date} • ${reg.schedule || 'Morning Session'}`;
-        if (workshopPassInstructor) workshopPassInstructor.textContent = `${reg.instructor} (${reg.role_title || 'Master Steward'})`;
-        if (workshopPassSeats) workshopPassSeats.textContent = `${reg.seats} Participant(s) • Boots & Aprons Provided`;
-        const totalDue = (reg.price_usd || 35) * (reg.seats || 1);
-        if (workshopPassPrice) workshopPassPrice.textContent = `$${totalDue} total ($0 advance • pay at feast)`;
-        if (workshopPassLocation) workshopPassLocation.textContent = `${reg.farm_name || 'Living Farm Estate'} (${reg.region_name || 'Terroir'})`;
-        if (workshopPassTakeaways) workshopPassTakeaways.textContent = reg.takeaways || 'Earthen starter cultures, apron, seeds and lunch';
-
-        if (workshopPassQrImg) {
-          const ref = reg.ticket_ref || 'ODK-WS';
-          workshopPassQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fonedaykissan.com%2Fverify-pass%2F${encodeURIComponent(ref)}&color=20-60-43&bgcolor=F5-F1-E8`;
-        }
-
-        openModal(workshopPassModal);
-      }
-
-      function downloadWorkshopPassSlip(reg) {
-        if (!reg) return;
-        const totalDue = (reg.price_usd || 35) * (reg.seats || 1);
-        const slipText = [
-          '======================================================',
-          'ONE DAY KISSAN™ — AGRARIAN MASTERCLASS ADMISSION PASS',
-          '======================================================',
-          `Ticket Reference:  ${reg.ticket_ref}`,
-          `Masterclass:       ${reg.workshop_title}`,
-          `Session Date:      ${reg.session_date}`,
-          `Schedule Time:     ${reg.schedule || 'Morning Immersion'}`,
-          `Status:            Confirmed Admission ($0 Advance Deposit)`,
-          '------------------------------------------------------',
-          `Guest / Lead:      ${reg.full_name}`,
-          `Seats Allocated:   ${reg.seats} Participant(s)`,
-          `Contact Phone:     ${reg.phone}`,
-          `Contact Email:     ${reg.email}`,
-          '------------------------------------------------------',
-          `Host Steward:      ${reg.instructor} (${reg.role_title})`,
-          `Farm Estate:       ${reg.farm_name} (${reg.region_name})`,
-          `Gate Directions:   ${reg.farm_location || 'One Day Kissan Agrarian Estate'}`,
-          `Due at Farm Gate:  $${totalDue} ($${reg.price_usd}/person • Includes Hearth Lunch)`,
-          '------------------------------------------------------',
-          'TAKEAWAYS & CRAFT MATERIALS PROVIDED:',
-          reg.takeaways || 'Apron, earthen culture flask, seed packet & harvest feast',
-          '------------------------------------------------------',
-          reg.special_notes ? `Notes / Requests:  ${reg.special_notes}\r\n------------------------------------------------------` : '',
-          'Please arrive 15 minutes prior to session schedule.',
-          'Rubber boots, natural cotton field aprons & craft tools are provided.',
-          'https://onedaykissan.com — Reconnecting Cities to the Soil',
-          '======================================================'
-        ].filter(Boolean).join('\r\n');
-
-        const blob = new Blob([slipText], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${reg.ticket_ref || 'ODK-WS'}-Admission-Pass.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        showToast('Masterclass admission pass (.txt) downloaded!');
-      }
-
-      async function handleWorkshopSubmit(e) {
-        e.preventDefault();
-        if (workshopErrorAlert) {
-          workshopErrorAlert.style.display = 'none';
-          workshopErrorAlert.textContent = '';
-        }
-
-        const payload = {
-          workshopId: (workshopIdInput ? workshopIdInput.value : 'ws-jeevamrutha'),
-          fullName: (workshopFullName ? workshopFullName.value : '').trim(),
-          email: (workshopEmail ? workshopEmail.value : '').trim(),
-          phone: (workshopPhone ? workshopPhone.value : '').trim(),
-          sessionDate: (workshopSessionDate ? workshopSessionDate.value : ''),
-          seats: parseInt(workshopSeats ? workshopSeats.value : '1', 10) || 1,
-          specialNotes: (workshopNotes ? workshopNotes.value : '').trim()
-        };
-
-        if (!payload.fullName || !payload.email || !payload.phone || !payload.sessionDate) {
-          if (workshopErrorAlert) {
-            workshopErrorAlert.textContent = 'Please complete all required fields.';
-            workshopErrorAlert.style.display = 'block';
-          }
-          return;
-        }
-
-        if (workshopSubmitBtn) workshopSubmitBtn.disabled = true;
-        if (workshopSubmitText) workshopSubmitText.textContent = 'Securing Pass & Seat...';
-
-        try {
-          const res = await fetch('/api/workshops/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-
-          const data = await res.json();
-          if (!res.ok || !data.success) {
-            throw new Error(data.error || 'Failed to reserve masterclass seat.');
-          }
-
-          closeModal(workshopModal);
-          workshopForm.reset();
-          renderWorkshopPass(data.data);
-          showToast('Masterclass seat confirmed! $0 advance deposit.');
-        } catch (err) {
-          console.warn('Workshop API fallback:', err);
-          const fallbackWs = fallbackWorkshops[payload.workshopId] || fallbackWorkshops['ws-jeevamrutha'];
-          const datePart = (payload.sessionDate || '20261121').replace(/-/g, '').slice(2, 6);
-          const fallbackTicketRef = `ODK-WS-${datePart}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
-          const fallbackReg = {
-            ticket_ref: fallbackTicketRef,
-            full_name: payload.fullName,
-            email: payload.email,
-            phone: payload.phone,
-            session_date: payload.sessionDate,
-            seats: payload.seats,
-            special_notes: payload.specialNotes,
-            workshop_title: fallbackWs.title,
-            instructor: fallbackWs.instructor,
-            role_title: fallbackWs.role_title,
-            schedule: fallbackWs.schedule,
-            price_usd: fallbackWs.price_usd,
-            farm_name: fallbackWs.farm_name,
-            region_name: fallbackWs.region_name,
-            farm_location: fallbackWs.farm_location,
-            takeaways: fallbackWs.takeaways
-          };
-          closeModal(workshopModal);
-          workshopForm.reset();
-          renderWorkshopPass(fallbackReg);
-          showToast('Masterclass seat confirmed (Offline Mode)!');
-        } finally {
-          if (workshopSubmitBtn) workshopSubmitBtn.disabled = false;
-          if (workshopSubmitText) workshopSubmitText.textContent = 'Confirm Masterclass Pass • $0 Advance';
-        }
-      }
-
-      if (closeWorkshopModalBtn) closeWorkshopModalBtn.addEventListener('click', () => closeModal(workshopModal));
-      if (workshopModal) {
-        workshopModal.addEventListener('click', (e) => {
-          if (e.target === workshopModal) closeModal(workshopModal);
-        });
-      }
-
-      if (closeWorkshopPassModalBtn) closeWorkshopPassModalBtn.addEventListener('click', () => closeModal(workshopPassModal));
-      if (workshopPassModal) {
-        workshopPassModal.addEventListener('click', (e) => {
-          if (e.target === workshopPassModal) closeModal(workshopPassModal);
-        });
-      }
-
-      if (copyWorkshopRefBtn) {
-        copyWorkshopRefBtn.addEventListener('click', () => {
-          if (currentActiveWorkshopReg && currentActiveWorkshopReg.ticket_ref) {
-            navigator.clipboard.writeText(currentActiveWorkshopReg.ticket_ref).then(() => {
-              showToast('Admission reference copied to clipboard!');
-            }).catch(() => {
-              showToast('Ticket Ref: ' + currentActiveWorkshopReg.ticket_ref);
-            });
-          }
-        });
-      }
-
-      if (downloadWorkshopPassBtn) {
-        downloadWorkshopPassBtn.addEventListener('click', () => {
-          downloadWorkshopPassSlip(currentActiveWorkshopReg);
-        });
-      }
-
-      if (workshopForm) workshopForm.addEventListener('submit', handleWorkshopSubmit);
-
-      // Attach workshop reserve buttons
-      document.querySelectorAll('.workshop-book-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const id = btn.getAttribute('data-workshop-id');
-          if (id) openWorkshopModal(id);
-        });
-      });
 
       // Reviews & Logbook
       if (writeReviewBtn) {
