@@ -156,6 +156,22 @@ app.get('/api/experiences', (req, res) => {
   }
 });
 
+// Authentic One Day Kisan Testimonials & Field Films API
+app.get('/api/testimonials', (req, res) => {
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const testimonialsPath = path.join(__dirname, 'testimonial_videos.json');
+    if (fs.existsSync(testimonialsPath)) {
+      const videos = JSON.parse(fs.readFileSync(testimonialsPath, 'utf8'));
+      return res.json({ success: true, count: videos.length, data: videos });
+    }
+    res.json({ success: true, count: 0, data: [] });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Phase 3: Farm-to-Table Harvest Hampers API
 app.get('/api/hampers', async (req, res) => {
   try {
