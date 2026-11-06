@@ -419,7 +419,7 @@ app.post('/api/bookings', async (req, res) => {
       email,
       phone,
       regionId,
-      experienceId,
+      experienceId = 'family',
       visitDate,
       travellers,
       guestCount,
@@ -427,27 +427,32 @@ app.post('/api/bookings', async (req, res) => {
       specialRequests
     } = req.body;
 
-    if (!fullName || !email || !phone || !regionId || !experienceId || !visitDate) {
+    if (!fullName || !phone || !regionId || !visitDate) {
       return res.status(400).json({
         success: false,
-        error: 'Please fill in all required fields: fullName, email, phone, regionId, experienceId, visitDate.'
+        error: 'Please fill in all required fields: fullName, phone, farm location, visit date.'
       });
     }
 
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({ success: false, error: 'Please provide a valid email address.' });
+    // Email validation (if provided) or fallback
+    let validEmail = (email || '').trim();
+    if (validEmail) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(validEmail)) {
+        return res.status(400).json({ success: false, error: 'Please provide a valid email address.' });
+      }
+    } else {
+      validEmail = `${phone.replace(/[^0-9]/g, '') || 'guest'}@guest.onedaykisan.com`;
     }
 
     const booking = await createBooking({
       fullName: fullName.trim(),
-      email: email.trim(),
+      email: validEmail,
       phone: phone.trim(),
       regionId,
-      experienceId,
+      experienceId: experienceId || 'family',
       visitDate,
-      travellers: travellers || '2 Adults',
+      travellers: travellers || 'Farm Visit',
       guestCount: parseInt(guestCount, 10) || 2,
       dietaryNotes: dietaryNotes ? dietaryNotes.trim() : '',
       specialRequests: specialRequests ? specialRequests.trim() : ''
@@ -455,7 +460,7 @@ app.post('/api/bookings', async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'Farm immersion reserved with $0 deposit. Your digital pass is ready.',
+      message: 'Booking request received with gratitude. Our team will contact you to confirm your visit.',
       data: booking
     });
   } catch (err) {

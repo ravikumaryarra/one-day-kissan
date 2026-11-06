@@ -669,7 +669,7 @@ async function getAvailability(regionId, dateStr) {
   };
 }
 
-// Booking creation
+// Booking enquiry creation
 async function createBooking(data) {
   const {
     fullName,
@@ -684,25 +684,23 @@ async function createBooking(data) {
     specialRequests = ''
   } = data;
 
-  // Check availability
+  // Retrieve farm details
   const avail = await getAvailability(regionId, visitDate);
-  if (!avail || avail.remaining_slots < guestCount) {
-    throw new Error(`Only ${avail ? avail.remaining_slots : 0} slots remaining on this date.`);
-  }
+  const farmName = avail ? avail.farm_name : (regionId === 'moinabad' ? 'One Day Kisan Moinabad' : 'One Day Kisan Bhongir');
 
   // Generate unique booking reference: ODK-YYYYMM-XXXX
-  const datePart = visitDate.replace(/-/g, '').slice(2, 6); // e.g. 2604
+  const datePart = visitDate ? visitDate.replace(/-/g, '').slice(2, 6) : '2611';
   const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
   const bookingRef = `ODK-${datePart}-${randomSuffix}`;
 
-  // Generate QR Code data URL for gate check-in
+  // Generate QR Code data URL for enquiry verification
   const qrPayload = JSON.stringify({
     ref: bookingRef,
     name: fullName,
     guests: guestCount,
-    farm: avail.farm_name,
+    farm: farmName,
     date: visitDate,
-    verified: true
+    status: 'enquiry_received'
   });
   const qrCodeData = await QRCode.toDataURL(qrPayload, {
     width: 280,
@@ -718,7 +716,7 @@ async function createBooking(data) {
       booking_ref, full_name, email, phone, region_id, experience_id,
       visit_date, travellers, guest_count, dietary_notes, special_requests,
       status, qr_code_data
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'confirmed', ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'enquiry_received', ?)
   `, [
     bookingRef, fullName, email, phone, regionId, experienceId,
     visitDate, travellers, guestCount, dietaryNotes, specialRequests,
