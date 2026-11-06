@@ -48,6 +48,7 @@ async function runTests() {
   });
 
   console.log(`Navigating to ${BASE_URL}...`);
+  await page.addInitScript(() => sessionStorage.setItem('odk_welcome_dismissed', 'true'));
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(1500);
 

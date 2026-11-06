@@ -5291,6 +5291,328 @@
         font-size: 11px;
       }
     }
+
+    /* =========================================================================
+       WARM WELCOME POPUP MODAL (A Little Closer to Nature)
+       ========================================================================= */
+    .welcome-popup-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(14, 26, 17, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
+    }
+
+    .welcome-popup-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .welcome-popup-card {
+      position: relative;
+      width: min(860px, 100%);
+      max-height: min(620px, 92vh);
+      background: #FAF7F0;
+      border-radius: 26px;
+      box-shadow: 0 35px 90px rgba(10, 24, 16, 0.45), 0 10px 25px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(220, 166, 79, 0.4);
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      overflow: hidden;
+      transform: scale(0.95) translateY(14px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+      opacity: 0;
+    }
+
+    .welcome-popup-overlay.is-open .welcome-popup-card {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    /* Left Visual Column */
+    .welcome-popup-visual {
+      position: relative;
+      background: var(--forest);
+      min-height: 260px;
+      overflow: hidden;
+    }
+
+    .welcome-popup-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transform: scale(1.04);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .welcome-popup-overlay.is-open .welcome-popup-img {
+      transform: scale(1);
+    }
+
+    .welcome-popup-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14, 26, 17, 0.72) 0%, rgba(14, 26, 17, 0.15) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .welcome-popup-loc-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(23, 59, 43, 0.88);
+      border: 1px solid rgba(220, 166, 79, 0.4);
+      backdrop-filter: blur(8px);
+      padding: 6px 13px;
+      border-radius: 999px;
+      color: #FAF7F0;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    .welcome-popup-loc-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--harvest);
+    }
+
+    /* Right Content Column */
+    .welcome-popup-body {
+      padding: 40px 38px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #FAF7F0;
+      overflow-y: auto;
+    }
+
+    .welcome-popup-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--harvest);
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+    }
+
+    .welcome-popup-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(24px, 2.5vw, 34px);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--forest);
+      line-height: 1.18;
+      margin: 0 0 14px 0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+    }
+
+    .welcome-popup-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #424e3e;
+      margin: 0 0 24px 0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+    }
+
+    .welcome-popup-action-wrap {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease 0.25s, transform 0.4s ease 0.25s;
+    }
+
+    .welcome-popup-overlay.is-open .welcome-popup-eyebrow,
+    .welcome-popup-overlay.is-open .welcome-popup-heading,
+    .welcome-popup-overlay.is-open .welcome-popup-desc,
+    .welcome-popup-overlay.is-open .welcome-popup-action-wrap {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .welcome-popup-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 48px;
+      padding: 0 26px;
+      border-radius: 999px;
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      background: var(--harvest);
+      color: #173B2B;
+      box-shadow: 0 6px 22px rgba(220, 166, 79, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      text-decoration: none;
+    }
+
+    .welcome-popup-cta:hover {
+      background: #E5B25D;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(220, 166, 79, 0.45);
+    }
+
+    .welcome-popup-cta:active {
+      transform: translateY(0);
+    }
+
+    .welcome-popup-cta:focus-visible {
+      outline: 2px solid var(--forest);
+      outline-offset: 3px;
+    }
+
+    .welcome-popup-supporting {
+      font-size: 12.5px;
+      color: #6a7865;
+      margin: 10px 0 16px 0;
+      line-height: 1.4;
+    }
+
+    .welcome-popup-tagline {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage);
+      border-top: 1px solid rgba(23, 59, 43, 0.1);
+      padding-top: 14px;
+      margin-top: 4px;
+      width: 100%;
+    }
+
+    /* Polished Close Button */
+    .welcome-popup-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 25;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(23, 59, 43, 0.08);
+      border: 1px solid rgba(23, 59, 43, 0.14);
+      color: var(--forest);
+      font-size: 22px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .welcome-popup-close:hover {
+      background: var(--forest);
+      color: #FAF7F0;
+      transform: rotate(90deg) scale(1.05);
+    }
+
+    .welcome-popup-close:focus-visible {
+      outline: 2px solid var(--harvest);
+      outline-offset: 2px;
+    }
+
+    /* Mobile Responsive Overrides */
+    @media (max-width: 767px) {
+      .welcome-popup-overlay {
+        padding: 14px;
+      }
+
+      .welcome-popup-card {
+        grid-template-columns: 1fr;
+        max-height: 88vh;
+        border-radius: 20px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .welcome-popup-visual {
+        height: 190px;
+        min-height: 190px;
+      }
+
+      .welcome-popup-loc-badge {
+        bottom: 12px;
+        left: 12px;
+        font-size: 11px;
+        padding: 4px 10px;
+      }
+
+      .welcome-popup-body {
+        padding: 22px 20px 22px;
+      }
+
+      .welcome-popup-heading {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .welcome-popup-desc {
+        font-size: 13.5px;
+        line-height: 1.5;
+        margin-bottom: 18px;
+      }
+
+      .welcome-popup-cta {
+        width: 100%;
+        height: 46px;
+        font-size: 14px;
+      }
+
+      .welcome-popup-close {
+        top: 12px;
+        right: 12px;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        color: var(--forest);
+      }
+    }
+
+    /* Reduced Motion Preference */
+    @media (prefers-reduced-motion: reduce) {
+      .welcome-popup-overlay,
+      .welcome-popup-card,
+      .welcome-popup-img,
+      .welcome-popup-eyebrow,
+      .welcome-popup-heading,
+      .welcome-popup-desc,
+      .welcome-popup-action-wrap,
+      .welcome-popup-close,
+      .welcome-popup-cta {
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body class="intro">
@@ -8090,6 +8412,44 @@
     </div>
   </div>
 
+  <!-- ======================================================================= -->
+  <!-- PREMIUM WARM WELCOME POPUP (A Little Closer to Nature)                 -->
+  <!-- ======================================================================= -->
+  <div id="welcomePopupModal" class="modal-overlay welcome-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="welcomePopupHeading" aria-describedby="welcomePopupDesc" aria-hidden="true">
+    <div class="welcome-popup-card" id="welcomePopupCard" role="document">
+      <!-- Visible Close Button (×) in Top-Right Corner -->
+      <button type="button" class="welcome-popup-close" id="welcomePopupCloseBtn" aria-label="Close welcome popup" title="Close welcome popup">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+      <!-- Left Column: Large Cinematic Countryside Photograph -->
+      <div class="welcome-popup-visual">
+        <img src="/assets/stories/story_01_discover_farm.jpg" alt="One Day Kissan agricultural farmland in Telangana" class="welcome-popup-img" id="welcomePopupImg" loading="eager">
+        <div class="welcome-popup-gradient"></div>
+        <div class="welcome-popup-loc-badge">
+          <span class="welcome-popup-loc-dot"></span>
+          <span>Telangana • Bhongir &amp; Moinabad</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Editorial Welcoming Content -->
+      <div class="welcome-popup-body">
+        <span class="welcome-popup-eyebrow" id="welcomePopupEyebrow">WELCOME TO ONE DAY KISSAN</span>
+        <h2 class="welcome-popup-heading" id="welcomePopupHeading">A little closer to nature.</h2>
+        <p class="welcome-popup-desc" id="welcomePopupDesc">Leave the everyday behind. Come experience the joy of farming, discover village traditions, and make beautiful memories with us.</p>
+        
+        <div class="welcome-popup-action-wrap">
+          <button type="button" class="btn btn-gold welcome-popup-cta" id="welcomePopupCtaBtn">
+            <span>Let's plan your farm day</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <p class="welcome-popup-supporting" id="welcomePopupSupporting">Explore our farms and choose your experience.</p>
+          <span class="welcome-popup-tagline" id="welcomePopupTagline">A DAY AWAY FROM THE ORDINARY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div id="toastMessage" class="toast-msg">Reference code copied to clipboard!</div>
 
@@ -10287,6 +10647,194 @@
         switchAtmosphere,
         switchFarmViewpoint,
         isActive: () => isTourActive
+      };
+    })();
+  </script>
+
+  <!-- Dedicated Warm Welcome Popup Engine -->
+  <script>
+    (function initWarmWelcomePopupEngine() {
+      const modal = document.getElementById('welcomePopupModal');
+      const card = document.getElementById('welcomePopupCard');
+      const closeBtn = document.getElementById('welcomePopupCloseBtn');
+      const ctaBtn = document.getElementById('welcomePopupCtaBtn');
+
+      if (!modal || !card) return;
+
+      const SESSION_KEY = 'odk_welcome_dismissed';
+      let previouslyFocusedElement = null;
+      let isOpen = false;
+
+      function isDismissed() {
+        try {
+          return sessionStorage.getItem(SESSION_KEY) === 'true';
+        } catch (e) {
+          return false;
+        }
+      }
+
+      function markDismissed() {
+        try {
+          sessionStorage.setItem(SESSION_KEY, 'true');
+        } catch (e) {}
+      }
+
+      function openPopup() {
+        if (isOpen) return;
+        isOpen = true;
+        previouslyFocusedElement = document.activeElement;
+
+        // Prevent background scrolling
+        if (window.__lenis) {
+          window.__lenis.stop();
+        }
+        document.body.style.overflow = 'hidden';
+
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+
+        // Focus management: accessible initial focus
+        if (closeBtn) closeBtn.focus();
+        else card.focus();
+
+        setTimeout(() => {
+          if (isOpen && ctaBtn) {
+            ctaBtn.focus();
+          }
+        }, 300);
+
+        // Register Keyboard listeners
+        window.addEventListener('keydown', handleKeyDown);
+      }
+
+      function closePopup(navToBooking = false) {
+        if (!isOpen) return;
+        isOpen = false;
+        markDismissed();
+
+        // Smooth exit
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+
+        // Restore background scrolling
+        if (window.__lenis) {
+          window.__lenis.start();
+        }
+        document.body.style.overflow = '';
+
+        // Clean up keyboard listener
+        window.removeEventListener('keydown', handleKeyDown);
+
+        // Restore focus
+        if (!navToBooking && previouslyFocusedElement && typeof previouslyFocusedElement.focus === 'function') {
+          try {
+            previouslyFocusedElement.focus();
+          } catch (e) {}
+        }
+
+        // Navigate to booking if CTA was clicked
+        if (navToBooking) {
+          const bookingEl = document.getElementById('booking');
+          if (bookingEl) {
+            setTimeout(() => {
+              if (window.__lenis) {
+                window.__lenis.scrollTo(bookingEl, { offset: -20, duration: 1.2 });
+              } else {
+                bookingEl.scrollIntoView({ behavior: 'smooth' });
+              }
+            }, 120);
+          }
+        }
+      }
+
+      // Keyboard Trap & Escape handling
+      function handleKeyDown(e) {
+        if (!isOpen) return;
+
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          e.stopPropagation();
+          closePopup(false);
+          return;
+        }
+
+        if (e.key === 'Tab') {
+          const focusables = modal.querySelectorAll('button:not([disabled]), a:not([disabled]), [tabindex="0"]');
+          if (!focusables.length) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        }
+      }
+
+      // 1. Close Button (×)
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closePopup(false);
+        });
+      }
+
+      // 2. Click Outside (Backdrop)
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closePopup(false);
+        }
+      });
+
+      // Click Inside prevents closing
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+
+      // 3. Primary CTA click
+      if (ctaBtn) {
+        ctaBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closePopup(true);
+        });
+      }
+
+      // Initial check & auto-open
+      function scheduleAutoOpen() {
+        if (isDismissed()) return;
+        const delay = window.__welcomeDelay !== undefined ? window.__welcomeDelay : 1400;
+        setTimeout(() => {
+          if (!isDismissed()) {
+            openPopup();
+          }
+        }, delay);
+      }
+
+      if (document.readyState !== 'loading') {
+        scheduleAutoOpen();
+      } else {
+        document.addEventListener('DOMContentLoaded', scheduleAutoOpen);
+      }
+
+      // Expose globally for testing & programmatic control
+      window.__welcomePopup = {
+        open: openPopup,
+        close: () => closePopup(false),
+        closeAndBook: () => closePopup(true),
+        isDismissed,
+        isOpen: () => isOpen,
+        resetSession: () => {
+          try {
+            sessionStorage.removeItem(SESSION_KEY);
+          } catch (e) {}
+        }
       };
     })();
   </script>
