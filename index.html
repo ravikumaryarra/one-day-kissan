@@ -1000,25 +1000,17 @@
       position: relative;
       width: 100%;
       height: 230px;
+      overflow: visible;
     }
-    .story-giant-num {
-      position: absolute;
-      top: 0;
-      left: 0;
+    /* Single Shared Number Display Container - eliminates stacked overlapping elements */
+    .story-giant-display {
+      position: relative;
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      opacity: 0;
-      transform: translateY(40px);
-      pointer-events: none;
-      transition: opacity .45s ease, transform .45s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .story-giant-num.is-active {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+      will-change: transform, opacity;
     }
     .giant-digit {
       font-family: "Playfair Display", Georgia, serif;
@@ -1028,6 +1020,7 @@
       letter-spacing: -0.04em;
       display: block;
       user-select: none;
+      will-change: transform, opacity;
     }
     .num-color-1 {
       color: #1B3B22;
@@ -1051,6 +1044,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      will-change: transform, opacity;
     }
     .num-sub-label::before {
       content: "";
@@ -1082,7 +1076,7 @@
       width: 33.33%;
       background: var(--forest);
       border-radius: 999px;
-      transition: width .2s ease;
+      transition: width .15s ease-out;
     }
     .story-track-dots {
       display: inline-flex;
@@ -1111,7 +1105,7 @@
       box-shadow: 0 4px 12px rgba(27, 59, 34, 0.2);
     }
 
-    /* RIGHT COLUMN: Story & Visuals Card Stack */
+    /* RIGHT COLUMN: Story & Visuals Card */
     .stories-col-right {
       position: relative;
       width: 100%;
@@ -1126,21 +1120,8 @@
       background: #FFFFFF;
       border: 1px solid rgba(32, 60, 43, 0.12);
       box-shadow: 0 24px 60px rgba(18, 36, 25, 0.09);
-    }
-    .story-slide {
-      position: absolute;
-      inset: 0;
       display: flex;
       flex-direction: column;
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(1.03) translateY(24px);
-      transition: opacity .5s ease, transform .5s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .story-slide.is-active {
-      opacity: 1;
-      pointer-events: auto;
-      transform: scale(1) translateY(0);
     }
 
     /* Visual Frame (Upper 62%) */
@@ -1152,20 +1133,28 @@
       background: #1B3B22;
     }
     .story-slide-image {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform .75s cubic-bezier(0.2, 0.8, 0.2, 1);
+      opacity: 0;
+      transform: scale(1.04);
+      pointer-events: none;
+      will-change: transform, opacity;
     }
-    .story-slide:hover .story-slide-image {
-      transform: scale(1.03);
+    .story-slide-image.is-active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
     }
     .story-visual-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(to top, rgba(14, 28, 18, 0.65) 0%, rgba(14, 28, 18, 0.1) 50%, rgba(14, 28, 18, 0.25) 100%);
       pointer-events: none;
+      z-index: 2;
     }
     .story-visual-badge {
       position: absolute;
@@ -1181,6 +1170,8 @@
       color: #FFFFFF;
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.18);
+      z-index: 3;
+      will-change: opacity, transform;
     }
 
     /* Editorial Caption (Lower 38%) */
@@ -1192,6 +1183,9 @@
       height: 38%;
       background: #FFFFFF;
       box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+      will-change: opacity, transform;
     }
     .story-step-prefix {
       font-size: 11px;
@@ -1200,6 +1194,7 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 4px;
+      display: block;
     }
     .story-editorial-heading {
       font-family: "Playfair Display", Georgia, serif;
@@ -1249,6 +1244,9 @@
       .stories-number-stage {
         height: 80px;
         width: 140px;
+      }
+      .story-giant-display {
+        height: 100%;
       }
       .giant-digit {
         font-size: clamp(60px, 14vw, 80px);
@@ -3881,23 +3879,13 @@
           <!-- Main Two-Column Side-by-Side Grid -->
           <div class="stories-side-by-side">
 
-            <!-- LEFT COLUMN: Oversized Numbers -->
+            <!-- LEFT COLUMN: Oversized Numbers (Single Shared Display) -->
             <div class="stories-col-left">
               <div class="stories-number-stage" id="storiesNumberStage">
-                <!-- Giant Number 01 -->
-                <div class="story-giant-num is-active" data-stage="0" id="num-0">
-                  <span class="giant-digit num-color-1">01</span>
-                  <span class="num-sub-label">Discover</span>
-                </div>
-                <!-- Giant Number 02 -->
-                <div class="story-giant-num" data-stage="1" id="num-1">
-                  <span class="giant-digit num-color-2">02</span>
-                  <span class="num-sub-label">Participate</span>
-                </div>
-                <!-- Giant Number 03 -->
-                <div class="story-giant-num" data-stage="2" id="num-2">
-                  <span class="giant-digit num-color-3">03</span>
-                  <span class="num-sub-label">Experience</span>
+                <!-- Single Shared Giant Number Display - prevents duplicate or overlapping numbers -->
+                <div class="story-giant-display" id="storyGiantDisplay" data-stage="0">
+                  <span class="giant-digit num-color-1" id="giantDigit">01</span>
+                  <span class="num-sub-label" id="numSubLabel">Discover</span>
                 </div>
               </div>
 
@@ -3914,66 +3902,30 @@
               </div>
             </div>
 
-            <!-- RIGHT COLUMN: Story & Visuals Card Stack -->
+            <!-- RIGHT COLUMN: Story & Visuals Card -->
             <div class="stories-col-right">
               <div class="stories-viewport-card" id="storiesViewportCard">
 
-                <!-- STAGE 01: Discover the Farm -->
-                <article class="story-slide is-active" data-stage="0" id="slide-0">
-                  <div class="story-visual-frame">
-                    <img src="/assets/stories/story_01_discover_farm.jpg" alt="01 – Discover the Farm: Sweeping landscape of One Day Kissan farmland in morning light" class="story-slide-image" loading="lazy">
-                    <div class="story-visual-overlay"></div>
-                    <div class="story-visual-badge">Stage 01 • Countryside Discovery</div>
-                  </div>
-                  <div class="story-editorial-copy">
-                    <span class="story-step-prefix">Stage 01</span>
-                    <h3 class="story-editorial-heading">Discover the Farm</h3>
-                    <p class="story-editorial-desc">Explore the farm, discover nature and experience the beauty of rural life.</p>
-                    <div class="story-tag-cluster">
-                      <span class="story-chip">Wide Open Farmland</span>
-                      <span class="story-chip">Morning Mist Trails</span>
-                      <span class="story-chip">Native Flora</span>
-                    </div>
-                  </div>
-                </article>
+                <!-- Visual Frame with 3 Photorealistic Farm Layers -->
+                <div class="story-visual-frame" id="storyVisualFrame">
+                  <img id="storyImg-0" src="/assets/stories/story_01_discover_farm.jpg" alt="01 – Discover the Farm: Sweeping landscape of One Day Kissan farmland in morning light" class="story-slide-image is-active" loading="lazy">
+                  <img id="storyImg-1" src="/assets/stories/story_02_participate_farming.jpg" alt="02 – Participate in Farming: Visitors actively planting paddy rice seedlings in wet soil" class="story-slide-image" loading="lazy">
+                  <img id="storyImg-2" src="/assets/stories/story_03_experience_rural_life.jpg" alt="03 – Experience Rural Life: Traditional clay chulha woodfire cooking and rural hospitality" class="story-slide-image" loading="lazy">
+                  <div class="story-visual-overlay"></div>
+                  <div class="story-visual-badge" id="storyVisualBadge">Stage 01 • Countryside Discovery</div>
+                </div>
 
-                <!-- STAGE 02: Participate in Farming -->
-                <article class="story-slide" data-stage="1" id="slide-1">
-                  <div class="story-visual-frame">
-                    <img src="/assets/stories/story_02_participate_farming.jpg" alt="02 – Participate in Farming: Visitors actively planting paddy rice seedlings in wet soil" class="story-slide-image" loading="lazy">
-                    <div class="story-visual-overlay"></div>
-                    <div class="story-visual-badge">Stage 02 • Agrarian Work</div>
+                <!-- Single Shared Editorial Copy Container (No overlapping text) -->
+                <div class="story-editorial-copy" id="storyEditorialCopy">
+                  <span class="story-step-prefix" id="storyStepPrefix">Stage 01</span>
+                  <h3 class="story-editorial-heading" id="storyHeading">Discover the Farm</h3>
+                  <p class="story-editorial-desc" id="storyDesc">Explore the farm, discover nature and experience the beauty of rural life.</p>
+                  <div class="story-tag-cluster" id="storyTagCluster">
+                    <span class="story-chip">Wide Open Farmland</span>
+                    <span class="story-chip">Morning Mist Trails</span>
+                    <span class="story-chip">Native Flora</span>
                   </div>
-                  <div class="story-editorial-copy">
-                    <span class="story-step-prefix">Stage 02</span>
-                    <h3 class="story-editorial-heading">Participate in Farming</h3>
-                    <p class="story-editorial-desc">Get your hands into the soil and experience farming yourself.</p>
-                    <div class="story-tag-cluster">
-                      <span class="story-chip">Paddy Transplantation</span>
-                      <span class="story-chip">Soil Stewardship</span>
-                      <span class="story-chip">Hands-On Fieldwork</span>
-                    </div>
-                  </div>
-                </article>
-
-                <!-- STAGE 03: Experience Rural Life -->
-                <article class="story-slide" data-stage="2" id="slide-2">
-                  <div class="story-visual-frame">
-                    <img src="/assets/stories/story_03_experience_rural_life.jpg" alt="03 – Experience Rural Life: Traditional clay chulha woodfire cooking and rural hospitality" class="story-slide-image" loading="lazy">
-                    <div class="story-visual-overlay"></div>
-                    <div class="story-visual-badge">Stage 03 • Living Culture</div>
-                  </div>
-                  <div class="story-editorial-copy">
-                    <span class="story-step-prefix">Stage 03</span>
-                    <h3 class="story-editorial-heading">Experience Rural Life</h3>
-                    <p class="story-editorial-desc">Enjoy traditional food, rural culture and meaningful moments.</p>
-                    <div class="story-tag-cluster">
-                      <span class="story-chip">Woodfire Hearth Cooking</span>
-                      <span class="story-chip">Artisan Pottery</span>
-                      <span class="story-chip">Folk Stories</span>
-                    </div>
-                  </div>
-                </article>
+                </div>
 
               </div>
             </div>
@@ -4947,66 +4899,190 @@
 
         // ------------------------------------------------------------------
         // Premium Side-by-Side Scroll Storytelling (#stories)
+        // Single-Source-of-Truth Stage Controller (Zero Overlapping Elements)
         // ------------------------------------------------------------------
         const storySection = document.getElementById('stories');
-        const numItems = document.querySelectorAll('.story-giant-num');
-        const slideItems = document.querySelectorAll('.story-slide');
+        const giantDisplay = document.getElementById('storyGiantDisplay');
+        const giantDigit = document.getElementById('giantDigit');
+        const numSubLabel = document.getElementById('numSubLabel');
+        const storyProgressBar = document.getElementById('storyProgressBar');
         const storyDots = document.querySelectorAll('.story-dot');
-        const storyBar = document.getElementById('storyProgressBar');
+        const storyImgs = [
+          document.getElementById('storyImg-0'),
+          document.getElementById('storyImg-1'),
+          document.getElementById('storyImg-2')
+        ];
+        const storyVisualBadge = document.getElementById('storyVisualBadge');
+        const storyEditorialCopy = document.getElementById('storyEditorialCopy');
+        const storyStepPrefix = document.getElementById('storyStepPrefix');
+        const storyHeading = document.getElementById('storyHeading');
+        const storyDesc = document.getElementById('storyDesc');
+        const storyTagCluster = document.getElementById('storyTagCluster');
 
-        if (storySection && numItems.length && slideItems.length) {
-          let currentStoryIndex = 0;
-
-          function setStoryStage(idx, progress) {
-            currentStoryIndex = idx;
-
-            // Numbers transition with smooth directional offset
-            numItems.forEach((numEl, i) => {
-              const isActive = i === idx;
-              numEl.classList.toggle('is-active', isActive);
-              if (!reduce) {
-                if (isActive) {
-                  gsap.to(numEl, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power2.out', overwrite: 'auto' });
-                } else if (i < idx) {
-                  gsap.to(numEl, { opacity: 0, y: -40, scale: 0.95, duration: 0.4, ease: 'power2.in', overwrite: 'auto' });
-                } else {
-                  gsap.to(numEl, { opacity: 0, y: 40, scale: 0.95, duration: 0.4, ease: 'power2.in', overwrite: 'auto' });
-                }
-              }
-            });
-
-            // Slides transition with layered reveals and parallax
-            slideItems.forEach((slideEl, i) => {
-              const isActive = i === idx;
-              slideEl.classList.toggle('is-active', isActive);
-              const img = slideEl.querySelector('.story-slide-image');
-
-              if (!reduce) {
-                if (isActive) {
-                  gsap.to(slideEl, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: 'power2.out', overwrite: 'auto' });
-                  if (img) gsap.to(img, { scale: 1, y: 0, duration: 0.7, ease: 'power2.out', overwrite: 'auto' });
-                } else if (i < idx) {
-                  gsap.to(slideEl, { opacity: 0, y: -26, scale: 0.96, duration: 0.48, ease: 'power2.in', overwrite: 'auto' });
-                  if (img) gsap.to(img, { scale: 1.04, y: -12, duration: 0.48, ease: 'power2.in', overwrite: 'auto' });
-                } else {
-                  gsap.to(slideEl, { opacity: 0, y: 26, scale: 1.04, duration: 0.48, ease: 'power2.in', overwrite: 'auto' });
-                  if (img) gsap.to(img, { scale: 1.04, y: 12, duration: 0.48, ease: 'power2.in', overwrite: 'auto' });
-                }
-              }
-            });
-
-            // Progress bar and dot styling
-            if (storyBar && progress !== undefined) {
-              storyBar.style.width = `${Math.min(100, Math.max(0, progress * 100))}%`;
-            } else if (storyBar) {
-              storyBar.style.width = `${((idx + 1) / 3) * 100}%`;
+        if (storySection && giantDigit && numSubLabel && storyEditorialCopy) {
+          const STORY_STAGES = [
+            {
+              num: '01',
+              numClass: 'num-color-1',
+              label: 'Discover',
+              badge: 'Stage 01 • Countryside Discovery',
+              step: 'Stage 01',
+              heading: 'Discover the Farm',
+              desc: 'Explore the farm, discover nature and experience the beauty of rural life.',
+              tags: ['Wide Open Farmland', 'Morning Mist Trails', 'Native Flora']
+            },
+            {
+              num: '02',
+              numClass: 'num-color-2',
+              label: 'Participate',
+              badge: 'Stage 02 • Agrarian Work',
+              step: 'Stage 02',
+              heading: 'Participate in Farming',
+              desc: 'Get your hands into the soil and experience farming yourself.',
+              tags: ['Paddy Transplantation', 'Soil Stewardship', 'Hands-On Fieldwork']
+            },
+            {
+              num: '03',
+              numClass: 'num-color-3',
+              label: 'Experience',
+              badge: 'Stage 03 • Living Culture',
+              step: 'Stage 03',
+              heading: 'Experience Rural Life',
+              desc: 'Enjoy traditional food, rural culture and meaningful moments.',
+              tags: ['Woodfire Hearth Cooking', 'Artisan Pottery', 'Folk Stories']
             }
+          ];
+
+          let currentStage = 0;
+          let activeTransition = null;
+
+          function applyStageDOM(targetIdx) {
+            const data = STORY_STAGES[targetIdx];
+            if (!data) return;
+            giantDigit.textContent = data.num;
+            giantDigit.className = 'giant-digit ' + data.numClass;
+            numSubLabel.textContent = data.label;
+            if (giantDisplay) giantDisplay.setAttribute('data-stage', String(targetIdx));
+
+            if (storyStepPrefix) storyStepPrefix.textContent = data.step;
+            if (storyHeading) storyHeading.textContent = data.heading;
+            if (storyDesc) storyDesc.textContent = data.desc;
+            if (storyVisualBadge) storyVisualBadge.textContent = data.badge;
+
+            if (storyTagCluster) {
+              storyTagCluster.innerHTML = data.tags
+                .map(t => '<span class="story-chip">' + t + '</span>')
+                .join('');
+            }
+          }
+
+          function transitionToStage(targetIdx, immediate = false, direction = 1) {
+            if (targetIdx === currentStage && !immediate) return;
+
+            const prevIdx = currentStage;
+            currentStage = targetIdx;
+
+            // Update chapter progress track dots
             storyDots.forEach((dot, i) => {
-              dot.classList.toggle('is-active', i === idx);
+              dot.classList.toggle('is-active', i === targetIdx);
+            });
+
+            // Kill any running transition timeline
+            if (activeTransition) {
+              activeTransition.kill();
+              activeTransition = null;
+            }
+
+            const data = STORY_STAGES[targetIdx];
+            if (!data) return;
+
+            const isDown = direction >= 0;
+            const outDigitY = isDown ? -28 : 28;
+            const inDigitY = isDown ? 28 : -28;
+            const outCopyY = isDown ? -14 : 14;
+            const inCopyY = isDown ? 14 : -14;
+
+            if (immediate || reduce) {
+              applyStageDOM(targetIdx);
+              gsap.set([giantDigit, numSubLabel, storyEditorialCopy, storyVisualBadge], { opacity: 1, y: 0 });
+              storyImgs.forEach((img, i) => {
+                if (img) {
+                  img.classList.toggle('is-active', i === targetIdx);
+                  gsap.set(img, { opacity: i === targetIdx ? 1 : 0, scale: 1 });
+                }
+              });
+              return;
+            }
+
+            // Cinematic choreographed transition timeline
+            // 1. Current number moves out and fades.
+            // 2. Current label fades away.
+            // 3. Right-side story copy moves out and fades.
+            // 4. Midpoint: update DOM contents while fully transparent.
+            // 5. Next number enters smoothly with subtle vertical motion.
+            // 6. Corresponding label appears.
+            // 7. Right-side photograph and story transition in sync.
+            const tl = gsap.timeline({
+              defaults: { ease: 'power2.out' },
+              onComplete: () => {
+                activeTransition = null;
+              }
+            });
+            activeTransition = tl;
+
+            // Phase 1: Fade and slide out current elements
+            tl.to(giantDigit, { opacity: 0, y: outDigitY, duration: 0.18, ease: 'power2.in' }, 0)
+              .to(numSubLabel, { opacity: 0, y: outDigitY * 0.5, duration: 0.15, ease: 'power2.in' }, 0)
+              .to(storyEditorialCopy, { opacity: 0, y: outCopyY, duration: 0.18, ease: 'power2.in' }, 0)
+              .to(storyVisualBadge, { opacity: 0, duration: 0.15 }, 0);
+
+            // Phase 2: Switch DOM and set starting positions for entry
+            tl.add(() => {
+              applyStageDOM(targetIdx);
+              gsap.set(giantDigit, { y: inDigitY, opacity: 0 });
+              gsap.set(numSubLabel, { y: inDigitY * 0.5, opacity: 0 });
+              gsap.set(storyEditorialCopy, { y: inCopyY, opacity: 0 });
+              gsap.set(storyVisualBadge, { opacity: 0 });
+            });
+
+            // Phase 3: Animate in incoming number and label
+            tl.to(giantDigit, { opacity: 1, y: 0, duration: 0.32, ease: 'power2.out' }, '+=0.02')
+              .to(numSubLabel, { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out' }, '-=0.22')
+              .to(storyEditorialCopy, { opacity: 1, y: 0, duration: 0.32, ease: 'power2.out' }, '-=0.26')
+              .to(storyVisualBadge, { opacity: 1, duration: 0.24 }, '-=0.2');
+
+            // Phase 4: Synchronized photograph crossfade with subtle scale parallax
+            storyImgs.forEach((img, i) => {
+              if (!img) return;
+              if (i === targetIdx) {
+                img.classList.add('is-active');
+                tl.fromTo(img,
+                  { opacity: 0, scale: 1.05 },
+                  { opacity: 1, scale: 1, duration: 0.48, ease: 'power2.out' },
+                  0.05
+                );
+              } else if (i === prevIdx) {
+                tl.to(img, {
+                  opacity: 0,
+                  scale: 0.98,
+                  duration: 0.42,
+                  ease: 'power2.inOut',
+                  onComplete: () => {
+                    img.classList.remove('is-active');
+                  }
+                }, 0);
+              } else {
+                img.classList.remove('is-active');
+                gsap.set(img, { opacity: 0, scale: 1 });
+              }
             });
           }
 
-          // GSAP ScrollTrigger to track scroll-linked stages
+          // Initialize Stage 0 DOM immediately
+          transitionToStage(0, true, 1);
+
+          // ScrollTrigger with Hysteresis to guarantee zero jitter/flickering
+          let lastProgress = 0;
           ScrollTrigger.create({
             trigger: storySection,
             start: 'top top',
@@ -5014,19 +5090,43 @@
             scrub: 0.3,
             onUpdate: (self) => {
               const p = self.progress;
-              let targetIdx = 0;
-              if (p >= 0.64) {
-                targetIdx = 2;
-              } else if (p >= 0.31) {
-                targetIdx = 1;
-              } else {
-                targetIdx = 0;
+              const scrollDir = p >= lastProgress ? 1 : -1;
+              lastProgress = p;
+
+              // Smooth continuous progress bar fill
+              if (storyProgressBar) {
+                storyProgressBar.style.width = `${Math.min(100, Math.max(0, p * 100))}%`;
               }
-              setStoryStage(targetIdx, p);
+
+              // Hysteresis thresholds for forward vs backward scrolling
+              let targetStage = currentStage;
+              if (scrollDir >= 0) {
+                // Forward scrolling thresholds
+                if (p >= 0.68) {
+                  targetStage = 2;
+                } else if (p >= 0.34) {
+                  targetStage = 1;
+                } else {
+                  targetStage = 0;
+                }
+              } else {
+                // Backward scrolling thresholds with deadband buffer
+                if (p <= 0.30) {
+                  targetStage = 0;
+                } else if (p <= 0.64) {
+                  targetStage = 1;
+                } else {
+                  targetStage = 2;
+                }
+              }
+
+              if (targetStage !== currentStage) {
+                transitionToStage(targetStage, false, scrollDir);
+              }
             }
           });
 
-          // Click on chapter dot jumps to corresponding stage
+          // Chapter dots click navigation
           storyDots.forEach((dot) => {
             dot.addEventListener('click', (e) => {
               e.preventDefault();
@@ -5037,8 +5137,11 @@
               if (st && st.end > st.start) {
                 targetY = st.start + (jumpIdx / 2) * (st.end - st.start);
               }
+              const scrollDir = jumpIdx >= currentStage ? 1 : -1;
+              transitionToStage(jumpIdx, false, scrollDir);
+
               if (window.__lenis) {
-                window.__lenis.scrollTo(targetY, { duration: 1.2 });
+                window.__lenis.scrollTo(targetY, { duration: 1.0 });
               } else {
                 window.scrollTo({ top: targetY, behavior: 'smooth' });
               }

@@ -25,7 +25,7 @@ function assert(condition, message) {
 
 async function runTests() {
   console.log('================================================================');
-  console.log('🧪 ONE DAY KISSAN - PREMIUM SIDE-BY-SIDE SCROLL STORYTELLING TEST');
+  console.log('🧪 ONE DAY KISSAN - FIXED SCROLL ANIMATION & NO OVERLAPPING TEST');
   console.log('================================================================\n');
 
   // Launch Playwright
@@ -47,10 +47,10 @@ async function runTests() {
   // Wait for intro animation to complete so setupScroll() initializes
   console.log('Waiting for intro animation to finish and setupScroll() to run...');
   await page.waitForFunction(() => !document.body.classList.contains('intro'));
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(600);
 
-  // --- 1. Verify Layout Architecture ---
-  console.log('\n--- 1. Verifying Two-Column Side-by-Side Layout ---');
+  // --- 1. Verify Architecture: Single Shared Display (No Overlapping Elements) ---
+  console.log('\n--- 1. Verifying Single-Source-of-Truth DOM Architecture ---');
   const section = page.locator('#stories');
   assert(await section.isVisible(), '#stories section exists on page');
 
@@ -59,61 +59,34 @@ async function runTests() {
 
   const leftCol = section.locator('.stories-col-left');
   const rightCol = section.locator('.stories-col-right');
-  assert(await leftCol.isVisible(), 'Left column for oversized numbers is visible');
-  assert(await rightCol.isVisible(), 'Right column for story visuals is visible');
+  assert(await leftCol.isVisible(), 'Left column for oversized number is visible');
+  assert(await rightCol.isVisible(), 'Right column for story visual card is visible');
 
-  // Verify Side-by-Side Positioning on Desktop
+  // Confirm Side-by-Side on Desktop
   const leftBox = await leftCol.boundingBox();
   const rightBox = await rightCol.boundingBox();
-  assert(leftBox && rightBox, 'Both columns have valid layout boxes');
-  assert(rightBox.x > leftBox.x, `Side-by-side verified on desktop (Left X: ${leftBox.x}, Right X: ${rightBox.x})`);
+  assert(leftBox && rightBox, 'Both columns have valid bounding boxes');
+  assert(rightBox.x > leftBox.x, `Side-by-side layout verified (Left X: ${leftBox.x}, Right X: ${rightBox.x})`);
 
-  // --- 2. Verify Three Stages Content & Visuals ---
-  console.log('\n--- 2. Verifying Three Storytelling Stages ---');
+  // Verify only ONE giant digit and ONE sub-label exists in the entire DOM
+  const digitCount = await page.locator('#stories .giant-digit').count();
+  const subLabelCount = await page.locator('#stories .num-sub-label').count();
+  assert(digitCount === 1, `Exactly 1 giant digit in DOM (Found: ${digitCount}) - physically impossible to overlap!`);
+  assert(subLabelCount === 1, `Exactly 1 sub-label in DOM (Found: ${subLabelCount}) - zero ghost labels!`);
 
-  // Stage 01
-  const slide0 = section.locator('#slide-0');
-  const num0 = section.locator('#num-0');
-  const title0 = await slide0.locator('.story-editorial-heading').textContent();
-  const desc0 = await slide0.locator('.story-editorial-desc').textContent();
-  const img0 = await slide0.locator('.story-slide-image').getAttribute('src');
-  const digit0 = await num0.locator('.giant-digit').textContent();
+  // Verify only ONE copy container exists
+  const copyCount = await page.locator('#stories .story-editorial-copy').count();
+  assert(copyCount === 1, `Exactly 1 editorial copy container in DOM (Found: ${copyCount}) - zero duplicate headings!`);
 
-  assert(digit0.trim() === '01', `Stage 01 number: "${digit0.trim()}"`);
-  assert(title0.trim() === 'Discover the Farm', `Stage 01 title: "${title0.trim()}"`);
-  assert(desc0.includes('Explore the farm, discover nature and experience the beauty of rural life.'), `Stage 01 description verified`);
-  assert(img0.includes('story_01_discover_farm.jpg'), `Stage 01 image verified: ${img0}`);
+  // Verify 3 layered images exist in the visual frame
+  const img0 = page.locator('#storyImg-0');
+  const img1 = page.locator('#storyImg-1');
+  const img2 = page.locator('#storyImg-2');
+  assert(await img0.count() === 1, '#storyImg-0 exists');
+  assert(await img1.count() === 1, '#storyImg-1 exists');
+  assert(await img2.count() === 1, '#storyImg-2 exists');
 
-  // Stage 02
-  const slide1 = section.locator('#slide-1');
-  const num1 = section.locator('#num-1');
-  const title1 = await slide1.locator('.story-editorial-heading').textContent();
-  const desc1 = await slide1.locator('.story-editorial-desc').textContent();
-  const img1 = await slide1.locator('.story-slide-image').getAttribute('src');
-  const digit1 = await num1.locator('.giant-digit').textContent();
-
-  assert(digit1.trim() === '02', `Stage 02 number: "${digit1.trim()}"`);
-  assert(title1.trim() === 'Participate in Farming', `Stage 02 title: "${title1.trim()}"`);
-  assert(desc1.includes('Get your hands into the soil and experience farming yourself.'), `Stage 02 description verified`);
-  assert(img1.includes('story_02_participate_farming.jpg'), `Stage 02 image verified: ${img1}`);
-
-  // Stage 03
-  const slide2 = section.locator('#slide-2');
-  const num2 = section.locator('#num-2');
-  const title2 = await slide2.locator('.story-editorial-heading').textContent();
-  const desc2 = await slide2.locator('.story-editorial-desc').textContent();
-  const img2 = await slide2.locator('.story-slide-image').getAttribute('src');
-  const digit2 = await num2.locator('.giant-digit').textContent();
-
-  assert(digit2.trim() === '03', `Stage 03 number: "${digit2.trim()}"`);
-  assert(title2.trim() === 'Experience Rural Life', `Stage 03 title: "${title2.trim()}"`);
-  assert(desc2.includes('Enjoy traditional food, rural culture and meaningful moments.'), `Stage 03 description verified`);
-  assert(img2.includes('story_03_experience_rural_life.jpg'), `Stage 03 image verified: ${img2}`);
-
-  // --- 3. Verify Scroll-Driven Interactive Progress ---
-  console.log('\n--- 3. Testing Scroll-Driven Transitions ---');
-  
-  // Helper to scroll to an exact stage progress fraction via ScrollTrigger
+  // Helper to scroll to exact fraction inside ScrollTrigger
   async function scrollToStageFraction(fraction) {
     await page.evaluate((frac) => {
       const el = document.getElementById('stories');
@@ -126,15 +99,25 @@ async function runTests() {
         ScrollTrigger.update();
       }
     }, fraction);
-    await page.waitForTimeout(400);
+    await page.waitForTimeout(650);
   }
 
-  // Scroll to 10% progress (Stage 01 active)
-  await scrollToStageFraction(0.10);
+  // --- 2. Test Forward Scroll Stages ---
+  console.log('\n--- 2. Testing Forward Scroll Transitions (01 -> 02 -> 03) ---');
 
-  let isNum0Active = await num0.evaluate(el => el.classList.contains('is-active'));
-  let isSlide0Active = await slide0.evaluate(el => el.classList.contains('is-active'));
-  assert(isNum0Active && isSlide0Active, 'Stage 01 active at 10% scroll progress');
+  // Scroll to 10% -> Stage 01
+  await scrollToStageFraction(0.10);
+  let curDigit = (await page.locator('#giantDigit').textContent()).trim();
+  let curLabel = (await page.locator('#numSubLabel').textContent()).trim();
+  let curHeading = (await page.locator('#storyHeading').textContent()).trim();
+  let curDesc = (await page.locator('#storyDesc').textContent()).trim();
+  let img0Opacity = await page.evaluate(() => window.getComputedStyle(document.getElementById('storyImg-0')).opacity);
+
+  assert(curDigit === '01', `Stage 01 number is "01" (actual: "${curDigit}")`);
+  assert(curLabel === 'Discover', `Stage 01 label is "Discover" (actual: "${curLabel}")`);
+  assert(curHeading === 'Discover the Farm', `Stage 01 heading is "Discover the Farm"`);
+  assert(curDesc.includes('Explore the farm, discover nature and experience the beauty of rural life.'), `Stage 01 description verified`);
+  assert(parseFloat(img0Opacity) > 0.8, `Stage 01 image is fully visible (opacity: ${img0Opacity})`);
 
   // Screenshot Stage 01
   const shot0 = path.join(LOCAL_SCREENSHOT_DIR, '06_story_stage_01_discover.png');
@@ -142,12 +125,19 @@ async function runTests() {
   fs.copyFileSync(shot0, path.join(ARTIFACT_SCREENSHOT_DIR, '06_story_stage_01_discover.png'));
   console.log(`📸 Saved screenshot: 06_story_stage_01_discover.png`);
 
-  // Scroll to 50% progress (Stage 02 active)
+  // Scroll to 50% -> Stage 02
   await scrollToStageFraction(0.50);
+  curDigit = (await page.locator('#giantDigit').textContent()).trim();
+  curLabel = (await page.locator('#numSubLabel').textContent()).trim();
+  curHeading = (await page.locator('#storyHeading').textContent()).trim();
+  curDesc = (await page.locator('#storyDesc').textContent()).trim();
+  let img1Opacity = await page.evaluate(() => window.getComputedStyle(document.getElementById('storyImg-1')).opacity);
 
-  let isNum1Active = await num1.evaluate(el => el.classList.contains('is-active'));
-  let isSlide1Active = await slide1.evaluate(el => el.classList.contains('is-active'));
-  assert(isNum1Active && isSlide1Active, 'Stage 02 active at 50% scroll progress');
+  assert(curDigit === '02', `Stage 02 number transitioned cleanly to "02" (actual: "${curDigit}")`);
+  assert(curLabel === 'Participate', `Stage 02 label is "Participate" (actual: "${curLabel}")`);
+  assert(curHeading === 'Participate in Farming', `Stage 02 heading is "Participate in Farming"`);
+  assert(curDesc.includes('Get your hands into the soil and experience farming yourself.'), `Stage 02 description verified`);
+  assert(parseFloat(img1Opacity) > 0.8, `Stage 02 image is fully visible (opacity: ${img1Opacity})`);
 
   // Screenshot Stage 02
   const shot1 = path.join(LOCAL_SCREENSHOT_DIR, '07_story_stage_02_participate.png');
@@ -155,12 +145,19 @@ async function runTests() {
   fs.copyFileSync(shot1, path.join(ARTIFACT_SCREENSHOT_DIR, '07_story_stage_02_participate.png'));
   console.log(`📸 Saved screenshot: 07_story_stage_02_participate.png`);
 
-  // Scroll to 85% progress (Stage 03 active)
+  // Scroll to 85% -> Stage 03
   await scrollToStageFraction(0.85);
+  curDigit = (await page.locator('#giantDigit').textContent()).trim();
+  curLabel = (await page.locator('#numSubLabel').textContent()).trim();
+  curHeading = (await page.locator('#storyHeading').textContent()).trim();
+  curDesc = (await page.locator('#storyDesc').textContent()).trim();
+  let img2Opacity = await page.evaluate(() => window.getComputedStyle(document.getElementById('storyImg-2')).opacity);
 
-  let isNum2Active = await num2.evaluate(el => el.classList.contains('is-active'));
-  let isSlide2Active = await slide2.evaluate(el => el.classList.contains('is-active'));
-  assert(isNum2Active && isSlide2Active, 'Stage 03 active at 85% scroll progress');
+  assert(curDigit === '03', `Stage 03 number transitioned cleanly to "03" (actual: "${curDigit}")`);
+  assert(curLabel === 'Experience', `Stage 03 label is "Experience" (actual: "${curLabel}")`);
+  assert(curHeading === 'Experience Rural Life', `Stage 03 heading is "Experience Rural Life"`);
+  assert(curDesc.includes('Enjoy traditional food, rural culture and meaningful moments.'), `Stage 03 description verified`);
+  assert(parseFloat(img2Opacity) > 0.8, `Stage 03 image is fully visible (opacity: ${img2Opacity})`);
 
   // Screenshot Stage 03
   const shot2 = path.join(LOCAL_SCREENSHOT_DIR, '08_story_stage_03_experience.png');
@@ -168,16 +165,53 @@ async function runTests() {
   fs.copyFileSync(shot2, path.join(ARTIFACT_SCREENSHOT_DIR, '08_story_stage_03_experience.png'));
   console.log(`📸 Saved screenshot: 08_story_stage_03_experience.png`);
 
-  // --- 4. Interactive Dot Jump Navigation ---
-  console.log('\n--- 4. Testing Interactive Chapter Dot Navigation ---');
+  // --- 3. Test Backward Scroll (03 -> 02 -> 01) ---
+  console.log('\n--- 3. Testing Backward Scroll Transitions (03 -> 02 -> 01) ---');
+
+  // Scroll back to 50% -> Stage 02
+  await scrollToStageFraction(0.50);
+  curDigit = (await page.locator('#giantDigit').textContent()).trim();
+  curLabel = (await page.locator('#numSubLabel').textContent()).trim();
+  assert(curDigit === '02', `Backward scroll cleanly transitioned to "02"`);
+  assert(curLabel === 'Participate', `Backward scroll label is "Participate"`);
+
+  // Scroll back to 10% -> Stage 01
+  await scrollToStageFraction(0.10);
+  curDigit = (await page.locator('#giantDigit').textContent()).trim();
+  curLabel = (await page.locator('#numSubLabel').textContent()).trim();
+  assert(curDigit === '01', `Backward scroll cleanly transitioned to "01"`);
+  assert(curLabel === 'Discover', `Backward scroll label is "Discover"`);
+
+  // --- 4. Rapid Scrolling Stress Test (Zero Overlap & Zero Desync) ---
+  console.log('\n--- 4. Stress Testing Rapid Scrolling Back and Forth ---');
+  for (let i = 0; i < 5; i++) {
+    await scrollToStageFraction(0.90);
+    await page.waitForTimeout(100);
+    await scrollToStageFraction(0.05);
+    await page.waitForTimeout(100);
+  }
+  await page.waitForTimeout(600);
+  curDigit = (await page.locator('#giantDigit').textContent()).trim();
+  assert(['01', '02', '03'].includes(curDigit), `Valid single digit state after rapid scrolling: "${curDigit}"`);
+  const finalDigitCount = await page.locator('#stories .giant-digit').count();
+  assert(finalDigitCount === 1, `Exactly 1 giant digit maintained during stress test`);
+
+  // --- 5. Chapter Dot Navigation ---
+  console.log('\n--- 5. Testing Chapter Dot Direct Click Navigation ---');
+  const dot2 = section.locator('.story-dot[data-jump="1"]');
+  await dot2.click();
+  await page.waitForTimeout(650);
+  curDigit = (await page.locator('#giantDigit').textContent()).trim();
+  assert(curDigit === '02', `Clicking 02 dot switched digit to "02"`);
+
   const dot1 = section.locator('.story-dot[data-jump="0"]');
   await dot1.click();
-  await page.waitForTimeout(600);
-  isNum0Active = await num0.evaluate(el => el.classList.contains('is-active'));
-  assert(isNum0Active, 'Clicking Chapter 01 dot jumped back to Stage 01');
+  await page.waitForTimeout(650);
+  curDigit = (await page.locator('#giantDigit').textContent()).trim();
+  assert(curDigit === '01', `Clicking 01 dot switched digit to "01"`);
 
-  // --- 5. Responsiveness & Horizontal Overflow (6 Viewports) ---
-  console.log('\n--- 5. Responsiveness & Horizontal Overflow Verification (6 Viewports) ---');
+  // --- 6. Viewport Responsiveness & Horizontal Overflow (6 Viewports) ---
+  console.log('\n--- 6. Responsiveness & Horizontal Overflow (6 Viewports) ---');
   const viewports = [
     { name: 'desktop_1920x1080', width: 1920, height: 1080 },
     { name: 'desktop_1440x900',  width: 1440, height: 900 },
@@ -210,7 +244,7 @@ async function runTests() {
 
   await browser.close();
   console.log('\n================================================================');
-  console.log('🎉 ALL SIDE-BY-SIDE SCROLL STORYTELLING TESTS PASSED!');
+  console.log('🎉 ALL FIXED SCROLL ANIMATION & OVERLAP TESTS PASSED!');
   console.log('================================================================');
 }
 
