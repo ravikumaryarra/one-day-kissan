@@ -24,7 +24,7 @@ function assert(condition, message) {
 
 async function runTests() {
   console.log('========================================================================');
-  console.log('🌟 ONE DAY KISSAN — THE CINEMATIC WELCOME COMPREHENSIVE TEST SUITE');
+  console.log('🌟 ONE DAY KISSAN — WELCOME POPUP REFINEMENT (VERSION 3) TEST SUITE');
   console.log('========================================================================\n');
 
   const browser = await chromium.launch({
@@ -33,9 +33,9 @@ async function runTests() {
   });
 
   // =========================================================================
-  // TEST SUITE 1: FIRST VISIT AUTO-OPEN & CINEMATIC COMPOSITION VERIFICATION
+  // TEST SUITE 1: FIRST VISIT AUTO-OPEN, CONTENT & BRIGHTNESS VERIFICATION
   // =========================================================================
-  console.log('--- TEST 1: First Visit Auto-Open & Exact Content Verification ---');
+  console.log('--- TEST 1: First Visit Auto-Open, Content & Treatment Verification ---');
   let context = await browser.newContext({
     viewport: { width: 1440, height: 900 }
   });
@@ -76,10 +76,6 @@ async function runTests() {
   const headingText = (await page.locator('#welcomeHeading').textContent()).trim();
   assert(headingText === 'Welcome to the land of little wonders.', `Main heading matches exact required text: "${headingText}"`);
 
-  const quoteText = (await page.locator('#welcomeQuote').textContent()).trim();
-  assert(quoteText.includes('Sometimes, the best way to reconnect with life is to return to the land.'),
-    `Contemplative quote matches exact required text: "${quoteText}"`);
-
   const taglineText = (await page.locator('#welcomePopupTagline').textContent()).trim();
   assert(taglineText === 'A DAY AWAY FROM THE ORDINARY',
     `Closing brand tagline matches exact required text: "${taglineText}"`);
@@ -102,30 +98,106 @@ async function runTests() {
   });
   assert(imgLoaded, 'Authentic Telangana farmland image loaded full-bleed with natural dimensions');
 
-  // Verify background scrolling locked
-  const isLocked = await page.evaluate(() => {
-    return document.body.style.overflow === 'hidden';
+  // =========================================================================
+  // TEST SUITE 2: BACKGROUND BRIGHTNESS & BALANCED LAYERED TREATMENT
+  // =========================================================================
+  console.log('\n--- TEST 2: Background Image Brightness & Scrim Treatment Audit ---');
+  const bgImgFilter = await page.evaluate(() => {
+    const img = document.getElementById('welcomePopupImg');
+    return img ? window.getComputedStyle(img).filter : '';
   });
+  assert(bgImgFilter.includes('brightness') || bgImgFilter === 'none' || bgImgFilter === '',
+    `Image filter has balanced brightness treatment (filter: "${bgImgFilter}")`);
+
+  const scrimBg = await page.evaluate(() => {
+    const scrim = document.querySelector('.welcome-cinematic-scrim');
+    return scrim ? window.getComputedStyle(scrim).backgroundImage : '';
+  });
+  assert(scrimBg.includes('radial-gradient') && scrimBg.includes('linear-gradient'),
+    'Scrim utilizes layered radial and linear gradients for sunlight visibility and text legibility');
+
+  // Verify background scrolling locked
+  const isLocked = await page.evaluate(() => document.body.style.overflow === 'hidden');
   assert(isLocked, 'Background scrolling is locked while cinematic welcome is open');
 
-  // Screenshot Desktop Welcome Popup
+  // Screenshot Desktop Welcome Popup (Version 3 Refined)
   const shot35 = path.join(LOCAL_SCREENSHOT_DIR, '35_warm_welcome_popup_desktop.png');
   await page.screenshot({ path: shot35 });
   fs.copyFileSync(shot35, path.join(ARTIFACT_SCREENSHOT_DIR, '35_warm_welcome_popup_desktop.png'));
   console.log('📸 Saved screenshot: 35_warm_welcome_popup_desktop.png');
 
   // =========================================================================
-  // TEST SUITE 2: CLICK INSIDE DOES NOT CLOSE
+  // TEST SUITE 3: QUOTE TYPOGRAPHY READABILITY AUDIT (NO THIN ITALICS)
   // =========================================================================
-  console.log('\n--- TEST 2: Click Inside Card Does Not Close ---');
-  await page.locator('#welcomeHeading').click();
-  await page.waitForTimeout(300);
-  assert(await modal.evaluate(el => el.classList.contains('is-open')), 'Clicking inside welcome card keeps it open');
+  console.log('\n--- TEST 3: Quote Typography Readability Audit ---');
+  const quoteStyles = await page.evaluate(() => {
+    const q = document.getElementById('welcomeQuote');
+    if (!q) return null;
+    const computed = window.getComputedStyle(q);
+    return {
+      fontFamily: computed.fontFamily,
+      fontStyle: computed.fontStyle,
+      fontWeight: computed.fontWeight,
+      fontSize: computed.fontSize,
+      lineHeight: computed.lineHeight,
+      color: computed.color
+    };
+  });
+  assert(quoteStyles !== null, 'Quote element exists in DOM');
+  assert(quoteStyles.fontStyle === 'normal', `Quote fontStyle is normal (not thin decorative italics): "${quoteStyles.fontStyle}"`);
+  assert(quoteStyles.fontFamily.toLowerCase().includes('manrope') || quoteStyles.fontFamily.includes('sans-serif'),
+    `Quote uses clean, readable editorial font: "${quoteStyles.fontFamily}"`);
+  console.log(`   Typography Specs: ${quoteStyles.fontFamily}, ${quoteStyles.fontSize}, style: ${quoteStyles.fontStyle}, line-height: ${quoteStyles.lineHeight}`);
 
   // =========================================================================
-  // TEST SUITE 3: CLOSE BUTTON (×) & SCROLL RESTORATION
+  // TEST SUITE 4: ROTATING WELCOME QUOTES & CONSECUTIVE DIFFERENTIATION
   // =========================================================================
-  console.log('\n--- TEST 3: Close via Close Button (×) ---');
+  console.log('\n--- TEST 4: Rotating Welcome Quotes & Consecutive Difference ---');
+  const quotesList = await page.evaluate(() => window.__welcomePopup ? window.__welcomePopup.getQuotesList() : []);
+  assert(quotesList.length >= 10, `Curated quotes collection contains at least 10 entries (found: ${quotesList.length})`);
+
+  const initialQuote = await page.evaluate(() => window.__welcomePopup ? window.__welcomePopup.getCurrentQuote() : '');
+  assert(quotesList.includes(initialQuote), `Initial quote is from curated collection: "${initialQuote}"`);
+
+  // Stability test: Reloading within same session must preserve the exact same quote
+  await page.evaluate(() => window.__welcomePopup.resetDismissal()); // reset dismissal only, keep session quote
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(2000);
+  const stableQuote = await page.evaluate(() => window.__welcomePopup ? window.__welcomePopup.getCurrentQuote() : '');
+  assert(stableQuote === initialQuote, `Quote remains stable across reloads during the same visit ("${stableQuote}")`);
+  await context.close();
+
+  // Test Consecutive Visit: Fresh browser session must select a DIFFERENT quote
+  console.log('\n--- TEST 4B: Next Visit Selects Non-Consecutive Quote ---');
+  context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  page = await context.newPage();
+
+  // Seed localStorage with initialQuote to simulate previous visit
+  await page.addInitScript((prev) => {
+    localStorage.setItem('odk_last_welcome_quote', prev);
+  }, initialQuote);
+
+  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(2200);
+
+  const nextVisitQuote = await page.evaluate(() => window.__welcomePopup ? window.__welcomePopup.getCurrentQuote() : '');
+  assert(quotesList.includes(nextVisitQuote), `Next visit selected valid curated quote: "${nextVisitQuote}"`);
+  assert(nextVisitQuote !== initialQuote,
+    `Consecutive visit strictly avoided repeating previous quote!\n   Prev: "${initialQuote}"\n   Next: "${nextVisitQuote}"`);
+
+  // =========================================================================
+  // TEST SUITE 5: CLICK INSIDE DOES NOT CLOSE
+  // =========================================================================
+  console.log('\n--- TEST 5: Click Inside Card Does Not Close ---');
+  await page.locator('#welcomeHeading').click();
+  await page.waitForTimeout(300);
+  assert(await page.locator('#welcomePopupModal').evaluate(el => el.classList.contains('is-open')),
+    'Clicking inside welcome card keeps it open');
+
+  // =========================================================================
+  // TEST SUITE 6: CLOSE BUTTON (×) & SCROLL RESTORATION
+  // =========================================================================
+  console.log('\n--- TEST 6: Close via Close Button (×) ---');
   const closeBtn = page.locator('#welcomePopupCloseBtn');
   assert(await closeBtn.isVisible(), 'Close button (×) is visible in top right');
   assert(await closeBtn.getAttribute('aria-label') === 'Close welcome message', 'Close button has accessible aria-label="Close welcome message"');
@@ -133,30 +205,30 @@ async function runTests() {
   await closeBtn.click();
   await page.waitForTimeout(400);
 
-  assert(await modal.evaluate(el => !el.classList.contains('is-open')), 'Popup cleanly closed via × button');
+  assert(await page.locator('#welcomePopupModal').evaluate(el => !el.classList.contains('is-open')),
+    'Popup cleanly closed via × button');
 
-  const isUnlocked = await page.evaluate(() => {
-    return document.body.style.overflow !== 'hidden';
-  });
+  const isUnlocked = await page.evaluate(() => document.body.style.overflow !== 'hidden');
   assert(isUnlocked, 'Background scrolling restored after closing');
 
   const sessionDismissed = await page.evaluate(() => sessionStorage.getItem('odk_welcome_dismissed'));
   assert(sessionDismissed === 'true', 'Session state marked as dismissed in sessionStorage');
 
   // =========================================================================
-  // TEST SUITE 4: REFRESH IN SAME SESSION STAYS DISMISSED
+  // TEST SUITE 7: REFRESH IN SAME SESSION STAYS DISMISSED
   // =========================================================================
-  console.log('\n--- TEST 4: Refresh in Same Session Stays Dismissed ---');
+  console.log('\n--- TEST 7: Refresh in Same Session Stays Dismissed ---');
   await page.reload({ waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(2000);
 
-  assert(await modal.evaluate(el => !el.classList.contains('is-open')), 'Popup stays dismissed on page refresh within same session');
+  assert(await page.locator('#welcomePopupModal').evaluate(el => !el.classList.contains('is-open')),
+    'Popup stays dismissed on page refresh within same session');
   await context.close();
 
   // =========================================================================
-  // TEST SUITE 5: NEW BROWSER SESSION RE-OPENS POPUP & TEST ESCAPE KEY
+  // TEST SUITE 8: NEW BROWSER SESSION RE-OPENS POPUP & TEST ESCAPE KEY
   // =========================================================================
-  console.log('\n--- TEST 5: New Browser Session & Close via Escape Key ---');
+  console.log('\n--- TEST 8: New Browser Session & Close via Escape Key ---');
   context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   page = await context.newPage();
 
@@ -178,9 +250,9 @@ async function runTests() {
   await context.close();
 
   // =========================================================================
-  // TEST SUITE 6: CLICK OUTSIDE (BACKDROP) DISMISSAL
+  // TEST SUITE 9: CLICK OUTSIDE (BACKDROP) DISMISSAL
   // =========================================================================
-  console.log('\n--- TEST 6: Close via Click Outside on Backdrop ---');
+  console.log('\n--- TEST 9: Close via Click Outside on Backdrop ---');
   context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   page = await context.newPage();
 
@@ -199,9 +271,9 @@ async function runTests() {
   await context.close();
 
   // =========================================================================
-  // TEST SUITE 7: EXPLORATION ACTION ("Explore the experience →")
+  // TEST SUITE 10: EXPLORATION ACTION ("Explore the experience →")
   // =========================================================================
-  console.log('\n--- TEST 7: Exploration Action ("Explore the experience →") ---');
+  console.log('\n--- TEST 10: Exploration Action ("Explore the experience →") ---');
   context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   page = await context.newPage();
 
@@ -229,9 +301,9 @@ async function runTests() {
   await context.close();
 
   // =========================================================================
-  // TEST SUITE 8: ACCESSIBILITY, FOCUS TRAP & KEYBOARD NAVIGATION
+  // TEST SUITE 11: ACCESSIBILITY, FOCUS TRAP & DIALOG SEMANTICS
   // =========================================================================
-  console.log('\n--- TEST 8: Accessibility & Focus Trapping ---');
+  console.log('\n--- TEST 11: Accessibility & Focus Trapping ---');
   context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   page = await context.newPage();
 
@@ -266,9 +338,9 @@ async function runTests() {
   await context.close();
 
   // =========================================================================
-  // TEST SUITE 9: REDUCED MOTION PREFERENCE
+  // TEST SUITE 12: REDUCED MOTION PREFERENCE
   // =========================================================================
-  console.log('\n--- TEST 9: Reduced Motion Support ---');
+  console.log('\n--- TEST 12: Reduced Motion Support ---');
   context = await browser.newContext({
     viewport: { width: 1440, height: 900 },
     reducedMotion: 'reduce'
@@ -287,9 +359,9 @@ async function runTests() {
   await context.close();
 
   // =========================================================================
-  // TEST SUITE 10: RESPONSIVE BEHAVIOUR & 0px OVERFLOW ACROSS ALL 7 VIEWPORTS
+  // TEST SUITE 13: RESPONSIVE BEHAVIOUR & 0px OVERFLOW ACROSS ALL 7 VIEWPORTS
   // =========================================================================
-  console.log('\n--- TEST 10: Responsive Layout & Overflow Audit across 7 Viewports ---');
+  console.log('\n--- TEST 13: Responsive Layout & Overflow Audit across 7 Viewports ---');
   const viewports = [
     { name: '1920px Desktop Large', width: 1920, height: 1080 },
     { name: '1440px Desktop Standard', width: 1440, height: 900 },
@@ -333,9 +405,9 @@ async function runTests() {
   }
 
   // =========================================================================
-  // TEST SUITE 11: 3D THREE.JS CANVAS INTEGRITY
+  // TEST SUITE 14: 3D THREE.JS CANVAS INTEGRITY
   // =========================================================================
-  console.log('\n--- TEST 11: 3D Three.js & Animation Integrity ---');
+  console.log('\n--- TEST 14: 3D Three.js & Animation Integrity ---');
   context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   page = await context.newPage();
 
@@ -353,7 +425,7 @@ async function runTests() {
   await browser.close();
 
   console.log('\n========================================================================');
-  console.log('🎉 ALL 15 CINEMATIC WELCOME TESTS PASSED WITH 100% SUCCESS!');
+  console.log('🎉 ALL 17 WELCOME POPUP REFINEMENT (V3) TESTS PASSED WITH 100% SUCCESS!');
   console.log('========================================================================\n');
 }
 

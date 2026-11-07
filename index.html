@@ -5328,12 +5328,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #0E1A11;
-      border: 1px solid rgba(220, 166, 79, 0.35);
+      background: #122115;
+      border: 1px solid rgba(220, 166, 79, 0.45);
       box-shadow:
-        0 40px 100px rgba(0, 0, 0, 0.65),
-        0 15px 35px rgba(0, 0, 0, 0.4),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        0 36px 90px rgba(0, 0, 0, 0.52),
+        0 12px 30px rgba(0, 0, 0, 0.32),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.16);
       transform: scale(0.96) translateY(14px);
       opacity: 0;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
@@ -5362,7 +5362,7 @@
       object-position: center;
       display: block;
       transform: scale(1.08);
-      filter: brightness(0.92) contrast(1.05);
+      filter: brightness(1.06) saturate(1.14) contrast(1.02);
       transition: transform 2.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -5370,14 +5370,20 @@
       transform: scale(1);
     }
 
-    /* Sophisticated Dark/Earthy Scrim Overlay */
+    /* Refined Layered Scrim: Reveals Lush Daylight while Ensuring Text Legibility */
     .welcome-cinematic-scrim {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at center, rgba(14, 26, 18, 0.65) 0%, rgba(10, 20, 14, 0.86) 65%, rgba(6, 13, 9, 0.95) 100%),
-        linear-gradient(to bottom, rgba(8, 16, 11, 0.5) 0%, rgba(10, 20, 14, 0.72) 50%, rgba(6, 13, 9, 0.96) 100%);
-      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.6);
+        /* Subtle central radial gradient directly behind typography */
+        radial-gradient(ellipse 72% 62% at 50% 50%, rgba(10, 22, 14, 0.52) 0%, rgba(10, 22, 14, 0.32) 55%, rgba(10, 22, 14, 0.05) 100%),
+        /* Vertical gradient letting golden morning sun shine at top and softly anchoring base */
+        linear-gradient(to bottom,
+          rgba(10, 22, 14, 0.12) 0%,
+          rgba(10, 22, 14, 0.22) 28%,
+          rgba(8, 18, 12, 0.52) 65%,
+          rgba(6, 14, 9, 0.76) 100%);
+      box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.3);
       pointer-events: none;
     }
 
@@ -5452,11 +5458,11 @@
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       font-size: clamp(38px, 4.8vw, 56px);
-      font-weight: 400;
+      font-weight: 600;
       line-height: 1.1;
       color: #FAF7F0;
       margin: 0 0 10px 0;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55);
       letter-spacing: -0.01em;
       opacity: 0;
       transform: translateY(12px);
@@ -5467,11 +5473,11 @@
     .welcome-cinematic-heading {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(22px, 2.6vw, 32px);
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1.28;
       color: #FAF7F0;
-      margin: 0 0 20px 0;
-      text-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+      margin: 0 0 18px 0;
+      text-shadow: 0 3px 14px rgba(0, 0, 0, 0.5);
       max-width: 660px;
       opacity: 0;
       transform: translateY(12px);
@@ -5482,23 +5488,24 @@
     .welcome-cinematic-divider {
       width: 56px;
       height: 1.5px;
-      background: linear-gradient(90deg, transparent, rgba(220, 166, 79, 0.85), transparent);
-      margin: 0 auto 22px;
+      background: linear-gradient(90deg, transparent, rgba(220, 166, 79, 0.9), transparent);
+      margin: 0 auto 20px;
       opacity: 0;
       transition: opacity 0.6s ease 0.6s;
     }
 
-    /* Contemplative Quote */
+    /* Highly Readable Premium Editorial Quote (Clean Sans-Serif, Warm Ivory, Generous Line Height) */
     .welcome-cinematic-quote {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic;
-      font-size: clamp(15.5px, 1.6vw, 19px);
-      font-weight: 400;
-      line-height: 1.62;
-      color: rgba(250, 247, 240, 0.92);
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: clamp(16.5px, 1.8vw, 20.5px);
+      line-height: 1.68;
+      letter-spacing: 0.012em;
+      color: #FAF7F0;
       margin: 0 auto 28px;
-      max-width: 620px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      max-width: 660px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.4);
       opacity: 0;
       transform: translateY(12px);
       transition: opacity 0.7s ease 0.7s, transform 0.7s ease 0.7s;
@@ -5629,9 +5636,10 @@
       }
 
       .welcome-cinematic-quote {
-        font-size: 14px;
-        line-height: 1.55;
+        font-size: 15px;
+        line-height: 1.62;
         margin-bottom: 22px;
+        max-width: 92%;
       }
 
       .welcome-explore-link {
@@ -8494,7 +8502,7 @@
         <h3 class="welcome-cinematic-heading" id="welcomeHeading">Welcome to the land of little wonders.</h3>
         <div class="welcome-cinematic-divider" aria-hidden="true"></div>
         <blockquote class="welcome-cinematic-quote" id="welcomeQuote">
-          &ldquo;Sometimes, the best way to reconnect with life is to return to the land.&rdquo;
+          &ldquo;The best memories are made where the earth meets the soul.&rdquo;
         </blockquote>
         <div class="welcome-cinematic-actions">
           <button type="button" class="welcome-explore-link" id="welcomeExploreBtn">
@@ -10708,7 +10716,7 @@
     })();
   </script>
 
-  <!-- Dedicated Cinematic Welcome Experience Engine -->
+  <!-- Dedicated Cinematic Welcome Experience Engine (with Dynamic Rotating Quotes) -->
   <script>
     (function initCinematicWelcomeEngine() {
       const modal = document.getElementById('welcomePopupModal');
@@ -10719,9 +10727,70 @@
 
       if (!modal || !card) return;
 
+      // Curated collection of original nature & farm-life welcome messages
+      const WELCOME_QUOTES = [
+        "The best memories are made where the earth meets the soul.",
+        "Step away from the rush. Find joy in the rhythm of nature.",
+        "A little time on the land can bring you closer to life.",
+        "Where every sunrise tells a story and every field holds a memory.",
+        "Reconnect with nature. Rediscover the simple joys of life.",
+        "Sometimes, all we need is a day closer to nature.",
+        "Come for a day. Leave with a lifetime of memories.",
+        "The beauty of life is often found in the simplest things.",
+        "Feel the soil, breathe the fresh air, and experience life differently.",
+        "Every field has a story. Every visit creates a memory.",
+        "Sometimes, the best way to reconnect with life is to return to the land.",
+        "In every seed sown and every furrow walked, life whispers its quiet wisdom."
+      ];
+
       const SESSION_KEY = 'odk_welcome_dismissed';
+      const SESSION_QUOTE_KEY = 'odk_current_session_quote';
+      const LOCAL_LAST_QUOTE_KEY = 'odk_last_welcome_quote';
+
       let previouslyFocusedElement = null;
       let isOpen = false;
+
+      // Select a quote randomly on a new visit, avoiding consecutive repetition
+      function getOrSelectQuote() {
+        // 1. If this session/visit already has a selected quote, keep it stable
+        try {
+          const sessionQuote = sessionStorage.getItem(SESSION_QUOTE_KEY);
+          if (sessionQuote && WELCOME_QUOTES.includes(sessionQuote)) {
+            return sessionQuote;
+          }
+        } catch (e) {}
+
+        // 2. Retrieve the quote displayed on the previous visit from localStorage
+        let lastQuote = '';
+        try {
+          lastQuote = localStorage.getItem(LOCAL_LAST_QUOTE_KEY) || '';
+        } catch (e) {}
+
+        // 3. Filter candidates to strictly prevent consecutive identical quotes
+        const candidates = WELCOME_QUOTES.filter(q => q !== lastQuote);
+        const pool = candidates.length > 0 ? candidates : WELCOME_QUOTES;
+        const randomIndex = Math.floor(Math.random() * pool.length);
+        const chosenQuote = pool[randomIndex];
+
+        // 4. Save to sessionStorage (visit stability) and localStorage (consecutive comparison)
+        try {
+          sessionStorage.setItem(SESSION_QUOTE_KEY, chosenQuote);
+          localStorage.setItem(LOCAL_LAST_QUOTE_KEY, chosenQuote);
+        } catch (e) {}
+
+        return chosenQuote;
+      }
+
+      function updateQuoteElement(quoteText) {
+        const quoteEl = document.getElementById('welcomeQuote');
+        if (quoteEl) {
+          quoteEl.textContent = `“${quoteText}”`;
+        }
+      }
+
+      // Initialize the quote immediately for the current visit
+      const initialQuote = getOrSelectQuote();
+      updateQuoteElement(initialQuote);
 
       function isDismissed() {
         try {
@@ -10741,6 +10810,9 @@
         if (isOpen) return;
         isOpen = true;
         previouslyFocusedElement = document.activeElement;
+
+        // Ensure quote element reflects stable session quote
+        updateQuoteElement(getOrSelectQuote());
 
         // Prevent background scrolling
         if (window.__lenis) {
@@ -10899,9 +10971,28 @@
         closeAndBook: () => closePopup(true),
         isDismissed,
         isOpen: () => isOpen,
+        getCurrentQuote: () => {
+          const quoteEl = document.getElementById('welcomeQuote');
+          return quoteEl ? quoteEl.textContent.replace(/^“|”$/g, '').trim() : '';
+        },
+        getQuotesList: () => [...WELCOME_QUOTES],
+        rotateQuoteForNextVisit: () => {
+          try {
+            sessionStorage.removeItem(SESSION_QUOTE_KEY);
+          } catch (e) {}
+          const newQuote = getOrSelectQuote();
+          updateQuoteElement(newQuote);
+          return newQuote;
+        },
+        resetDismissal: () => {
+          try {
+            sessionStorage.removeItem(SESSION_KEY);
+          } catch (e) {}
+        },
         resetSession: () => {
           try {
             sessionStorage.removeItem(SESSION_KEY);
+            sessionStorage.removeItem(SESSION_QUOTE_KEY);
           } catch (e) {}
         }
       };
