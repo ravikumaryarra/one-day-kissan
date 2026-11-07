@@ -24,7 +24,7 @@ function assert(condition, message) {
 
 async function runTests() {
   console.log('========================================================================');
-  console.log('🌟 ONE DAY KISSAN — WARM WELCOME POPUP COMPREHENSIVE TEST SUITE');
+  console.log('🌟 ONE DAY KISSAN — THE CINEMATIC WELCOME COMPREHENSIVE TEST SUITE');
   console.log('========================================================================\n');
 
   const browser = await chromium.launch({
@@ -33,9 +33,9 @@ async function runTests() {
   });
 
   // =========================================================================
-  // TEST SUITE 1: FIRST VISIT AUTO-OPEN & EXACT COPY VERIFICATION
+  // TEST SUITE 1: FIRST VISIT AUTO-OPEN & CINEMATIC COMPOSITION VERIFICATION
   // =========================================================================
-  console.log('--- TEST 1: First Visit Auto-Open & Content Verification ---');
+  console.log('--- TEST 1: First Visit Auto-Open & Exact Content Verification ---');
   let context = await browser.newContext({
     viewport: { width: 1440, height: 900 }
   });
@@ -57,42 +57,56 @@ async function runTests() {
 
   const modal = page.locator('#welcomePopupModal');
   const isModalOpen = await modal.evaluate(el => el.classList.contains('is-open'));
-  assert(isModalOpen, 'Welcome popup opens naturally on first visit');
+  assert(isModalOpen, 'Cinematic Welcome opens naturally on first visit');
+
+  // Verify Single Unified Panel (No two-column grid)
+  const panelDisplay = await page.evaluate(() => {
+    const card = document.getElementById('welcomePopupCard');
+    return card ? window.getComputedStyle(card).display : null;
+  });
+  assert(panelDisplay === 'flex', `Panel uses unified single-card layout (display: ${panelDisplay})`);
 
   // Verify Exact Content
-  const eyebrowText = (await page.locator('#welcomePopupEyebrow').textContent()).trim();
-  assert(eyebrowText === 'WELCOME TO ONE DAY KISSAN', `Eyebrow matches exact required text: "${eyebrowText}"`);
+  const brandText = (await page.locator('#welcomePopupBrand').textContent()).trim();
+  assert(brandText === 'ONE DAY KISSAN', `Brand label matches exact required text: "${brandText}"`);
 
-  const headingText = (await page.locator('#welcomePopupHeading').textContent()).trim();
-  assert(headingText === 'A little closer to nature.', `Main heading matches exact required text: "${headingText}"`);
+  const greetingText = (await page.locator('#welcomePopupGreeting').textContent()).trim();
+  assert(greetingText === 'Namaskaram.', `Greeting matches exact required text: "${greetingText}"`);
 
-  const descText = (await page.locator('#welcomePopupDesc').textContent()).trim();
-  assert(descText === 'Leave the everyday behind. Come experience the joy of farming, discover village traditions, and make beautiful memories with us.',
-    `Description matches exact required text: "${descText}"`);
+  const headingText = (await page.locator('#welcomeHeading').textContent()).trim();
+  assert(headingText === 'Welcome to the land of little wonders.', `Main heading matches exact required text: "${headingText}"`);
 
-  const ctaText = (await page.locator('#welcomePopupCtaBtn').textContent()).trim();
-  assert(ctaText.includes("Let's plan your farm day"), `Primary CTA text matches exact required text: "${ctaText}"`);
-
-  const supportingText = (await page.locator('#welcomePopupSupporting').textContent()).trim();
-  assert(supportingText === 'Explore our farms and choose your experience.',
-    `Supporting text matches exact required text: "${supportingText}"`);
+  const quoteText = (await page.locator('#welcomeQuote').textContent()).trim();
+  assert(quoteText.includes('Sometimes, the best way to reconnect with life is to return to the land.'),
+    `Contemplative quote matches exact required text: "${quoteText}"`);
 
   const taglineText = (await page.locator('#welcomePopupTagline').textContent()).trim();
   assert(taglineText === 'A DAY AWAY FROM THE ORDINARY',
-    `Closing tagline matches exact required text: "${taglineText}"`);
+    `Closing brand tagline matches exact required text: "${taglineText}"`);
 
-  // Verify authentic Telangana image loaded
+  const exploreText = (await page.locator('#welcomeExploreBtn').textContent()).trim();
+  assert(exploreText.includes('Explore the experience'),
+    `Understated exploration link matches exact required text: "${exploreText}"`);
+
+  // Verify Removal of Old Elements
+  const oldCtaExists = await page.locator('#welcomePopupCtaBtn').count();
+  assert(oldCtaExists === 0, 'Old marketing CTA button removed');
+
+  const oldBadgeExists = await page.locator('.welcome-popup-loc-badge').count();
+  assert(oldBadgeExists === 0, 'Old stray location badge removed');
+
+  // Verify authentic Telangana background image loaded full-bleed
   const imgLoaded = await page.evaluate(() => {
     const img = document.getElementById('welcomePopupImg');
     return img && img.complete && img.naturalWidth > 0 && img.src.includes('story_01_discover_farm.jpg');
   });
-  assert(imgLoaded, 'Authentic Telangana farmland image loaded successfully with natural dimensions');
+  assert(imgLoaded, 'Authentic Telangana farmland image loaded full-bleed with natural dimensions');
 
   // Verify background scrolling locked
   const isLocked = await page.evaluate(() => {
     return document.body.style.overflow === 'hidden';
   });
-  assert(isLocked, 'Background scrolling is locked while popup is open');
+  assert(isLocked, 'Background scrolling is locked while cinematic welcome is open');
 
   // Screenshot Desktop Welcome Popup
   const shot35 = path.join(LOCAL_SCREENSHOT_DIR, '35_warm_welcome_popup_desktop.png');
@@ -104,9 +118,9 @@ async function runTests() {
   // TEST SUITE 2: CLICK INSIDE DOES NOT CLOSE
   // =========================================================================
   console.log('\n--- TEST 2: Click Inside Card Does Not Close ---');
-  await page.locator('#welcomePopupHeading').click();
+  await page.locator('#welcomeHeading').click();
   await page.waitForTimeout(300);
-  assert(await modal.evaluate(el => el.classList.contains('is-open')), 'Clicking inside popup card keeps it open');
+  assert(await modal.evaluate(el => el.classList.contains('is-open')), 'Clicking inside welcome card keeps it open');
 
   // =========================================================================
   // TEST SUITE 3: CLOSE BUTTON (×) & SCROLL RESTORATION
@@ -114,7 +128,7 @@ async function runTests() {
   console.log('\n--- TEST 3: Close via Close Button (×) ---');
   const closeBtn = page.locator('#welcomePopupCloseBtn');
   assert(await closeBtn.isVisible(), 'Close button (×) is visible in top right');
-  assert(await closeBtn.getAttribute('aria-label') === 'Close welcome popup', 'Close button has accessible aria-label="Close welcome popup"');
+  assert(await closeBtn.getAttribute('aria-label') === 'Close welcome message', 'Close button has accessible aria-label="Close welcome message"');
 
   await closeBtn.click();
   await page.waitForTimeout(400);
@@ -185,31 +199,28 @@ async function runTests() {
   await context.close();
 
   // =========================================================================
-  // TEST SUITE 7: PRIMARY CTA NAVIGATION TO #booking
+  // TEST SUITE 7: EXPLORATION ACTION ("Explore the experience →")
   // =========================================================================
-  console.log('\n--- TEST 7: Primary CTA Navigation to #booking ---');
+  console.log('\n--- TEST 7: Exploration Action ("Explore the experience →") ---');
   context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   page = await context.newPage();
 
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(2200);
 
-  const ctaBtn = page.locator('#welcomePopupCtaBtn');
-  await ctaBtn.click();
-  await page.waitForTimeout(800);
+  const exploreBtn = page.locator('#welcomeExploreBtn');
+  await exploreBtn.click();
+  await page.waitForTimeout(500);
 
-  // Assert modal closed
+  // Assert modal closed cleanly
   assert(await page.locator('#welcomePopupModal').evaluate(el => !el.classList.contains('is-open')),
-    'Popup closed upon clicking primary CTA');
+    'Popup closed upon clicking "Explore the experience →"');
 
-  // Assert scrolled near #booking
-  const bookingPos = await page.evaluate(() => {
-    const el = document.getElementById('booking');
-    if (!el) return null;
-    const rect = el.getBoundingClientRect();
-    return { top: rect.top, visible: rect.top < window.innerHeight && rect.bottom > 0 };
-  });
-  assert(bookingPos && bookingPos.visible, 'Page smoothly scrolled to #booking section upon CTA click');
+  const exploreDismissed = await page.evaluate(() => sessionStorage.getItem('odk_welcome_dismissed') === 'true');
+  assert(exploreDismissed, 'Dismissal state saved in sessionStorage after exploration action');
+
+  const exploreScrollRestored = await page.evaluate(() => document.body.style.overflow !== 'hidden');
+  assert(exploreScrollRestored, 'Background scrolling restored for natural website exploration');
 
   const shot36 = path.join(LOCAL_SCREENSHOT_DIR, '36_warm_welcome_cta_nav_booking.png');
   await page.screenshot({ path: shot36 });
@@ -233,7 +244,9 @@ async function runTests() {
   const ariaModal = await page.locator('#welcomePopupModal').getAttribute('aria-modal');
   assert(ariaModal === 'true', 'Popup has aria-modal="true"');
   const ariaLabelledby = await page.locator('#welcomePopupModal').getAttribute('aria-labelledby');
-  assert(ariaLabelledby === 'welcomePopupHeading', 'Popup has aria-labelledby="welcomePopupHeading"');
+  assert(ariaLabelledby === 'welcomeHeading', 'Popup has aria-labelledby="welcomeHeading"');
+  const ariaDescribedby = await page.locator('#welcomePopupModal').getAttribute('aria-describedby');
+  assert(ariaDescribedby === 'welcomeQuote', 'Popup has aria-describedby="welcomeQuote"');
 
   // Check focus is inside modal
   const activeInside = await page.evaluate(() => {
@@ -340,7 +353,7 @@ async function runTests() {
   await browser.close();
 
   console.log('\n========================================================================');
-  console.log('🎉 ALL 14 WARM WELCOME POPUP TESTS PASSED WITH 100% SUCCESS!');
+  console.log('🎉 ALL 15 CINEMATIC WELCOME TESTS PASSED WITH 100% SUCCESS!');
   console.log('========================================================================\n');
 }
 

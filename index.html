@@ -5293,321 +5293,380 @@
     }
 
     /* =========================================================================
-       WARM WELCOME POPUP MODAL (A Little Closer to Nature)
+       THE CINEMATIC WELCOME EXPERIENCE (The Land of Little Wonders)
        ========================================================================= */
-    .welcome-popup-overlay {
+    .welcome-cinematic-overlay {
       position: fixed;
       inset: 0;
       z-index: 10000;
-      background: rgba(14, 26, 17, 0.78);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(8, 16, 11, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: clamp(16px, 3.5vw, 40px);
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s ease;
     }
 
-    .welcome-popup-overlay.is-open {
+    .welcome-cinematic-overlay.is-open {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
     }
 
-    .welcome-popup-card {
+    /* Single Unified Cinematic Panel */
+    .welcome-cinematic-panel {
       position: relative;
-      width: min(860px, 100%);
-      max-height: min(620px, 92vh);
-      background: #FAF7F0;
-      border-radius: 26px;
-      box-shadow: 0 35px 90px rgba(10, 24, 16, 0.45), 0 10px 25px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(220, 166, 79, 0.4);
-      display: grid;
-      grid-template-columns: 1fr 1.15fr;
+      width: min(940px, 92vw);
+      height: min(580px, 86vh);
+      border-radius: 28px;
       overflow: hidden;
-      transform: scale(0.95) translateY(14px);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0E1A11;
+      border: 1px solid rgba(220, 166, 79, 0.35);
+      box-shadow:
+        0 40px 100px rgba(0, 0, 0, 0.65),
+        0 15px 35px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      transform: scale(0.96) translateY(14px);
       opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
     }
 
-    .welcome-popup-overlay.is-open .welcome-popup-card {
+    .welcome-cinematic-overlay.is-open .welcome-cinematic-panel {
       transform: scale(1) translateY(0);
       opacity: 1;
     }
 
-    /* Left Visual Column */
-    .welcome-popup-visual {
-      position: relative;
-      background: var(--forest);
-      min-height: 260px;
+    /* Full-Bleed Authentic Countryside Photograph */
+    .welcome-cinematic-bg-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
     }
 
-    .welcome-popup-img {
+    .welcome-cinematic-bg-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
       display: block;
-      transform: scale(1.04);
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: scale(1.08);
+      filter: brightness(0.92) contrast(1.05);
+      transition: transform 2.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .welcome-popup-overlay.is-open .welcome-popup-img {
+    .welcome-cinematic-overlay.is-open .welcome-cinematic-bg-img {
       transform: scale(1);
     }
 
-    .welcome-popup-gradient {
+    /* Sophisticated Dark/Earthy Scrim Overlay */
+    .welcome-cinematic-scrim {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(14, 26, 17, 0.72) 0%, rgba(14, 26, 17, 0.15) 50%, transparent 100%);
+      background:
+        radial-gradient(ellipse at center, rgba(14, 26, 18, 0.65) 0%, rgba(10, 20, 14, 0.86) 65%, rgba(6, 13, 9, 0.95) 100%),
+        linear-gradient(to bottom, rgba(8, 16, 11, 0.5) 0%, rgba(10, 20, 14, 0.72) 50%, rgba(6, 13, 9, 0.96) 100%);
+      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.6);
       pointer-events: none;
     }
 
-    .welcome-popup-loc-badge {
+    /* Understated Elegant Close Button (×) */
+    .welcome-cinematic-close {
       position: absolute;
-      bottom: 20px;
-      left: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: rgba(23, 59, 43, 0.88);
-      border: 1px solid rgba(220, 166, 79, 0.4);
-      backdrop-filter: blur(8px);
-      padding: 6px 13px;
-      border-radius: 999px;
+      top: 22px;
+      right: 22px;
+      z-index: 20;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(14, 26, 18, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       color: #FAF7F0;
-      font-size: 11.5px;
-      font-weight: 600;
-      letter-spacing: .02em;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-    }
-
-    .welcome-popup-loc-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--harvest);
-    }
-
-    /* Right Content Column */
-    .welcome-popup-body {
-      padding: 40px 38px 36px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: #FAF7F0;
-      overflow-y: auto;
-    }
-
-    .welcome-popup-eyebrow {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--harvest);
-      margin-bottom: 10px;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
-    }
-
-    .welcome-popup-heading {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(24px, 2.5vw, 34px);
-      font-weight: 600;
-      letter-spacing: -0.015em;
-      color: var(--forest);
-      line-height: 1.18;
-      margin: 0 0 14px 0;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
-    }
-
-    .welcome-popup-desc {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #424e3e;
-      margin: 0 0 24px 0;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
-    }
-
-    .welcome-popup-action-wrap {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease 0.25s, transform 0.4s ease 0.25s;
-    }
-
-    .welcome-popup-overlay.is-open .welcome-popup-eyebrow,
-    .welcome-popup-overlay.is-open .welcome-popup-heading,
-    .welcome-popup-overlay.is-open .welcome-popup-desc,
-    .welcome-popup-overlay.is-open .welcome-popup-action-wrap {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .welcome-popup-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      height: 48px;
-      padding: 0 26px;
-      border-radius: 999px;
-      font-size: 14.5px;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      background: var(--harvest);
-      color: #173B2B;
-      box-shadow: 0 6px 22px rgba(220, 166, 79, 0.35);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-      text-decoration: none;
-    }
-
-    .welcome-popup-cta:hover {
-      background: #E5B25D;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(220, 166, 79, 0.45);
-    }
-
-    .welcome-popup-cta:active {
-      transform: translateY(0);
-    }
-
-    .welcome-popup-cta:focus-visible {
-      outline: 2px solid var(--forest);
-      outline-offset: 3px;
-    }
-
-    .welcome-popup-supporting {
-      font-size: 12.5px;
-      color: #6a7865;
-      margin: 10px 0 16px 0;
-      line-height: 1.4;
-    }
-
-    .welcome-popup-tagline {
-      display: inline-block;
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--sage);
-      border-top: 1px solid rgba(23, 59, 43, 0.1);
-      padding-top: 14px;
-      margin-top: 4px;
-      width: 100%;
-    }
-
-    /* Polished Close Button */
-    .welcome-popup-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      z-index: 25;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(23, 59, 43, 0.08);
-      border: 1px solid rgba(23, 59, 43, 0.14);
-      color: var(--forest);
-      font-size: 22px;
+      font-size: 20px;
       line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+      padding: 0;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, color 0.25s ease;
     }
 
-    .welcome-popup-close:hover {
-      background: var(--forest);
-      color: #FAF7F0;
-      transform: rotate(90deg) scale(1.05);
+    .welcome-cinematic-close:hover {
+      background: var(--harvest);
+      border-color: var(--harvest);
+      color: #173B2B;
+      transform: rotate(90deg) scale(1.06);
     }
 
-    .welcome-popup-close:focus-visible {
+    .welcome-cinematic-close:focus-visible {
       outline: 2px solid var(--harvest);
-      outline-offset: 2px;
+      outline-offset: 3px;
+    }
+
+    /* Centered Editorial Typography Content */
+    .welcome-cinematic-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 780px;
+      padding: 44px 36px 38px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-sizing: border-box;
+      pointer-events: auto;
+    }
+
+    /* Brand Label */
+    .welcome-cinematic-brand {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--harvest, #DCA64F);
+      margin-bottom: 14px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
+    }
+
+    /* Greeting: Namaskaram. */
+    .welcome-cinematic-greeting {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(38px, 4.8vw, 56px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: #FAF7F0;
+      margin: 0 0 10px 0;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+      letter-spacing: -0.01em;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.7s ease 0.32s, transform 0.7s ease 0.32s;
+    }
+
+    /* Main Heading: Welcome to the land of little wonders. */
+    .welcome-cinematic-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 2.6vw, 32px);
+      font-weight: 500;
+      line-height: 1.28;
+      color: #FAF7F0;
+      margin: 0 0 20px 0;
+      text-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+      max-width: 660px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.7s ease 0.48s, transform 0.7s ease 0.48s;
+    }
+
+    /* Subtle Decorative Divider */
+    .welcome-cinematic-divider {
+      width: 56px;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(220, 166, 79, 0.85), transparent);
+      margin: 0 auto 22px;
+      opacity: 0;
+      transition: opacity 0.6s ease 0.6s;
+    }
+
+    /* Contemplative Quote */
+    .welcome-cinematic-quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(15.5px, 1.6vw, 19px);
+      font-weight: 400;
+      line-height: 1.62;
+      color: rgba(250, 247, 240, 0.92);
+      margin: 0 auto 28px;
+      max-width: 620px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.7s ease 0.7s, transform 0.7s ease 0.7s;
+    }
+
+    /* Action Container */
+    .welcome-cinematic-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.7s ease 0.88s, transform 0.7s ease 0.88s;
+    }
+
+    /* Understated Exploration Text Link */
+    .welcome-explore-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #FAF7F0;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(250, 247, 240, 0.32);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 10px 22px;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .welcome-explore-link:hover {
+      background: rgba(220, 166, 79, 0.22);
+      border-color: rgba(220, 166, 79, 0.9);
+      color: var(--harvest, #DCA64F);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(220, 166, 79, 0.3);
+    }
+
+    .welcome-explore-link:active {
+      transform: translateY(0);
+    }
+
+    .welcome-explore-link:focus-visible {
+      outline: 2px solid var(--harvest);
+      outline-offset: 3px;
+    }
+
+    .welcome-explore-arrow {
+      display: inline-block;
+      font-size: 15px;
+      transition: transform 0.25s ease;
+    }
+
+    .welcome-explore-link:hover .welcome-explore-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Closing Brand Line */
+    .welcome-cinematic-tagline {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 240, 0.65);
+      margin-top: 4px;
+    }
+
+    /* Staggered Entrance Revealed State */
+    .welcome-cinematic-overlay.is-open .welcome-cinematic-brand,
+    .welcome-cinematic-overlay.is-open .welcome-cinematic-greeting,
+    .welcome-cinematic-overlay.is-open .welcome-cinematic-heading,
+    .welcome-cinematic-overlay.is-open .welcome-cinematic-divider,
+    .welcome-cinematic-overlay.is-open .welcome-cinematic-quote,
+    .welcome-cinematic-overlay.is-open .welcome-cinematic-actions {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Mobile Responsive Overrides */
     @media (max-width: 767px) {
-      .welcome-popup-overlay {
+      .welcome-cinematic-overlay {
         padding: 14px;
       }
 
-      .welcome-popup-card {
-        grid-template-columns: 1fr;
-        max-height: 88vh;
-        border-radius: 20px;
+      .welcome-cinematic-panel {
+        width: 100%;
+        height: auto;
+        min-height: 80vh;
+        max-height: 90vh;
+        border-radius: 22px;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
       }
 
-      .welcome-popup-visual {
-        height: 190px;
-        min-height: 190px;
+      .welcome-cinematic-content {
+        padding: 50px 22px 34px;
+        justify-content: center;
       }
 
-      .welcome-popup-loc-badge {
-        bottom: 12px;
-        left: 12px;
-        font-size: 11px;
-        padding: 4px 10px;
-      }
-
-      .welcome-popup-body {
-        padding: 22px 20px 22px;
-      }
-
-      .welcome-popup-heading {
-        font-size: 24px;
+      .welcome-cinematic-brand {
+        font-size: 10.5px;
+        letter-spacing: 0.2em;
         margin-bottom: 10px;
       }
 
-      .welcome-popup-desc {
-        font-size: 13.5px;
-        line-height: 1.5;
-        margin-bottom: 18px;
+      .welcome-cinematic-greeting {
+        font-size: 34px;
+        margin-bottom: 8px;
       }
 
-      .welcome-popup-cta {
-        width: 100%;
-        height: 46px;
+      .welcome-cinematic-heading {
+        font-size: 21px;
+        line-height: 1.25;
+        margin-bottom: 16px;
+      }
+
+      .welcome-cinematic-divider {
+        width: 44px;
+        margin-bottom: 16px;
+      }
+
+      .welcome-cinematic-quote {
         font-size: 14px;
+        line-height: 1.55;
+        margin-bottom: 22px;
       }
 
-      .welcome-popup-close {
-        top: 12px;
-        right: 12px;
-        background: rgba(255, 255, 255, 0.88);
-        backdrop-filter: blur(8px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        color: var(--forest);
+      .welcome-explore-link {
+        font-size: 13.5px;
+        padding: 9px 20px;
+        min-height: 44px;
+      }
+
+      .welcome-cinematic-tagline {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+      }
+
+      .welcome-cinematic-close {
+        top: 14px;
+        right: 14px;
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
       }
     }
 
-    /* Reduced Motion Preference */
+    /* Prefers-reduced-motion Overrides */
     @media (prefers-reduced-motion: reduce) {
-      .welcome-popup-overlay,
-      .welcome-popup-card,
-      .welcome-popup-img,
-      .welcome-popup-eyebrow,
-      .welcome-popup-heading,
-      .welcome-popup-desc,
-      .welcome-popup-action-wrap,
-      .welcome-popup-close,
-      .welcome-popup-cta {
+      .welcome-cinematic-overlay,
+      .welcome-cinematic-panel,
+      .welcome-cinematic-bg-img,
+      .welcome-cinematic-brand,
+      .welcome-cinematic-greeting,
+      .welcome-cinematic-heading,
+      .welcome-cinematic-divider,
+      .welcome-cinematic-quote,
+      .welcome-cinematic-actions,
+      .welcome-cinematic-close,
+      .welcome-explore-link {
         transition: none !important;
         transform: none !important;
         animation: none !important;
@@ -8413,38 +8472,36 @@
   </div>
 
   <!-- ======================================================================= -->
-  <!-- PREMIUM WARM WELCOME POPUP (A Little Closer to Nature)                 -->
+  <!-- CINEMATIC WELCOME EXPERIENCE (The Land of Little Wonders)               -->
   <!-- ======================================================================= -->
-  <div id="welcomePopupModal" class="modal-overlay welcome-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="welcomePopupHeading" aria-describedby="welcomePopupDesc" aria-hidden="true">
-    <div class="welcome-popup-card" id="welcomePopupCard" role="document">
-      <!-- Visible Close Button (×) in Top-Right Corner -->
-      <button type="button" class="welcome-popup-close" id="welcomePopupCloseBtn" aria-label="Close welcome popup" title="Close welcome popup">
+  <div id="welcomePopupModal" class="modal-overlay welcome-cinematic-overlay" role="dialog" aria-modal="true" aria-labelledby="welcomeHeading" aria-describedby="welcomeQuote" aria-hidden="true">
+    <div class="welcome-cinematic-panel" id="welcomePopupCard" role="document">
+      <!-- Full-Bleed Authentic Countryside Photograph & Scrim -->
+      <div class="welcome-cinematic-bg-wrap">
+        <img src="/assets/stories/story_01_discover_farm.jpg" alt="Authentic Telangana rural farmland at morning dawn" class="welcome-cinematic-bg-img" id="welcomePopupImg" loading="eager">
+        <div class="welcome-cinematic-scrim"></div>
+      </div>
+
+      <!-- Understated, Refined Close Button (×) -->
+      <button type="button" class="welcome-cinematic-close" id="welcomePopupCloseBtn" aria-label="Close welcome message" title="Close welcome message">
         <span aria-hidden="true">&times;</span>
       </button>
 
-      <!-- Left Column: Large Cinematic Countryside Photograph -->
-      <div class="welcome-popup-visual">
-        <img src="/assets/stories/story_01_discover_farm.jpg" alt="One Day Kissan agricultural farmland in Telangana" class="welcome-popup-img" id="welcomePopupImg" loading="eager">
-        <div class="welcome-popup-gradient"></div>
-        <div class="welcome-popup-loc-badge">
-          <span class="welcome-popup-loc-dot"></span>
-          <span>Telangana • Bhongir &amp; Moinabad</span>
-        </div>
-      </div>
-
-      <!-- Right Column: Editorial Welcoming Content -->
-      <div class="welcome-popup-body">
-        <span class="welcome-popup-eyebrow" id="welcomePopupEyebrow">WELCOME TO ONE DAY KISSAN</span>
-        <h2 class="welcome-popup-heading" id="welcomePopupHeading">A little closer to nature.</h2>
-        <p class="welcome-popup-desc" id="welcomePopupDesc">Leave the everyday behind. Come experience the joy of farming, discover village traditions, and make beautiful memories with us.</p>
-        
-        <div class="welcome-popup-action-wrap">
-          <button type="button" class="btn btn-gold welcome-popup-cta" id="welcomePopupCtaBtn">
-            <span>Let's plan your farm day</span>
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <!-- Center-Aligned Editorial Welcoming Composition -->
+      <div class="welcome-cinematic-content">
+        <span class="welcome-cinematic-brand" id="welcomePopupBrand">ONE DAY KISSAN</span>
+        <h2 class="welcome-cinematic-greeting" id="welcomePopupGreeting">Namaskaram.</h2>
+        <h3 class="welcome-cinematic-heading" id="welcomeHeading">Welcome to the land of little wonders.</h3>
+        <div class="welcome-cinematic-divider" aria-hidden="true"></div>
+        <blockquote class="welcome-cinematic-quote" id="welcomeQuote">
+          &ldquo;Sometimes, the best way to reconnect with life is to return to the land.&rdquo;
+        </blockquote>
+        <div class="welcome-cinematic-actions">
+          <button type="button" class="welcome-explore-link" id="welcomeExploreBtn">
+            <span>Explore the experience</span>
+            <span class="welcome-explore-arrow" aria-hidden="true">&rarr;</span>
           </button>
-          <p class="welcome-popup-supporting" id="welcomePopupSupporting">Explore our farms and choose your experience.</p>
-          <span class="welcome-popup-tagline" id="welcomePopupTagline">A DAY AWAY FROM THE ORDINARY</span>
+          <span class="welcome-cinematic-tagline" id="welcomePopupTagline">A DAY AWAY FROM THE ORDINARY</span>
         </div>
       </div>
     </div>
@@ -10651,12 +10708,13 @@
     })();
   </script>
 
-  <!-- Dedicated Warm Welcome Popup Engine -->
+  <!-- Dedicated Cinematic Welcome Experience Engine -->
   <script>
-    (function initWarmWelcomePopupEngine() {
+    (function initCinematicWelcomeEngine() {
       const modal = document.getElementById('welcomePopupModal');
       const card = document.getElementById('welcomePopupCard');
       const closeBtn = document.getElementById('welcomePopupCloseBtn');
+      const exploreBtn = document.getElementById('welcomeExploreBtn');
       const ctaBtn = document.getElementById('welcomePopupCtaBtn');
 
       if (!modal || !card) return;
@@ -10698,10 +10756,12 @@
         else card.focus();
 
         setTimeout(() => {
-          if (isOpen && ctaBtn) {
+          if (isOpen && exploreBtn) {
+            exploreBtn.focus();
+          } else if (isOpen && ctaBtn) {
             ctaBtn.focus();
           }
-        }, 300);
+        }, 320);
 
         // Register Keyboard listeners
         window.addEventListener('keydown', handleKeyDown);
@@ -10712,7 +10772,7 @@
         isOpen = false;
         markDismissed();
 
-        // Smooth exit
+        // Smooth exit transition
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
 
@@ -10732,7 +10792,7 @@
           } catch (e) {}
         }
 
-        // Navigate to booking if CTA was clicked
+        // Optional scroll to booking if explicitly requested
         if (navToBooking) {
           const bookingEl = document.getElementById('booking');
           if (bookingEl) {
@@ -10786,7 +10846,23 @@
         });
       }
 
-      // 2. Click Outside (Backdrop)
+      // 2. Exploration Text Link ("Explore the experience →")
+      if (exploreBtn) {
+        exploreBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closePopup(false);
+        });
+      }
+
+      // 3. Fallback CTA if present
+      if (ctaBtn) {
+        ctaBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closePopup(true);
+        });
+      }
+
+      // 4. Click Outside (Backdrop)
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
           closePopup(false);
@@ -10798,15 +10874,7 @@
         e.stopPropagation();
       });
 
-      // 3. Primary CTA click
-      if (ctaBtn) {
-        ctaBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          closePopup(true);
-        });
-      }
-
-      // Initial check & auto-open
+      // Initial check & auto-open on first visit
       function scheduleAutoOpen() {
         if (isDismissed()) return;
         const delay = window.__welcomeDelay !== undefined ? window.__welcomeDelay : 1400;
@@ -10827,6 +10895,7 @@
       window.__welcomePopup = {
         open: openPopup,
         close: () => closePopup(false),
+        explore: () => closePopup(false),
         closeAndBook: () => closePopup(true),
         isDismissed,
         isOpen: () => isOpen,
