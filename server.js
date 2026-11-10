@@ -6,6 +6,7 @@ const {
   all,
   get,
   getAvailability,
+  getMonthAvailability,
   createBooking,
   getBookingByRef,
   getTerroirs,
@@ -392,12 +393,21 @@ app.post('/api/reviews/:id/like', async (req, res) => {
   }
 });
 
-// 3. Check live slot availability for a region and date
+// 3. Check live slot availability for a region and date or month
 app.get('/api/availability', async (req, res) => {
   try {
-    const { regionId = 'sahyadri', date } = req.query;
+    const { regionId = 'bhongir', date, month } = req.query;
+
+    if (month) {
+      const monthAvail = await getMonthAvailability(regionId, month);
+      if (!monthAvail) {
+        return res.status(404).json({ success: false, error: 'Region not found.' });
+      }
+      return res.json({ success: true, data: monthAvail });
+    }
+
     if (!date) {
-      return res.status(400).json({ success: false, error: 'date query parameter is required (YYYY-MM-DD).' });
+      return res.status(400).json({ success: false, error: 'date or month query parameter is required (YYYY-MM-DD or YYYY-MM).' });
     }
 
     const avail = await getAvailability(regionId, date);
@@ -421,6 +431,7 @@ app.post('/api/bookings', async (req, res) => {
       regionId,
       experienceId = 'family',
       visitDate,
+      session,
       travellers,
       guestCount,
       dietaryNotes,
@@ -445,6 +456,12 @@ app.post('/api/bookings', async (req, res) => {
       validEmail = `${phone.replace(/[^0-9]/g, '') || 'guest'}@guest.onedaykisan.com`;
     }
 
+    // Format special requests to include chosen session
+    let formattedRequests = specialRequests ? specialRequests.trim() : '';
+    if (session) {
+      formattedRequests = formattedRequests ? `Session: ${session} | ${formattedRequests}` : `Session: ${session}`;
+    }
+
     const booking = await createBooking({
       fullName: fullName.trim(),
       email: validEmail,
@@ -455,7 +472,7 @@ app.post('/api/bookings', async (req, res) => {
       travellers: travellers || 'Farm Visit',
       guestCount: parseInt(guestCount, 10) || 2,
       dietaryNotes: dietaryNotes ? dietaryNotes.trim() : '',
-      specialRequests: specialRequests ? specialRequests.trim() : ''
+      specialRequests: formattedRequests
     });
 
     res.status(201).json({

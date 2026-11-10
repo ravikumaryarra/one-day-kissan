@@ -669,6 +669,35 @@ async function getAvailability(regionId, dateStr) {
   };
 }
 
+// Availability calculator for an entire month
+async function getMonthAvailability(regionId, monthStr) {
+  const region = await get('SELECT * FROM regions WHERE id = ?', [regionId]);
+  if (!region) return null;
+
+  const bookings = await all(`
+    SELECT visit_date, COALESCE(SUM(guest_count), 0) as total_booked
+    FROM bookings
+    WHERE region_id = ? AND visit_date LIKE ? AND status != 'cancelled'
+    GROUP BY visit_date
+  `, [regionId, `${monthStr}%`]);
+
+  const bookedMap = {};
+  if (Array.isArray(bookings)) {
+    bookings.forEach(b => {
+      bookedMap[b.visit_date] = b.total_booked;
+    });
+  }
+
+  return {
+    region_id: region.id,
+    region_name: region.name,
+    farm_name: region.farm_name,
+    month: monthStr,
+    daily_capacity: region.daily_capacity,
+    booked_dates: bookedMap
+  };
+}
+
 // Booking enquiry creation
 async function createBooking(data) {
   const {
@@ -1080,6 +1109,7 @@ module.exports = {
   get,
   run,
   getAvailability,
+  getMonthAvailability,
   createBooking,
   getBookingByRef,
   getTerroirs,

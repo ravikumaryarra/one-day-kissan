@@ -571,7 +571,7 @@ const newModalHtml = `<!-- Farm Activity Detail & Enquiry Modal -->
           <button type="button" class="btn btn-gold" id="expModalBookBtn" style="flex: 1; height: 46px; font-weight: 700;">
             Book a Farm Visit for This Activity
           </button>
-          <a href="https://wa.me/919989912345?text=Hi%20One%20Day%20Kissan,%20I%20would%20like%20to%20enquire%20about%20the%20activities" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="height: 46px; padding: 0 18px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+          <a href="https://wa.me/919849798674?text=Hi%20One%20Day%20Kissan,%20I%20would%20like%20to%20enquire%20about%20the%20activities" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="height: 46px; padding: 0 18px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
             WhatsApp Us
           </a>
         </div>

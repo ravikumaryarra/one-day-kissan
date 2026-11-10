@@ -1,0 +1,182 @@
+[
+  {
+    "id": "gallery-01",
+    "src": "/assets/experiences/gallery/gallery-01.webp",
+    "title": "Experiential Agricultural Discovery",
+    "category": "field",
+    "categoryLabel": "Paddy & Soil",
+    "location": "Bhongir Farm",
+    "desc": "Students and visitors gathering amidst lush open farm fields under guided stewardship."
+  },
+  {
+    "id": "gallery-02",
+    "src": "/assets/experiences/gallery/gallery-02.webp",
+    "title": "Barefoot Paddy Silt Transplantation",
+    "category": "field",
+    "categoryLabel": "Paddy & Soil",
+    "location": "Bhongir Farm",
+    "desc": "Stepping into wetland mud to transplant young heirloom rice seedlings into living soil."
+  },
+  {
+    "id": "gallery-03",
+    "src": "/assets/experiences/gallery/gallery-03.webp",
+    "title": "Indigenous Livestock & Cattle Interaction",
+    "category": "animals",
+    "categoryLabel": "Animals & Aviary",
+    "location": "Moinabad Farm",
+    "desc": "Hands-on cattle care, feeding indigenous cows, and understanding A1 and A2 milk production."
+  },
+  {
+    "id": "gallery-04",
+    "src": "/assets/experiences/gallery/gallery-04.webp",
+    "title": "Traditional Clay Pottery Wheel",
+    "category": "crafts",
+    "categoryLabel": "Village Crafts",
+    "location": "Bhongir Farm",
+    "desc": "Centering wet clay with village artisans and creating earthen pottery to take home."
+  },
+  {
+    "id": "gallery-05",
+    "src": "/assets/experiences/gallery/gallery-05.webp",
+    "title": "Walk-in Aviary & Exotic Birds",
+    "category": "animals",
+    "categoryLabel": "Animals & Aviary",
+    "location": "Moinabad Farm",
+    "desc": "Observing bird species up close and studying diverse nest-building architectures."
+  },
+  {
+    "id": "gallery-06",
+    "src": "/assets/experiences/gallery/gallery-06.webp",
+    "title": "Ancestral Dung Cake Making",
+    "category": "crafts",
+    "categoryLabel": "Village Crafts",
+    "location": "Bhongir Farm",
+    "desc": "Learning the science of organic biomass, natural biogas, and traditional drying methods."
+  },
+  {
+    "id": "gallery-07",
+    "src": "/assets/experiences/gallery/gallery-07.webp",
+    "title": "The Persian Wheel (Rahat)",
+    "category": "crafts",
+    "categoryLabel": "Village Crafts",
+    "location": "Bhongir Farm",
+    "desc": "Operating historical gearing and bucket chains to lift crystal groundwater into field flumes."
+  },
+  {
+    "id": "gallery-08",
+    "src": "/assets/experiences/gallery/gallery-08.webp",
+    "title": "Open-Air Tractor Joy Ride",
+    "category": "fun",
+    "categoryLabel": "Farm Joy",
+    "location": "Bhongir Farm",
+    "desc": "Riding across fertile farmland pathways with wind in your hair and panoramic Deccan views."
+  },
+  {
+    "id": "gallery-09",
+    "src": "/assets/experiences/gallery/gallery-09.webp",
+    "title": "Grass Castle & Hay Trampoline",
+    "category": "fun",
+    "categoryLabel": "Farm Joy",
+    "location": "Bhongir Farm",
+    "desc": "Safe, exuberant play jumping into clean harvest straw stacks under the open sky."
+  },
+  {
+    "id": "gallery-10",
+    "src": "/assets/experiences/gallery/gallery-10.webp",
+    "title": "Farmer's Watch Tower Horizon",
+    "category": "fun",
+    "categoryLabel": "Farm Joy",
+    "location": "Bhongir Farm",
+    "desc": "Climbing the elevated timber vantage tower to survey crop boundaries and granite hills."
+  },
+  {
+    "id": "gallery-11",
+    "src": "/assets/experiences/gallery/gallery-11.webp",
+    "title": "Outdoor Soil Science Classroom",
+    "category": "field",
+    "categoryLabel": "Paddy & Soil",
+    "location": "Bhongir Farm",
+    "desc": "Educators and agricultural instructors explaining microbial soil ecology to school groups."
+  },
+  {
+    "id": "gallery-12",
+    "src": "/assets/experiences/gallery/gallery-12.webp",
+    "title": "Vintage Bullock Cart Journey",
+    "category": "fun",
+    "categoryLabel": "Farm Joy",
+    "location": "Moinabad Farm",
+    "desc": "A rhythmic wooden cart ride honoring centuries of rural Indian transport traditions."
+  },
+  {
+    "id": "gallery-13",
+    "src": "/assets/experiences/gallery/gallery-13.webp",
+    "title": "Sensory Organic Vegetable Picking",
+    "category": "field",
+    "categoryLabel": "Paddy & Soil",
+    "location": "Moinabad Farm",
+    "desc": "Harvesting fresh seasonal vegetables directly from organic beds and learning soil health."
+  },
+  {
+    "id": "gallery-14",
+    "src": "/assets/experiences/gallery/gallery-14.webp",
+    "title": "Traditional Stone Chakki Grain Grinding",
+    "category": "crafts",
+    "categoryLabel": "Village Crafts",
+    "location": "Bhongir Farm",
+    "desc": "Turning the heavy granite millstone to grind whole wheat and millets into fresh flour."
+  },
+  {
+    "id": "gallery-15",
+    "src": "/assets/experiences/gallery/gallery-15.webp",
+    "title": "Straw Scarecrow Workshop",
+    "category": "crafts",
+    "categoryLabel": "Village Crafts",
+    "location": "Bhongir Farm",
+    "desc": "Creating traditional crop guardians with straw frames, painted clay pots, and discarded shirts."
+  },
+  {
+    "id": "gallery-16",
+    "src": "/assets/experiences/gallery/gallery-16.webp",
+    "title": "Archimedes Screw Water Physics",
+    "category": "crafts",
+    "categoryLabel": "Village Crafts",
+    "location": "Bhongir Farm",
+    "desc": "Turning the helical spiral pump to witness ancient mechanical water displacement in action."
+  },
+  {
+    "id": "gallery-17",
+    "src": "/assets/experiences/gallery/gallery-17.webp",
+    "title": "Student Creations & Memories",
+    "category": "crafts",
+    "categoryLabel": "Village Crafts",
+    "location": "Bhongir Farm",
+    "desc": "School students proudly displaying handmade clay pots crafted during their field trip."
+  },
+  {
+    "id": "gallery-18",
+    "src": "/assets/experiences/gallery/gallery-18.webp",
+    "title": "Folk Music, Dance & Village Celebration",
+    "category": "fun",
+    "categoryLabel": "Farm Joy",
+    "location": "Bhongir Farm",
+    "desc": "Rhythmic Telangana folk beats, group dance, and celebratory laughter at the farm pavilion."
+  },
+  {
+    "id": "gallery-19",
+    "src": "/assets/experiences/gallery/gallery-19.webp",
+    "title": "Rainwater Harvesting & Ground Recharge",
+    "category": "field",
+    "categoryLabel": "Paddy & Soil",
+    "location": "Bhongir Farm",
+    "desc": "Demonstrating natural percolation layers and aquifer recharge models for conservation."
+  },
+  {
+    "id": "gallery-20",
+    "src": "/assets/experiences/gallery/gallery-20.webp",
+    "title": "Deccan Countryside Golden Hour",
+    "category": "field",
+    "categoryLabel": "Paddy & Soil",
+    "location": "Bhongir Farm",
+    "desc": "Evening light filtering over granite boulders and tranquil organic Telangana agricultural fields."
+  }
+]
