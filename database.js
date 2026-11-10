@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const QRCode = require('qrcode');
 
@@ -21,8 +22,9 @@ function getSupabase() {
       } catch (e) {
         // ws optional if native WebSocket is available
       }
-      const url = process.env.SUPABASE_URL;
-      const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY;
+      const rawUrl = (process.env.SUPABASE_URL || '').trim();
+      const url = rawUrl.replace(/\/rest\/v1\/?$/, '').replace(/\/$/, '');
+      const key = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY || '').trim();
       const options = {
         auth: { persistSession: false }
       };
