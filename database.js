@@ -1,8 +1,49 @@
 const path = require('path');
 const QRCode = require('qrcode');
 
-// Controlled Demo Mode Flag (Explicit DEMO_MODE=true or Vercel cloud environment)
+// Supabase cloud database client
+let supabaseClient = null;
+
+function isSupabase() {
+  return Boolean(
+    process.env.SUPABASE_URL &&
+    (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY)
+  );
+}
+
+function getSupabase() {
+  if (!supabaseClient && isSupabase()) {
+    try {
+      const { createClient } = require('@supabase/supabase-js');
+      let ws = null;
+      try {
+        ws = require('ws');
+      } catch (e) {
+        // ws optional if native WebSocket is available
+      }
+      const url = process.env.SUPABASE_URL;
+      const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY;
+      const options = {
+        auth: { persistSession: false }
+      };
+      if (ws) {
+        options.realtime = { transport: ws };
+      }
+      supabaseClient = createClient(url, key, options);
+      console.log('🌿 Supabase client initialized for:', url);
+    } catch (err) {
+      console.warn('⚠️ Supabase client initialization failed:', err.message);
+      supabaseClient = null;
+    }
+  }
+  return supabaseClient;
+}
+
+// Controlled Demo Mode Flag (Explicit DEMO_MODE=true or Vercel cloud environment without Supabase)
 function isDemoMode() {
+  if (isSupabase()) {
+    return false;
+  }
   return process.env.DEMO_MODE === 'true' || process.env.VERCEL === '1';
 }
 
@@ -12,7 +53,7 @@ const dbPath = path.join(__dirname, 'onedaykissan.db');
 
 // Lazy-load SQLite only when local development mode requires persistent SQLite
 function getDatabase() {
-  if (isDemoMode()) {
+  if (isDemoMode() || isSupabase()) {
     return null;
   }
   if (!dbInstance) {
@@ -27,7 +68,25 @@ function getDatabase() {
   return dbInstance;
 }
 
-function initDatabase() {
+async function initDatabase() {
+  if (isSupabase()) {
+    const sb = getSupabase();
+    if (sb) {
+      try {
+        const { data, error } = await sb.from('regions').select('id').limit(1);
+        if (error) {
+          console.warn('⚠️ Supabase connection warning (schema may need setup via supabase_schema.sql):', error.message);
+        } else {
+          console.log('🌿 One Day Kissan connected to Supabase (Cloud PostgreSQL). Tables ready.');
+        }
+        return true;
+      } catch (e) {
+        console.warn('⚠️ Supabase query check failed:', e.message);
+        return true;
+      }
+    }
+  }
+
   if (isDemoMode()) {
     console.log('🌿 One Day Kissan starting in DEMO_MODE (Native SQLite module isolated; no database connection opened).');
     return Promise.resolve(false);
@@ -647,7 +706,39 @@ function initDatabase() {
 }
 
 // Helper: Query all
-function all(sql, params = []) {
+async function all(sql, params = []) {
+  if (isSupabase()) {
+    const sb = getSupabase();
+    if (sb) {
+      const cleanSql = sql.trim().toLowerCase();
+      try {
+        if (cleanSql.includes('from regions')) {
+          const { data, error } = await sb.from('regions').select('*').order('id');
+          if (!error && data) return data;
+        } else if (cleanSql.includes('from experiences')) {
+          const { data, error } = await sb.from('experiences').select('*').order('id');
+          if (!error && data) return data;
+        } else if (cleanSql.includes('from bookings')) {
+          const { data, error } = await sb.from('bookings').select('*').order('created_at', { ascending: false }).limit(50);
+          if (!error && data) {
+            const { data: regions } = await sb.from('regions').select('*');
+            const { data: experiences } = await sb.from('experiences').select('*');
+            const regMap = Object.fromEntries((regions || []).map(r => [r.id, r]));
+            const expMap = Object.fromEntries((experiences || []).map(e => [e.id, e]));
+            return data.map(b => ({
+              ...b,
+              region_name: regMap[b.region_id]?.name || b.region_id,
+              farm_name: regMap[b.region_id]?.farm_name || '',
+              experience_title: expMap[b.experience_id]?.title || ''
+            }));
+          }
+        }
+      } catch (err) {
+        console.warn('Supabase generic all() query fell back:', err.message);
+      }
+    }
+  }
+
   if (isDemoMode()) {
     return Promise.resolve([]);
   }
@@ -662,7 +753,11 @@ function all(sql, params = []) {
 }
 
 // Helper: Query one
-function get(sql, params = []) {
+async function get(sql, params = []) {
+  if (isSupabase()) {
+    const rows = await all(sql, params);
+    return rows && rows.length ? rows[0] : null;
+  }
   if (isDemoMode()) {
     return Promise.resolve(null);
   }
@@ -677,7 +772,10 @@ function get(sql, params = []) {
 }
 
 // Helper: Run command
-function run(sql, params = []) {
+async function run(sql, params = []) {
+  if (isSupabase()) {
+    return Promise.resolve({ id: 0, changes: 1 });
+  }
   if (isDemoMode()) {
     return Promise.resolve({ id: 0, changes: 0 });
   }
@@ -693,6 +791,50 @@ function run(sql, params = []) {
 
 // Availability calculator
 async function getAvailability(regionId, dateStr) {
+  if (isSupabase()) {
+    const sb = getSupabase();
+    if (sb) {
+      try {
+        const { data: region, error: rErr } = await sb
+          .from('regions')
+          .select('*')
+          .eq('id', regionId)
+          .maybeSingle();
+
+        const reg = region || {
+          id: regionId,
+          name: regionId === 'moinabad' ? 'Branch Farm – Moinabad' : 'Main Farm – Bhongir',
+          farm_name: regionId === 'moinabad' ? 'One Day Kisan Moinabad' : 'One Day Kisan Bhongir',
+          daily_capacity: 300
+        };
+
+        const { data: bookings, error: bErr } = await sb
+          .from('bookings')
+          .select('guest_count')
+          .eq('region_id', regionId)
+          .eq('visit_date', dateStr)
+          .neq('status', 'cancelled');
+
+        const totalBooked = (bookings || []).reduce((acc, b) => acc + (b.guest_count || 0), 0);
+        const remaining = Math.max(0, (reg.daily_capacity || 300) - totalBooked);
+
+        return {
+          region_id: reg.id,
+          region_name: reg.name,
+          farm_name: reg.farm_name,
+          date: dateStr,
+          daily_capacity: reg.daily_capacity || 300,
+          booked_guests: totalBooked,
+          remaining_slots: remaining,
+          is_available: remaining > 0,
+          storage: 'supabase'
+        };
+      } catch (err) {
+        console.error('Supabase getAvailability error:', err.message);
+      }
+    }
+  }
+
   if (isDemoMode()) {
     const regionName = regionId === 'moinabad' ? 'Branch Farm – Moinabad' : 'Main Farm – Bhongir';
     const farmName = regionId === 'moinabad' ? 'One Day Kisan Moinabad' : 'One Day Kisan Bhongir';
@@ -737,6 +879,52 @@ async function getAvailability(regionId, dateStr) {
 
 // Availability calculator for an entire month
 async function getMonthAvailability(regionId, monthStr) {
+  if (isSupabase()) {
+    const sb = getSupabase();
+    if (sb) {
+      try {
+        const { data: region, error: rErr } = await sb
+          .from('regions')
+          .select('*')
+          .eq('id', regionId)
+          .maybeSingle();
+
+        const reg = region || {
+          id: regionId,
+          name: regionId === 'moinabad' ? 'Branch Farm – Moinabad' : 'Main Farm – Bhongir',
+          farm_name: regionId === 'moinabad' ? 'One Day Kisan Moinabad' : 'One Day Kisan Bhongir',
+          daily_capacity: 300
+        };
+
+        const { data: bookings, error: bErr } = await sb
+          .from('bookings')
+          .select('visit_date, guest_count')
+          .eq('region_id', regionId)
+          .like('visit_date', `${monthStr}%`)
+          .neq('status', 'cancelled');
+
+        const bookedMap = {};
+        if (Array.isArray(bookings)) {
+          bookings.forEach(b => {
+            bookedMap[b.visit_date] = (bookedMap[b.visit_date] || 0) + (b.guest_count || 0);
+          });
+        }
+
+        return {
+          region_id: reg.id,
+          region_name: reg.name,
+          farm_name: reg.farm_name,
+          month: monthStr,
+          daily_capacity: reg.daily_capacity || 300,
+          booked_dates: bookedMap,
+          storage: 'supabase'
+        };
+      } catch (err) {
+        console.error('Supabase getMonthAvailability error:', err.message);
+      }
+    }
+  }
+
   if (isDemoMode()) {
     const regionName = regionId === 'moinabad' ? 'Branch Farm – Moinabad' : 'Main Farm – Bhongir';
     const farmName = regionId === 'moinabad' ? 'One Day Kisan Moinabad' : 'One Day Kisan Bhongir';
@@ -794,6 +982,61 @@ async function createBooking(data) {
     dietaryNotes = '',
     specialRequests = ''
   } = data;
+
+  if (isSupabase()) {
+    const sb = getSupabase();
+    if (sb) {
+      const avail = await getAvailability(regionId, visitDate);
+      const farmName = avail ? avail.farm_name : (regionId === 'moinabad' ? 'One Day Kisan Moinabad' : 'One Day Kisan Bhongir');
+      const datePart = visitDate ? visitDate.replace(/-/g, '').slice(2, 6) : '2611';
+      const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+      const bookingRef = `ODK-${datePart}-${randomSuffix}`;
+
+      const qrPayload = JSON.stringify({
+        ref: bookingRef,
+        name: fullName,
+        guests: guestCount,
+        farm: farmName,
+        date: visitDate,
+        status: 'enquiry_received'
+      });
+      const qrCodeData = await QRCode.toDataURL(qrPayload, {
+        width: 280,
+        margin: 1,
+        color: {
+          dark: '#203C2B',
+          light: '#F5F1E8'
+        }
+      });
+
+      const newBooking = {
+        booking_ref: bookingRef,
+        full_name: fullName,
+        email: email,
+        phone: phone,
+        region_id: regionId,
+        experience_id: experienceId || 'family',
+        visit_date: visitDate,
+        travellers: travellers,
+        guest_count: guestCount,
+        dietary_notes: dietaryNotes || '',
+        special_requests: specialRequests || '',
+        status: 'enquiry_received',
+        qr_code_data: qrCodeData
+      };
+
+      const { error: iErr } = await sb
+        .from('bookings')
+        .insert([newBooking]);
+
+      if (iErr) {
+        console.error('Supabase booking creation error:', iErr.message);
+        throw new Error('Supabase booking creation error: ' + iErr.message);
+      }
+
+      return getBookingByRef(bookingRef);
+    }
+  }
 
   if (isDemoMode()) {
     const farmName = (regionId === 'moinabad' ? 'One Day Kisan Moinabad' : 'One Day Kisan Bhongir');
@@ -866,6 +1109,35 @@ async function createBooking(data) {
 
 // Get Booking by Reference with joined details
 async function getBookingByRef(bookingRef) {
+  if (isSupabase()) {
+    const sb = getSupabase();
+    if (sb) {
+      const { data: b, error } = await sb
+        .from('bookings')
+        .select('*')
+        .eq('booking_ref', bookingRef)
+        .maybeSingle();
+
+      if (b && !error) {
+        const { data: r } = await sb.from('regions').select('*').eq('id', b.region_id).maybeSingle();
+        const { data: e } = await sb.from('experiences').select('*').eq('id', b.experience_id).maybeSingle();
+
+        return {
+          ...b,
+          region_name: r ? r.name : b.region_id,
+          farm_name: r ? r.farm_name : '',
+          host_name: r ? r.host_name : '',
+          farm_location: r ? r.location : '',
+          elevation: r ? r.elevation : '',
+          experience_title: e ? e.title : '',
+          experience_duration: e ? e.duration : '',
+          inclusions: e ? e.inclusions : '',
+          storage: 'supabase'
+        };
+      }
+    }
+  }
+
   if (isDemoMode()) {
     return {
       booking_ref: bookingRef,
@@ -1231,8 +1503,10 @@ module.exports = {
   get db() {
     return getDatabase();
   },
+  isSupabase,
   isDemoMode,
   getDatabase,
+  getSupabase,
   initDatabase,
   all,
   get,

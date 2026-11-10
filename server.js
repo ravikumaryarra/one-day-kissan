@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const {
+  isSupabase,
   isDemoMode,
   initDatabase,
   all,
@@ -40,6 +41,12 @@ app.use(express.static(path.join(__dirname)));
 // 1. Get all farm regions
 app.get('/api/regions', async (req, res) => {
   try {
+    if (typeof isSupabase === 'function' && isSupabase()) {
+      const regions = await all('SELECT * FROM regions ORDER BY id');
+      if (regions && regions.length) {
+        return res.json({ success: true, count: regions.length, data: regions, storage: 'supabase' });
+      }
+    }
     if (isDemoMode()) {
       return res.json({
         success: true,
@@ -547,6 +554,10 @@ app.get('/api/bookings/:ref', async (req, res) => {
 // 6. List recent bookings (for steward review)
 app.get('/api/bookings', async (req, res) => {
   try {
+    if (typeof isSupabase === 'function' && isSupabase()) {
+      const bookings = await all('SELECT * FROM bookings ORDER BY created_at DESC LIMIT 50');
+      return res.json({ success: true, count: bookings.length, data: bookings, storage: 'supabase' });
+    }
     if (isDemoMode()) {
       return res.json({
         success: true,
@@ -677,9 +688,17 @@ app.get('/api/farm-360', (req, res) => {
   });
 });
 
-// Fallback to index.html for root routing
+// Fallback routing: serve index.html if present, otherwise clean 404
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ success: false, error: 'API route not found.' });
+  }
+  const indexPath = path.join(__dirname, 'index.html');
+  const fs = require('fs');
+  if (fs.existsSync(indexPath)) {
+    return res.sendFile(indexPath);
+  }
+  res.status(404).send('Page not found.');
 });
 
 // Start server after database initialization (local development daemon)
