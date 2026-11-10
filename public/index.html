@@ -8289,7 +8289,7 @@
         <div class="farm360-stage-card is-off" id="farm360StageCard">
           <!-- Preview State (when OFF) -->
           <div class="farm360-preview-wrap" id="farm360PreviewWrap">
-            <img src="/assets/farm_tour/tamil_nadu_hill_farm_360_master.jpg" alt="Tamil Nadu Hill Farm 360 Preview" class="farm360-preview-img" loading="lazy">
+            <img src="/assets/farm_tour/tamil_nadu_hill_farm_360_preview.webp" alt="Tamil Nadu Hill Farm 360 Preview" class="farm360-preview-img" loading="lazy" decoding="async">
             <div class="farm360-preview-scrim"></div>
             
             <div class="farm360-preview-center">
@@ -8399,7 +8399,7 @@
     <section class="stats" id="stats">
       <div class="sq-field" data-count="22"></div>
       <div class="tree-wrap">
-        <img id="tree" class="tree" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093215_95f11900-c4a0-49ad-bb2d-bb927dd594ee.png" alt="Heritage Countryside Banyan">
+        <img id="tree" class="tree" src="/assets/tree_banyan.webp" alt="Heritage Countryside Banyan" loading="lazy" decoding="async">
       </div>
       <div class="stats-inner">
         <span class="pill reveal">
@@ -8474,7 +8474,7 @@
           <!-- LOCATION 01 – BHONGIR -->
           <article class="location-panel is-selected" id="panel-bhongir" data-loc="bhongir">
             <div class="loc-media-wrap">
-              <img src="/assets/locations/bhongir_main_farm.jpg" alt="Bhongir Main Farm - Open agricultural fields and rural Telangana landscape" class="loc-photo" loading="lazy">
+              <img src="/assets/locations/bhongir_main_farm.webp" alt="Bhongir Main Farm - Open agricultural fields and rural Telangana landscape" class="loc-photo" loading="lazy" decoding="async">
               <div class="loc-media-gradient"></div>
               <div class="loc-media-tags">
                 <span class="loc-tag">LOCATION 01</span>
@@ -8537,7 +8537,7 @@
           <!-- LOCATION 02 – MOINABAD -->
           <article class="location-panel" id="panel-moinabad" data-loc="moinabad">
             <div class="loc-media-wrap">
-              <img src="/assets/locations/moinabad_branch_farm.jpg" alt="Moinabad Branch Farm - Lush Telangana agro-forest, fruit orchards and countryside paths" class="loc-photo" loading="lazy">
+              <img src="/assets/locations/moinabad_branch_farm.webp" alt="Moinabad Branch Farm - Lush Telangana agro-forest, fruit orchards and countryside paths" class="loc-photo" loading="lazy" decoding="async">
               <div class="loc-media-gradient"></div>
               <div class="loc-media-tags">
                 <span class="loc-tag">LOCATION 02</span>
@@ -8693,9 +8693,9 @@
 
                 <!-- Visual Frame with 3 Photorealistic Farm Layers -->
                 <div class="story-visual-frame" id="storyVisualFrame">
-                  <img id="storyImg-0" src="/assets/stories/story_01_discover_farm.jpg" alt="01 – Discover the Farm: Sweeping landscape of One Day Kissan farmland in morning light" class="story-slide-image is-active" loading="lazy">
-                  <img id="storyImg-1" src="/assets/stories/story_02_participate_farming.jpg" alt="02 – Participate in Farming: Visitors actively planting paddy rice seedlings in wet soil" class="story-slide-image" loading="lazy">
-                  <img id="storyImg-2" src="/assets/stories/story_03_experience_rural_life.jpg" alt="03 – Experience Rural Life: Traditional clay chulha woodfire cooking and rural hospitality" class="story-slide-image" loading="lazy">
+                  <img id="storyImg-0" src="/assets/stories/story_01_discover_farm.webp" alt="01 – Discover the Farm: Sweeping landscape of One Day Kissan farmland in morning light" class="story-slide-image is-active" loading="lazy" decoding="async">
+                  <img id="storyImg-1" src="/assets/stories/story_02_participate_farming.webp" alt="02 – Participate in Farming: Visitors actively planting paddy rice seedlings in wet soil" class="story-slide-image" loading="lazy" decoding="async">
+                  <img id="storyImg-2" src="/assets/stories/story_03_experience_rural_life.webp" alt="03 – Experience Rural Life: Traditional clay chulha woodfire cooking and rural hospitality" class="story-slide-image" loading="lazy" decoding="async">
                   <div class="story-visual-overlay"></div>
                   <div class="story-visual-badge" id="storyVisualBadge">Stage 01 • Countryside Discovery</div>
                 </div>
@@ -10106,7 +10106,7 @@
           <!-- LEFT SIDE: Farm Photography (50–55%) -->
           <div class="luxury-visual-col" id="luxuryVisualCol">
             <div class="luxury-visual-img-wrap">
-              <img id="luxuryFarmPhoto" src="/assets/locations/bhongir_main_farm.jpg" alt="Authentic farmland at One Day Kissan Bhongir, Telangana" class="luxury-visual-img">
+              <img id="luxuryFarmPhoto" src="/assets/locations/bhongir_main_farm.webp" alt="Authentic farmland at One Day Kissan Bhongir, Telangana" class="luxury-visual-img" loading="lazy" decoding="async">
             </div>
             <div class="luxury-visual-overlay"></div>
             
@@ -10789,25 +10789,30 @@
       if (!ctx) return;
 
       const TOTAL_FRAMES = 188;
-      let targetFps = 24;
+      const FRAME_STEP = 2; // Step by 2 frames: loads 94 frames total instead of 188 (50% network bandwidth reduction)
+      let targetFps = 12; // 12 FPS * step 2 = 24 source-frame cadence per second (perfect cinematic timing ~7.8s)
       let frameInterval = 1000 / targetFps;
       const FRAME_PATH_PREFIX = '/assets/hero_sequence/ezgif-frame-';
-      const MAX_CACHE_CAPACITY = 36;
-      const BUFFER_AHEAD_TARGET = 16;
-      const BUFFER_AHEAD_REFILL = 6;
-      const MAX_CONCURRENT_LOADS = 2;
+      const MAX_CACHE_CAPACITY = 96; // Cache up to 96 frames in memory (~7MB RAM) so loop never re-requests over the network!
+      const BUFFER_AHEAD_TARGET = 6;
+      const BUFFER_AHEAD_REFILL = 3;
+      const MAX_CONCURRENT_LOADS = 1; // Single-request streaming prevents network socket starvation
       let activeRequests = 0;
       let isBufferingAllowed = false;
+      let lastRequestTimestamp = 0;
+      const MIN_REQUEST_SPACING_MS = 100; // 100ms throttle between image downloads
 
       function enableBuffering() {
+        if (isBufferingAllowed) return;
         isBufferingAllowed = true;
-        if (isPlaying) refillBuffer();
+        if (isPlaying && isVisible) refillBuffer();
       }
 
+      // Defer background buffering until 2500ms after window load, so critical CSS, fonts, and Supabase APIs load with 100% pipe!
       if (document.readyState === 'complete') {
-        setTimeout(enableBuffering, 700);
+        setTimeout(enableBuffering, 2500);
       } else {
-        window.addEventListener('load', () => setTimeout(enableBuffering, 700));
+        window.addEventListener('load', () => setTimeout(enableBuffering, 2500));
       }
 
       // State
@@ -10887,27 +10892,39 @@
         }
       }
 
+      function getNextSteppedIndex(fromIdx, offset) {
+        let idx = fromIdx + (offset * FRAME_STEP);
+        while (idx > TOTAL_FRAMES) {
+          idx -= TOTAL_FRAMES;
+        }
+        if (idx < 1) idx = 1;
+        return idx;
+      }
+
       function countBufferedAhead() {
         let count = 0;
         for (let i = 1; i <= BUFFER_AHEAD_TARGET; i++) {
-          let idx = currentFrameIndex + i;
-          if (idx > TOTAL_FRAMES) idx -= TOTAL_FRAMES;
+          const idx = getNextSteppedIndex(currentFrameIndex, i);
           if (frameCache.has(idx)) count++;
         }
         return count;
       }
 
       function refillBuffer() {
-        if (!isBufferingAllowed) return;
+        if (!isBufferingAllowed || !isVisible || !isTabActive) return;
         if (activeRequests >= MAX_CONCURRENT_LOADS) return;
         if (countBufferedAhead() >= BUFFER_AHEAD_REFILL) return;
 
+        const now = performance.now();
+        if (now - lastRequestTimestamp < MIN_REQUEST_SPACING_MS) return;
+
         for (let i = 1; i <= BUFFER_AHEAD_TARGET; i++) {
           if (activeRequests >= MAX_CONCURRENT_LOADS) break;
-          let nextIdx = currentFrameIndex + i;
-          if (nextIdx > TOTAL_FRAMES) nextIdx -= TOTAL_FRAMES;
+          const nextIdx = getNextSteppedIndex(currentFrameIndex, i);
           if (!frameCache.has(nextIdx) && !loadingPromises.has(nextIdx)) {
+            lastRequestTimestamp = now;
             loadFrame(nextIdx);
+            break;
           }
         }
       }
@@ -10929,8 +10946,20 @@
       function renderCurrentFrame() {
         let img = frameCache.get(currentFrameIndex);
         if (!img || !img.complete || img.naturalWidth === 0) {
-          img = frameCache.get(1);
-          if (!img || !img.complete || img.naturalWidth === 0) return;
+          // Find closest loaded previous stepped frame to eliminate flicker!
+          let fallback = currentFrameIndex;
+          while (fallback > 1) {
+            fallback = Math.max(1, fallback - FRAME_STEP);
+            const candidate = frameCache.get(fallback);
+            if (candidate && candidate.complete && candidate.naturalWidth > 0) {
+              img = candidate;
+              break;
+            }
+          }
+          if (!img || !img.complete || img.naturalWidth === 0) {
+            img = frameCache.get(1);
+            if (!img || !img.complete || img.naturalWidth === 0) return;
+          }
         }
 
         const cw = canvas.width;
@@ -10964,7 +10993,10 @@
 
         let advanced = false;
         while (deltaAccumulator >= frameInterval) {
-          currentFrameIndex = (currentFrameIndex % TOTAL_FRAMES) + 1;
+          currentFrameIndex += FRAME_STEP;
+          if (currentFrameIndex > TOTAL_FRAMES) {
+            currentFrameIndex = 1;
+          }
           deltaAccumulator -= frameInterval;
           advanced = true;
         }
@@ -11469,19 +11501,23 @@
           ease: 'power3.out'
         }, '-=0.4');
 
-        introTl.from('.cloud.cloud-l', {
-          x: -120,
-          opacity: 0,
-          duration: 1.6,
-          ease: 'power3.out'
-        }, 0.4);
+        if (document.querySelector('.cloud.cloud-l')) {
+          introTl.from('.cloud.cloud-l', {
+            x: -120,
+            opacity: 0,
+            duration: 1.6,
+            ease: 'power3.out'
+          }, 0.4);
+        }
 
-        introTl.from('.cloud.cloud-r', {
-          x: 120,
-          opacity: 0,
-          duration: 1.6,
-          ease: 'power3.out'
-        }, 0.4);
+        if (document.querySelector('.cloud.cloud-r')) {
+          introTl.from('.cloud.cloud-r', {
+            x: 120,
+            opacity: 0,
+            duration: 1.6,
+            ease: 'power3.out'
+          }, 0.4);
+        }
 
         introTl.from('#heroGlass .glass', {
           opacity: 0,
@@ -11716,28 +11752,32 @@
             });
           });
 
-          gsap.from('.panel-in', {
-            y: 120,
-            opacity: 0,
-            duration: 1.1,
-            stagger: 0.12,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: '#loop',
-              start: 'top 60%'
-            }
-          });
+          if (document.querySelector('#loop')) {
+            gsap.from('.panel-in', {
+              y: 120,
+              opacity: 0,
+              duration: 1.1,
+              stagger: 0.12,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: '#loop',
+                start: 'top 60%'
+              }
+            });
 
-          gsap.to('.loop-cloud', {
-            x: 60,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: '#loop',
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true
+            if (document.querySelector('.loop-cloud')) {
+              gsap.to('.loop-cloud', {
+                x: 60,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: '#loop',
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  scrub: true
+                }
+              });
             }
-          });
+          }
 
           return () => {
             cleanups.forEach(fn => fn());
@@ -12416,31 +12456,35 @@
         }
 
         // CTA Parallax & Entrance
-        gsap.fromTo('#ctaImg', {
-          yPercent: -12
-        }, {
-          yPercent: 0,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '#booking',
-            start: 'top bottom',
-            end: 'bottom bottom',
-            scrub: true
-          }
-        });
+        if (document.querySelector('#ctaImg')) {
+          gsap.fromTo('#ctaImg', {
+            yPercent: -12
+          }, {
+            yPercent: 0,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '#booking',
+              start: 'top bottom',
+              end: 'bottom bottom',
+              scrub: true
+            }
+          });
+        }
 
-        gsap.from('#ctaCard', {
-          y: 80,
-          scale: 0.94,
-          opacity: 0,
-          filter: 'blur(10px)',
-          duration: 1.2,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '#booking',
-            start: 'top 60%'
-          }
-        });
+        if (document.querySelector('#ctaCard')) {
+          gsap.from('#ctaCard', {
+            y: 80,
+            scale: 0.94,
+            opacity: 0,
+            filter: 'blur(10px)',
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '#booking',
+              start: 'top 60%'
+            }
+          });
+        }
 
         // Footer Logo Animation (Sprout Monogram Reveal)
         const dots = document.querySelectorAll('.fdot');
@@ -12734,7 +12778,7 @@
     <div class="welcome-cinematic-panel" id="welcomePopupCard" role="document">
       <!-- Full-Bleed Authentic Countryside Photograph & Scrim -->
       <div class="welcome-cinematic-bg-wrap">
-        <img src="/assets/stories/story_01_discover_farm.jpg" alt="Authentic Telangana rural farmland at morning dawn" class="welcome-cinematic-bg-img" id="welcomePopupImg" loading="eager">
+        <img src="/assets/stories/story_01_discover_farm.webp" alt="Authentic Telangana rural farmland at morning dawn" class="welcome-cinematic-bg-img" id="welcomePopupImg" loading="lazy" decoding="async">
         <div class="welcome-cinematic-scrim"></div>
       </div>
 
@@ -12785,14 +12829,14 @@
             name: 'Main Farm – Bhongir',
             addr: 'Hotel Vivera, Hyderabad–Warangal Highway, Bhongir Bypass, Bhongir, Telangana – 508116',
             badgeText: '📍 Currently Selected: Main Farm — Bhongir',
-            photo: '/assets/locations/bhongir_main_farm.jpg',
+            photo: '/assets/locations/bhongir_main_farm.webp',
             alt: 'One Day Kissan Bhongir Main Farm, Telangana'
           },
           moinabad: {
             name: 'Branch Farm – Moinabad',
             addr: 'Kapil Agro Farms, Sriramnagar, Moinabad, Telangana – 501504',
             badgeText: '📍 Currently Selected: Branch Farm — Moinabad',
-            photo: '/assets/locations/moinabad_branch_farm.jpg',
+            photo: '/assets/locations/moinabad_branch_farm.webp',
             alt: 'One Day Kissan Moinabad Branch Farm, Telangana'
           }
         };
@@ -14763,7 +14807,7 @@
         journalFilmstrip.innerHTML = TESTIMONIAL_VIDEOS.map((item, index) => `
           <article class="journal-film-card" data-video-index="${index}" data-video-id="${item.id}" tabindex="0" role="button" aria-label="Watch testimonial: ${item.institution}">
             <div class="journal-film-thumb-wrap">
-              <img src="${item.thumb}" alt="${item.institution}" class="journal-film-thumb">
+              <img src="${item.thumb}" alt="${item.institution}" class="journal-film-thumb" loading="lazy" decoding="async">
               <div class="journal-film-overlay">
                 <div class="film-mini-play">
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
@@ -16739,7 +16783,7 @@
       // Initial check & auto-open on first visit
       function scheduleAutoOpen() {
         if (isDismissed()) return;
-        const delay = window.__welcomeDelay !== undefined ? window.__welcomeDelay : 1400;
+        const delay = window.__welcomeDelay !== undefined ? window.__welcomeDelay : 5000;
         setTimeout(() => {
           if (!isDismissed()) {
             openPopup();
