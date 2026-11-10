@@ -1,0 +1,1452 @@
+[
+  {
+    "name": "Pristine School",
+    "loc": "Upperpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Little Scholars High School",
+    "loc": "Sanathnagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Master Minds School",
+    "loc": "ECIL",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Residential School",
+    "loc": "Thorrur",
+    "region": "warangal"
+  },
+  {
+    "name": "Gnanakshetra School",
+    "loc": "Yousufguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "FIITJEE World School",
+    "loc": "Narayanaguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "DAV Public School",
+    "loc": "Safilguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "New Rishi School",
+    "loc": "Mahabubnagar",
+    "region": "regional"
+  },
+  {
+    "name": "Bodhi - The School",
+    "loc": "Nizampet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Lotus National School",
+    "loc": "Nagaram",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Master Minds School",
+    "loc": "Bandlaguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Advita International School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "KV School",
+    "loc": "Chandrayangutta",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Pallavi International School",
+    "loc": "Uppal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "KV School",
+    "loc": "Yeddumailaram",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Rishi School",
+    "loc": "Ghatkesar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "KV School",
+    "loc": "Bolarum",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Indian School of Excellence",
+    "loc": "Tolichowki",
+    "region": "hyderabad"
+  },
+  {
+    "name": "MNR Scottdales International School",
+    "loc": "Miyapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Genesis School",
+    "loc": "Kukatpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Kalpatharu School",
+    "loc": "Safilguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Pallavi International School",
+    "loc": "Pocharam",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Jasmine High School",
+    "loc": "Rajendranagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Global High School",
+    "loc": "Chandrayanagutta",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Pavitra International School",
+    "loc": "Ameenpur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "MSB School",
+    "loc": "Secunderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "RKS Mission School",
+    "loc": "Uppuguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Joseph's Public School",
+    "loc": "Habsiguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Happy Kids",
+    "loc": "Bahadurpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Paramitha Heritage School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "Pavitra International School",
+    "loc": "Kharmanghat",
+    "region": "hyderabad"
+  },
+  {
+    "name": "KV School",
+    "loc": "Uppal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "IZM School",
+    "loc": "Moula Ali",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Indu International School",
+    "loc": "LB Nagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sanskriti Pre School",
+    "loc": "Kukatpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "KV School",
+    "loc": "Picket",
+    "region": "hyderabad"
+  },
+  {
+    "name": "PM SHRI Govt High School",
+    "loc": "Rasoolpura",
+    "region": "hyderabad"
+  },
+  {
+    "name": "AHPS - Raja Chandrashekhar",
+    "loc": "Nacharam",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Green Meadows Public School",
+    "loc": "Mehdipatnam",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Donbagh High School",
+    "loc": "Attapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Hyderabad Public School",
+    "loc": "Ramanthapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Church School",
+    "loc": "Secunderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Hyderabad Public School",
+    "loc": "Begumpet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Paramitha Explorica School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "Oakwood International School",
+    "loc": "Kothapet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Keshav Memorial School",
+    "loc": "Narayanguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Joseph's International School",
+    "loc": "Hayatnagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Gouthami Vidyalaya",
+    "loc": "SR Nagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Paramount School",
+    "loc": "Warangal",
+    "region": "warangal"
+  },
+  {
+    "name": "Johnson Grammar School",
+    "loc": "Nacharam",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Global Model High School",
+    "loc": "Jagathgirigutta",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Chaitanya Olympiad School",
+    "loc": "Boduppal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "High Mount Public School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "Mother's Choice School",
+    "loc": "Warangal",
+    "region": "warangal"
+  },
+  {
+    "name": "Diamond Jubilee High School",
+    "loc": "Abids",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Kirthi High School",
+    "loc": "Secunderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "English Union School",
+    "loc": "Kavadiguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sri Vidya Vihar School",
+    "loc": "Annojiguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Andrews School",
+    "loc": "Keesara",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Delhi World Public School",
+    "loc": "Patancheru",
+    "region": "hyderabad"
+  },
+  {
+    "name": "KV School",
+    "loc": "Golconda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Mahabodhi Vidyalaya",
+    "loc": "Venkatapuram",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Ratnam Global School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "Deccan Spring Global School",
+    "loc": "Nacharam",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Pallavi International School",
+    "loc": "Keesara",
+    "region": "hyderabad"
+  },
+  {
+    "name": "International Delhi Public School",
+    "loc": "Vanastalipuram",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Prestine School",
+    "loc": "Hyderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Delhi Public Secondary School",
+    "loc": "Siddipet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Akshara Vaagdevi International School",
+    "loc": "Secunderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Rotterdam International School",
+    "loc": "Narapally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Kidzee & Arsha School",
+    "loc": "Madhapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Rising India Techno School",
+    "loc": "Madikonda",
+    "region": "warangal"
+  },
+  {
+    "name": "KV School",
+    "loc": "Bhongir",
+    "region": "regional"
+  },
+  {
+    "name": "Rajadhani Residential School",
+    "loc": "Chinthal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Excellencia Infinitum School",
+    "loc": "Shamirpet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Oxford School",
+    "loc": "Uppal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Saraswathi Shishu Mandir",
+    "loc": "Saidabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Meridian School",
+    "loc": "Uppal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "GD Goenka International School",
+    "loc": "LB Nagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "G.Pulla Reddy School",
+    "loc": "Mehdipatnam",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Radiance School",
+    "loc": "Warangal",
+    "region": "warangal"
+  },
+  {
+    "name": "Sai Gurukul School",
+    "loc": "Pocharam",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sloka International School",
+    "loc": "Balapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "KV School",
+    "loc": "Ghatkesar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Paramita School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "AHPS",
+    "loc": "Kothapet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Nirvachan School",
+    "loc": "Sagar Road",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Radiant Tapovan School",
+    "loc": "Kompally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Akshara International School",
+    "loc": "LB Nagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Chipotle School",
+    "loc": "Yousufguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Gautami Talent School",
+    "loc": "Dilsuknagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Genius School",
+    "loc": "Bahadurpura",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Great Height School",
+    "loc": "Nagole",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Pallavi Model School",
+    "loc": "Boduppal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Birla Open Minds International School",
+    "loc": "LB Nagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "PM SHRI Govt High School",
+    "loc": "Borabanda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vignan Global School",
+    "loc": "ECIL",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Pochampally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sloka International School",
+    "loc": "Manneguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Cheekatimamidi",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Tapasya Degree College",
+    "loc": "Dilsuknagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Joseph's School",
+    "loc": "Ramanthapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Saraswathi Shishu Mandir",
+    "loc": "Kushaiguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Unicent School",
+    "loc": "Kompally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sri Vidyanikethan School",
+    "loc": "Malkajgiri",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Baswapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sloka The Global School",
+    "loc": "Almasguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Bhongir",
+    "region": "regional"
+  },
+  {
+    "name": "TG Residential School",
+    "loc": "Sangareddy",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vidya Samskar Montessori",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Kodakandla",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Tejaswi Juniors Vidyaranya",
+    "loc": "Annojiguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Ghanpur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Bibinagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Tolichowki",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sunrise Innovative School",
+    "loc": "Sangareddy",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Malkapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Veritas Sainik School",
+    "loc": "Vantimamidi",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Narsapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Talentia School",
+    "loc": "Jubilee Hills",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Janapriya School",
+    "loc": "Miyapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Udayan Care",
+    "loc": "Hyderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Deeksha Global School",
+    "loc": "Yousufguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Silver Stork International School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Bachannapet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Yajur Public School",
+    "loc": "Warangal",
+    "region": "warangal"
+  },
+  {
+    "name": "Sri Vidyaranya International School",
+    "loc": "Bandlaguda Jagir",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Gajwel",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Birla Open Minds",
+    "loc": "Warangal",
+    "region": "warangal"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Ibrahimpur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vidyodaya School",
+    "loc": "Jammikunta",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Koheda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sprouts School",
+    "loc": "Meerpet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Kamalapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Joseph's High School",
+    "loc": "Ramanthapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Chowdaram",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Andrews School",
+    "loc": "Suchitra",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Narayanpur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Spark - The School",
+    "loc": "LB Nagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Husnabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vaarahi Kids",
+    "loc": "Bachupally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Vellanki",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Siddi School",
+    "loc": "Bowenpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Tejaswi High School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Shantinikethan Vidyalaya",
+    "loc": "Shamirpet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Maddur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Saraswathi Shishumandir",
+    "loc": "Badangpet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sri Vidyaranya Avasa Vidyanikethan",
+    "loc": "Bandlaguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Station Ghanpur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Trishna Montessori School",
+    "loc": "Boduppal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.John's School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Atmakur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Joseph's School",
+    "loc": "LB Nagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Shivani High School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Shriram Montessori School",
+    "loc": "Banjarahills",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Ann's School",
+    "loc": "Kompally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Siricilla",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Yadagirigutta",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Golden Jubilee High School",
+    "loc": "Langar House",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Andrews School",
+    "loc": "West Marredpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vidya Bharathi",
+    "loc": "Nadergul",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Mandamarri",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Johnson Grammar School",
+    "loc": "LB Nagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Andrews School",
+    "loc": "Bandlaguda Jagir",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Saraswathi Shishu Mandir",
+    "loc": "Pargi",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Isha School",
+    "loc": "Hasthinapuram",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Aler",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Meridian International School",
+    "loc": "Uppal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZP High School",
+    "loc": "Kolanpaka",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Calvary Temple School",
+    "loc": "Miyapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Joseph's School",
+    "loc": "Vanastalipuram",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vaarahi Kids",
+    "loc": "Miyapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "P.Obul Reddy Public School",
+    "loc": "Jubilee Hills",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Mallapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Star Global School",
+    "loc": "Jubilee Hills",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Pious High School",
+    "loc": "Alwal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Santinos Global School",
+    "loc": "Meerpet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Valli High School",
+    "loc": "Saidabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "SAV School",
+    "loc": "Malkajgiri",
+    "region": "hyderabad"
+  },
+  {
+    "name": "ZPHS",
+    "loc": "Vadlakonda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vivekananda Vidya Vihar",
+    "loc": "Qutbullapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "SMR High School",
+    "loc": "Warangal",
+    "region": "warangal"
+  },
+  {
+    "name": "Vaagdevi Global Smart Public School",
+    "loc": "Warangal",
+    "region": "warangal"
+  },
+  {
+    "name": "Vignana Jyothi Public School",
+    "loc": "Madhuranagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sri Prathibha School",
+    "loc": "Mahaboobnagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Andrews School",
+    "loc": "Marredpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Theressa School",
+    "loc": "Kapra",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sunrise School",
+    "loc": "Pragathinagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TG Model School",
+    "loc": "Shankarapatnam",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Saraswathi Shishumandir",
+    "loc": "Kachiguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sri Vidya Secondary School",
+    "loc": "Tilaknagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Montessori School",
+    "loc": "Bibinagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Happiness Kids",
+    "loc": "Kukatpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Marena Global School",
+    "loc": "Warangal",
+    "region": "warangal"
+  },
+  {
+    "name": "Gowtham Model School",
+    "loc": "Shivrampally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Arka International School",
+    "loc": "Balapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Cambridge International School",
+    "loc": "Bachupally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Krishnaveni Talent School",
+    "loc": "Jiyaguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Jublee Hills Public School",
+    "loc": "Rampally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sadhu Vaswani International School",
+    "loc": "Kompally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "HPS",
+    "loc": "Warangal",
+    "region": "warangal"
+  },
+  {
+    "name": "Hyderabad School of Business",
+    "loc": "Banjara Hills",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Gowtham Model School",
+    "loc": "Jillelguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Pace International School",
+    "loc": "ECIL",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Suvidya School",
+    "loc": "Ramanthapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vidya Ratna School",
+    "loc": "Uppal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Masterji",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Reforge HR",
+    "loc": "Sainikpuri",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Kidz Medha School",
+    "loc": "Mothinagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Ashoka Chanakya School",
+    "loc": "Jagadgirigutta",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Gowtham Model School",
+    "loc": "Begumpet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "St.Peter School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Shastra School",
+    "loc": "Shastra",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Aditya High School",
+    "loc": "Miryalaguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Unique High School",
+    "loc": "Jeedimetla",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Atomic Energy School",
+    "loc": "ECIL",
+    "region": "hyderabad"
+  },
+  {
+    "name": "DAV Public School",
+    "loc": "Miyapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Tome International School",
+    "loc": "Shalibanda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Indus Universal School",
+    "loc": "Kapra, Secunderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vignan School",
+    "loc": "Ghatkesar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vidyadhari School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Scholars School",
+    "loc": "Hyderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Loyola High School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "Odyssey The School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "Medha Concept School",
+    "loc": "Jeedimetla",
+    "region": "hyderabad"
+  },
+  {
+    "name": "The Celebrities School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Birla Open Minds International School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "Masterji",
+    "loc": "Madikonda",
+    "region": "warangal"
+  },
+  {
+    "name": "NRI High School",
+    "loc": "Vanasthalipuram",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Resonance School",
+    "loc": "Patancheru",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Father's Model School",
+    "loc": "Hyderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Bhavan's Atmakuri Rama Rao",
+    "loc": "Jubilee Hills",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Chirec International School",
+    "loc": "Kondapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Newton Educational Institutions",
+    "loc": "Hyderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sri Vidya High School",
+    "loc": "Meerpet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Dr.PVRR TG R School",
+    "loc": "Vangara",
+    "region": "regional"
+  },
+  {
+    "name": "Techfield School",
+    "loc": "Manikonda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Times School",
+    "loc": "Haliya",
+    "region": "regional"
+  },
+  {
+    "name": "Kakatiya School",
+    "loc": "Jiaguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "RCI School",
+    "loc": "Hyderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "TGMS",
+    "loc": "Maripeda",
+    "region": "warangal"
+  },
+  {
+    "name": "Vijaya Public School",
+    "loc": "Kapra",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sky Montessori",
+    "loc": "Himayatnagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Cambridge Montessori School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Krushi School",
+    "loc": "Jeedimetla",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Gowtham Model School",
+    "loc": "AS Rao Nagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Seed Primary School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Rose Buds",
+    "loc": "Manikoda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Naveena High School",
+    "loc": "Hasthinapuram",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Shanthinikethan",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "University of Hyderabad School",
+    "loc": "Gachibowli",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Talla Padmavathi Olympiad School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Shanthi High School",
+    "loc": "Kachiguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Alphores High School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "Skill Stork International School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Ocean School",
+    "loc": "Malakpet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "DPS",
+    "loc": "Mahendra Hills",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Indic International School",
+    "loc": "Kompally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sunshine School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Geetanjali Olympiad School",
+    "loc": "Madeenaguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "All Saints High School",
+    "loc": "Abids",
+    "region": "hyderabad"
+  },
+  {
+    "name": "AVN Vida International School",
+    "loc": "Gachibowli",
+    "region": "hyderabad"
+  },
+  {
+    "name": "SVAV",
+    "loc": "Bandlaguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Somanas Destinations",
+    "loc": "Jagdgirigutta",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Kakatiya High School",
+    "loc": "Kapra",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Buds n Blooms",
+    "loc": "Kukatpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Krishnaveni Talent School",
+    "loc": "Kukatpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Edify School",
+    "loc": "Uppal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Golden Oak School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "KVM School",
+    "loc": "Suraram",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Gowtham Model School",
+    "loc": "Kushaiguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "City Group of Schools",
+    "loc": "Hyderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Krishnaveni Talent School",
+    "loc": "Hyderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "New Dimension School",
+    "loc": "Bhongir",
+    "region": "regional"
+  },
+  {
+    "name": "Foster Billabong School",
+    "loc": "Hyderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Shanthinikethan School",
+    "loc": "Bowrampet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vishra The School",
+    "loc": "Balapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Sri Sai Saraswathi Vidya Niketan",
+    "loc": "ECIL",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Neo Geetanjali",
+    "loc": "Patancheru",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Bhavishya High School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "English Union School",
+    "loc": "Karimnagar",
+    "region": "regional"
+  },
+  {
+    "name": "Resonance School",
+    "loc": "Madhapur",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Neo Geetanjali School",
+    "loc": "Pragathinagar",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Vijaya Bharathi School",
+    "loc": "Yousufguda",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Dr.B.R.Ambedkar School",
+    "loc": "Chikkadpally",
+    "region": "hyderabad"
+  },
+  {
+    "name": "NSR International School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  },
+  {
+    "name": "Bharatiya Vidya Bhavan's Public School",
+    "loc": "Hyderabad",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Shanthinikethan School",
+    "loc": "Shamirpet",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Nirbhaya School",
+    "loc": "Chinthal",
+    "region": "hyderabad"
+  },
+  {
+    "name": "Rising Sun School",
+    "loc": "Hanmakonda",
+    "region": "warangal"
+  }
+]

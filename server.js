@@ -36,6 +36,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve frontend static files
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname)));
 
 // 1. Get all farm regions
@@ -693,8 +694,10 @@ app.use((req, res) => {
   if (req.path.startsWith('/api')) {
     return res.status(404).json({ success: false, error: 'API route not found.' });
   }
-  const indexPath = path.join(__dirname, 'index.html');
   const fs = require('fs');
+  const publicIndexPath = path.join(__dirname, 'public', 'index.html');
+  const rootIndexPath = path.join(__dirname, 'index.html');
+  const indexPath = fs.existsSync(publicIndexPath) ? publicIndexPath : rootIndexPath;
   if (fs.existsSync(indexPath)) {
     return res.sendFile(indexPath);
   }
