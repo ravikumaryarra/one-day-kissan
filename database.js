@@ -1,11 +1,44 @@
-const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const QRCode = require('qrcode');
 
+// Controlled Demo Mode Flag (Explicit DEMO_MODE=true or Vercel cloud environment)
+function isDemoMode() {
+  return process.env.DEMO_MODE === 'true' || process.env.VERCEL === '1';
+}
+
+let sqlite3 = null;
+let dbInstance = null;
 const dbPath = path.join(__dirname, 'onedaykissan.db');
-const db = new sqlite3.Database(dbPath);
+
+// Lazy-load SQLite only when local development mode requires persistent SQLite
+function getDatabase() {
+  if (isDemoMode()) {
+    return null;
+  }
+  if (!dbInstance) {
+    try {
+      sqlite3 = require('sqlite3').verbose();
+      dbInstance = new sqlite3.Database(dbPath);
+    } catch (err) {
+      console.warn('⚠️ Native SQLite module failed to load. Operating in Demo Mode:', err.message);
+      return null;
+    }
+  }
+  return dbInstance;
+}
 
 function initDatabase() {
+  if (isDemoMode()) {
+    console.log('🌿 One Day Kissan starting in DEMO_MODE (Native SQLite module isolated; no database connection opened).');
+    return Promise.resolve(false);
+  }
+
+  const db = getDatabase();
+  if (!db) {
+    console.warn('⚠️ SQLite database unavailable. Operating without local database initialization.');
+    return Promise.resolve(false);
+  }
+
   return new Promise((resolve, reject) => {
     db.serialize(() => {
       // 1. Regions table
@@ -615,6 +648,11 @@ function initDatabase() {
 
 // Helper: Query all
 function all(sql, params = []) {
+  if (isDemoMode()) {
+    return Promise.resolve([]);
+  }
+  const db = getDatabase();
+  if (!db) return Promise.resolve([]);
   return new Promise((resolve, reject) => {
     db.all(sql, params, (err, rows) => {
       if (err) reject(err);
@@ -625,6 +663,11 @@ function all(sql, params = []) {
 
 // Helper: Query one
 function get(sql, params = []) {
+  if (isDemoMode()) {
+    return Promise.resolve(null);
+  }
+  const db = getDatabase();
+  if (!db) return Promise.resolve(null);
   return new Promise((resolve, reject) => {
     db.get(sql, params, (err, row) => {
       if (err) reject(err);
@@ -635,6 +678,11 @@ function get(sql, params = []) {
 
 // Helper: Run command
 function run(sql, params = []) {
+  if (isDemoMode()) {
+    return Promise.resolve({ id: 0, changes: 0 });
+  }
+  const db = getDatabase();
+  if (!db) return Promise.resolve({ id: 0, changes: 0 });
   return new Promise((resolve, reject) => {
     db.run(sql, params, function (err) {
       if (err) reject(err);
@@ -645,6 +693,24 @@ function run(sql, params = []) {
 
 // Availability calculator
 async function getAvailability(regionId, dateStr) {
+  if (isDemoMode()) {
+    const regionName = regionId === 'moinabad' ? 'Branch Farm – Moinabad' : 'Main Farm – Bhongir';
+    const farmName = regionId === 'moinabad' ? 'One Day Kisan Moinabad' : 'One Day Kisan Bhongir';
+    return {
+      region_id: regionId,
+      region_name: regionName,
+      farm_name: farmName,
+      date: dateStr,
+      daily_capacity: 300,
+      booked_guests: 0,
+      remaining_slots: 300,
+      is_available: true,
+      is_unconfirmed: true,
+      demo_mode: true,
+      message: 'Farm visit availability is unconfirmed in demo mode and confirmed upon enquiry by our stewardship team.'
+    };
+  }
+
   const region = await get('SELECT * FROM regions WHERE id = ?', [regionId]);
   if (!region) return null;
 
@@ -671,6 +737,22 @@ async function getAvailability(regionId, dateStr) {
 
 // Availability calculator for an entire month
 async function getMonthAvailability(regionId, monthStr) {
+  if (isDemoMode()) {
+    const regionName = regionId === 'moinabad' ? 'Branch Farm – Moinabad' : 'Main Farm – Bhongir';
+    const farmName = regionId === 'moinabad' ? 'One Day Kisan Moinabad' : 'One Day Kisan Bhongir';
+    return {
+      region_id: regionId,
+      region_name: regionName,
+      farm_name: farmName,
+      month: monthStr,
+      daily_capacity: 300,
+      booked_dates: {},
+      is_unconfirmed: true,
+      demo_mode: true,
+      message: 'Farm visit availability is unconfirmed in demo mode and confirmed upon enquiry by our stewardship team.'
+    };
+  }
+
   const region = await get('SELECT * FROM regions WHERE id = ?', [regionId]);
   if (!region) return null;
 
@@ -712,6 +794,33 @@ async function createBooking(data) {
     dietaryNotes = '',
     specialRequests = ''
   } = data;
+
+  if (isDemoMode()) {
+    const farmName = (regionId === 'moinabad' ? 'One Day Kisan Moinabad' : 'One Day Kisan Bhongir');
+    const datePart = visitDate ? visitDate.replace(/-/g, '').slice(2, 6) : '2611';
+    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const bookingRef = `ODK-ENQ-${datePart}-${randomSuffix}`;
+    return {
+      booking_ref: bookingRef,
+      full_name: fullName,
+      email: email,
+      phone: phone,
+      region_id: regionId,
+      region_name: regionId === 'moinabad' ? 'Branch Farm – Moinabad' : 'Main Farm – Bhongir',
+      farm_name: farmName,
+      experience_id: experienceId || 'family',
+      experience_title: 'Farm Visit & Agrarian Experience',
+      visit_date: visitDate,
+      travellers: travellers,
+      guest_count: guestCount,
+      dietary_notes: dietaryNotes,
+      special_requests: specialRequests,
+      status: 'enquiry_received',
+      is_demo: true,
+      qr_code_data: null,
+      created_at: new Date().toISOString()
+    };
+  }
 
   // Retrieve farm details
   const avail = await getAvailability(regionId, visitDate);
@@ -757,6 +866,22 @@ async function createBooking(data) {
 
 // Get Booking by Reference with joined details
 async function getBookingByRef(bookingRef) {
+  if (isDemoMode()) {
+    return {
+      booking_ref: bookingRef,
+      full_name: 'Guest Enquiry',
+      email: 'guest@onedaykisan.com',
+      phone: '+919100033333',
+      status: 'enquiry_received',
+      farm_name: 'One Day Kisan Bhongir',
+      visit_date: '2026-11-14',
+      travellers: 'Farm Visit',
+      guest_count: 2,
+      is_demo: true,
+      message: 'Demo mode booking pass'
+    };
+  }
+
   return get(`
     SELECT 
       b.*,
@@ -1103,7 +1228,11 @@ async function likeReview(id) {
 }
 
 module.exports = {
-  db,
+  get db() {
+    return getDatabase();
+  },
+  isDemoMode,
+  getDatabase,
   initDatabase,
   all,
   get,

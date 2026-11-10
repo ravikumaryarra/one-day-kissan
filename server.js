@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const {
+  isDemoMode,
   initDatabase,
   all,
   get,
@@ -39,6 +40,32 @@ app.use(express.static(path.join(__dirname)));
 // 1. Get all farm regions
 app.get('/api/regions', async (req, res) => {
   try {
+    if (isDemoMode()) {
+      return res.json({
+        success: true,
+        demo_mode: true,
+        data: [
+          {
+            id: 'bhongir',
+            name: 'Main Farm – Bhongir',
+            farm_name: 'One Day Kisan Bhongir',
+            host_name: 'One Day Kisan Team',
+            location: 'Hotel Vivera, Hyderabad–Warangal Highway, Bhongir Bypass, Bhongir, Telangana – 508116',
+            daily_capacity: 300,
+            elevation: 'Deccan Plateau'
+          },
+          {
+            id: 'moinabad',
+            name: 'Branch Farm – Moinabad',
+            farm_name: 'One Day Kisan Moinabad',
+            host_name: 'One Day Kisan Team',
+            location: 'Kapil Agro Farms, Sriramnagar, Moinabad, Telangana – 501504',
+            daily_capacity: 150,
+            elevation: 'Deccan Plateau'
+          }
+        ]
+      });
+    }
     const regions = await all('SELECT * FROM regions ORDER BY id');
     res.json({ success: true, data: regions });
   } catch (err) {
@@ -49,6 +76,15 @@ app.get('/api/regions', async (req, res) => {
 // 2. Get all experience types
 app.get('/api/experiences', async (req, res) => {
   try {
+    const fs = require('fs');
+    const experiencesPath = path.join(__dirname, 'official_activities.json');
+    if (fs.existsSync(experiencesPath)) {
+      const activities = JSON.parse(fs.readFileSync(experiencesPath, 'utf8'));
+      return res.json({ success: true, count: activities.length, data: activities });
+    }
+    if (isDemoMode()) {
+      return res.json({ success: true, count: 0, data: [] });
+    }
     const experiences = await all('SELECT * FROM experiences ORDER BY id');
     res.json({ success: true, data: experiences });
   } catch (err) {
@@ -475,6 +511,16 @@ app.post('/api/bookings', async (req, res) => {
       specialRequests: formattedRequests
     });
 
+    if (isDemoMode()) {
+      return res.status(200).json({
+        success: true,
+        demo_mode: true,
+        status: 'enquiry_received',
+        message: 'Visit enquiry received (Demo Mode). This is an enquiry request and not a confirmed booking. Our stewardship team will contact you to verify availability.',
+        data: booking
+      });
+    }
+
     res.status(201).json({
       success: true,
       message: 'Booking request received with gratitude. Our team will contact you to confirm your visit.',
@@ -501,6 +547,15 @@ app.get('/api/bookings/:ref', async (req, res) => {
 // 6. List recent bookings (for steward review)
 app.get('/api/bookings', async (req, res) => {
   try {
+    if (isDemoMode()) {
+      return res.json({
+        success: true,
+        demo_mode: true,
+        count: 0,
+        data: [],
+        message: 'Customer records are not stored or exposed in demo mode.'
+      });
+    }
     const bookings = await all(`
       SELECT 
         b.booking_ref, b.full_name, b.email, b.phone, b.visit_date, 
@@ -627,27 +682,32 @@ app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Start server after database initialization
-initDatabase()
-  .then(() => {
-    function startListening(portToTry) {
-      const server = app.listen(portToTry, () => {
-        console.log(`🌾 One Day Kissan full-stack engine running on http://localhost:${portToTry}`);
-      });
+// Start server after database initialization (local development daemon)
+if (require.main === module) {
+  initDatabase()
+    .then(() => {
+      function startListening(portToTry) {
+        const server = app.listen(portToTry, () => {
+          const modeStr = isDemoMode() ? 'DEMO MODE (SQLite isolated)' : 'LOCAL MODE (SQLite active)';
+          console.log(`🌾 One Day Kissan full-stack engine running on http://localhost:${portToTry} [${modeStr}]`);
+        });
 
-      server.on('error', (err) => {
-        if (err.code === 'EADDRINUSE') {
-          console.warn(`⚠️ Port ${portToTry} is already active. Checking next port...`);
-          startListening(portToTry + 1);
-        } else {
-          console.error('Server error:', err);
-        }
-      });
-    }
+        server.on('error', (err) => {
+          if (err.code === 'EADDRINUSE') {
+            console.warn(`⚠️ Port ${portToTry} is already active. Checking next port...`);
+            startListening(portToTry + 1);
+          } else {
+            console.error('Server error:', err);
+          }
+        });
+      }
 
-    startListening(Number(PORT));
-  })
-  .catch(err => {
-    console.error('Failed to initialize database:', err);
-    process.exit(1);
-  });
+      startListening(Number(PORT));
+    })
+    .catch(err => {
+      console.error('Failed to initialize database:', err);
+      process.exit(1);
+    });
+}
+
+module.exports = app;

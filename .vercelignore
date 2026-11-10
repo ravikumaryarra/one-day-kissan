@@ -1,0 +1,9 @@
+# Exclude test screenshots, local database, and dev scripts from Vercel deployment
+screenshots/
+screenshots_*/
+test_*.cjs
+apply_*.cjs
+onedaykissan.db
+*.log
+docs/
+.git
