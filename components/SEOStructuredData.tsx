@@ -2,25 +2,27 @@ import React from "react";
 import { faqs } from "@/data/faqs";
 
 export default function SEOStructuredData() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://onedaykissan.vercel.app";
+
   // 1. LocalBusiness / TouristAttraction Schema for both locations
   const locationsSchema = [
     {
       "@context": "https://schema.org",
       "@type": ["TouristAttraction", "LocalBusiness"],
-      "@id": "https://www.onedaykisan.com/#bhongir-farm",
+      "@id": `${siteUrl}/#bhongir-farm`,
       "name": "One Day Kisan — Bhongir Main Farm",
       "alternateName": "One Day Kisan Hyderabad Warangal Highway",
       "description": "India's First Farm-Based Edutainment Destination. 15+ acres of hands-on agricultural experiences, ancient Persian wheel water systems, paddy transplantation, and rural living near Hyderabad.",
-      "url": "https://www.onedaykisan.com",
+      "url": siteUrl,
       "telephone": "+91-9849798674",
       "email": "info@onedaykisan.com",
       "priceRange": "₹₹",
       "currenciesAccepted": "INR",
       "paymentAccepted": "Cash, UPI, Credit Card, Bank Transfer",
       "image": [
-        "https://www.onedaykisan.com/gallery/gallery-01.webp",
-        "https://www.onedaykisan.com/images/hero-bg.jpg",
-        "https://www.onedaykisan.com/images/logo.png"
+        `${siteUrl}/gallery/gallery-01.webp`,
+        `${siteUrl}/images/hero-bg.jpg`,
+        `${siteUrl}/images/logo.png`
       ],
       "address": {
         "@type": "PostalAddress",
@@ -69,19 +71,19 @@ export default function SEOStructuredData() {
     {
       "@context": "https://schema.org",
       "@type": ["TouristAttraction", "LocalBusiness"],
-      "@id": "https://www.onedaykisan.com/#moinabad-farm",
+      "@id": `${siteUrl}/#moinabad-farm`,
       "name": "One Day Kisan — Moinabad Agro-Sanctuary",
       "alternateName": "One Day Kisan Kapil Agro Farms",
       "description": "Lush agro-sanctuary featuring the Walk-In Birds Aviary, Desi Gir cattle dairy, polyhouse greenhouse cultivation, and hands-on pottery workshops near Chilkur Balaji, Hyderabad.",
-      "url": "https://www.onedaykisan.com",
+      "url": siteUrl,
       "telephone": "+91-9849798674",
       "email": "info@onedaykisan.com",
       "priceRange": "₹₹",
       "currenciesAccepted": "INR",
       "paymentAccepted": "Cash, UPI, Credit Card, Bank Transfer",
       "image": [
-        "https://www.onedaykisan.com/gallery/gallery-02.webp",
-        "https://www.onedaykisan.com/images/23.png"
+        `${siteUrl}/gallery/gallery-02.webp`,
+        `${siteUrl}/images/23.png`
       ],
       "address": {
         "@type": "PostalAddress",
@@ -145,31 +147,31 @@ export default function SEOStructuredData() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://www.onedaykisan.com"
+        "item": siteUrl
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Farm Experiences",
-        "item": "https://www.onedaykisan.com#act1-mud"
+        "item": `${siteUrl}#act1-mud`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "360° Virtual Farm Tour",
-        "item": "https://www.onedaykisan.com#tour360"
+        "item": `${siteUrl}#tour360`
       },
       {
         "@type": "ListItem",
         "position": 4,
         "name": "School Field Trips",
-        "item": "https://www.onedaykisan.com#schools"
+        "item": `${siteUrl}#schools`
       },
       {
         "@type": "ListItem",
         "position": 5,
         "name": "Plan Your Visit & FAQ",
-        "item": "https://www.onedaykisan.com#planner"
+        "item": `${siteUrl}#planner`
       }
     ]
   };
@@ -179,7 +181,7 @@ export default function SEOStructuredData() {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     "name": "One Day Kisan Farm School Academy",
-    "url": "https://www.onedaykisan.com",
+    "url": siteUrl,
     "description": "Experiential hands-on agricultural and environmental education for K-12 students aligned with CBSE, ICSE, and NCERT guidelines.",
     "educationalCredentialAwarded": "Certificate of Agri-Literacy",
     "hasOfferCatalog": {

@@ -23,8 +23,10 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://onedaykissan.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.onedaykisan.com"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "One Day Kisan — India's Premier Farm-Based Edutainment Destination | Hyderabad",
     template: "%s | One Day Kisan",
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
   description:
     "Experience authentic rural farming, hands-on paddy transplantation, ancient Persian wheel water systems, pottery, and 360° virtual farm tours. Telangana's #1 farm field trip destination near Hyderabad (Bhongir & Moinabad) for schools, families, and corporate outings.",
   applicationName: "One Day Kisan",
-  authors: [{ name: "One Day Kisan Team", url: "https://www.onedaykisan.com" }],
+  authors: [{ name: "One Day Kisan Team", url: siteUrl }],
   generator: "Next.js",
   keywords: [
     // Brand Keywords
@@ -93,7 +95,7 @@ export const metadata: Metadata = {
     title: "One Day Kisan — India's Premier Farm-Based Edutainment Destination",
     description:
       "Give your children the childhood you had. Hands-on paddy transplantation, working Persian water wheels, walk-in aviary, pottery, and 360° virtual farm tours near Hyderabad (Bhongir & Moinabad).",
-    url: "https://www.onedaykisan.com",
+    url: siteUrl,
     siteName: "One Day Kisan",
     locale: "en_IN",
     type: "website",

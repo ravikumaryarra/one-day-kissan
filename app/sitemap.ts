@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.onedaykisan.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://onedaykissan.vercel.app";
   const lastModified = new Date();
 
   return [
