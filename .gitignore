@@ -1,17 +1,36 @@
-.DS_Store
-Thumbs.db
-*.log
-*.db
-.env
-.env.*
-node_modules/
-package-lock.json
-screenshots/
-screenshots_phase1/
-screenshots_phase2/
-screenshots_phase3/
-screenshots_phase4/
-screenshots_360_tour/
-test-results/
-run_inspection.js
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# backups
+assets_backup/

@@ -1,22 +1,31 @@
 {
-  "name": "one-day-kissan",
+  "name": "onedaykisan",
   "version": "1.0.0",
-  "description": "One Day Kissan — Full-Stack Agrotourism & Organic Produce Platform",
-  "main": "server.js",
+  "private": true,
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js",
-    "test": "node test_360_tour.cjs",
-    "test:all": "node test_360_tour.cjs && node test_phase4.cjs"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.109.0",
-    "cors": "^2.8.6",
-    "dotenv": "^18.0.9",
-    "express": "^5.3.0",
-    "playwright-core": "^1.64.1",
-    "qrcode": "^1.5.4",
-    "sqlite3": "^6.0.1",
-    "ws": "^8.22.2"
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.11.9",
+    "lucide-react": "^0.453.0",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.4",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/three": "^0.169.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3"
   }
 }
