@@ -3,6 +3,7 @@
 import React from "react";
 import { Phone, Mail, MapPin, Download, ArrowUp, Instagram, Facebook, Youtube, Linkedin, Heart } from "lucide-react";
 import { farmsData } from "@/data/farms";
+import { trackPhoneCall } from "@/components/Analytics";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -122,7 +123,11 @@ export default function Footer() {
               Direct Contact
             </h4>
             <div className="space-y-2 text-xs">
-              <a href="tel:9849798674" className="flex items-center gap-2 text-[#2b4c1c] font-medium hover:underline">
+              <a
+                href="tel:9849798674"
+                onClick={() => trackPhoneCall("9849798674")}
+                className="flex items-center gap-2 text-[#2b4c1c] font-medium hover:underline"
+              >
                 <Phone className="w-3.5 h-3.5 text-[#a84724]" />
                 <span>+91 98497 98674</span>
               </a>

@@ -24,6 +24,7 @@ import {
   Recycle
 } from "lucide-react";
 import { farmsData, FarmLocation, Hotspot } from "@/data/farms";
+import { track360Interaction } from "@/components/Analytics";
 
 const iconMap: Record<string, React.ReactNode> = {
   Droplets: <Droplets className="w-4 h-4 text-[#2b4c1c]" />,
@@ -331,7 +332,10 @@ export default function Farm360Tour() {
         {/* Dual-Farm Switcher: Warm Linen Segmented Pill */}
         <div className="mt-8 inline-flex p-1.5 rounded-full bg-[#ffffff] border border-[#2b4c1c]/15 relative shadow-md">
           <button
-            onClick={() => setSelectedFarmKey("bhongir")}
+            onClick={() => {
+              setSelectedFarmKey("bhongir");
+              track360Interaction("Bhongir Farm", "switch_farm");
+            }}
             className={`relative z-10 px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
               selectedFarmKey === "bhongir"
                 ? "text-white font-semibold"
@@ -346,7 +350,10 @@ export default function Farm360Tour() {
           </button>
 
           <button
-            onClick={() => setSelectedFarmKey("moinabad")}
+            onClick={() => {
+              setSelectedFarmKey("moinabad");
+              track360Interaction("Moinabad Farm", "switch_farm");
+            }}
             className={`relative z-10 px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
               selectedFarmKey === "moinabad"
                 ? "text-white font-semibold"
@@ -417,7 +424,13 @@ export default function Farm360Tour() {
                 className="absolute -top-5 -left-5 pointer-events-auto transition-transform duration-75 ease-out"
               >
                 <button
-                  onClick={() => setSelectedHotspot(isSelected ? null : hs)}
+                  onClick={() => {
+                    const nextState = isSelected ? null : hs;
+                    setSelectedHotspot(nextState);
+                    if (nextState) {
+                      track360Interaction(farm.name, `hotspot_${hs.title}`);
+                    }
+                  }}
                   className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-[#ffffff] shadow-lg hover:scale-125 transition-all duration-300 border border-[#2b4c1c]/20"
                   title={hs.title}
                 >
