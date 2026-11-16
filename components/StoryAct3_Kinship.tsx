@@ -46,16 +46,16 @@ export default function StoryAct3_Kinship({ onOpenBooking }: Act3Props) {
 
   return (
     <section id="act3-kinship" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#2b4c1c]/10">
-      {/* Chapter Marker with Amber-Honey Livestock Palette */}
+      {/* Chapter Marker */}
       <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-xs font-semibold uppercase tracking-wider mb-4 shadow-xs">
-          <HeartHandshake className="w-3.5 h-3.5 text-amber-700" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#8a4724]/10 text-[#8a4724] border border-[#8a4724]/20 text-xs font-mono uppercase tracking-widest mb-4">
+          <HeartHandshake className="w-3.5 h-3.5 text-[#8a4724]" />
           <span>Act III • 01:30 PM • Animal Kinship, Birds & Farm Feast</span>
         </div>
 
         <h2 className="text-3xl sm:text-5xl font-serif font-black text-[#14230e] tracking-tight">
           Where milk is a living gift, <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-600 to-emerald-700">
+          <span className="italic font-normal text-[#8a4724]">
             not a supermarket barcode.
           </span>
         </h2>

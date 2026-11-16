@@ -100,7 +100,7 @@ export default function AudienceSections({ onOpenBooking }: AudienceSectionsProp
                   <div className="mt-8 flex items-center gap-4">
                     <button
                       onClick={onOpenBooking}
-                      className="px-7 py-3 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-emerald-600 to-farm-700 hover:from-emerald-500 hover:to-farm-600 shadow-lg flex items-center gap-2"
+                      className="px-7 py-3 rounded-full text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-md flex items-center gap-2"
                     >
                       Request School Visit Proposal <ArrowRight className="w-3.5 h-3.5" />
                     </button>
@@ -163,7 +163,7 @@ export default function AudienceSections({ onOpenBooking }: AudienceSectionsProp
                   <div className="mt-8 flex items-center gap-4">
                     <button
                       onClick={onOpenBooking}
-                      className="px-7 py-3 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-amber-600 to-clay-700 hover:from-amber-500 hover:to-clay-600 shadow-lg flex items-center gap-2"
+                      className="px-7 py-3 rounded-full text-xs font-semibold text-white bg-[#8a4724] hover:bg-[#743a1c] shadow-md flex items-center gap-2"
                     >
                       Book Corporate Outing Package <ArrowRight className="w-3.5 h-3.5" />
                     </button>
@@ -198,7 +198,7 @@ export default function AudienceSections({ onOpenBooking }: AudienceSectionsProp
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div>
-                  <span className="px-3.5 py-1 rounded-full bg-pink-500/20 text-pink-300 text-xs font-medium border border-pink-500/30 inline-block mb-4">
+                  <span className="px-3.5 py-1 rounded-full bg-[#8a4724]/20 text-[#f5d0b5] text-xs font-medium border border-[#8a4724]/30 inline-block mb-4">
                     Weekend Day Passes & Family Picnics
                   </span>
                   <h3 className="text-2xl sm:text-4xl font-serif font-bold text-white mb-4">
@@ -217,7 +217,7 @@ export default function AudienceSections({ onOpenBooking }: AudienceSectionsProp
                       "Hygienic traditional buffet included in all day-pass options"
                     ].map((item, idx) => (
                       <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm text-stone-200">
-                        <CheckCircle className="w-4 h-4 text-pink-400 flex-shrink-0" />
+                        <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                         <span>{item}</span>
                       </div>
                     ))}
@@ -226,7 +226,7 @@ export default function AudienceSections({ onOpenBooking }: AudienceSectionsProp
                   <div className="mt-8 flex items-center gap-4">
                     <button
                       onClick={onOpenBooking}
-                      className="px-7 py-3 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-pink-600 to-rose-700 hover:from-pink-500 hover:to-rose-600 shadow-lg flex items-center gap-2"
+                      className="px-7 py-3 rounded-full text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-md flex items-center gap-2"
                     >
                       Reserve Family Weekend Pass <ArrowRight className="w-3.5 h-3.5" />
                     </button>

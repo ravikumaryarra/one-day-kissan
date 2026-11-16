@@ -67,7 +67,7 @@ export default function ActivitiesExplorer({ onSelectActivityForBooking }: Activ
               onClick={() => setActiveCategory(cat.key)}
               className={`px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 flex items-center gap-1.5 ${
                 activeCategory === cat.key
-                  ? "bg-gradient-to-r from-emerald-600 to-farm-700 text-white font-semibold shadow-md border border-white/20"
+                  ? "bg-[#2b4c1c] text-white font-semibold shadow-md border border-[#2b4c1c]/40"
                   : "text-stone-400 hover:text-white hover:bg-white/5"
               }`}
             >
@@ -196,7 +196,7 @@ export default function ActivitiesExplorer({ onSelectActivityForBooking }: Activ
                       setSelectedActivity(null);
                       onSelectActivityForBooking(title);
                     }}
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-emerald-600 to-farm-700 hover:from-emerald-500 hover:to-farm-600 shadow-lg transition-all"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-full text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-md transition-all"
                   >
                     Include in Visit Plan →
                   </button>

@@ -38,16 +38,16 @@ export default function StoryAct4_ClayFire({ onOpenBooking }: Act4Props) {
 
   return (
     <section id="act4-clay" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#2b4c1c]/10">
-      {/* Chapter Marker with Terracotta-Sunset Palette */}
+      {/* Chapter Marker */}
       <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 text-orange-950 border border-orange-300 text-xs font-semibold uppercase tracking-wider mb-4 shadow-xs">
-          <Sparkles className="w-3.5 h-3.5 text-orange-600 animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#8a4724]/10 text-[#8a4724] border border-[#8a4724]/20 text-xs font-mono uppercase tracking-widest mb-4">
+          <Sparkles className="w-3.5 h-3.5 text-[#8a4724]" />
           <span>Act IV • 03:30 PM • Fire, Clay & Twilight Joy</span>
         </div>
 
         <h2 className="text-3xl sm:text-5xl font-serif font-black text-[#14230e] tracking-tight">
           The joy of shaping the world <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-red-600 to-amber-600">
+          <span className="italic font-normal text-[#8a4724]">
             with your own two hands.
           </span>
         </h2>

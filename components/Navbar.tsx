@@ -101,9 +101,9 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
             <button
               onClick={onOpenBooking}
-              className="px-5 py-2 rounded-full text-xs font-bold text-white bg-gradient-to-r from-emerald-600 via-green-600 to-amber-600 hover:from-emerald-700 hover:to-amber-700 shadow-sm hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap"
+              className="px-5 py-2 rounded-full text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-sm hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap"
             >
-              <Sparkles className="w-3.5 h-3.5 text-yellow-200" />
+              <Sparkles className="w-3.5 h-3.5 text-white/80" />
               <span>Book a Visit</span>
             </button>
           </div>
@@ -164,9 +164,9 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                   setMobileMenuOpen(false);
                   onOpenBooking();
                 }}
-                className="w-full py-3.5 rounded-2xl text-xs font-bold text-white bg-gradient-to-r from-emerald-600 via-green-600 to-amber-600 shadow-md flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-2xl text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-md flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-4 h-4 text-yellow-200" />
+                <Sparkles className="w-4 h-4 text-white/80" />
                 Book a Visit
               </button>
             </div>

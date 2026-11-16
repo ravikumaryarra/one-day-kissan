@@ -23,56 +23,50 @@ export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
     <>
       {/* Fixed Native-Style Bottom App Bar (Mobile & Tablet only) */}
       <div className="fixed bottom-0 inset-x-0 z-40 lg:hidden px-3 pb-3 pointer-events-none">
-        <div className="max-w-md mx-auto pointer-events-auto bg-[#ffffff]/95 backdrop-blur-xl border border-emerald-900/15 rounded-3xl shadow-[0_-5px_25px_rgba(20,50,15,0.12)] p-2 flex items-center justify-between gap-1">
+        <div className="max-w-md mx-auto pointer-events-auto bg-[#ffffff]/95 backdrop-blur-xl border border-[#2b4c1c]/15 rounded-3xl shadow-[0_-5px_25px_rgba(40,30,15,0.1)] p-2 flex items-center justify-between gap-1">
           {/* 360° Tour Tab */}
           <button
             onClick={() => scrollTo("tour360")}
-            className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#2b4c1c] hover:bg-emerald-50 active:scale-95 transition-all"
+            className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#2b4c1c] hover:bg-[#f5f0e6] active:scale-95 transition-all"
           >
-            <div className="relative">
-              <Compass className="w-5 h-5 text-emerald-700" />
-              <span className="absolute -top-1 -right-2 flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
-              </span>
-            </div>
-            <span className="text-[10px] font-bold text-emerald-900 mt-0.5 tracking-tight">360° Tour</span>
+            <Compass className="w-5 h-5 text-[#2b4c1c]" />
+            <span className="text-[10px] font-bold text-[#2b4c1c] mt-0.5 tracking-tight">360° Tour</span>
           </button>
 
           {/* Activities / Experiences */}
           <button
             onClick={() => scrollTo("act1-mud")}
-            className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#4a5840] hover:bg-emerald-50 active:scale-95 transition-all"
+            className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#526048] hover:bg-[#f5f0e6] active:scale-95 transition-all"
           >
-            <Sprout className="w-5 h-5 text-amber-600" />
-            <span className="text-[10px] font-semibold text-[#3d5032] mt-0.5 tracking-tight">Activities</span>
+            <Sprout className="w-5 h-5 text-[#8a4724]" />
+            <span className="text-[10px] font-medium text-[#526048] mt-0.5 tracking-tight">Activities</span>
           </button>
 
           {/* Directions Quick Action */}
           <button
             onClick={() => setDirectionsModalOpen(true)}
-            className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#4a5840] hover:bg-emerald-50 active:scale-95 transition-all"
+            className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#526048] hover:bg-[#f5f0e6] active:scale-95 transition-all"
           >
-            <Navigation className="w-5 h-5 text-blue-600" />
-            <span className="text-[10px] font-semibold text-[#3d5032] mt-0.5 tracking-tight">Directions</span>
+            <Navigation className="w-5 h-5 text-[#2b4c1c]" />
+            <span className="text-[10px] font-medium text-[#526048] mt-0.5 tracking-tight">Directions</span>
           </button>
 
           {/* Call Helpdesk */}
           <a
             href="tel:9849798674"
             onClick={() => trackPhoneCall("9849798674")}
-            className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#4a5840] hover:bg-emerald-50 active:scale-95 transition-all"
+            className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#526048] hover:bg-[#f5f0e6] active:scale-95 transition-all"
           >
-            <Phone className="w-5 h-5 text-emerald-700" />
-            <span className="text-[10px] font-semibold text-[#3d5032] mt-0.5 tracking-tight">Call Us</span>
+            <Phone className="w-5 h-5 text-[#2b4c1c]" />
+            <span className="text-[10px] font-medium text-[#526048] mt-0.5 tracking-tight">Call Us</span>
           </a>
 
-          {/* Book Now Radiant Action Button */}
+          {/* Book Now Button */}
           <button
             onClick={onOpenBooking}
-            className="flex-1.5 py-2.5 px-3 rounded-2xl bg-gradient-to-r from-emerald-600 via-green-600 to-amber-600 text-white font-bold text-xs shadow-md flex items-center justify-center gap-1 active:scale-95 transition-transform"
+            className="flex-1.5 py-2.5 px-3 rounded-2xl bg-[#2b4c1c] hover:bg-[#1e3614] text-white font-semibold text-xs shadow-sm flex items-center justify-center gap-1 active:scale-95 transition-all"
           >
-            <Sparkles className="w-3.5 h-3.5 text-yellow-200" />
+            <Sparkles className="w-3.5 h-3.5 text-[#e6f2dc]" />
             <span>Book Visit</span>
           </button>
         </div>
@@ -114,17 +108,17 @@ export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
               </div>
 
               {/* Location 1: Bhongir Farm */}
-              <div className="mt-4 p-4 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
+              <div className="mt-4 p-4 rounded-2xl bg-[#faf7f0] border border-[#2b4c1c]/15">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded-full">
+                  <span className="field-note-tag text-[9px]">
                     Flagship • 15+ Acres
                   </span>
-                  <span className="text-xs font-semibold text-emerald-700">~45–50 Mins</span>
+                  <span className="text-xs text-[#8a4724] font-medium">~45–50 Mins</span>
                 </div>
-                <h4 className="font-serif font-bold text-base text-[#14230e] mb-1">
+                <h4 className="font-serif font-bold text-base text-[#1a2614] mb-1">
                   Bhongir Main Farm
                 </h4>
-                <p className="text-xs text-[#3a4e30] mb-3 leading-relaxed">
+                <p className="text-xs text-[#526048] mb-3 leading-relaxed">
                   Near Hotel Vivera, Hyderabad - Warangal Highway (NH 163), Bhongir Bypass
                 </p>
                 <div className="flex gap-2">
@@ -133,9 +127,9 @@ export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setDirectionsModalOpen(false)}
-                    className="flex-1 py-2.5 px-4 rounded-xl bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
+                    className="flex-1 py-2.5 px-4 rounded-xl bg-[#2b4c1c] hover:bg-[#1e3614] text-white font-medium text-xs flex items-center justify-center gap-1.5 shadow-xs active:scale-98"
                   >
-                    <Navigation className="w-3.5 h-3.5 text-amber-300" />
+                    <Navigation className="w-3.5 h-3.5" />
                     <span>Navigate (Google Maps)</span>
                     <ExternalLink className="w-3 h-3 ml-0.5" />
                   </a>
@@ -143,17 +137,17 @@ export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
               </div>
 
               {/* Location 2: Moinabad Farm */}
-              <div className="mt-3 p-4 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200">
+              <div className="mt-3 p-4 rounded-2xl bg-[#faf7f0] border border-[#2b4c1c]/15">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-200/60 px-2 py-0.5 rounded-full">
+                  <span className="field-note-tag text-[9px]">
                     Agro-Sanctuary • 12+ Acres
                   </span>
-                  <span className="text-xs font-semibold text-amber-700">~30–35 Mins</span>
+                  <span className="text-xs text-[#8a4724] font-medium">~30–35 Mins</span>
                 </div>
-                <h4 className="font-serif font-bold text-base text-[#14230e] mb-1">
+                <h4 className="font-serif font-bold text-base text-[#1a2614] mb-1">
                   Moinabad Agro-Sanctuary
                 </h4>
-                <p className="text-xs text-[#3a4e30] mb-3 leading-relaxed">
+                <p className="text-xs text-[#526048] mb-3 leading-relaxed">
                   Kapil Agro Farms, Sriramnagar, Chilkur Balaji Corridor, Moinabad
                 </p>
                 <div className="flex gap-2">
@@ -162,9 +156,9 @@ export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setDirectionsModalOpen(false)}
-                    className="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98"
+                    className="flex-1 py-2.5 px-4 rounded-xl bg-[#2b4c1c] hover:bg-[#1e3614] text-white font-medium text-xs flex items-center justify-center gap-1.5 shadow-xs active:scale-98"
                   >
-                    <Navigation className="w-3.5 h-3.5 text-yellow-200" />
+                    <Navigation className="w-3.5 h-3.5" />
                     <span>Navigate (Google Maps)</span>
                     <ExternalLink className="w-3 h-3 ml-0.5" />
                   </a>
@@ -173,13 +167,13 @@ export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
 
               {/* Direct Helpdesk Phone Button */}
               <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
-                <span className="text-[#526548]">Need gate directions?</span>
+                <span className="text-[#526048]">Need gate directions?</span>
                 <a
                   href="tel:9849798674"
                   onClick={() => trackPhoneCall("9849798674")}
-                  className="font-bold text-emerald-800 flex items-center gap-1 hover:underline"
+                  className="font-bold text-[#2b4c1c] flex items-center gap-1 hover:underline"
                 >
-                  <Phone className="w-3.5 h-3.5 text-emerald-700" />
+                  <Phone className="w-3.5 h-3.5 text-[#2b4c1c]" />
                   +91 98497 98674
                 </a>
               </div>

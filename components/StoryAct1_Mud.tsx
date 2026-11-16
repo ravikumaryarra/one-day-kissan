@@ -56,16 +56,16 @@ export default function StoryAct1_Mud({ onOpenBooking }: Act1Props) {
 
   return (
     <section id="act1-mud" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#2b4c1c]/10">
-      {/* Chapter Marker with Vibrant Agro Palette */}
+      {/* Chapter Marker */}
       <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300 text-xs font-semibold uppercase tracking-wider mb-4 shadow-xs">
-          <Sprout className="w-3.5 h-3.5 text-emerald-700" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2b4c1c]/10 text-[#2b4c1c] border border-[#2b4c1c]/20 text-xs font-mono uppercase tracking-widest mb-4">
+          <Sprout className="w-3.5 h-3.5 text-[#2b4c1c]" />
           <span>Act I • 09:30 AM • Soil Awakening & Paddy Arena</span>
         </div>
 
         <h2 className="text-3xl sm:text-5xl font-serif font-black text-[#14230e] tracking-tight">
           The cold shock of earth <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-green-600 to-amber-600">
+          <span className="italic font-normal text-[#8a4724]">
             between bare toes.
           </span>
         </h2>

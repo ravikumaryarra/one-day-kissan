@@ -78,7 +78,7 @@ export default function Hero({ onOpenBooking }: HeroProps) {
         >
           <a
             href="#tour360"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-emerald-600 via-farm-600 to-farm-700 hover:from-emerald-500 hover:to-farm-600 shadow-[0_10px_35px_rgba(45,74,18,0.5)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2.5 specular-border group"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-full text-sm font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-[0_10px_35px_rgba(43,76,28,0.5)] transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2.5 specular-border group"
           >
             <Compass className="w-4 h-4 text-emerald-200 group-hover:rotate-45 transition-transform" />
             <span>Explore 360° Farm Tour</span>

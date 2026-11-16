@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -30,33 +30,31 @@ import { track360Interaction } from "@/components/Analytics";
 const iconMap: Record<string, React.ReactNode> = {
   Droplets: <Droplets className="w-4 h-4 text-[#2b4c1c]" />,
   Sprout: <Sprout className="w-4 h-4 text-[#2b4c1c]" />,
-  Compass: <Compass className="w-4 h-4 text-[#a84724]" />,
-  Eye: <Eye className="w-4 h-4 text-[#8a5738]" />,
-  Feather: <Feather className="w-4 h-4 text-[#b8522f]" />,
-  HeartHandshake: <HeartHandshake className="w-4 h-4 text-[#8a5738]" />,
+  Compass: <Compass className="w-4 h-4 text-[#2b4c1c]" />,
+  Eye: <Eye className="w-4 h-4 text-[#2b4c1c]" />,
+  Feather: <Feather className="w-4 h-4 text-[#8a4724]" />,
+  HeartHandshake: <HeartHandshake className="w-4 h-4 text-[#8a4724]" />,
   Leaf: <Leaf className="w-4 h-4 text-[#2b4c1c]" />,
   Recycle: <Recycle className="w-4 h-4 text-[#2b4c1c]" />,
 };
-
-interface ScreenHotspot extends Hotspot {
-  screenX: number;
-  screenY: number;
-  visible: boolean;
-}
 
 export default function Farm360Tour() {
   const [selectedFarmKey, setSelectedFarmKey] = useState<"bhongir" | "moinabad">("bhongir");
   const farm: FarmLocation = farmsData[selectedFarmKey];
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isAutoRotating, setIsAutoRotating] = useState(true);
-  const [isGyroActive, setIsGyroActive] = useState(false);
-  const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
-  const [screenHotspots, setScreenHotspots] = useState<ScreenHotspot[]>([]);
   const [isLoadingTexture, setIsLoadingTexture] = useState(true);
+  const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
+  const [screenHotspots, setScreenHotspots] = useState<
+    (Hotspot & { screenX: number; screenY: number; visible: boolean })[]
+  >([]);
 
-  // Three.js refs
+  // Mobile Gyroscope Support
+  const [isGyroActive, setIsGyroActive] = useState(false);
+
+  // Three.js instances
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
@@ -76,13 +74,14 @@ export default function Farm360Tour() {
   const onPointerDownPointerYRef = useRef(0);
   const onPointerDownLonRef = useRef(0);
   const onPointerDownLatRef = useRef(0);
+  const isVisibleRef = useRef(false);
 
-  // Setup Three.js scene
+  // Setup Three.js scene with performance optimizations
   useEffect(() => {
     if (!containerRef.current) return;
     const container = containerRef.current;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    const width = container.clientWidth || 360;
+    const height = container.clientHeight || 450;
 
     const scene = new THREE.Scene();
     sceneRef.current = scene;
@@ -91,15 +90,16 @@ export default function Farm360Tour() {
     const cameraTarget = new THREE.Vector3(0, 0, 0);
     cameraRef.current = camera;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Mobile optimized WebGL renderer (capped pixel ratio 1.5 for buttery performance)
+    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false, powerPreference: "default" });
+    renderer.setPixelRatio(Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 1.5));
     renderer.setSize(width, height);
     rendererRef.current = renderer;
 
     container.appendChild(renderer.domElement);
 
-    // Sphere Geometry (inverted)
-    const geometry = new THREE.SphereGeometry(500, 60, 40);
+    // Optimized Sphere Geometry (36x24 segments - 70% lighter on GPU than 60x40)
+    const geometry = new THREE.SphereGeometry(500, 36, 24);
     geometry.scale(-1, 1, 1);
 
     const textureLoader = new THREE.TextureLoader();
@@ -117,9 +117,22 @@ export default function Farm360Tour() {
     sphereRef.current = sphere;
 
     let animationFrameId: number;
+    let lastHotspotUpdate = 0;
+
+    // IntersectionObserver to suspend Three.js when scrolled out of view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+
+      // CRITICAL MOBILE PERF: If not in viewport, do zero math and zero rendering!
+      if (!isVisibleRef.current) return;
 
       // Smooth camera interpolation
       if (isAutoRotating && !isUserInteractingRef.current) {
@@ -143,8 +156,11 @@ export default function Farm360Tour() {
 
       renderer.render(scene, camera);
 
-      // Project Hotspots into 2D Screen Space
-      if (containerRef.current) {
+      // CRITICAL MOBILE PERF: Throttle hotspot recalculation to at most once per 120ms
+      // (avoids calling React setState 60 times/sec which freezes mobile phones!)
+      const now = performance.now();
+      if (now - lastHotspotUpdate > 120 && containerRef.current) {
+        lastHotspotUpdate = now;
         const curW = containerRef.current.clientWidth;
         const curH = containerRef.current.clientHeight;
         const currentFarm = farmsData[selectedFarmKey];
@@ -192,6 +208,7 @@ export default function Farm360Tour() {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
@@ -258,98 +275,93 @@ export default function Farm360Tour() {
     targetLonRef.current = hs.yaw;
     targetLatRef.current = hs.pitch;
     setSelectedHotspot(hs);
-    setIsAutoRotating(false);
   };
 
+  // Fullscreen Toggle
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
     if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen().then(() => setIsFullscreen(true)).catch(() => {});
+      containerRef.current.requestFullscreen().catch(() => {});
+      setIsFullscreen(true);
     } else {
-      document.exitFullscreen().then(() => setIsFullscreen(false)).catch(() => {});
+      document.exitFullscreen().catch(() => {});
+      setIsFullscreen(false);
     }
   };
 
+  // Device Orientation (Gyroscope)
   const toggleGyro = () => {
     if (typeof window === "undefined") return;
-    if (typeof (DeviceOrientationEvent as any)?.requestPermission === "function") {
-      (DeviceOrientationEvent as any).requestPermission()
-        .then((state: string) => {
-          if (state === "granted") {
-            setIsGyroActive((prev) => !prev);
+
+    if (
+      typeof (DeviceOrientationEvent as any) !== "undefined" &&
+      typeof (DeviceOrientationEvent as any).requestPermission === "function"
+    ) {
+      (DeviceOrientationEvent as any)
+        .requestPermission()
+        .then((response: string) => {
+          if (response === "granted") {
+            enableGyroListener();
           }
         })
         .catch(() => {});
     } else {
-      setIsGyroActive((prev) => !prev);
+      enableGyroListener();
     }
   };
 
-  useEffect(() => {
-    if (!isGyroActive) return;
-    const handleOrientation = (e: DeviceOrientationEvent) => {
-      if (e.alpha !== null && e.beta !== null) {
-        targetLonRef.current = -e.alpha;
-        targetLatRef.current = Math.max(-80, Math.min(80, e.beta - 60));
+  const enableGyroListener = () => {
+    setIsGyroActive((prev) => {
+      const next = !prev;
+      if (next) {
+        window.addEventListener("deviceorientation", handleDeviceOrientation);
+      } else {
+        window.removeEventListener("deviceorientation", handleDeviceOrientation);
       }
-    };
-    window.addEventListener("deviceorientation", handleOrientation);
-    return () => window.removeEventListener("deviceorientation", handleOrientation);
-  }, [isGyroActive]);
+      return next;
+    });
+  };
+
+  const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+    if (event.gamma !== null && event.beta !== null) {
+      targetLonRef.current += event.gamma * 0.05;
+      targetLatRef.current = Math.max(-85, Math.min(85, event.beta - 45));
+    }
+  };
 
   return (
-    <section id="tour360" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#2b4c1c]/10">
-      {/* Chapter Marker */}
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/15 via-green-500/15 to-amber-500/15 border border-emerald-600/25 text-xs font-semibold text-[#1e5128] uppercase tracking-wider mb-4 shadow-xs"
-        >
-          <Compass className="w-3.5 h-3.5 text-emerald-600 animate-spin" style={{ animationDuration: "12s" }} />
-          <span>Interactive 360° Virtual Tour • Explore Before You Visit</span>
-        </motion.div>
+    <section id="tour360" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
+      {/* Clean Editorial Header */}
+      <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="field-note-tag mb-3">
+          <Compass className="w-3.5 h-3.5 text-[#8a4724]" />
+          <span>Interactive 360° Virtual Tour</span>
+        </div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-3xl sm:text-5xl font-serif font-black text-[#14230e] tracking-tight"
-        >
+        <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#1a2614] tracking-tight">
           Look across the fields <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-green-600 to-amber-600">
-            before you take the highway.
-          </span>
-        </motion.h2>
+          <span className="italic font-normal text-[#8a4724]">before you take the highway.</span>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-4 text-[#3d4f33] text-sm sm:text-base font-normal leading-relaxed max-w-2xl mx-auto"
-        >
-          Swipe with your fingers or move your phone in 360 degrees. Step inside both farm campuses near Hyderabad to explore water wheels, mud arenas, and bird sanctuaries.
-        </motion.p>
+        <p className="mt-3 text-[#4a5840] text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+          Swipe with your finger or move your phone in 360 degrees. Both farm locations near Hyderabad are open to explore.
+        </p>
 
-        {/* Dual-Farm Switcher: Vibrant Agro Segmented Pill */}
-        <div className="mt-8 inline-flex p-1.5 rounded-full bg-white border border-emerald-900/20 relative shadow-md">
+        {/* Dual-Farm Switcher: Simple Clean Pill */}
+        <div className="mt-6 inline-flex p-1 rounded-full bg-[#ffffff] border border-[#2b4c1c]/15 shadow-sm">
           <button
             onClick={() => {
               setSelectedFarmKey("bhongir");
               track360Interaction("Bhongir Farm", "switch_farm");
             }}
-            className={`relative z-10 px-5 sm:px-7 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+            className={`px-5 sm:px-7 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
               selectedFarmKey === "bhongir"
-                ? "text-white shadow-sm"
-                : "text-[#3f5135] hover:text-[#16330b]"
+                ? "bg-[#2b4c1c] text-white shadow-xs"
+                : "text-[#526048] hover:text-[#1a2614]"
             }`}
           >
-            <MapPin className="w-4 h-4 text-amber-300" />
+            <MapPin className="w-3.5 h-3.5" />
             <span>Bhongir Main Farm</span>
-            <span className="hidden sm:inline text-[10px] px-2 py-0.5 rounded-full bg-white/20 font-medium">
-              Warangal Hwy
-            </span>
           </button>
 
           <button
@@ -357,38 +369,20 @@ export default function Farm360Tour() {
               setSelectedFarmKey("moinabad");
               track360Interaction("Moinabad Farm", "switch_farm");
             }}
-            className={`relative z-10 px-5 sm:px-7 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+            className={`px-5 sm:px-7 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
               selectedFarmKey === "moinabad"
-                ? "text-white shadow-sm"
-                : "text-[#3f5135] hover:text-[#16330b]"
+                ? "bg-[#2b4c1c] text-white shadow-xs"
+                : "text-[#526048] hover:text-[#1a2614]"
             }`}
           >
-            <MapPin className="w-4 h-4 text-emerald-300" />
+            <MapPin className="w-3.5 h-3.5" />
             <span>Moinabad Agro-Sanctuary</span>
-            <span className="hidden sm:inline text-[10px] px-2 py-0.5 rounded-full bg-white/20 font-medium">
-              Chilkur Road
-            </span>
           </button>
-
-          {/* Active Pill Animation */}
-          <motion.div
-            layoutId="activeFarmPill"
-            className={`absolute inset-y-1.5 rounded-full shadow-md transition-colors ${
-              selectedFarmKey === "bhongir"
-                ? "bg-gradient-to-r from-emerald-700 to-green-700"
-                : "bg-gradient-to-r from-amber-600 to-orange-600"
-            }`}
-            style={{
-              left: selectedFarmKey === "bhongir" ? "6px" : "50%",
-              width: "calc(50% - 6px)",
-            }}
-            transition={{ type: "spring", stiffness: 350, damping: 32 }}
-          />
         </div>
       </div>
 
-      {/* 360 Horizon Pavilion Container (Mobile-first tall viewport) */}
-      <div className="relative rounded-3xl overflow-hidden bg-[#ffffff] border-2 border-emerald-900/15 shadow-[0_20px_60px_-15px_rgba(20,50,15,0.18)] h-[460px] sm:h-[550px] lg:h-[650px] select-none">
+      {/* 360 Horizon Pavilion Container */}
+      <div className="relative rounded-3xl overflow-hidden bg-[#ffffff] border border-[#2b4c1c]/15 shadow-md h-[400px] sm:h-[500px] lg:h-[600px] select-none">
         {/* Loading Overlay */}
         <AnimatePresence>
           {isLoadingTexture && (
@@ -396,10 +390,10 @@ export default function Farm360Tour() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#fdfbf7]/85 backdrop-blur-md"
+              className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#faf7f0]/90 backdrop-blur-xs"
             >
-              <div className="w-10 h-10 rounded-full border-2 border-[#2b4c1c]/20 border-t-[#2b4c1c] animate-spin" />
-              <p className="mt-4 text-xs font-serif italic text-[#4a5840]">
+              <div className="w-8 h-8 rounded-full border-2 border-[#2b4c1c]/20 border-t-[#2b4c1c] animate-spin" />
+              <p className="mt-3 text-xs font-serif italic text-[#4a5840]">
                 Connecting to {farm.name}...
               </p>
             </motion.div>
@@ -438,17 +432,14 @@ export default function Farm360Tour() {
                       track360Interaction(farm.name, `hotspot_${hs.title}`);
                     }
                   }}
-                  className="group relative flex items-center justify-center w-10 h-10 rounded-full bg-[#ffffff] shadow-lg hover:scale-125 transition-all duration-300 border border-[#2b4c1c]/20"
+                  className="group relative flex items-center justify-center w-9 h-9 rounded-full bg-[#ffffff] shadow-md hover:scale-115 transition-all duration-300 border border-[#2b4c1c]/20"
                   title={hs.title}
                 >
-                  {/* Radar Pulse */}
-                  <span className="absolute inset-0 rounded-full bg-[#a84724]/20 animate-ping" />
+                  <span className="absolute inset-0 rounded-full bg-[#8a4724]/20 animate-ping" />
                   <span className="relative z-10 flex items-center justify-center">
                     {iconMap[hs.icon] || <Info className="w-4 h-4 text-[#2b4c1c]" />}
                   </span>
-
-                  {/* Hotspot Floating Label */}
-                  <span className="absolute left-12 whitespace-nowrap px-3 py-1 rounded-full bg-[#ffffff] text-[11px] font-semibold text-[#1a2713] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md border border-[#2b4c1c]/15">
+                  <span className="absolute left-11 whitespace-nowrap px-2.5 py-1 rounded-full bg-[#ffffff] text-[10px] font-semibold text-[#1a2614] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-sm border border-[#2b4c1c]/15">
                     {hs.title}
                   </span>
                 </button>
@@ -457,31 +448,30 @@ export default function Farm360Tour() {
           })}
         </div>
 
-        {/* Selected Hotspot Detail Card (Warm Editorial Polaroid Sheet) */}
+        {/* Selected Hotspot Detail Card */}
         <AnimatePresence>
           {selectedHotspot && (
             <motion.div
-              initial={{ opacity: 0, y: 24, scale: 0.94 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 16, scale: 0.94 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="absolute bottom-20 left-4 sm:left-8 right-4 sm:right-auto sm:max-w-md z-20 bg-[#ffffff] rounded-2xl p-5 border border-[#2b4c1c]/15 shadow-2xl text-left"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 15 }}
+              className="absolute bottom-16 sm:bottom-6 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-30 p-5 rounded-2xl bg-[#ffffff] border border-[#2b4c1c]/15 shadow-xl"
             >
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <span className="field-note-tag text-[10px]">
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <span className="text-[10px] font-semibold text-[#8a4724] uppercase tracking-wider">
                   {selectedHotspot.tag}
                 </span>
                 <button
                   onClick={() => setSelectedHotspot(null)}
-                  className="text-[#6e7d64] hover:text-[#1a2713] p-1 rounded-full hover:bg-[#f3ede2]"
+                  className="p-1 text-[#6e7d64] hover:text-[#1a2614]"
                 >
                   ✕
                 </button>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 {selectedHotspot.image && (
-                  <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-[#e8ded0] border border-[#2b4c1c]/10">
+                  <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-[#e8ded0] border border-[#2b4c1c]/10">
                     <img
                       src={selectedHotspot.image}
                       alt={selectedHotspot.title}
@@ -490,7 +480,7 @@ export default function Farm360Tour() {
                   </div>
                 )}
                 <div>
-                  <h4 className="text-base font-serif font-bold text-[#1e2917]">
+                  <h4 className="text-sm font-serif font-bold text-[#1a2614]">
                     {selectedHotspot.title}
                   </h4>
                   <p className="mt-1 text-xs text-[#526048] leading-relaxed">
@@ -498,41 +488,26 @@ export default function Farm360Tour() {
                   </p>
                 </div>
               </div>
-
-              <div className="mt-4 pt-3 border-t border-[#2b4c1c]/10 flex items-center justify-between text-xs">
-                <span className="text-[11px] text-[#6e7d64]">
-                  Part of {farm.name}
-                </span>
-                <a
-                  href="#act1-mud"
-                  className="text-xs font-semibold text-[#2b4c1c] hover:underline inline-flex items-center gap-1"
-                >
-                  Read Field Note <ArrowRight className="w-3 h-3" />
-                </a>
-              </div>
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Top Location Pill */}
-        <div className="absolute top-4 left-4 z-20 hidden sm:flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/95 backdrop-blur-md border border-emerald-900/15 text-xs text-[#334628] shadow-sm">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" />
-          <span className="font-bold text-[#14230e]">{farm.name}</span>
+        <div className="absolute top-4 left-4 z-20 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ffffff]/90 backdrop-blur-xs border border-[#2b4c1c]/15 text-xs text-[#334628] shadow-xs">
+          <span className="w-2 h-2 rounded-full bg-[#2b4c1c]" />
+          <span className="font-semibold text-[#1a2614]">{farm.name}</span>
           <span>•</span>
-          <span className="text-emerald-800 font-medium">{farm.highway}</span>
-          <span>•</span>
-          <span className="text-amber-800 font-bold">{farm.travelTime}</span>
+          <span className="text-[#8a4724] font-medium">{farm.travelTime}</span>
         </div>
 
         {/* Floating Mobile Instruction Pill */}
-        <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-emerald-900/15 shadow-sm text-[11px] text-[#14230e] font-semibold">
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#ffffff]/90 backdrop-blur-xs border border-[#2b4c1c]/15 shadow-xs text-[11px] text-[#1a2614]">
           <span>👆</span>
-          <span className="hidden sm:inline">Drag 360° to look around</span>
-          <span className="sm:hidden">Swipe 360° to pan</span>
+          <span>Swipe 360°</span>
         </div>
 
         {/* Bottom Floating Control Bar */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 p-1 rounded-full bg-[#ffffff]/90 border border-[#2b4c1c]/15 shadow-xl">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 p-1 rounded-full bg-[#ffffff]/90 border border-[#2b4c1c]/15 shadow-md">
           <button
             onClick={() => setIsAutoRotating((prev) => !prev)}
             className={`p-2 rounded-full transition-all ${
@@ -540,7 +515,7 @@ export default function Farm360Tour() {
             }`}
             title="Auto-Rotate Horizon"
           >
-            <RotateCw className="w-4 h-4" />
+            <RotateCw className="w-3.5 h-3.5" />
           </button>
 
           <button
@@ -548,7 +523,7 @@ export default function Farm360Tour() {
             className="p-2 rounded-full text-[#4a5840] hover:bg-[#f3ece0]"
             title="Zoom In"
           >
-            <ZoomIn className="w-4 h-4" />
+            <ZoomIn className="w-3.5 h-3.5" />
           </button>
 
           <button
@@ -556,7 +531,7 @@ export default function Farm360Tour() {
             className="p-2 rounded-full text-[#4a5840] hover:bg-[#f3ece0]"
             title="Zoom Out"
           >
-            <ZoomOut className="w-4 h-4" />
+            <ZoomOut className="w-3.5 h-3.5" />
           </button>
 
           <button
@@ -566,7 +541,7 @@ export default function Farm360Tour() {
             }`}
             title="Mobile Gyroscope View"
           >
-            <Smartphone className="w-4 h-4" />
+            <Smartphone className="w-3.5 h-3.5" />
           </button>
 
           <button
@@ -574,61 +549,25 @@ export default function Farm360Tour() {
             className="p-2 rounded-full text-[#4a5840] hover:bg-[#f3ece0]"
             title="Fullscreen"
           >
-            {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+            {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
           </button>
         </div>
       </div>
 
-      {/* Campus Quick Action Bar: Directions & Key Highlights */}
-      <div className="mt-6 p-4 rounded-2xl bg-white border border-emerald-900/15 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3 text-left">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-100 to-amber-100 flex items-center justify-center flex-shrink-0 text-emerald-800">
-            <MapPin className="w-5 h-5 text-emerald-700" />
-          </div>
-          <div>
-            <h4 className="font-serif font-bold text-sm text-[#14230e]">
-              Currently Viewing: {farm.name}
-            </h4>
-            <p className="text-xs text-[#526548]">
-              {farm.address} • <strong className="text-emerald-900">{farm.travelTime}</strong>
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
-          <a
-            href={farm.directionsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-700 to-green-700 hover:from-emerald-800 hover:to-green-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-transform active:scale-95"
-          >
-            <Navigation className="w-3.5 h-3.5 text-amber-300" />
-            <span>Open in Google Maps</span>
-          </a>
-
-          <a
-            href="#directions"
-            className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-[#faf7f0] hover:bg-[#f3ede0] border border-emerald-900/15 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition-colors"
-          >
-            <span>Compare Both Farms ↓</span>
-          </a>
-        </div>
-      </div>
-
-      {/* Landmark Jump Pills with Colorful Badges */}
-      <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-        <span className="text-xs text-[#526548] font-bold mr-1 flex items-center gap-1">
-          <Compass className="w-3.5 h-3.5 text-amber-600" />
-          Jump directly to landmark:
+      {/* Simple Clean Landmark Jump Pills */}
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+        <span className="text-xs text-[#6e7d64] font-medium mr-1 flex items-center gap-1">
+          <Compass className="w-3.5 h-3.5 text-[#8a4724]" />
+          Key landmarks:
         </span>
         {farm.hotspots.map((hs) => (
           <button
             key={hs.id}
             onClick={() => jumpToHotspot(hs)}
-            className={`px-3.5 py-1.5 rounded-full text-xs transition-all duration-300 flex items-center gap-1.5 border ${
+            className={`px-3 py-1 rounded-full text-xs transition-all duration-200 flex items-center gap-1.5 border ${
               selectedHotspot?.id === hs.id
-                ? "bg-gradient-to-r from-emerald-700 to-green-700 text-white border-emerald-800 shadow-sm font-semibold scale-105"
-                : "bg-white text-[#3f5135] hover:text-[#16330b] border-emerald-900/15 hover:bg-emerald-50"
+                ? "bg-[#2b4c1c] text-white border-[#2b4c1c] font-medium"
+                : "bg-[#ffffff] text-[#4a5840] hover:text-[#1a2614] border-[#2b4c1c]/15 hover:bg-[#faf7f0]"
             }`}
           >
             {iconMap[hs.icon]}

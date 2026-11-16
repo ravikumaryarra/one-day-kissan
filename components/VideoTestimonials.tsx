@@ -29,26 +29,26 @@ export default function VideoTestimonials() {
 
   return (
     <section id="testimonials" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
-      {/* Header with Vibrant Agro Badges */}
+      {/* Header with Natural Field Note Badge */}
       <div className="text-center max-w-3xl mx-auto mb-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/15 via-orange-500/15 to-emerald-500/15 border border-amber-600/20 text-xs font-semibold text-amber-900 uppercase tracking-wider mb-4 shadow-xs">
-          <Video className="w-3.5 h-3.5 text-amber-600" />
-          <span>Voices from the Field • Unscripted Video Reviews</span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2b4c1c]/10 border border-[#2b4c1c]/20 text-xs font-mono uppercase tracking-widest text-[#2b4c1c] mb-4">
+          <Video className="w-3.5 h-3.5 text-[#2b4c1c]" />
+          <span>Field Archives • Unscripted Reflections</span>
         </div>
 
         <h2 className="text-3xl sm:text-5xl font-serif font-black text-[#14230e] tracking-tight">
           Hear from Principals, Teachers <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-600 to-emerald-700">
+          <span className="italic font-normal text-[#8a4724]">
             & Corporate Organizers.
           </span>
         </h2>
 
         <p className="mt-4 text-[#3d4f33] text-sm sm:text-base font-normal">
-          Watch real video reflections from over 350+ educational institutions and corporate teams that spent a full day at One Day Kisan.
+          Authentic video reflections from educational institutions and corporate teams that spent a full day grounded at One Day Kisan.
         </p>
 
         {/* Category Filter Pills */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-full bg-white border border-emerald-900/15 max-w-lg mx-auto shadow-xs">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-full bg-white/80 border border-[#2b4c1c]/15 max-w-lg mx-auto shadow-xs">
           {categories.map((cat) => (
             <button
               key={cat.key}
@@ -56,15 +56,15 @@ export default function VideoTestimonials() {
                 setActiveCategory(cat.key);
                 setIsExpanded(false);
               }}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 flex items-center gap-1.5 ${
                 activeCategory === cat.key
-                  ? "bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-xs"
-                  : "text-[#4a5f3f] hover:text-[#16330b] hover:bg-amber-50/60"
+                  ? "bg-[#2b4c1c] text-white shadow-xs"
+                  : "text-[#4a5f3f] hover:text-[#14230e] hover:bg-[#2b4c1c]/5"
               }`}
             >
               <span>{cat.label}</span>
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                activeCategory === cat.key ? "bg-white/25 text-white" : "bg-amber-100 text-amber-900"
+              <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                activeCategory === cat.key ? "bg-white/20 text-white" : "bg-[#2b4c1c]/10 text-[#2b4c1c]"
               }`}>
                 {cat.count}
               </span>
@@ -82,7 +82,7 @@ export default function VideoTestimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             onClick={() => setActiveVideo(vid)}
-            className="polaroid-frame rounded-2xl cursor-pointer group flex flex-col justify-between bg-white border border-emerald-900/10 hover:border-amber-500/40 hover:shadow-xl transition-all"
+            className="polaroid-frame rounded-2xl cursor-pointer group flex flex-col justify-between bg-white border border-[#2b4c1c]/15 hover:border-[#2b4c1c]/50 hover:shadow-lg transition-all"
           >
             <div>
               <div className="relative aspect-video rounded-xl overflow-hidden bg-black mb-3">
@@ -92,34 +92,34 @@ export default function VideoTestimonials() {
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/15 transition-colors flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-[#2b4c1c] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                     <Play className="w-5 h-5 ml-0.5 fill-white" />
                   </div>
                 </div>
               </div>
 
               <div className="px-1">
-                <div className="flex items-center gap-1 text-amber-500 mb-1.5">
+                <div className="flex items-center gap-1 text-[#8a4724] mb-1.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-[#8a4724] text-[#8a4724]" />
                   ))}
-                  <span className="text-[10px] text-amber-800 ml-1 font-mono uppercase font-bold">
+                  <span className="text-[10px] text-[#8a4724] ml-1 font-mono uppercase font-bold tracking-wider">
                     Verified {vid.category} Visit
                   </span>
                 </div>
-                <h4 className="font-serif font-bold text-sm text-[#1e2917] group-hover:text-emerald-800 transition-colors line-clamp-2">
+                <h4 className="font-serif font-bold text-sm text-[#14230e] group-hover:text-[#2b4c1c] transition-colors line-clamp-2">
                   {vid.title}
                 </h4>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-emerald-900/10 flex items-center justify-between text-[11px] text-emerald-800 px-1 font-semibold">
+            <div className="mt-4 pt-3 border-t border-[#2b4c1c]/10 flex items-center justify-between text-[11px] text-[#4a5f3f] px-1 font-semibold">
               <span className="flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-amber-500" />
+                <Sparkles className="w-3 h-3 text-[#8a4724]" />
                 {vid.category} Experience
               </span>
-              <span className="group-hover:translate-x-1 transition-transform text-amber-700 font-bold">
+              <span className="group-hover:translate-x-1 transition-transform text-[#8a4724] font-bold">
                 Watch Video →
               </span>
             </div>
@@ -132,7 +132,7 @@ export default function VideoTestimonials() {
         <div className="mt-10 text-center flex flex-col items-center">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="group relative inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-600 via-orange-600 to-emerald-700 hover:from-amber-700 hover:to-emerald-800 text-white font-bold text-sm shadow-md hover:shadow-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
+            className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#2b4c1c] hover:bg-[#1e3613] text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
             {isExpanded ? (
               <>
