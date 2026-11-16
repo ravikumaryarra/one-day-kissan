@@ -1,8 +1,9 @@
 import React from "react";
 import { faqs } from "@/data/faqs";
+import { getSiteUrl } from "@/lib/siteUrl";
 
 export default function SEOStructuredData() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://onedaykissan.vercel.app";
+  const siteUrl = getSiteUrl();
 
   // 1. LocalBusiness / TouristAttraction Schema for both locations
   const locationsSchema = [

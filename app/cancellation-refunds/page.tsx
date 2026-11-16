@@ -2,11 +2,15 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, RefreshCw, CloudRain, Clock, AlertCircle, CheckCircle2, Mail, Phone } from "lucide-react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Cancellation, Rescheduling & Refund Policy",
   description:
     "Official Cancellation, Weather Rescheduling, and Refund Policy for One Day Kisan bookings (Schools, Corporates, and Family Passes).",
+  alternates: {
+    canonical: "/cancellation-refunds",
+  },
 };
 
 export default function CancellationRefundPage() {
@@ -32,8 +36,10 @@ export default function CancellationRefundPage() {
       </header>
 
       {/* Main Content Container */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="mb-10 text-center sm:text-left border-b border-[#2b4c1c]/15 pb-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <Breadcrumbs items={[{ label: "Institutional Compliance" }, { label: "Cancellation & Refunds" }]} />
+
+        <div className="mt-6 mb-10 text-center sm:text-left border-b border-[#2b4c1c]/15 pb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2b4c1c]/10 text-[#2b4c1c] border border-[#2b4c1c]/20 text-xs font-mono uppercase tracking-widest mb-4">
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Consumer Transparent Guidelines</span>

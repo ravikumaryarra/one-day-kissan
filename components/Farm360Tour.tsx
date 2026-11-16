@@ -474,7 +474,7 @@ export default function Farm360Tour() {
                   <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-[#e8ded0] border border-[#2b4c1c]/10">
                     <img
                       src={selectedHotspot.image}
-                      alt={selectedHotspot.title}
+                      alt={`${selectedHotspot.title} - One Day Kisan 360 virtual tour`}
                       className="w-full h-full object-cover"
                     />
                   </div>

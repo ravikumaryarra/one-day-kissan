@@ -3,6 +3,7 @@ import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import SEOStructuredData from "@/components/SEOStructuredData";
 import Analytics from "@/components/Analytics";
+import { getSiteUrl } from "@/lib/siteUrl";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://onedaykissan.vercel.app";
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -36,6 +37,16 @@ export const metadata: Metadata = {
   applicationName: "One Day Kisan",
   authors: [{ name: "One Day Kisan Team", url: siteUrl }],
   generator: "Next.js",
+  icons: {
+    icon: [
+      { url: "/images/logo.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png" },
+    ],
+    shortcut: "/images/logo.png",
+  },
   keywords: [
     // Brand Keywords
     "One Day Kisan",

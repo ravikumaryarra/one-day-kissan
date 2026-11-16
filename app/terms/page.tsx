@@ -2,11 +2,15 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ShieldCheck, AlertCircle, FileText, CheckCircle2, MapPin, Phone } from "lucide-react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions",
+  title: "Terms and Conditions of Farm Entry",
   description:
-    "Official Terms and Conditions, Visitor Agreement, Farm Rules, and Code of Conduct for One Day Kisan (Bhongir & Moinabad campuses).",
+    "Official Terms and Conditions, Visitor Agreement, campus code of conduct, and rules of admission for One Day Kisan (Bhongir & Moinabad campuses).",
+  alternates: {
+    canonical: "/terms",
+  },
 };
 
 export default function TermsPage() {
@@ -32,8 +36,10 @@ export default function TermsPage() {
       </header>
 
       {/* Main Content Container */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="mb-10 text-center sm:text-left border-b border-[#2b4c1c]/15 pb-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <Breadcrumbs items={[{ label: "Institutional Compliance" }, { label: "Terms & Conditions" }]} />
+
+        <div className="mt-6 mb-10 text-center sm:text-left border-b border-[#2b4c1c]/15 pb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2b4c1c]/10 text-[#2b4c1c] border border-[#2b4c1c]/20 text-xs font-mono uppercase tracking-widest mb-4">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Legal Agreement</span>

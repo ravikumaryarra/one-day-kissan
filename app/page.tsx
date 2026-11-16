@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import StoryPrologue from "@/components/StoryPrologue";
-import Farm360Tour from "@/components/Farm360Tour";
 import FarmDirectionsSection from "@/components/FarmDirectionsSection";
 import StoryAct1_Mud from "@/components/StoryAct1_Mud";
 import StoryAct2_Water from "@/components/StoryAct2_Water";
@@ -14,8 +14,25 @@ import GallerySection from "@/components/GallerySection";
 import VideoTestimonials from "@/components/VideoTestimonials";
 import ExpeditionPlanner from "@/components/ExpeditionPlanner";
 import Footer from "@/components/Footer";
-import BookingModal from "@/components/BookingModal";
 import MobileTabBar from "@/components/MobileTabBar";
+
+// Code-split heavy Three.js 360 viewer for near-instant initial page hydration
+const Farm360Tour = dynamic(() => import("@/components/Farm360Tour"), {
+  ssr: false,
+  loading: () => (
+    <div className="py-16 px-4 max-w-7xl mx-auto flex flex-col items-center justify-center min-h-[400px] bg-white rounded-3xl border border-[#2b4c1c]/15 shadow-sm text-center">
+      <div className="w-8 h-8 rounded-full border-2 border-[#2b4c1c]/20 border-t-[#2b4c1c] animate-spin mb-3" />
+      <p className="text-xs font-serif italic text-[#4a5840]">
+        Loading 360° Interactive Farm Horizon...
+      </p>
+    </div>
+  ),
+});
+
+// Code-split interactive concierge booking modal
+const BookingModal = dynamic(() => import("@/components/BookingModal"), {
+  ssr: false,
+});
 
 export default function Home() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);

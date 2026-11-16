@@ -54,7 +54,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             <div className="w-10 h-10 rounded-full overflow-hidden border border-[#2b4c1c]/20 bg-[#faf7f0] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
               <img
                 src="/images/logo.png"
-                alt="One Day Kisan"
+                alt="One Day Kisan - India's Premier Farm-Based Edutainment Destination"
                 className="w-full h-full object-contain p-0.5"
               />
             </div>

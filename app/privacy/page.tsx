@@ -2,11 +2,15 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ShieldCheck, Mail, Phone, MapPin, Lock, FileText, CheckCircle2 } from "lucide-react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: "Privacy Policy & DPDP Act Data Governance",
   description:
-    "Official Privacy Policy and Data Protection practices of One Day Kisan under the Digital Personal Data Protection Act, 2023 (DPDP) and Information Technology Act, 2000.",
+    "Official Privacy Policy of One Day Kisan under the Digital Personal Data Protection Act (DPDP 2023) and IT Act 2000. Learn how we safeguard student batch and visitor data.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPolicyPage() {
@@ -32,8 +36,10 @@ export default function PrivacyPolicyPage() {
       </header>
 
       {/* Main Content Container */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="mb-10 text-center sm:text-left border-b border-[#2b4c1c]/15 pb-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <Breadcrumbs items={[{ label: "Institutional Compliance" }, { label: "Privacy Policy" }]} />
+
+        <div className="mt-6 mb-10 text-center sm:text-left border-b border-[#2b4c1c]/15 pb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2b4c1c]/10 text-[#2b4c1c] border border-[#2b4c1c]/20 text-xs font-mono uppercase tracking-widest mb-4">
             <Lock className="w-3.5 h-3.5" />
             <span>Institutional Legal Disclosure</span>

@@ -110,7 +110,7 @@ export default function StoryAct4_ClayFire({ onOpenBooking }: Act4Props) {
               <div className="relative aspect-video bg-[#000]">
                 <img
                   src={vid.thumbnail}
-                  alt={vid.title}
+                  alt={`${vid.title} - Authentic Video Review from One Day Kisan Visitor`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">

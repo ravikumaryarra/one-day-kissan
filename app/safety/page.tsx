@@ -2,11 +2,15 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ShieldCheck, HeartPulse, Utensils, Droplets, Users, Bus, AlertTriangle, CheckCircle2 } from "lucide-react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Farm Safety, Health & Child Protection Guidelines",
+  title: "Farm Safety, Health & Child Protection Standards",
   description:
-    "Comprehensive safety protocols, child protection norms, water/food hygiene standards, and emergency readiness for schools and families at One Day Kisan.",
+    "Comprehensive safety protocols, 1:25 instructor ratios, RO water hygiene, FSSAI meals, and hospital readiness for schools and families at One Day Kisan.",
+  alternates: {
+    canonical: "/safety",
+  },
 };
 
 export default function SafetyPage() {
@@ -32,8 +36,10 @@ export default function SafetyPage() {
       </header>
 
       {/* Main Content Container */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="mb-10 text-center sm:text-left border-b border-[#2b4c1c]/15 pb-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <Breadcrumbs items={[{ label: "Institutional Compliance" }, { label: "Safety & Child Protection" }]} />
+
+        <div className="mt-6 mb-10 text-center sm:text-left border-b border-[#2b4c1c]/15 pb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2b4c1c]/10 text-[#2b4c1c] border border-[#2b4c1c]/20 text-xs font-mono uppercase tracking-widest mb-4">
             <HeartPulse className="w-3.5 h-3.5 text-[#2b4c1c]" />
             <span>Institutional Safety & Hygiene</span>

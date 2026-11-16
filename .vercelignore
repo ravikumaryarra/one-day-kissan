@@ -7,3 +7,4 @@ onedaykissan.db
 *.log
 docs/
 .git
+assets_backup/

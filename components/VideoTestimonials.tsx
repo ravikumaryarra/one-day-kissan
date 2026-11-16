@@ -88,7 +88,7 @@ export default function VideoTestimonials() {
               <div className="relative aspect-video rounded-xl overflow-hidden bg-black mb-3">
                 <img
                   src={vid.thumbnail}
-                  alt={vid.title}
+                  alt={`${vid.title} - Authentic Video Review from One Day Kisan Visitor`}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
