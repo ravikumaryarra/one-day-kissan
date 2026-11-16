@@ -18,9 +18,9 @@ Google Search Console requires domain-level or URL-prefix verification to grant 
 ### Verification Readiness in Codebase
 | Verification Method | Implementation Details | Status |
 | :--- | :--- | :---: |
-| **HTML Tag (`google-site-verification`)** | Configured in `app/layout.tsx` via `verification.google` reading `process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` or direct token injection. | **Ready for Token** |
-| **Google Analytics (GA4)** | Client script integrated via `components/Analytics.tsx` with standard `gtag.js` loader. Accounts with edit access auto-verify instantly. | **Integrated** |
-| **HTML File Upload** | Can be placed directly into the `public/` directory (e.g., `public/google[code].html`) for immediate 200 OK edge delivery. | **Supported** |
+| **HTML Tag (`google-site-verification`)** | Injected in `app/layout.tsx` metadata with token `ba1a25befc440415`. | **Deployed Live (Verified 200 OK)** |
+| **HTML File Upload** | `public/googleba1a25befc440415.html` containing `google-site-verification: googleba1a25befc440415.html`. | **Deployed Live (Verified 200 OK)** |
+| **Google Analytics (GA4)** | Client script integrated via `components/Analytics.tsx` with standard `gtag.js` loader. | **Integrated** |
 | **DNS Record** | Vercel DNS or DNS provider TXT record. | **Optional** |
 
 > [!IMPORTANT]
