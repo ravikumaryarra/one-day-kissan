@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Phone, Mail, MapPin, Download, ArrowUp, Instagram, Facebook, Youtube, Linkedin, Heart } from "lucide-react";
-import { farmsData } from "@/data/farms";
+import Link from "next/link";
+import { Phone, Mail, MapPin, Download, ArrowUp, Instagram, Facebook, Youtube, Linkedin, ShieldCheck, FileText, RefreshCw, HeartPulse } from "lucide-react";
 import { trackPhoneCall } from "@/components/Analytics";
 
 export default function Footer() {
@@ -39,7 +39,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ffffff] text-xs font-semibold text-[#2b4c1c] hover:bg-[#e8ded0] border border-[#2b4c1c]/20 transition-all shadow-sm"
             >
-              <Download className="w-3.5 h-3.5 text-[#a84724]" />
+              <Download className="w-3.5 h-3.5 text-[#8a4724]" />
               Download Official 2024–2025 Brochure (PDF)
             </a>
 
@@ -49,6 +49,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-[#ffffff] border border-[#2b4c1c]/15 flex items-center justify-center text-[#2b4c1c] hover:bg-[#2b4c1c] hover:text-white transition-colors"
+                aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -57,6 +58,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-[#ffffff] border border-[#2b4c1c]/15 flex items-center justify-center text-[#2b4c1c] hover:bg-[#2b4c1c] hover:text-white transition-colors"
+                aria-label="Facebook"
               >
                 <Facebook className="w-4 h-4" />
               </a>
@@ -65,6 +67,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-[#ffffff] border border-[#2b4c1c]/15 flex items-center justify-center text-[#2b4c1c] hover:bg-[#2b4c1c] hover:text-white transition-colors"
+                aria-label="YouTube"
               >
                 <Youtube className="w-4 h-4" />
               </a>
@@ -73,54 +76,101 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-[#ffffff] border border-[#2b4c1c]/15 flex items-center justify-center text-[#2b4c1c] hover:bg-[#2b4c1c] hover:text-white transition-colors"
+                aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
             </div>
           </div>
 
-          {/* Farm 1: Bhongir */}
+          {/* Farm Campuses */}
           <div>
-            <h4 className="font-serif font-bold text-sm text-[#14230e] mb-2 flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Bhongir Main Farm</span>
+            <h4 className="font-serif font-bold text-sm text-[#14230e] mb-3">
+              Campus Locations
             </h4>
-            <p className="text-xs text-[#526548] leading-relaxed mb-3">
-              Near Hotel Vivera, Hyderabad - Warangal Highway (NH 163), Bhongir Bypass - 508 116
-            </p>
-            <a
-              href="https://maps.google.com/?q=One+Day+Kisan+Bhongir"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-emerald-800 hover:text-emerald-950 hover:underline font-bold inline-flex items-center gap-1"
-            >
-              <span>Navigate via Google Maps →</span>
-            </a>
+            
+            <div className="mb-4">
+              <div className="font-semibold text-xs text-[#14230e] flex items-center gap-1.5 mb-1">
+                <MapPin className="w-3.5 h-3.5 text-[#2b4c1c]" />
+                <span>Bhongir Main Farm (15+ Ac)</span>
+              </div>
+              <p className="text-[11px] text-[#526548] leading-relaxed mb-1.5">
+                Near Hotel Vivera, Hyderabad - Warangal Highway (NH 163), Bhongir Bypass - 508 116
+              </p>
+              <a
+                href="https://maps.google.com/?q=One+Day+Kisan+Bhongir"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-[#2b4c1c] hover:underline font-semibold"
+              >
+                Maps Navigation →
+              </a>
+            </div>
+
+            <div>
+              <div className="font-semibold text-xs text-[#14230e] flex items-center gap-1.5 mb-1">
+                <MapPin className="w-3.5 h-3.5 text-[#8a4724]" />
+                <span>Moinabad Sanctuary (12+ Ac)</span>
+              </div>
+              <p className="text-[11px] text-[#526548] leading-relaxed mb-1.5">
+                Kapil Agro Farms, Sriramnagar, Chilkur Balaji Corridor, Moinabad - 501 504
+              </p>
+              <a
+                href="https://maps.google.com/?q=Kapil+Agro+Farms+Moinabad"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-[#8a4724] hover:underline font-semibold"
+              >
+                Maps Navigation →
+              </a>
+            </div>
           </div>
 
-          {/* Farm 2: Moinabad */}
+          {/* Legal & Governance Compliance */}
           <div>
-            <h4 className="font-serif font-bold text-sm text-[#14230e] mb-2 flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-amber-600" />
-              <span>Moinabad Agro-Sanctuary</span>
+            <h4 className="font-serif font-bold text-sm text-[#14230e] mb-3">
+              Institutional Compliance
             </h4>
-            <p className="text-xs text-[#526548] leading-relaxed mb-3">
-              Kapil Agro Farms, Sriramnagar, Chilkur Balaji Corridor, Moinabad - 501 504
-            </p>
-            <a
-              href="https://maps.google.com/?q=Kapil+Agro+Farms+Moinabad"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-amber-800 hover:text-amber-950 hover:underline font-bold inline-flex items-center gap-1"
-            >
-              <span>Navigate via Google Maps →</span>
-            </a>
+            <div className="space-y-2 text-xs">
+              <Link
+                href="/privacy"
+                className="flex items-center gap-2 text-[#526048] hover:text-[#14230e] transition-colors"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-[#2b4c1c]" />
+                <span>Privacy & DPDP Governance</span>
+              </Link>
+              <Link
+                href="/terms"
+                className="flex items-center gap-2 text-[#526048] hover:text-[#14230e] transition-colors"
+              >
+                <FileText className="w-3.5 h-3.5 text-[#2b4c1c]" />
+                <span>Terms of Entry & Rules</span>
+              </Link>
+              <Link
+                href="/cancellation-refunds"
+                className="flex items-center gap-2 text-[#526048] hover:text-[#14230e] transition-colors"
+              >
+                <RefreshCw className="w-3.5 h-3.5 text-[#2b4c1c]" />
+                <span>Cancellation & Weather Policy</span>
+              </Link>
+              <Link
+                href="/safety"
+                className="flex items-center gap-2 text-[#526048] hover:text-[#14230e] transition-colors"
+              >
+                <HeartPulse className="w-3.5 h-3.5 text-[#8a4724]" />
+                <span>Farm Safety & Child Protection</span>
+              </Link>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-[#2b4c1c]/10 text-[11px] text-[#6e7d64]">
+              CBSE & ICSE Practical Curriculum Aligned
+            </div>
           </div>
 
-          {/* Direct Desk */}
+          {/* Direct Desk & Grievance */}
           <div>
             <h4 className="font-serif font-bold text-sm text-[#1e2917] mb-3">
-              Direct Contact
+              Helpdesk & Grievance
             </h4>
             <div className="space-y-2 text-xs">
               <a
@@ -128,16 +178,24 @@ export default function Footer() {
                 onClick={() => trackPhoneCall("9849798674")}
                 className="flex items-center gap-2 text-[#2b4c1c] font-medium hover:underline"
               >
-                <Phone className="w-3.5 h-3.5 text-[#a84724]" />
+                <Phone className="w-3.5 h-3.5 text-[#8a4724]" />
                 <span>+91 98497 98674</span>
+              </a>
+              <a
+                href="tel:9398357618"
+                onClick={() => trackPhoneCall("9398357618")}
+                className="flex items-center gap-2 text-[#2b4c1c] font-medium hover:underline"
+              >
+                <Phone className="w-3.5 h-3.5 text-[#8a4724]" />
+                <span>+91 93983 57618</span>
               </a>
               <a href="mailto:info@onedaykisan.com" className="flex items-center gap-2 text-[#526048] hover:underline">
                 <Mail className="w-3.5 h-3.5 text-[#2b4c1c]" />
                 <span>info@onedaykisan.com</span>
               </a>
             </div>
-            <div className="mt-4 pt-4 border-t border-[#2b4c1c]/10 text-xs text-[#6e7d64]">
-              Hours: 9:00 AM – 6:00 PM (All 7 Days)
+            <div className="mt-4 pt-4 border-t border-[#2b4c1c]/10 text-[11px] text-[#6e7d64]">
+              Operating Hours: 9:00 AM – 6:00 PM (All 7 Days)
             </div>
           </div>
         </div>
@@ -148,10 +206,11 @@ export default function Footer() {
             © {new Date().getFullYear()} One Day Kisan. Experience Life. Learn Real Farming.
           </div>
 
-          <div className="flex items-center gap-6">
-            <a href="#prologue" className="hover:text-[#1e2917]">The Story</a>
-            <a href="#tour360" className="hover:text-[#1e2917]">360° Living Horizon</a>
-            <a href="#planner" className="hover:text-[#1e2917]">Expedition Desk</a>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+            <Link href="/privacy" className="hover:text-[#1e2917]">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-[#1e2917]">Terms of Entry</Link>
+            <Link href="/cancellation-refunds" className="hover:text-[#1e2917]">Cancellation & Refunds</Link>
+            <Link href="/safety" className="hover:text-[#1e2917]">Safety Standards</Link>
             <button
               onClick={scrollToTop}
               className="p-2 rounded-full bg-[#ffffff] border border-[#2b4c1c]/15 hover:bg-[#e8ded0] text-[#1e2917]"
@@ -165,3 +224,4 @@ export default function Footer() {
     </footer>
   );
 }
+
