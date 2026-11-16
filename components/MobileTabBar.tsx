@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Compass, Navigation, Phone, Calendar, Sparkles, MapPin, X, ExternalLink, Sprout } from "lucide-react";
 import { trackPhoneCall } from "@/components/Analytics";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface MobileTabBarProps {
   onOpenBooking: () => void;
@@ -11,6 +12,7 @@ interface MobileTabBarProps {
 
 export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
   const [directionsModalOpen, setDirectionsModalOpen] = useState(false);
+  const { t } = useLanguage();
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -30,7 +32,9 @@ export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
             className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#2b4c1c] hover:bg-[#f5f0e6] active:scale-95 transition-all"
           >
             <Compass className="w-5 h-5 text-[#2b4c1c]" />
-            <span className="text-[10px] font-bold text-[#2b4c1c] mt-0.5 tracking-tight">360° Tour</span>
+            <span className="text-[10px] font-bold text-[#2b4c1c] mt-0.5 tracking-tight truncate max-w-[65px]">
+              {t.nav.tour360.split(" ")[0]}
+            </span>
           </button>
 
           {/* Activities / Experiences */}
@@ -39,7 +43,9 @@ export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
             className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#526048] hover:bg-[#f5f0e6] active:scale-95 transition-all"
           >
             <Sprout className="w-5 h-5 text-[#8a4724]" />
-            <span className="text-[10px] font-medium text-[#526048] mt-0.5 tracking-tight">Activities</span>
+            <span className="text-[10px] font-medium text-[#526048] mt-0.5 tracking-tight truncate max-w-[65px]">
+              {t.nav.story}
+            </span>
           </button>
 
           {/* Directions Quick Action */}
@@ -48,7 +54,9 @@ export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
             className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#526048] hover:bg-[#f5f0e6] active:scale-95 transition-all"
           >
             <Navigation className="w-5 h-5 text-[#2b4c1c]" />
-            <span className="text-[10px] font-medium text-[#526048] mt-0.5 tracking-tight">Directions</span>
+            <span className="text-[10px] font-medium text-[#526048] mt-0.5 tracking-tight truncate max-w-[65px]">
+              {t.nav.directions}
+            </span>
           </button>
 
           {/* Call Helpdesk */}
@@ -58,16 +66,16 @@ export default function MobileTabBar({ onOpenBooking }: MobileTabBarProps) {
             className="flex-1 py-1.5 px-1 rounded-2xl flex flex-col items-center justify-center text-[#526048] hover:bg-[#f5f0e6] active:scale-95 transition-all"
           >
             <Phone className="w-5 h-5 text-[#2b4c1c]" />
-            <span className="text-[10px] font-medium text-[#526048] mt-0.5 tracking-tight">Call Us</span>
+            <span className="text-[10px] font-medium text-[#526048] mt-0.5 tracking-tight">Call</span>
           </a>
 
           {/* Book Now Button */}
           <button
             onClick={onOpenBooking}
-            className="flex-1.5 py-2.5 px-3 rounded-2xl bg-[#2b4c1c] hover:bg-[#1e3614] text-white font-semibold text-xs shadow-sm flex items-center justify-center gap-1 active:scale-95 transition-all"
+            className="flex-1.5 py-2.5 px-3 rounded-2xl bg-[#2b4c1c] hover:bg-[#1e3614] text-white font-semibold text-xs shadow-sm flex items-center justify-center gap-1 active:scale-95 transition-all whitespace-nowrap"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#e6f2dc]" />
-            <span>Book Visit</span>
+            <span>{t.nav.bookVisit}</span>
           </button>
         </div>
       </div>

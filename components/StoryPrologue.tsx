@@ -3,12 +3,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Compass, Sparkles, MapPin, ArrowDown, Calendar } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface StoryPrologueProps {
   onOpenBooking: () => void;
 }
 
 export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
+  const { language, t } = useLanguage();
   return (
     <section id="prologue" className="relative pt-36 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
       {/* Background Subtle Sun Dapple */}
@@ -33,10 +35,21 @@ export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight text-[#14230e] leading-[1.08]"
         >
-          Give your children <br />
-          <span className="italic font-normal text-[#8a4724]">
-            the childhood you had.
-          </span>
+          {language === "te" ? (
+            <>
+              {t.hero.titleLine1} <br />
+              <span className="italic font-normal text-[#8a4724]">
+                {t.hero.titleHighlight}
+              </span>
+            </>
+          ) : (
+            <>
+              Give your children <br />
+              <span className="italic font-normal text-[#8a4724]">
+                the childhood you had.
+              </span>
+            </>
+          )}
         </motion.h1>
 
         {/* Agricultural Highlights Bar */}
@@ -83,23 +96,23 @@ export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
         >
           <div className="p-8 rounded-3xl bg-[#ffffff] border border-[#2b4c1c]/10 shadow-[0_10px_35px_rgba(50,40,20,0.04)] relative">
             <span className="text-4xl font-serif text-[#a84724] float-left mr-3 -mt-2 leading-none">
-              T
+              {language === "te" ? "తెలం" : "T"}
             </span>
             <p>
-              oday, an urban child in Hyderabad spends over six hours a day looking into glass screens. They can pass a botany exam without ever touching the silky roots of a rice sapling. They know the price of groceries, but have never heard the rhythmic wooden groaning of a Persian wheel lifting life-giving water from a deep stone well.
+              {t.prologue.bodyPart1}
             </p>
 
             <p className="mt-4">
-              <strong>One Day Kissan (One Day Kisan) is not a resort or a sterile amusement park.</strong> It is fifteen acres of living, breathing Telangana farmland—two lush campuses at <strong>Bhongir</strong> and <strong>Moinabad</strong>—where children take off their sneakers, roll up their sleeves, and discover how humanity actually survives.
+              <strong>{t.prologue.bodyHighlight}</strong> {t.prologue.bodyPart2}
             </p>
 
             {/* Travel Footnote */}
             <div className="mt-6 pt-5 border-t border-[#2b4c1c]/10 flex flex-wrap items-center justify-between gap-3 text-xs text-[#6e7d64]">
               <span className="flex items-center gap-1.5 font-medium text-[#2b4c1c]">
                 <MapPin className="w-3.5 h-3.5 text-[#a84724]" />
-                45 mins from Hyderabad (ORR Access)
+                {t.prologue.highwayNote}
               </span>
-              <span>Open for Schools, Corporates & Families</span>
+              <span>{t.prologue.audienceNote}</span>
             </div>
           </div>
 
@@ -110,7 +123,7 @@ export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
               className="px-6 py-3.5 rounded-full text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3613] shadow-md transition-all flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
             >
               <Compass className="w-4 h-4 text-white/80 animate-spin" style={{ animationDuration: "12s" }} />
-              <span>Explore 360° Farm Tour</span>
+              <span>{t.hero.exploreTourBtn}</span>
             </a>
 
             <a
@@ -118,7 +131,7 @@ export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
               className="px-6 py-3.5 rounded-full text-xs font-semibold text-[#14230e] bg-white border border-[#2b4c1c]/20 hover:bg-[#2b4c1c]/5 transition-all flex items-center justify-center gap-2 shadow-xs"
             >
               <MapPin className="w-4 h-4 text-[#8a4724]" />
-              <span>Get Directions</span>
+              <span>{t.nav.directions}</span>
             </a>
 
             <button
@@ -126,7 +139,7 @@ export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
               className="px-6 py-3.5 rounded-full text-xs font-semibold text-[#8a4724] bg-[#8a4724]/10 hover:bg-[#8a4724]/15 border border-[#8a4724]/25 transition-all flex items-center justify-center gap-2 shadow-xs"
             >
               <Sparkles className="w-4 h-4 text-[#8a4724]" />
-              <span>Plan a Visit</span>
+              <span>{t.nav.bookVisit}</span>
             </button>
           </div>
         </motion.div>

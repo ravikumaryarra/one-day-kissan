@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Compass, Phone, ArrowRight, Sparkles } from "lucide-react";
+import { Menu, X, Compass, Phone, ArrowRight, Sparkles, Globe, Shield } from "lucide-react";
 import { trackPhoneCall } from "@/components/Analytics";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -13,6 +14,7 @@ interface NavbarProps {
 export default function Navbar({ onOpenBooking }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     let ticking = false;
@@ -30,14 +32,13 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
   }, []);
 
   const navItems = [
-    { label: "Our Story", href: "/#prologue" },
-    { label: "360° Tour", href: "/#tour360", badge: "360°" },
-    { label: "Directions", href: "/#directions" },
-    { label: "Experiences", href: "/#act1-mud" },
-    { label: "Schools", href: "/#schools" },
-    { label: "Gallery", href: "/#gallery" },
-    { label: "Testimonials", href: "/#testimonials" },
-    { label: "Plan & FAQ", href: "/#planner" },
+    { label: t.nav.story, href: "/#prologue" },
+    { label: t.nav.tour360, href: "/#tour360", badge: "360°" },
+    { label: t.nav.directions, href: "/#directions" },
+    { label: t.nav.schools, href: "/#schools" },
+    { label: t.nav.gallery, href: "/#gallery" },
+    { label: t.nav.reviews, href: "/#testimonials" },
+    { label: t.nav.faqs, href: "/#planner" },
   ];
 
   return (
@@ -98,7 +99,35 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
           </div>
 
           {/* Right Action Concierge */}
-          <div className="hidden sm:flex items-center gap-2.5 flex-shrink-0">
+          <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
+            {/* Language Switcher Pill */}
+            <div className="flex items-center rounded-full bg-[#faf7f0] border border-[#2b4c1c]/15 p-0.5 text-[11px] font-semibold shadow-xs">
+              <button
+                type="button"
+                onClick={() => setLanguage("en")}
+                className={`px-2.5 py-1 rounded-full transition-all ${
+                  language === "en"
+                    ? "bg-[#2b4c1c] text-white shadow-xs"
+                    : "text-[#526048] hover:text-[#1a2713]"
+                }`}
+                title="Switch to English"
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage("te")}
+                className={`px-2.5 py-1 rounded-full transition-all ${
+                  language === "te"
+                    ? "bg-[#2b4c1c] text-white shadow-xs"
+                    : "text-[#526048] hover:text-[#1a2713]"
+                }`}
+                title="తెలుగు భాషకు మారండి"
+              >
+                తెలుగు
+              </button>
+            </div>
+
             <a
               href="tel:9849798674"
               onClick={() => trackPhoneCall("9849798674")}
@@ -106,15 +135,23 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
               title="Call Helpline"
             >
               <Phone className="w-3.5 h-3.5 text-emerald-700" />
-              <span>98497 98674</span>
+              <span>{t.nav.callHelpline}</span>
             </a>
+
+            <Link
+              href="/admin"
+              className="p-1.5 rounded-full text-[#4a5840] hover:text-[#1a2713] hover:bg-[#faf7f0] border border-transparent hover:border-[#2b4c1c]/15 transition-all"
+              title={t.nav.adminPortal}
+            >
+              <Shield className="w-3.5 h-3.5" />
+            </Link>
 
             <button
               onClick={onOpenBooking}
               className="px-5 py-2 rounded-full text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-sm hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap"
             >
               <Sparkles className="w-3.5 h-3.5 text-white/80" />
-              <span>Book a Visit</span>
+              <span>{t.nav.bookVisit}</span>
             </button>
           </div>
 
@@ -168,6 +205,38 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                 ))}
               </div>
 
+              {/* Mobile Language Switcher */}
+              <div className="flex items-center justify-between py-2 px-1 border-b border-[#2b4c1c]/10 text-xs">
+                <span className="text-[#526048] font-medium flex items-center gap-1.5">
+                  <Globe className="w-3.5 h-3.5 text-[#2b4c1c]" />
+                  Language / భాష
+                </span>
+                <div className="flex items-center rounded-full bg-[#faf7f0] border border-[#2b4c1c]/15 p-0.5 text-xs font-semibold">
+                  <button
+                    type="button"
+                    onClick={() => setLanguage("en")}
+                    className={`px-3 py-1 rounded-full transition-all ${
+                      language === "en"
+                        ? "bg-[#2b4c1c] text-white shadow-xs"
+                        : "text-[#526048]"
+                    }`}
+                  >
+                    English
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLanguage("te")}
+                    className={`px-3 py-1 rounded-full transition-all ${
+                      language === "te"
+                        ? "bg-[#2b4c1c] text-white shadow-xs"
+                        : "text-[#526048]"
+                    }`}
+                  >
+                    తెలుగు
+                  </button>
+                </div>
+              </div>
+
               <div className="pt-2 flex flex-col gap-2.5">
                 <a
                   href="tel:9849798674"
@@ -178,6 +247,15 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                   Call +91 98497 98674
                 </a>
 
+                <Link
+                  href="/admin"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full py-2.5 rounded-2xl bg-white border border-[#2b4c1c]/15 text-xs font-semibold text-[#4a5840] hover:text-[#1e2917] flex items-center justify-center gap-2"
+                >
+                  <Shield className="w-3.5 h-3.5 text-[#2b4c1c]" />
+                  {t.nav.adminPortal}
+                </Link>
+
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
@@ -186,7 +264,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                   className="w-full py-3.5 rounded-2xl text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-md flex items-center justify-center gap-2"
                 >
                   <Sparkles className="w-4 h-4 text-white/80" />
-                  Book a Visit
+                  {t.nav.bookVisit}
                 </button>
               </div>
             </motion.div>

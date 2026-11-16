@@ -3,6 +3,7 @@ import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import SEOStructuredData from "@/components/SEOStructuredData";
 import Analytics from "@/components/Analytics";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { getSiteUrl } from "@/lib/siteUrl";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -176,7 +177,9 @@ export default function RootLayout({
         <Analytics />
       </head>
       <body className="bg-[#faf7f0] text-[#1e2617] antialiased selection:bg-[#3d6027] selection:text-white">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -34,11 +34,14 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
     ],
   };
 
+  // Security: Escape < characters to prevent latent </script> breakout injection
+  const safeJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd }}
       />
       <nav aria-label="Breadcrumb" className="py-2.5">
         <ol className="flex flex-wrap items-center gap-1.5 text-xs text-[#526048]">

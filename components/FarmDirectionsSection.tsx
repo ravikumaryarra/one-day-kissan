@@ -3,23 +3,26 @@
 import React from "react";
 import { MapPin, Navigation, Clock, Phone } from "lucide-react";
 import { trackPhoneCall } from "@/components/Analytics";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function FarmDirectionsSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="directions" className="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto scroll-mt-24">
       {/* Clean Minimal Header */}
       <div className="text-center max-w-2xl mx-auto mb-10">
         <div className="field-note-tag mb-3">
           <Navigation className="w-3.5 h-3.5 text-[#8a4724]" />
-          <span>Farm Directions</span>
+          <span>{t.directions.badge}</span>
         </div>
 
         <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#1a2614] tracking-tight">
-          Directions to Both Farms
+          {t.directions.title}
         </h2>
 
         <p className="mt-3 text-[#4a5840] text-sm leading-relaxed">
-          Both locations have wide highway access, dedicated bus parking, and paved approach roads.
+          {t.directions.subtitle}
         </p>
       </div>
 
@@ -39,14 +42,14 @@ export default function FarmDirectionsSection() {
             </div>
 
             <h3 className="text-xl font-serif font-bold text-[#1a2614] mb-1">
-              Bhongir Main Farm
+              {t.directions.bhongirTitle}
             </h3>
             <p className="text-xs text-[#8a4724] font-medium mb-3">
-              Warangal Highway (NH 163) • Near Hotel Vivera
+              {t.directions.bhongirHighway}
             </p>
 
             <p className="text-xs text-[#526048] leading-relaxed mb-6">
-              Near Hotel Vivera, Hyderabad - Warangal Highway, Bhongir Bypass, Telangana - 508 116.
+              {t.directions.bhongirAddress}
             </p>
           </div>
 
@@ -58,7 +61,7 @@ export default function FarmDirectionsSection() {
               className="py-2.5 px-5 rounded-full bg-[#2b4c1c] hover:bg-[#1e3614] text-white font-medium text-xs flex items-center gap-1.5 transition-colors shadow-xs"
             >
               <Navigation className="w-3.5 h-3.5" />
-              <span>Open in Google Maps</span>
+              <span>{t.directions.openMaps}</span>
             </a>
 
             <a
@@ -67,7 +70,7 @@ export default function FarmDirectionsSection() {
               className="text-xs text-[#4a5840] hover:text-[#1a2614] font-medium flex items-center gap-1"
             >
               <Phone className="w-3.5 h-3.5 text-[#2b4c1c]" />
-              <span>Helpdesk</span>
+              <span>{t.directions.callDesk}</span>
             </a>
           </div>
         </div>
@@ -86,14 +89,14 @@ export default function FarmDirectionsSection() {
             </div>
 
             <h3 className="text-xl font-serif font-bold text-[#1a2614] mb-1">
-              Moinabad Agro-Sanctuary
+              {t.directions.moinabadTitle}
             </h3>
             <p className="text-xs text-[#8a4724] font-medium mb-3">
-              Chevella Road • Kapil Agro Farms (Chilkur Balaji Corridor)
+              {t.directions.moinabadHighway}
             </p>
 
             <p className="text-xs text-[#526048] leading-relaxed mb-6">
-              Kapil Agro Farms, Sriramnagar, Moinabad, Telangana - 501 504.
+              {t.directions.moinabadAddress}
             </p>
           </div>
 
@@ -105,7 +108,7 @@ export default function FarmDirectionsSection() {
               className="py-2.5 px-5 rounded-full bg-[#2b4c1c] hover:bg-[#1e3614] text-white font-medium text-xs flex items-center gap-1.5 transition-colors shadow-xs"
             >
               <Navigation className="w-3.5 h-3.5" />
-              <span>Open in Google Maps</span>
+              <span>{t.directions.openMaps}</span>
             </a>
 
             <a
@@ -114,7 +117,7 @@ export default function FarmDirectionsSection() {
               className="text-xs text-[#4a5840] hover:text-[#1a2614] font-medium flex items-center gap-1"
             >
               <Phone className="w-3.5 h-3.5 text-[#2b4c1c]" />
-              <span>Helpdesk</span>
+              <span>{t.directions.callDesk}</span>
             </a>
           </div>
         </div>

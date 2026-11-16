@@ -2,8 +2,12 @@
 
 import Script from "next/script";
 
-export const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
-export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
+export const GA_ID = (process.env.NEXT_PUBLIC_GA_ID || "").trim();
+export const META_PIXEL_ID = (process.env.NEXT_PUBLIC_META_PIXEL_ID || "").trim();
+
+// Security Validation: Ensure IDs contain only alphanumeric characters to prevent injection
+const isValidGaId = /^[A-Za-z0-9_-]+$/.test(GA_ID);
+const isValidPixelId = /^[0-9]+$/.test(META_PIXEL_ID);
 
 // Custom Event Dispatcher for GA4 & Meta Pixel
 export const trackEvent = (eventName: string, params: Record<string, any> = {}) => {
@@ -58,11 +62,11 @@ export default function Analytics() {
   return (
     <>
       {/* Google Analytics 4 */}
-      {GA_ID && (
+      {isValidGaId && (
         <>
           <Script
             strategy="afterInteractive"
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_ID)}`}
           />
           <Script
             id="google-analytics"
@@ -72,7 +76,7 @@ export default function Analytics() {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${GA_ID}', {
+                gtag('config', ${JSON.stringify(GA_ID)}, {
                   page_path: window.location.pathname,
                 });
               `,
@@ -82,7 +86,7 @@ export default function Analytics() {
       )}
 
       {/* Meta (Facebook) Pixel */}
-      {META_PIXEL_ID && (
+      {isValidPixelId && (
         <>
           <Script
             id="meta-pixel"
@@ -97,7 +101,7 @@ export default function Analytics() {
                 t.src=v;s=b.getElementsByTagName(e)[0];
                 s.parentNode.insertBefore(t,s)}(window, document,'script',
                 'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '${META_PIXEL_ID}');
+                fbq('init', ${JSON.stringify(META_PIXEL_ID)});
                 fbq('track', 'PageView');
               `,
             }}

@@ -218,6 +218,7 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-[#1e2917]">Terms of Entry</Link>
             <Link href="/cancellation-refunds" className="hover:text-[#1e2917]">Cancellation & Refunds</Link>
             <Link href="/safety" className="hover:text-[#1e2917]">Safety Standards</Link>
+            <Link href="/admin" className="hover:text-[#1e2917] font-medium text-[#2b4c1c]">Staff Portal</Link>
             <button
               onClick={scrollToTop}
               className="p-2 rounded-full bg-[#ffffff] border border-[#2b4c1c]/15 hover:bg-[#e8ded0] text-[#1e2917]"

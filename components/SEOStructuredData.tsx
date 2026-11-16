@@ -227,27 +227,30 @@ export default function SEOStructuredData() {
     }
   };
 
+  // Security: Escape < characters to prevent latent </script> breakout injection
+  const safeJsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, "\\u003c");
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(websiteSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(locationsSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(locationsSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(educationalSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(educationalSchema) }}
       />
     </>
   );

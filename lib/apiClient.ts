@@ -24,6 +24,10 @@ export async function cachedFetch<T = unknown>(
   url: string,
   options: FetchOptions = {}
 ): Promise<T> {
+  // Security: Guard against dangerous protocols (e.g. file://, gopher://, javascript:)
+  if (!/^https?:\/\//i.test(url) && !url.startsWith("/")) {
+    throw new Error("Invalid request protocol: Only relative paths and HTTP/HTTPS URLs are allowed.");
+  }
   const {
     ttlMs = 60000,
     retries = 2,
