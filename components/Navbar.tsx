@@ -15,10 +15,17 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 15);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -56,6 +63,8 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
               <img
                 src="/images/logo.png"
                 alt="One Day Kisan - India's Premier Farm-Based Edutainment Destination"
+                width={40}
+                height={40}
                 className="w-full h-full object-contain p-0.5"
               />
             </div>

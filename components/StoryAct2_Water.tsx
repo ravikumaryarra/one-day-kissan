@@ -16,7 +16,7 @@ export default function StoryAct2_Water({ onOpenBooking }: Act2Props) {
       id: "persian-wheel",
       title: "The Persian Wheel (Rahat)",
       time: "11:30 AM",
-      image: "/images/7.png",
+      image: "/images/7.webp",
       tag: "Hydraulic Mechanics",
       quote: "Circular gear torque converted to vertical water lift",
       description: "A monumental wooden gear apparatus dating back over 1,500 years. As the bullock-arm pivots horizontally, crown gears translate rotary motion into a vertical chain of metal buckets descending into the deep well and tipping cool water into the stone flume.",
@@ -26,7 +26,7 @@ export default function StoryAct2_Water({ onOpenBooking }: Act2Props) {
       id: "archimedes",
       title: "Archimedes Screw Lift",
       time: "12:00 PM",
-      image: "/images/8.png",
+      image: "/images/8.webp",
       tag: "Fluid Dynamics",
       quote: "Defying gravity with a rotating helical cylinder",
       description: "Students physically crank the sealed helix cylinder. Watching trapped pockets of water travel upward against gravity as the helical spiral rotates. A profound visceral demonstration that engineering is about geometry, not just batteries.",
@@ -36,7 +36,7 @@ export default function StoryAct2_Water({ onOpenBooking }: Act2Props) {
       id: "mota-bavi",
       title: "Mota Bavi & Vintage Stone Well",
       time: "12:20 PM",
-      image: "/images/11.png",
+      image: "/images/11.webp",
       tag: "Civil Architecture",
       quote: "The heart of every Telangana village settlement",
       description: "Hand-chiseled granite blocks descending 40 feet into the groundwater table. Demonstrating the ancient leather-bucket 'Mota' pulley system. Students feel the immense weight of 50 litres of water and understand why water was worshipped as sacred.",
@@ -46,7 +46,7 @@ export default function StoryAct2_Water({ onOpenBooking }: Act2Props) {
       id: "dam-reservoir",
       title: "Working Dam & Canal Model",
       time: "12:45 PM",
-      image: "/images/6.png",
+      image: "/images/6.webp",
       tag: "Hydro-Electric Science",
       quote: "Controlling monsoon run-off for 12 months of harvests",
       description: "A scale working model of a multi-gate reservoir. Students operate miniature sluice gates, observe hydrostatic water pressure, watch turbine fins spin under hydraulic head pressure, and trace canal distribution networks into terrace fields.",
@@ -91,6 +91,9 @@ export default function StoryAct2_Water({ onOpenBooking }: Act2Props) {
                 <img
                   src={item.image}
                   alt={`${item.title} - Ancient Hydraulic Irrigation Demonstration at One Day Kisan`}
+                  width={500}
+                  height={334}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-[#ffffff]/90 text-[10px] font-mono text-[#2b4c1c] font-semibold">
@@ -151,7 +154,7 @@ export default function StoryAct2_Water({ onOpenBooking }: Act2Props) {
                     <p className="italic text-xs text-[#8a5738] mb-3">{item.quote}</p>
 
                     <div className="aspect-video rounded-xl overflow-hidden bg-[#e8ded0] mb-4">
-                      <img src={item.image} alt={`${item.title} - Working Model at One Day Kisan`} className="w-full h-full object-cover" />
+                      <img src={item.image} alt={`${item.title} - Working Model at One Day Kisan`} width={500} height={334} loading="lazy" className="w-full h-full object-cover" />
                     </div>
 
                     <p className="text-sm text-[#4a5840] leading-relaxed font-light mb-4">

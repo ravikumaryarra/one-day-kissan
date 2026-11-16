@@ -36,10 +36,12 @@ export default function ExpeditionPlanner({ onOpenBooking }: ExpeditionPlannerPr
   const [selectedFarm, setSelectedFarm] = useState("Bhongir");
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastWhatsAppUrl, setLastWhatsAppUrl] = useState<string>("");
 
   const handleQuickWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     const cleanPhone = phone.replace(/\D/g, "");
 
     if (!org.trim()) {
@@ -52,6 +54,7 @@ export default function ExpeditionPlanner({ onOpenBooking }: ExpeditionPlannerPr
       return;
     }
 
+    setIsSubmitting(true);
     setFormError(null);
     const text = `*Expedition Inquiry – One Day Kisan*%0A%0A*Type:* ${activeTab}%0A*Farm:* ${selectedFarm} Farm%0A*Name/Org:* ${encodeURIComponent(org.trim())}%0A*Est. Persons:* ${encodeURIComponent(count || "1")}%0A*Phone:* ${encodeURIComponent(cleanPhone)}`;
     const waUrl = `https://wa.me/919849798674?text=${text}`;
@@ -59,11 +62,13 @@ export default function ExpeditionPlanner({ onOpenBooking }: ExpeditionPlannerPr
     trackWhatsAppBooking(activeTab, selectedFarm, count);
     setLastWhatsAppUrl(waUrl);
     setFormSuccess(true);
+    setIsSubmitting(false);
     window.open(waUrl, "_blank");
   };
 
   const handleResetForm = () => {
     setFormSuccess(false);
+    setIsSubmitting(false);
     setFormError(null);
     setPhone("");
     setOrg("");
@@ -165,10 +170,22 @@ export default function ExpeditionPlanner({ onOpenBooking }: ExpeditionPlannerPr
         />
         <button
           type="submit"
-          className={`w-full py-3 rounded-xl text-xs font-semibold text-white ${buttonBg} hover:${buttonHoverBg} shadow-sm flex items-center justify-center gap-2 transition-colors`}
+          disabled={isSubmitting}
+          className={`w-full py-3 rounded-xl text-xs font-semibold text-white ${buttonBg} hover:${buttonHoverBg} shadow-sm flex items-center justify-center gap-2 transition-colors ${
+            isSubmitting ? "opacity-75 cursor-not-allowed" : ""
+          }`}
         >
-          <Send className="w-3.5 h-3.5" />
-          {submitLabel}
+          {isSubmitting ? (
+            <>
+              <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <span>Preparing Proposal...</span>
+            </>
+          ) : (
+            <>
+              <Send className="w-3.5 h-3.5" />
+              <span>{submitLabel}</span>
+            </>
+          )}
         </button>
       </form>
     );

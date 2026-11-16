@@ -25,11 +25,13 @@ export default function BookingModal({ isOpen, onClose, preselectedActivity }: B
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState(preselectedActivity ? `Focus: ${preselectedActivity}` : "");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submittedWhatsAppUrl, setSubmittedWhatsAppUrl] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setErrorMessage(null);
 
     const cleanPhone = phone.replace(/[^0-9]/g, "");
@@ -50,6 +52,8 @@ export default function BookingModal({ isOpen, onClose, preselectedActivity }: B
       setErrorMessage("Please enter your contact name.");
       return;
     }
+
+    setIsSubmitting(true);
 
     let text = `*New Booking Request – One Day Kisan*%0A%0A`;
     text += `*Visit Type:* ${encodeURIComponent(visitType)}%0A`;
@@ -80,10 +84,12 @@ export default function BookingModal({ isOpen, onClose, preselectedActivity }: B
     trackWhatsAppBooking(visitType, farmLocation, headcount);
     window.open(waUrl, "_blank");
     setIsSubmitted(true);
+    setIsSubmitting(false);
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setIsSubmitting(false);
     setErrorMessage(null);
     onClose();
   };
@@ -306,10 +312,22 @@ export default function BookingModal({ isOpen, onClose, preselectedActivity }: B
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-2xl text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-md flex items-center justify-center gap-2 transition-all mt-4"
+                disabled={isSubmitting}
+                className={`w-full py-3.5 rounded-2xl text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-md flex items-center justify-center gap-2 transition-all mt-4 ${
+                  isSubmitting ? "opacity-75 cursor-not-allowed" : ""
+                }`}
               >
-                <Send className="w-4 h-4" />
-                Dispatch via WhatsApp (+91 98497 98674)
+                {isSubmitting ? (
+                  <>
+                    <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Preparing WhatsApp Dispatch...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Dispatch via WhatsApp (+91 98497 98674)</span>
+                  </>
+                )}
               </button>
             </form>
           </div>

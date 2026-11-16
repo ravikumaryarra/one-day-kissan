@@ -194,17 +194,25 @@ export default function Farm360Tour() {
 
     animate();
 
-    // Resize Handler
+    // Throttled Resize Handler
+    let resizeTicking = false;
     const handleResize = () => {
-      if (!containerRef.current || !rendererRef.current || !cameraRef.current) return;
-      const w = containerRef.current.clientWidth;
-      const h = containerRef.current.clientHeight;
-      cameraRef.current.aspect = w / h;
-      cameraRef.current.updateProjectionMatrix();
-      rendererRef.current.setSize(w, h);
+      if (!resizeTicking) {
+        window.requestAnimationFrame(() => {
+          if (containerRef.current && rendererRef.current && cameraRef.current) {
+            const w = containerRef.current.clientWidth;
+            const h = containerRef.current.clientHeight;
+            cameraRef.current.aspect = w / h;
+            cameraRef.current.updateProjectionMatrix();
+            rendererRef.current.setSize(w, h);
+          }
+          resizeTicking = false;
+        });
+        resizeTicking = true;
+      }
     };
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
 
     return () => {
       cancelAnimationFrame(animationFrameId);
@@ -475,6 +483,9 @@ export default function Farm360Tour() {
                     <img
                       src={selectedHotspot.image}
                       alt={`${selectedHotspot.title} - One Day Kisan 360 virtual tour`}
+                      width={64}
+                      height={64}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </div>

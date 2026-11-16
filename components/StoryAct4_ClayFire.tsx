@@ -16,21 +16,21 @@ export default function StoryAct4_ClayFire({ onOpenBooking }: Act4Props) {
     {
       id: "pottery",
       title: "Clay Pottery on the Wheel",
-      image: "/images/2.png",
+      image: "/images/2.webp",
       tag: "Sensory Craft",
       desc: "Sitting before the ancient wooden potter's flywheel. Wet clay slipping through palms. Guiding thumbs into the spinning center to raise a clay pot that each visitor takes home."
     },
     {
       id: "dung-cake",
       title: "Dung Cake Making & Chulha",
-      image: "/images/1.png",
+      image: "/images/1.webp",
       tag: "Ancestral Energy",
       desc: "Kneading dried paddy straw into organic cattle by-products. Slapping circular cakes against drying stone walls—India's ancient biofuel for clean domestic firewood hearths."
     },
     {
       id: "tractor",
       title: "Open-Air Tractor Joyrides",
-      image: "/images/24.png",
+      image: "/images/24.webp",
       tag: "Pure Celebration",
       desc: "Climbing into the trailer of the farmer's vehicle. Bumping along unpaved red mud farm borders as late-afternoon breezes blow across acres of green crops."
     }
@@ -66,6 +66,9 @@ export default function StoryAct4_ClayFire({ onOpenBooking }: Act4Props) {
                 <img
                   src={craft.image}
                   alt={`${craft.title} - Traditional Rural Crafts at One Day Kisan Hyderabad`}
+                  width={500}
+                  height={334}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -111,6 +114,9 @@ export default function StoryAct4_ClayFire({ onOpenBooking }: Act4Props) {
                 <img
                   src={vid.thumbnail}
                   alt={`${vid.title} - Authentic Video Review from One Day Kisan Visitor`}
+                  width={480}
+                  height={270}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">

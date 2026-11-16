@@ -10,11 +10,14 @@ import StoryAct2_Water from "@/components/StoryAct2_Water";
 import StoryAct3_Kinship from "@/components/StoryAct3_Kinship";
 import StoryAct4_ClayFire from "@/components/StoryAct4_ClayFire";
 import SchoolsSection from "@/components/SchoolsSection";
-import GallerySection from "@/components/GallerySection";
-import VideoTestimonials from "@/components/VideoTestimonials";
-import ExpeditionPlanner from "@/components/ExpeditionPlanner";
 import Footer from "@/components/Footer";
 import MobileTabBar from "@/components/MobileTabBar";
+import SectionErrorBoundary from "@/components/ErrorBoundary";
+import {
+  GallerySkeleton,
+  TestimonialsSkeleton,
+  PlannerSkeleton,
+} from "@/components/SectionSkeletons";
 
 // Code-split heavy Three.js 360 viewer for near-instant initial page hydration
 const Farm360Tour = dynamic(() => import("@/components/Farm360Tour"), {
@@ -27,6 +30,24 @@ const Farm360Tour = dynamic(() => import("@/components/Farm360Tour"), {
       </p>
     </div>
   ),
+});
+
+// Code-split Gallery section with lightbox modal
+const GallerySection = dynamic(() => import("@/components/GallerySection"), {
+  ssr: false,
+  loading: () => <GallerySkeleton />,
+});
+
+// Code-split Video Testimonials with YouTube modal
+const VideoTestimonials = dynamic(() => import("@/components/VideoTestimonials"), {
+  ssr: false,
+  loading: () => <TestimonialsSkeleton />,
+});
+
+// Code-split Expedition Planner with package tabs & FAQs
+const ExpeditionPlanner = dynamic(() => import("@/components/ExpeditionPlanner"), {
+  ssr: false,
+  loading: () => <PlannerSkeleton />,
 });
 
 // Code-split interactive concierge booking modal
@@ -57,7 +78,9 @@ export default function Home() {
       <StoryPrologue onOpenBooking={() => handleOpenBooking()} />
 
       {/* Visual Feature: 360° Interactive Virtual Farm Tour (Immediately after Hero) */}
-      <Farm360Tour />
+      <SectionErrorBoundary fallbackTitle="360° Farm Tour Temporarily Unavailable">
+        <Farm360Tour />
+      </SectionErrorBoundary>
 
       {/* Interactive Directions & Campus Comparison for Both Farms */}
       <FarmDirectionsSection />
@@ -78,13 +101,19 @@ export default function Home() {
       <SchoolsSection onOpenBooking={() => handleOpenBooking("School Field Trip Batch")} />
 
       {/* Curated Authentic Photo Archive with 'Explore More' Toggle + Fullscreen Lightbox */}
-      <GallerySection />
+      <SectionErrorBoundary fallbackTitle="Visual Archive Temporarily Unavailable">
+        <GallerySection />
+      </SectionErrorBoundary>
 
       {/* Video Reviews with 'Watch More' Toggle & Player Modal */}
-      <VideoTestimonials />
+      <SectionErrorBoundary fallbackTitle="Video Reviews Temporarily Unavailable">
+        <VideoTestimonials />
+      </SectionErrorBoundary>
 
       {/* Epilogue: The Expedition Desk (Packages, Safety Guarantees, FAQs & WhatsApp Concierge) */}
-      <ExpeditionPlanner onOpenBooking={() => handleOpenBooking()} />
+      <SectionErrorBoundary fallbackTitle="Expedition Desk Temporarily Unavailable">
+        <ExpeditionPlanner onOpenBooking={() => handleOpenBooking()} />
+      </SectionErrorBoundary>
 
       {/* Footer */}
       <Footer />

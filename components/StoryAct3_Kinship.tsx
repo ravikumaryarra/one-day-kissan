@@ -16,7 +16,7 @@ export default function StoryAct3_Kinship({ onOpenBooking }: Act3Props) {
       id: "aviary",
       title: "The Walk-In Birds Aviary",
       time: "01:30 PM",
-      image: "/images/23.png",
+      image: "/images/23.webp",
       tag: "Avian Ethology",
       quote: "When a wild bird chooses to land on your palm",
       description: "An enclosed walk-through sanctuary. Children learn stillness and calm as parakeets, lovebirds, and doves flutter down to feed seeds directly from their outstretched hands. An instant lesson in quiet patience and animal trust.",
@@ -26,7 +26,7 @@ export default function StoryAct3_Kinship({ onOpenBooking }: Act3Props) {
       id: "dairy",
       title: "Desi Gir & Indigenous Cattle",
       time: "02:00 PM",
-      image: "/images/18.png",
+      image: "/images/18.webp",
       tag: "Living Heritage",
       quote: "Understanding the ancient mother of Indian agriculture",
       description: "Getting up close with indigenous Gir and Sahiwal cows. Students stroke the distinctive dorsal hump, hand-feed green organic fodder, observe milking, and learn why A2 beta-casein protein is biologically superior for human health.",
@@ -36,7 +36,7 @@ export default function StoryAct3_Kinship({ onOpenBooking }: Act3Props) {
       id: "lunch",
       title: "The Traditional Farm Feast",
       time: "02:30 PM",
-      image: "/images/1.png",
+      image: "/images/1.webp",
       tag: "Nourishment",
       quote: "Hot food cooked over earthen hearths with pure farm water",
       description: "Under shady neem canopies, students and visitors sit down to a wholesome, steaming Telangana rural buffet: authentic Dal, freshly harvested seasonal vegetables, fragrant rice, crisp papads, and buttermilk. Zero preservatives.",
@@ -81,6 +81,9 @@ export default function StoryAct3_Kinship({ onOpenBooking }: Act3Props) {
                 <img
                   src={item.image}
                   alt={`${item.title} - Animal Care & Aviary Experience at One Day Kisan`}
+                  width={500}
+                  height={334}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-[#ffffff]/90 text-[10px] font-mono text-[#a84724] font-semibold">
@@ -141,7 +144,7 @@ export default function StoryAct3_Kinship({ onOpenBooking }: Act3Props) {
                     <p className="italic text-xs text-[#8a5738] mb-3">{item.quote}</p>
 
                     <div className="aspect-video rounded-xl overflow-hidden bg-[#e8ded0] mb-4">
-                      <img src={item.image} alt={`${item.title} - One Day Kisan Educational Animal Husbandry`} className="w-full h-full object-cover" />
+                      <img src={item.image} alt={`${item.title} - One Day Kisan Educational Animal Husbandry`} width={500} height={334} loading="lazy" className="w-full h-full object-cover" />
                     </div>
 
                     <p className="text-sm text-[#4a5840] leading-relaxed font-light mb-4">

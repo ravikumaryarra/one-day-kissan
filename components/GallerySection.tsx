@@ -124,6 +124,8 @@ export default function GallerySection() {
                 <img
                   src={img.src}
                   alt={img.alt}
+                  width={400}
+                  height={400}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                 />
@@ -208,6 +210,8 @@ export default function GallerySection() {
               <img
                 src={filteredImages[currentLightboxIndex].src}
                 alt={filteredImages[currentLightboxIndex].alt}
+                width={1200}
+                height={800}
                 className="max-w-full max-h-[76vh] object-contain rounded-2xl shadow-2xl border border-white/20"
               />
               <p className="mt-3 text-xs text-stone-300 text-center max-w-xl">

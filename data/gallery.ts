@@ -246,52 +246,52 @@ export const galleryImages: GalleryImage[] = [
     "alt": "Family weekend picnic and rural living experience near Hyderabad - One Day Kisan (Activities #49)"
   },
   {
-    "src": "/gallery/gallery-51.jpg",
+    "src": "/gallery/gallery-51.webp",
     "category": "activities",
     "alt": "Children crafting traditional earthen diyas and clay pots to take home - One Day Kisan (Activities #51)"
   },
   {
-    "src": "/gallery/gallery-52.jpg",
+    "src": "/gallery/gallery-52.webp",
     "category": "activities",
     "alt": "Traditional dung cake making experience using organic cow dung and straw - One Day Kisan (Activities #52)"
   },
   {
-    "src": "/gallery/gallery-53.jpg",
+    "src": "/gallery/gallery-53.webp",
     "category": "activities",
     "alt": "Open-air tractor joyride across maize and vegetable fields at sunset - One Day Kisan (Activities #53)"
   },
   {
-    "src": "/gallery/gallery-54.jpg",
+    "src": "/gallery/gallery-54.webp",
     "category": "activities",
     "alt": "Traditional village sports and outdoor team building games in green lawns - One Day Kisan (Activities #54)"
   },
   {
-    "src": "/gallery/gallery-55.jpg",
+    "src": "/gallery/gallery-55.webp",
     "category": "activities",
     "alt": "Children grinding food grains using traditional stone hand-grinders (Chakki) - One Day Kisan (Activities #55)"
   },
   {
-    "src": "/gallery/gallery-56.jpg",
+    "src": "/gallery/gallery-56.webp",
     "category": "activities",
     "alt": "Polyhouse greenhouse hi-tech drip irrigation exploration - One Day Kisan (Activities #56)"
   },
   {
-    "src": "/gallery/gallery-57.jpg",
+    "src": "/gallery/gallery-57.webp",
     "category": "activities",
     "alt": "Exploring indigenous food grain varieties and organic vegetable plots - One Day Kisan (Activities #57)"
   },
   {
-    "src": "/gallery/gallery-58.jpg",
+    "src": "/gallery/gallery-58.webp",
     "category": "activities",
     "alt": "Evening DJ music and cultural rural celebration arena for visitors - One Day Kisan (Activities #58)"
   },
   {
-    "src": "/gallery/gallery-59.jpg",
+    "src": "/gallery/gallery-59.webp",
     "category": "activities",
     "alt": "Family weekend picnic and rural living experience near Hyderabad - One Day Kisan (Activities #59)"
   },
   {
-    "src": "/gallery/gallery-60.jpg",
+    "src": "/gallery/gallery-60.webp",
     "category": "activities",
     "alt": "Hands-on clay pottery wheel sculpting workshop for kids and families - One Day Kisan (Activities #60)"
   }

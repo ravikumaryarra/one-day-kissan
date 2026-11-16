@@ -89,6 +89,8 @@ export default function VideoTestimonials() {
                 <img
                   src={vid.thumbnail}
                   alt={`${vid.title} - Authentic Video Review from One Day Kisan Visitor`}
+                  width={480}
+                  height={270}
                   loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />

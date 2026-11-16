@@ -163,6 +163,9 @@ export default function RootLayout({
     <html lang="en" className={`${jakarta.variable} ${playfair.variable} scroll-smooth`}>
       <head>
         <link rel="icon" href="/images/logo.png" type="image/png" />
+        <link rel="preload" href="/gallery/gallery-01.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <SEOStructuredData />
         <Analytics />
       </head>

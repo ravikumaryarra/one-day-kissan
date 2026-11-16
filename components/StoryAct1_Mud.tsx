@@ -16,7 +16,7 @@ export default function StoryAct1_Mud({ onOpenBooking }: Act1Props) {
       id: "paddy",
       title: "Paddy Sowing & Transplantation",
       time: "09:45 AM",
-      image: "/images/21.png",
+      image: "/images/21.webp",
       tag: "Botany & Soil Science",
       caption: "From seed bed to slush terrace",
       description: "Students stand calf-deep in organic mud. Local farmers demonstrate the precise thumb-and-forefinger technique to plant live rice saplings at regular 6-inch intervals, learning the grueling physical labour required to put white rice on an urban dinner plate.",
@@ -26,7 +26,7 @@ export default function StoryAct1_Mud({ onOpenBooking }: Act1Props) {
       id: "ploughing",
       title: "Traditional Soil Ploughing",
       time: "10:15 AM",
-      image: "/images/16.png",
+      image: "/images/16.webp",
       tag: "Earth Mechanics",
       caption: "Breaking the hard crust",
       description: "Gripping the wooden plough handles. Understanding why compacted dry soil must be aerated, inverted, and pulverized before sowing can begin. A lesson in friction, soil density, and ancestral ergonomic design.",
@@ -36,7 +36,7 @@ export default function StoryAct1_Mud({ onOpenBooking }: Act1Props) {
       id: "vermicompost",
       title: "Vermiculture & Earthworm Nursery",
       time: "10:45 AM",
-      image: "/images/4.png",
+      image: "/images/4.webp",
       tag: "Circular Biology",
       caption: "Nature's quiet engineers",
       description: "Touching live red wigglers (Eisenia fetida). Discovering why earthworms are called the farmer's best friend. Students analyze organic waste decomposition, pH balance, and bio-fertilizer production without synthetic chemicals.",
@@ -46,7 +46,7 @@ export default function StoryAct1_Mud({ onOpenBooking }: Act1Props) {
       id: "scarecrow",
       title: "Community Scarecrow Crafting",
       time: "11:15 AM",
-      image: "/images/5.png",
+      image: "/images/5.webp",
       tag: "Traditional Ecology",
       caption: "Guarding the ripening crops",
       description: "Working in teams of four using dried paddy straw, bamboo stakes, and vintage dhotis to craft scarecrows. Learning how visual deterrents protect developing grain spikes from predatory birds without harmful pesticides.",
@@ -91,6 +91,9 @@ export default function StoryAct1_Mud({ onOpenBooking }: Act1Props) {
                 <img
                   src={m.image}
                   alt={`${m.title} - Hands-on Agricultural Learning at One Day Kisan Hyderabad`}
+                  width={500}
+                  height={334}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-[#ffffff]/90 text-[10px] font-mono text-[#8a5738] font-semibold">
@@ -150,7 +153,7 @@ export default function StoryAct1_Mud({ onOpenBooking }: Act1Props) {
                     </h3>
 
                     <div className="aspect-video rounded-xl overflow-hidden bg-[#e8ded0] mb-4">
-                      <img src={item.image} alt={`${item.title} - One Day Kisan Educational Field Trip`} className="w-full h-full object-cover" />
+                      <img src={item.image} alt={`${item.title} - One Day Kisan Educational Field Trip`} width={500} height={334} loading="lazy" className="w-full h-full object-cover" />
                     </div>
 
                     <p className="text-sm text-[#4a5840] leading-relaxed font-light mb-4">

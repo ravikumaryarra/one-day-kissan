@@ -54,6 +54,7 @@ export default function NotFound() {
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
           <Link
             href="/"
+            prefetch={true}
             className="p-5 rounded-2xl bg-white border border-[#2b4c1c]/15 hover:border-[#2b4c1c]/40 hover:shadow-md transition-all group"
           >
             <div className="w-9 h-9 rounded-full bg-[#2b4c1c]/10 text-[#2b4c1c] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
@@ -76,6 +77,7 @@ export default function NotFound() {
 
           <Link
             href="/safety"
+            prefetch={true}
             className="p-5 rounded-2xl bg-white border border-[#2b4c1c]/15 hover:border-[#2b4c1c]/40 hover:shadow-md transition-all group"
           >
             <div className="w-9 h-9 rounded-full bg-[#2b4c1c]/10 text-[#2b4c1c] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">

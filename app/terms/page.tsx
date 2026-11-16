@@ -23,6 +23,7 @@ export default function TermsPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link
             href="/"
+            prefetch={true}
             className="inline-flex items-center gap-2 text-xs font-semibold text-[#2b4c1c] hover:text-[#1a3811] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -185,9 +186,9 @@ export default function TermsPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#526048]">
           <span>© {new Date().getFullYear()} One Day Kisan. All Rights Reserved.</span>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-[#14230e] underline">Privacy Policy</Link>
-            <Link href="/cancellation-refunds" className="hover:text-[#14230e] underline">Refund & Cancellation</Link>
-            <Link href="/safety" className="hover:text-[#14230e] underline">Safety Standards</Link>
+            <Link href="/privacy" prefetch={true} className="hover:text-[#14230e] underline">Privacy Policy</Link>
+            <Link href="/cancellation-refunds" prefetch={true} className="hover:text-[#14230e] underline">Refund & Cancellation</Link>
+            <Link href="/safety" prefetch={true} className="hover:text-[#14230e] underline">Safety Standards</Link>
           </div>
         </div>
       </footer>

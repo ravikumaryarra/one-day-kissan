@@ -145,6 +145,9 @@ export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
               <img
                 src="/gallery/gallery-01.webp"
                 alt="School children experiencing barefoot paddy transplantation in mud at One Day Kisan farm near Hyderabad"
+                width={600}
+                height={450}
+                fetchPriority="high"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -164,6 +167,9 @@ export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
               <img
                 src="/gallery/gallery-06.webp"
                 alt="Persian wheel (Rahat) hydraulic irrigation working demonstration at One Day Kisan Bhongir"
+                width={400}
+                height={300}
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
             </div>

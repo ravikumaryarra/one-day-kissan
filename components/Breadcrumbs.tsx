@@ -45,6 +45,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
           <li className="inline-flex items-center">
             <Link
               href="/"
+              prefetch={true}
               className="inline-flex items-center gap-1 hover:text-[#14230e] text-[#2b4c1c] font-medium transition-colors"
             >
               <Home className="w-3.5 h-3.5" />
@@ -60,6 +61,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                 {item.href && !isLast ? (
                   <Link
                     href={item.href}
+                    prefetch={true}
                     className="hover:text-[#14230e] transition-colors"
                   >
                     {item.label}

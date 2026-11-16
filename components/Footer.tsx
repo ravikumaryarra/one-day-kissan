@@ -21,6 +21,9 @@ export default function Footer() {
                 <img
                   src="/images/logo.png"
                   alt="One Day Kisan - India's Premier Farm-Based Edutainment Destination"
+                  width={40}
+                  height={40}
+                  loading="lazy"
                   className="w-full h-full object-contain p-0.5"
                 />
               </div>
@@ -134,6 +137,7 @@ export default function Footer() {
             <div className="space-y-2 text-xs">
               <Link
                 href="/privacy"
+                prefetch={true}
                 className="flex items-center gap-2 text-[#526048] hover:text-[#14230e] transition-colors"
               >
                 <ShieldCheck className="w-3.5 h-3.5 text-[#2b4c1c]" />
@@ -141,6 +145,7 @@ export default function Footer() {
               </Link>
               <Link
                 href="/terms"
+                prefetch={true}
                 className="flex items-center gap-2 text-[#526048] hover:text-[#14230e] transition-colors"
               >
                 <FileText className="w-3.5 h-3.5 text-[#2b4c1c]" />
@@ -148,6 +153,7 @@ export default function Footer() {
               </Link>
               <Link
                 href="/cancellation-refunds"
+                prefetch={true}
                 className="flex items-center gap-2 text-[#526048] hover:text-[#14230e] transition-colors"
               >
                 <RefreshCw className="w-3.5 h-3.5 text-[#2b4c1c]" />
@@ -155,6 +161,7 @@ export default function Footer() {
               </Link>
               <Link
                 href="/safety"
+                prefetch={true}
                 className="flex items-center gap-2 text-[#526048] hover:text-[#14230e] transition-colors"
               >
                 <HeartPulse className="w-3.5 h-3.5 text-[#8a4724]" />
