@@ -148,7 +148,7 @@ export default function PrivacyPolicyPage() {
               One Day Kisan captures unscripted moments of agriculture, muddy paddy transplantation, ancient water engineering, and artisan pottery to showcase authentic agritourism archives and educational progress.
             </p>
             <p>
-              <strong>Opt-Out Protocol:</strong> If a visiting institution, school principal, parent, or visitor does not wish to be included in photographs or video archives published for educational outreach, they may notify our campus helpdesk upon arrival or email us in advance at <strong>info@onedaykisan.com</strong>. We will ensure designated batches are excluded from public archives.
+              <strong>Opt-Out Protocol:</strong> If a visiting institution, school principal, parent, or visitor does not wish to be included in photographs or video archives published for educational outreach, they may notify our campus helpdesk upon arrival or email us in advance at <a href="mailto:info@onedaykisan.com" className="font-semibold text-[#2b4c1c] underline">info@onedaykisan.com</a>. We will ensure designated batches are excluded from public archives.
             </p>
           </section>
 
@@ -180,11 +180,15 @@ export default function PrivacyPolicyPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#2b4c1c] flex-shrink-0" />
-                <span>+91 98497 98674 / +91 93983 57618</span>
+                <span>
+                  <a href="tel:9849798674" className="hover:underline text-[#2b4c1c] font-semibold">+91 98497 98674</a>
+                  {" / "}
+                  <a href="tel:9398357618" className="hover:underline text-[#2b4c1c] font-semibold">+91 93983 57618</a>
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#2b4c1c] flex-shrink-0" />
-                <span>info@onedaykisan.com</span>
+                <a href="mailto:info@onedaykisan.com" className="hover:underline text-[#2b4c1c] font-semibold">info@onedaykisan.com</a>
               </div>
               <div className="text-[#526048] pt-2">
                 Response SLA: All privacy-related grievances and verification requests will be acknowledged within 24 hours and redressed within 15 business days.

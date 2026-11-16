@@ -194,11 +194,19 @@ export default function CancellationRefundPage() {
               <div className="font-bold text-[#14230e] text-base">One Day Kisan Expeditions Desk</div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#2b4c1c] flex-shrink-0" />
-                <span>WhatsApp / Phone: +91 98497 98674 / +91 93983 57618</span>
+                <span>
+                  WhatsApp / Phone:{" "}
+                  <a href="tel:9849798674" className="hover:underline text-[#2b4c1c] font-semibold">+91 98497 98674</a>
+                  {" / "}
+                  <a href="tel:9398357618" className="hover:underline text-[#2b4c1c] font-semibold">+91 93983 57618</a>
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#2b4c1c] flex-shrink-0" />
-                <span>Email: info@onedaykisan.com</span>
+                <span>
+                  Email:{" "}
+                  <a href="mailto:info@onedaykisan.com" className="hover:underline text-[#2b4c1c] font-semibold">info@onedaykisan.com</a>
+                </span>
               </div>
               <div className="text-[#526048] pt-2">
                 Our support team is available 7 days a week from 8:30 AM to 6:30 PM.

@@ -34,20 +34,148 @@ export default function ExpeditionPlanner({ onOpenBooking }: ExpeditionPlannerPr
   const [org, setOrg] = useState("");
   const [count, setCount] = useState("50");
   const [selectedFarm, setSelectedFarm] = useState("Bhongir");
+  const [formError, setFormError] = useState<string | null>(null);
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [lastWhatsAppUrl, setLastWhatsAppUrl] = useState<string>("");
 
   const handleQuickWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!phone) {
-      alert("Please provide a contact phone number.");
+    const cleanPhone = phone.replace(/\D/g, "");
+
+    if (!org.trim()) {
+      setFormError("Please enter your name or institution/organization.");
       return;
     }
-    const text = `*Expedition Inquiry – One Day Kisan*%0A%0A*Type:* ${activeTab}%0A*Farm:* ${selectedFarm} Farm%0A*Name/Org:* ${encodeURIComponent(org || "Visitor")}%0A*Est. Persons:* ${encodeURIComponent(count)}%0A*Phone:* ${encodeURIComponent(phone)}`;
+
+    if (cleanPhone.length < 10) {
+      setFormError("Please enter a valid 10-digit mobile number for WhatsApp.");
+      return;
+    }
+
+    setFormError(null);
+    const text = `*Expedition Inquiry – One Day Kisan*%0A%0A*Type:* ${activeTab}%0A*Farm:* ${selectedFarm} Farm%0A*Name/Org:* ${encodeURIComponent(org.trim())}%0A*Est. Persons:* ${encodeURIComponent(count || "1")}%0A*Phone:* ${encodeURIComponent(cleanPhone)}`;
+    const waUrl = `https://wa.me/919849798674?text=${text}`;
+
     trackWhatsAppBooking(activeTab, selectedFarm, count);
-    window.open(`https://wa.me/919849798674?text=${text}`, "_blank");
+    setLastWhatsAppUrl(waUrl);
+    setFormSuccess(true);
+    window.open(waUrl, "_blank");
+  };
+
+  const handleResetForm = () => {
+    setFormSuccess(false);
+    setFormError(null);
+    setPhone("");
+    setOrg("");
+  };
+
+  const renderFormContent = (
+    namePlaceholder: string,
+    countPlaceholder: string,
+    submitLabel: string,
+    buttonBg: string,
+    buttonHoverBg: string
+  ) => {
+    if (formSuccess) {
+      return (
+        <div className="bg-[#f0fdf4] border border-green-200 p-6 rounded-2xl text-center space-y-4">
+          <div className="w-12 h-12 bg-green-100 text-green-700 rounded-full flex items-center justify-center mx-auto">
+            <CheckCircle className="w-6 h-6" />
+          </div>
+          <div>
+            <h5 className="font-serif font-bold text-lg text-green-950">Inquiry Prepared!</h5>
+            <p className="text-xs text-green-800 mt-1">
+              Details saved for <span className="font-semibold">{org}</span> ({count} visitors, {selectedFarm} Farm).
+            </p>
+          </div>
+          <p className="text-xs text-green-700 leading-relaxed">
+            WhatsApp should launch automatically. If it didn&apos;t open or popups were blocked, tap the button below:
+          </p>
+          <a
+            href={lastWhatsAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-3 rounded-xl text-xs font-semibold text-white bg-green-700 hover:bg-green-800 shadow-sm flex items-center justify-center gap-2"
+          >
+            <Send className="w-4 h-4" />
+            Open WhatsApp Chat Now
+          </a>
+          <div className="pt-2 border-t border-green-200/60 flex items-center justify-between text-xs">
+            <a href="tel:9849798674" className="text-green-900 font-semibold hover:underline flex items-center gap-1">
+              <Phone className="w-3.5 h-3.5" /> Call: 98497 98674
+            </a>
+            <button
+              type="button"
+              onClick={handleResetForm}
+              className="text-stone-600 hover:text-stone-900 underline"
+            >
+              New Inquiry
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <form onSubmit={handleQuickWhatsApp} className="space-y-3">
+        {formError && (
+          <div className="p-2.5 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs font-medium">
+            {formError}
+          </div>
+        )}
+        <input
+          type="text"
+          placeholder={namePlaceholder}
+          required
+          value={org}
+          onChange={(e) => {
+            setOrg(e.target.value);
+            if (formError) setFormError(null);
+          }}
+          className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none focus:ring-1 focus:ring-[#2b4c1c]"
+        />
+        <div className="grid grid-cols-2 gap-2">
+          <input
+            type="number"
+            min="1"
+            placeholder={countPlaceholder}
+            value={count}
+            onChange={(e) => setCount(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none focus:ring-1 focus:ring-[#2b4c1c]"
+          />
+          <select
+            value={selectedFarm}
+            onChange={(e) => setSelectedFarm(e.target.value)}
+            className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none focus:ring-1 focus:ring-[#2b4c1c]"
+          >
+            <option value="Bhongir">Bhongir</option>
+            <option value="Moinabad">Moinabad</option>
+          </select>
+        </div>
+        <input
+          type="tel"
+          placeholder="WhatsApp Number (10 digits) *"
+          required
+          value={phone}
+          onChange={(e) => {
+            setPhone(e.target.value);
+            if (formError) setFormError(null);
+          }}
+          className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none focus:ring-1 focus:ring-[#2b4c1c]"
+        />
+        <button
+          type="submit"
+          className={`w-full py-3 rounded-xl text-xs font-semibold text-white ${buttonBg} hover:${buttonHoverBg} shadow-sm flex items-center justify-center gap-2 transition-colors`}
+        >
+          <Send className="w-3.5 h-3.5" />
+          {submitLabel}
+        </button>
+      </form>
+    );
   };
 
   return (
-    <section id="planner" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#2b4c1c]/10">
+    <section id="planner" className="scroll-mt-24 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#2b4c1c]/10">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2b4c1c]/10 text-[#2b4c1c] border border-[#2b4c1c]/20 text-xs font-mono uppercase tracking-widest mb-4">
@@ -127,48 +255,13 @@ export default function ExpeditionPlanner({ onOpenBooking }: ExpeditionPlannerPr
               </h4>
               <p className="text-xs text-[#6e7d64] mb-4">Direct quote via WhatsApp in 30 mins</p>
 
-              <form onSubmit={handleQuickWhatsApp} className="space-y-3">
-                <input
-                  type="text"
-                  placeholder="School Name"
-                  required
-                  value={org}
-                  onChange={(e) => setOrg(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                />
-                <div className="grid grid-cols-2 gap-2">
-                  <input
-                    type="number"
-                    placeholder="Est. Students"
-                    value={count}
-                    onChange={(e) => setCount(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                  />
-                  <select
-                    value={selectedFarm}
-                    onChange={(e) => setSelectedFarm(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                  >
-                    <option value="Bhongir">Bhongir</option>
-                    <option value="Moinabad">Moinabad</option>
-                  </select>
-                </div>
-                <input
-                  type="tel"
-                  placeholder="WhatsApp Number *"
-                  required
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  className="w-full py-3 rounded-xl text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-sm flex items-center justify-center gap-2"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  Request School Quotation
-                </button>
-              </form>
+              {renderFormContent(
+                "School / College Name",
+                "Est. Students",
+                "Request School Quotation",
+                "bg-[#2b4c1c]",
+                "bg-[#1e3614]"
+              )}
             </div>
           </div>
         )}
@@ -208,48 +301,13 @@ export default function ExpeditionPlanner({ onOpenBooking }: ExpeditionPlannerPr
               </h4>
               <p className="text-xs text-[#6e7d64] mb-4">Direct quote via WhatsApp in 30 mins</p>
 
-              <form onSubmit={handleQuickWhatsApp} className="space-y-3">
-                <input
-                  type="text"
-                  placeholder="Company Name"
-                  required
-                  value={org}
-                  onChange={(e) => setOrg(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                />
-                <div className="grid grid-cols-2 gap-2">
-                  <input
-                    type="number"
-                    placeholder="Team Size"
-                    value={count}
-                    onChange={(e) => setCount(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                  />
-                  <select
-                    value={selectedFarm}
-                    onChange={(e) => setSelectedFarm(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                  >
-                    <option value="Bhongir">Bhongir</option>
-                    <option value="Moinabad">Moinabad</option>
-                  </select>
-                </div>
-                <input
-                  type="tel"
-                  placeholder="Contact WhatsApp *"
-                  required
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  className="w-full py-3 rounded-xl text-xs font-semibold text-white bg-[#a84724] hover:bg-[#8e381b] shadow-sm flex items-center justify-center gap-2"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  Request Corporate Proposal
-                </button>
-              </form>
+              {renderFormContent(
+                "Company / Organization Name",
+                "Team Size",
+                "Request Corporate Proposal",
+                "bg-[#a84724]",
+                "bg-[#8e381b]"
+              )}
             </div>
           </div>
         )}
@@ -289,48 +347,13 @@ export default function ExpeditionPlanner({ onOpenBooking }: ExpeditionPlannerPr
               </h4>
               <p className="text-xs text-[#6e7d64] mb-4">Direct confirmation via WhatsApp</p>
 
-              <form onSubmit={handleQuickWhatsApp} className="space-y-3">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  required
-                  value={org}
-                  onChange={(e) => setOrg(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                />
-                <div className="grid grid-cols-2 gap-2">
-                  <input
-                    type="number"
-                    placeholder="Total Family Members"
-                    value={count}
-                    onChange={(e) => setCount(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                  />
-                  <select
-                    value={selectedFarm}
-                    onChange={(e) => setSelectedFarm(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                  >
-                    <option value="Bhongir">Bhongir</option>
-                    <option value="Moinabad">Moinabad</option>
-                  </select>
-                </div>
-                <input
-                  type="tel"
-                  placeholder="WhatsApp Number *"
-                  required
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#ffffff] text-xs text-[#1e2917] border border-[#2b4c1c]/15 focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  className="w-full py-3 rounded-xl text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-sm flex items-center justify-center gap-2"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  Reserve Weekend Pass
-                </button>
-              </form>
+              {renderFormContent(
+                "Your Name / Family Lead",
+                "Total Family Members",
+                "Reserve Weekend Pass",
+                "bg-[#2b4c1c]",
+                "bg-[#1e3614]"
+              )}
             </div>
           </div>
         )}

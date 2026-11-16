@@ -10,7 +10,7 @@ interface StoryPrologueProps {
 
 export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
   return (
-    <section id="prologue" className="relative pt-36 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section id="prologue" className="relative pt-36 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
       {/* Background Subtle Sun Dapple */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#f0e3cc]/50 rounded-full blur-[140px] pointer-events-none -z-10" />
 

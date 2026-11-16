@@ -16,18 +16,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-[#2b4c1c]/15">
           {/* Brand & Manifesto */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full overflow-hidden border border-[#2b4c1c]/20 bg-[#ffffff] flex items-center justify-center">
+            <Link href="/" className="flex items-center gap-3 mb-4 group inline-flex">
+              <div className="w-10 h-10 rounded-full overflow-hidden border border-[#2b4c1c]/20 bg-[#ffffff] flex items-center justify-center group-hover:scale-105 transition-transform">
                 <img
                   src="/images/logo.png"
                   alt="One Day Kisan - India's Premier Farm-Based Edutainment Destination"
                   className="w-full h-full object-contain p-0.5"
                 />
               </div>
-              <span className="font-serif font-bold text-lg text-[#1e2917]">
+              <span className="font-serif font-bold text-lg text-[#1e2917] group-hover:text-[#2b4c1c] transition-colors">
                 One Day Kisan
               </span>
-            </div>
+            </Link>
 
             <p className="text-xs text-[#526048] leading-relaxed font-light max-w-sm mb-6">
               India&apos;s First Farm-Based Edutainment Destination. Reconnecting urban schools, corporate teams, and families to living Indian agricultural heritage, water engineering, and living soil stewardship.

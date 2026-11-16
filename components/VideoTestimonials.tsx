@@ -28,7 +28,7 @@ export default function VideoTestimonials() {
   const remainingCount = Math.max(0, filteredVideos.length - INITIAL_COUNT);
 
   return (
-    <section id="testimonials" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
+    <section id="testimonials" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
       {/* Header with Natural Field Note Badge */}
       <div className="text-center max-w-3xl mx-auto mb-10">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2b4c1c]/10 border border-[#2b4c1c]/20 text-xs font-mono uppercase tracking-widest text-[#2b4c1c] mb-4">

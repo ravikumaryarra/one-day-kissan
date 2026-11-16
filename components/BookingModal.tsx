@@ -25,11 +25,29 @@ export default function BookingModal({ isOpen, onClose, preselectedActivity }: B
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState(preselectedActivity ? `Focus: ${preselectedActivity}` : "");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [submittedWhatsAppUrl, setSubmittedWhatsAppUrl] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!phone) {
-      alert("Please provide a contact phone number.");
+    setErrorMessage(null);
+
+    const cleanPhone = phone.replace(/[^0-9]/g, "");
+    if (cleanPhone.length < 10) {
+      setErrorMessage("Please enter a valid 10-digit mobile or WhatsApp number.");
+      return;
+    }
+
+    if (visitType === "School" && !orgName.trim()) {
+      setErrorMessage("Please enter your school or institution name.");
+      return;
+    }
+    if (visitType === "Corporate" && !orgName.trim()) {
+      setErrorMessage("Please enter your company or organization name.");
+      return;
+    }
+    if ((visitType === "Family" || visitType === "Others") && !name.trim()) {
+      setErrorMessage("Please enter your contact name.");
       return;
     }
 
@@ -38,31 +56,35 @@ export default function BookingModal({ isOpen, onClose, preselectedActivity }: B
     text += `*Preferred Farm:* ${encodeURIComponent(farmLocation)} Farm%0A`;
 
     if (visitType === "School") {
-      text += `*School:* ${encodeURIComponent(orgName || "School")}%0A`;
+      text += `*School:* ${encodeURIComponent(orgName.trim())}%0A`;
       text += `*City:* ${encodeURIComponent(city)}%0A`;
-      if (grade) text += `*Grade/Class:* ${encodeURIComponent(grade)}%0A`;
+      if (grade) text += `*Grade/Class:* ${encodeURIComponent(grade.trim())}%0A`;
       text += `*Est. Students:* ${encodeURIComponent(headcount)}%0A`;
     } else if (visitType === "Corporate") {
-      text += `*Company:* ${encodeURIComponent(orgName || "Company")}%0A`;
+      text += `*Company:* ${encodeURIComponent(orgName.trim())}%0A`;
       text += `*City:* ${encodeURIComponent(city)}%0A`;
       text += `*Est. Team Size:* ${encodeURIComponent(headcount)}%0A`;
     } else {
-      text += `*Contact Name:* ${encodeURIComponent(name || "Visitor")}%0A`;
+      text += `*Contact Name:* ${encodeURIComponent(name.trim())}%0A`;
       text += `*Persons:* ${encodeURIComponent(headcount)}%0A`;
     }
 
     if (date) text += `*Date:* ${encodeURIComponent(date)}%0A`;
-    text += `*Phone:* ${encodeURIComponent(phone)}%0A`;
-    if (email) text += `*Email:* ${encodeURIComponent(email)}%0A`;
-    if (notes) text += `*Notes:* ${encodeURIComponent(notes)}%0A`;
+    text += `*Phone:* ${encodeURIComponent(cleanPhone)}%0A`;
+    if (email) text += `*Email:* ${encodeURIComponent(email.trim())}%0A`;
+    if (notes) text += `*Notes:* ${encodeURIComponent(notes.trim())}%0A`;
+
+    const waUrl = `https://wa.me/919849798674?text=${text}`;
+    setSubmittedWhatsAppUrl(waUrl);
 
     trackWhatsAppBooking(visitType, farmLocation, headcount);
-    window.open(`https://wa.me/919849798674?text=${text}`, "_blank");
+    window.open(waUrl, "_blank");
     setIsSubmitted(true);
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setErrorMessage(null);
     onClose();
   };
 
@@ -275,6 +297,13 @@ export default function BookingModal({ isOpen, onClose, preselectedActivity }: B
                 />
               </div>
 
+              {errorMessage && (
+                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 flex items-center gap-2">
+                  <span className="font-bold">⚠️</span>
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
               <button
                 type="submit"
                 className="w-full py-3.5 rounded-2xl text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-md flex items-center justify-center gap-2 transition-all mt-4"
@@ -289,13 +318,34 @@ export default function BookingModal({ isOpen, onClose, preselectedActivity }: B
             <div className="w-16 h-16 rounded-full bg-[#2b4c1c]/10 text-[#2b4c1c] flex items-center justify-center mb-4">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h3 className="text-2xl font-serif font-bold text-[#1e2917]">Inquiry Dispatched</h3>
+            <h3 className="text-2xl font-serif font-bold text-[#1e2917]">Inquiry Dispatched!</h3>
             <p className="text-xs text-[#4a5840] max-w-sm mt-2 leading-relaxed">
-              We&apos;ve opened WhatsApp with your visit details. If your chat didn&apos;t open automatically, message us directly at <strong className="text-[#1e2917]">+91 98497 98674</strong>.
+              We&apos;ve opened WhatsApp with your customized visit proposal details. If your chat didn&apos;t open automatically, use the buttons below:
             </p>
+
+            <div className="mt-6 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+              {submittedWhatsAppUrl && (
+                <a
+                  href={submittedWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-[#2b4c1c] hover:bg-[#1e3614] text-white text-xs font-semibold shadow-sm transition-all text-center flex items-center justify-center gap-2"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Open WhatsApp Chat</span>
+                </a>
+              )}
+              <a
+                href="tel:9849798674"
+                className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-white border border-[#2b4c1c]/20 hover:bg-[#2b4c1c]/5 text-[#1e2917] text-xs font-semibold transition-all text-center"
+              >
+                Call: +91 98497 98674
+              </a>
+            </div>
+
             <button
               onClick={handleReset}
-              className="mt-6 px-6 py-2.5 rounded-full bg-[#2b4c1c] text-white text-xs font-semibold"
+              className="mt-6 text-xs text-[#6e7d64] hover:text-[#1e2917] underline"
             >
               Close Window
             </button>
