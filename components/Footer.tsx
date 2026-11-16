@@ -81,39 +81,39 @@ export default function Footer() {
 
           {/* Farm 1: Bhongir */}
           <div>
-            <h4 className="font-serif font-bold text-sm text-[#1e2917] mb-2 flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#a84724]" />
-              Bhongir Main Farm
+            <h4 className="font-serif font-bold text-sm text-[#14230e] mb-2 flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Bhongir Main Farm</span>
             </h4>
-            <p className="text-xs text-[#526048] leading-relaxed font-light mb-3">
-              Near Hotel Vivera, Hyderabad - Warangal Highway, Bhongir Bypass, Telangana - 508 116
+            <p className="text-xs text-[#526548] leading-relaxed mb-3">
+              Near Hotel Vivera, Hyderabad - Warangal Highway (NH 163), Bhongir Bypass - 508 116
             </p>
             <a
-              href={farmsData.bhongir.directionsUrl}
+              href="https://maps.google.com/?q=One+Day+Kisan+Bhongir"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-[#2b4c1c] hover:underline font-semibold"
+              className="text-xs text-emerald-800 hover:text-emerald-950 hover:underline font-bold inline-flex items-center gap-1"
             >
-              Directions (NH 163) →
+              <span>Navigate via Google Maps →</span>
             </a>
           </div>
 
           {/* Farm 2: Moinabad */}
           <div>
-            <h4 className="font-serif font-bold text-sm text-[#1e2917] mb-2 flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#8a5738]" />
-              Moinabad Agro-Sanctuary
+            <h4 className="font-serif font-bold text-sm text-[#14230e] mb-2 flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-amber-600" />
+              <span>Moinabad Agro-Sanctuary</span>
             </h4>
-            <p className="text-xs text-[#526048] leading-relaxed font-light mb-3">
-              Kapil Agro Farms, Sriramnagar, Moinabad, Telangana - 501 504 (Chilkur Balaji Corridor)
+            <p className="text-xs text-[#526548] leading-relaxed mb-3">
+              Kapil Agro Farms, Sriramnagar, Chilkur Balaji Corridor, Moinabad - 501 504
             </p>
             <a
-              href={farmsData.moinabad.directionsUrl}
+              href="https://maps.google.com/?q=Kapil+Agro+Farms+Moinabad"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-[#8a5738] hover:underline font-semibold"
+              className="text-xs text-amber-800 hover:text-amber-950 hover:underline font-bold inline-flex items-center gap-1"
             >
-              Directions (Chilkur Rd) →
+              <span>Navigate via Google Maps →</span>
             </a>
           </div>
 

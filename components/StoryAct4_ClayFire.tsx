@@ -38,19 +38,21 @@ export default function StoryAct4_ClayFire({ onOpenBooking }: Act4Props) {
 
   return (
     <section id="act4-clay" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#2b4c1c]/10">
-      {/* Chapter Marker */}
+      {/* Chapter Marker with Terracotta-Sunset Palette */}
       <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-        <div className="field-note-tag mb-4">
-          <Sparkles className="w-3.5 h-3.5 text-[#a84724]" />
-          Act IV • 03:30 PM • Fire, Clay & Twilight Joy
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 text-orange-950 border border-orange-300 text-xs font-semibold uppercase tracking-wider mb-4 shadow-xs">
+          <Sparkles className="w-3.5 h-3.5 text-orange-600 animate-pulse" />
+          <span>Act IV • 03:30 PM • Fire, Clay & Twilight Joy</span>
         </div>
 
-        <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#1a2713] tracking-tight">
+        <h2 className="text-3xl sm:text-5xl font-serif font-black text-[#14230e] tracking-tight">
           The joy of shaping the world <br />
-          <span className="italic font-normal text-[#a84724]">with your own two hands.</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-red-600 to-amber-600">
+            with your own two hands.
+          </span>
         </h2>
 
-        <p className="mt-4 text-[#4a5840] text-base sm:text-lg font-light leading-relaxed">
+        <p className="mt-4 text-[#3d4f33] text-sm sm:text-base font-normal leading-relaxed">
           As the afternoon softens into golden Telangana dusk, the farm turns into a celebration of music, clay, and wind. The memory of this day stays long after the red mud is washed off.
         </p>
       </div>

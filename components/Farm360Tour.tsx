@@ -15,6 +15,7 @@ import {
   ArrowRight,
   Info,
   MapPin,
+  Navigation,
   Sparkles,
   Droplets,
   Sprout,
@@ -304,47 +305,49 @@ export default function Farm360Tour() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="field-note-tag mb-4"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/15 via-green-500/15 to-amber-500/15 border border-emerald-600/25 text-xs font-semibold text-[#1e5128] uppercase tracking-wider mb-4 shadow-xs"
         >
-          <Compass className="w-3.5 h-3.5 text-[#a84724]" />
-          Visual Interlude • The Living Horizon
+          <Compass className="w-3.5 h-3.5 text-emerald-600 animate-spin" style={{ animationDuration: "12s" }} />
+          <span>Interactive 360° Virtual Tour • Explore Before You Visit</span>
         </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl sm:text-5xl font-serif font-bold text-[#1a2713] tracking-tight"
+          className="text-3xl sm:text-5xl font-serif font-black text-[#14230e] tracking-tight"
         >
           Look across the fields <br />
-          <span className="italic font-normal text-[#a84724]">before you take the highway.</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-green-600 to-amber-600">
+            before you take the highway.
+          </span>
         </motion.h2>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-4 text-[#4a5840] text-base sm:text-lg font-light leading-relaxed"
+          className="mt-4 text-[#3d4f33] text-sm sm:text-base font-normal leading-relaxed max-w-2xl mx-auto"
         >
-          Drag with your fingers or move your phone to turn 360 degrees. Both farm locations near Hyderabad are open to explore.
+          Swipe with your fingers or move your phone in 360 degrees. Step inside both farm campuses near Hyderabad to explore water wheels, mud arenas, and bird sanctuaries.
         </motion.p>
 
-        {/* Dual-Farm Switcher: Warm Linen Segmented Pill */}
-        <div className="mt-8 inline-flex p-1.5 rounded-full bg-[#ffffff] border border-[#2b4c1c]/15 relative shadow-md">
+        {/* Dual-Farm Switcher: Vibrant Agro Segmented Pill */}
+        <div className="mt-8 inline-flex p-1.5 rounded-full bg-white border border-emerald-900/20 relative shadow-md">
           <button
             onClick={() => {
               setSelectedFarmKey("bhongir");
               track360Interaction("Bhongir Farm", "switch_farm");
             }}
-            className={`relative z-10 px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
+            className={`relative z-10 px-5 sm:px-7 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
               selectedFarmKey === "bhongir"
-                ? "text-white font-semibold"
-                : "text-[#526048] hover:text-[#1a2713]"
+                ? "text-white shadow-sm"
+                : "text-[#3f5135] hover:text-[#16330b]"
             }`}
           >
-            <MapPin className="w-4 h-4 text-[#a84724]" />
-            Bhongir Main Farm
-            <span className="hidden sm:inline text-[10px] px-2 py-0.5 rounded-full bg-[#ffffff]/20 font-normal">
+            <MapPin className="w-4 h-4 text-amber-300" />
+            <span>Bhongir Main Farm</span>
+            <span className="hidden sm:inline text-[10px] px-2 py-0.5 rounded-full bg-white/20 font-medium">
               Warangal Hwy
             </span>
           </button>
@@ -354,23 +357,27 @@ export default function Farm360Tour() {
               setSelectedFarmKey("moinabad");
               track360Interaction("Moinabad Farm", "switch_farm");
             }}
-            className={`relative z-10 px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
+            className={`relative z-10 px-5 sm:px-7 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
               selectedFarmKey === "moinabad"
-                ? "text-white font-semibold"
-                : "text-[#526048] hover:text-[#1a2713]"
+                ? "text-white shadow-sm"
+                : "text-[#3f5135] hover:text-[#16330b]"
             }`}
           >
-            <MapPin className="w-4 h-4 text-[#8a5738]" />
-            Moinabad Agro-Sanctuary
-            <span className="hidden sm:inline text-[10px] px-2 py-0.5 rounded-full bg-[#ffffff]/20 font-normal">
-              Kapil Agro
+            <MapPin className="w-4 h-4 text-emerald-300" />
+            <span>Moinabad Agro-Sanctuary</span>
+            <span className="hidden sm:inline text-[10px] px-2 py-0.5 rounded-full bg-white/20 font-medium">
+              Chilkur Road
             </span>
           </button>
 
           {/* Active Pill Animation */}
           <motion.div
             layoutId="activeFarmPill"
-            className="absolute inset-y-1.5 rounded-full bg-[#2b4c1c] shadow-sm"
+            className={`absolute inset-y-1.5 rounded-full shadow-md transition-colors ${
+              selectedFarmKey === "bhongir"
+                ? "bg-gradient-to-r from-emerald-700 to-green-700"
+                : "bg-gradient-to-r from-amber-600 to-orange-600"
+            }`}
             style={{
               left: selectedFarmKey === "bhongir" ? "6px" : "50%",
               width: "calc(50% - 6px)",
@@ -380,8 +387,8 @@ export default function Farm360Tour() {
         </div>
       </div>
 
-      {/* 360 Horizon Pavilion Container */}
-      <div className="relative rounded-3xl overflow-hidden bg-[#ffffff] border border-[#2b4c1c]/15 shadow-[0_20px_60px_-15px_rgba(50,40,20,0.12)] aspect-[16/10] sm:aspect-[16/9] max-h-[700px] select-none">
+      {/* 360 Horizon Pavilion Container (Mobile-first tall viewport) */}
+      <div className="relative rounded-3xl overflow-hidden bg-[#ffffff] border-2 border-emerald-900/15 shadow-[0_20px_60px_-15px_rgba(20,50,15,0.18)] h-[460px] sm:h-[550px] lg:h-[650px] select-none">
         {/* Loading Overlay */}
         <AnimatePresence>
           {isLoadingTexture && (
@@ -508,13 +515,20 @@ export default function Farm360Tour() {
         </AnimatePresence>
 
         {/* Top Location Pill */}
-        <div className="absolute top-4 left-4 z-20 hidden sm:flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#ffffff]/90 border border-[#2b4c1c]/15 text-xs text-[#4a5840] shadow-sm">
-          <span className="w-2 h-2 rounded-full bg-[#2b4c1c] animate-pulse" />
-          <span className="font-semibold text-[#1a2713]">{farm.name}</span>
+        <div className="absolute top-4 left-4 z-20 hidden sm:flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/95 backdrop-blur-md border border-emerald-900/15 text-xs text-[#334628] shadow-sm">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" />
+          <span className="font-bold text-[#14230e]">{farm.name}</span>
           <span>•</span>
-          <span>{farm.highway}</span>
+          <span className="text-emerald-800 font-medium">{farm.highway}</span>
           <span>•</span>
-          <span className="text-[#a84724] font-medium">{farm.travelTime}</span>
+          <span className="text-amber-800 font-bold">{farm.travelTime}</span>
+        </div>
+
+        {/* Floating Mobile Instruction Pill */}
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-emerald-900/15 shadow-sm text-[11px] text-[#14230e] font-semibold">
+          <span>👆</span>
+          <span className="hidden sm:inline">Drag 360° to look around</span>
+          <span className="sm:hidden">Swipe 360° to pan</span>
         </div>
 
         {/* Bottom Floating Control Bar */}
@@ -565,11 +579,47 @@ export default function Farm360Tour() {
         </div>
       </div>
 
-      {/* Landmark Jump Pills */}
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-        <span className="text-xs text-[#6e7d64] font-medium mr-1 flex items-center gap-1">
-          <Compass className="w-3.5 h-3.5 text-[#a84724]" />
-          Direct landmark jumps:
+      {/* Campus Quick Action Bar: Directions & Key Highlights */}
+      <div className="mt-6 p-4 rounded-2xl bg-white border border-emerald-900/15 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3 text-left">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-100 to-amber-100 flex items-center justify-center flex-shrink-0 text-emerald-800">
+            <MapPin className="w-5 h-5 text-emerald-700" />
+          </div>
+          <div>
+            <h4 className="font-serif font-bold text-sm text-[#14230e]">
+              Currently Viewing: {farm.name}
+            </h4>
+            <p className="text-xs text-[#526548]">
+              {farm.address} • <strong className="text-emerald-900">{farm.travelTime}</strong>
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
+          <a
+            href={farm.directionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-700 to-green-700 hover:from-emerald-800 hover:to-green-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-transform active:scale-95"
+          >
+            <Navigation className="w-3.5 h-3.5 text-amber-300" />
+            <span>Open in Google Maps</span>
+          </a>
+
+          <a
+            href="#directions"
+            className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-[#faf7f0] hover:bg-[#f3ede0] border border-emerald-900/15 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition-colors"
+          >
+            <span>Compare Both Farms ↓</span>
+          </a>
+        </div>
+      </div>
+
+      {/* Landmark Jump Pills with Colorful Badges */}
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+        <span className="text-xs text-[#526548] font-bold mr-1 flex items-center gap-1">
+          <Compass className="w-3.5 h-3.5 text-amber-600" />
+          Jump directly to landmark:
         </span>
         {farm.hotspots.map((hs) => (
           <button
@@ -577,12 +627,12 @@ export default function Farm360Tour() {
             onClick={() => jumpToHotspot(hs)}
             className={`px-3.5 py-1.5 rounded-full text-xs transition-all duration-300 flex items-center gap-1.5 border ${
               selectedHotspot?.id === hs.id
-                ? "bg-[#2b4c1c] text-white border-[#2b4c1c] shadow-sm font-medium"
-                : "bg-[#ffffff] text-[#4a5840] hover:text-[#1a2713] border-[#2b4c1c]/15"
+                ? "bg-gradient-to-r from-emerald-700 to-green-700 text-white border-emerald-800 shadow-sm font-semibold scale-105"
+                : "bg-white text-[#3f5135] hover:text-[#16330b] border-emerald-900/15 hover:bg-emerald-50"
             }`}
           >
             {iconMap[hs.icon]}
-            {hs.title}
+            <span>{hs.title}</span>
           </button>
         ))}
       </div>

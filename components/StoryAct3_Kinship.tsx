@@ -46,19 +46,21 @@ export default function StoryAct3_Kinship({ onOpenBooking }: Act3Props) {
 
   return (
     <section id="act3-kinship" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#2b4c1c]/10">
-      {/* Chapter Marker */}
+      {/* Chapter Marker with Amber-Honey Livestock Palette */}
       <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-        <div className="field-note-tag mb-4">
-          <HeartHandshake className="w-3.5 h-3.5 text-[#a84724]" />
-          Act III • 01:30 PM • Kinship & Nourishment
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-xs font-semibold uppercase tracking-wider mb-4 shadow-xs">
+          <HeartHandshake className="w-3.5 h-3.5 text-amber-700" />
+          <span>Act III • 01:30 PM • Animal Kinship, Birds & Farm Feast</span>
         </div>
 
-        <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#1a2713] tracking-tight">
+        <h2 className="text-3xl sm:text-5xl font-serif font-black text-[#14230e] tracking-tight">
           Where milk is a living gift, <br />
-          <span className="italic font-normal text-[#a84724]">not a supermarket barcode.</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-600 to-emerald-700">
+            not a supermarket barcode.
+          </span>
         </h2>
 
-        <p className="mt-4 text-[#4a5840] text-base sm:text-lg font-light leading-relaxed">
+        <p className="mt-4 text-[#3d4f33] text-sm sm:text-base font-normal leading-relaxed">
           In an era where children interact through glass touchscreens, touching the warm coat of a Desi calf and feeling gentle birds alight on their fingers awakens something ancient and kind.
         </p>
       </div>

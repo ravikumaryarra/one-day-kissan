@@ -26,23 +26,46 @@ export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
           Prologue • The Nostalgic Memory
         </motion.div>
 
-        {/* Monumental Editorial Headline */}
+        {/* Monumental Editorial Headline with Vibrant Agro Gradient */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight text-[#1a2713] leading-[1.08]"
+          className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight text-[#14230e] leading-[1.08]"
         >
           Give your children <br />
-          <span className="italic font-normal text-[#a84724]">the childhood you had.</span>
+          <span className="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-green-600 to-amber-600">
+            the childhood you had.
+          </span>
         </motion.h1>
+
+        {/* Agricultural Highlights Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs"
+        >
+          <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300 flex items-center gap-1.5 shadow-2xs">
+            <span>🌱</span> 24 Hands-On Farm Modules
+          </span>
+          <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-900 font-semibold border border-amber-300 flex items-center gap-1.5 shadow-2xs">
+            <span>📍</span> 2 Campuses: Bhongir & Moinabad
+          </span>
+          <span className="px-3 py-1 rounded-full bg-orange-100 text-orange-900 font-semibold border border-orange-300 flex items-center gap-1.5 shadow-2xs">
+            <span>⭐</span> 4.8★ Rating (664+ Google Reviews)
+          </span>
+          <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-900 font-semibold border border-sky-300 flex items-center gap-1.5 shadow-2xs">
+            <span>🎓</span> 350+ Trusted Schools
+          </span>
+        </motion.div>
 
         {/* The Nostalgic Hook */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.25 }}
-          className="mt-6 text-[#4a5840] text-lg sm:text-xl font-light leading-relaxed max-w-2xl mx-auto"
+          className="mt-6 text-[#3d4f33] text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto"
         >
           Before iPads, coaching classes, and high-rise balconies, childhood smelled like wet red earth after the first rain, tasted like raw sugarcane, and ended only when the village sun went down.
         </motion.p>
@@ -80,23 +103,31 @@ export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
             </div>
           </div>
 
-          {/* Action Navigation */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+          {/* Mobile-Friendly Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
             <a
-              href="#act1-mud"
-              className="px-6 py-3 rounded-full text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1e3614] shadow-md transition-all flex items-center gap-2"
+              href="#tour360"
+              className="px-6 py-3.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-emerald-600 via-green-600 to-amber-600 hover:from-emerald-700 hover:to-amber-700 shadow-md transition-all flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span>Walk Through the Day</span>
-              <ArrowDown className="w-3.5 h-3.5" />
+              <Compass className="w-4 h-4 text-yellow-200 animate-spin" style={{ animationDuration: "12s" }} />
+              <span>Explore 360° Farm Tour</span>
             </a>
 
             <a
-              href="#tour360"
-              className="px-6 py-3 rounded-full text-xs font-semibold text-[#2b4c1c] bg-[#ffffff] border border-[#2b4c1c]/20 hover:bg-[#f3ede2] transition-all flex items-center gap-2 shadow-sm"
+              href="#directions"
+              className="px-6 py-3.5 rounded-full text-xs font-bold text-emerald-950 bg-white border border-emerald-900/20 hover:bg-emerald-50 transition-all flex items-center justify-center gap-2 shadow-xs"
             >
-              <Compass className="w-3.5 h-3.5 text-[#a84724]" />
-              <span>Step Inside 360° Horizon</span>
+              <MapPin className="w-4 h-4 text-amber-600" />
+              <span>Get Directions (Both Farms)</span>
             </a>
+
+            <button
+              onClick={onOpenBooking}
+              className="px-6 py-3.5 rounded-full text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 border border-amber-300 transition-all flex items-center justify-center gap-2 shadow-xs"
+            >
+              <Sparkles className="w-4 h-4 text-amber-700" />
+              <span>Plan a Visit</span>
+            </button>
           </div>
         </motion.div>
 

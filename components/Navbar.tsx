@@ -23,8 +23,9 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
   const navItems = [
     { label: "Our Story", href: "#prologue" },
+    { label: "360° Tour", href: "#tour360", badge: "360°" },
+    { label: "Directions", href: "#directions" },
     { label: "Experiences", href: "#act1-mud" },
-    { label: "360° Tour", href: "#tour360", badge: "Live" },
     { label: "Schools", href: "#schools" },
     { label: "Gallery", href: "#gallery" },
     { label: "Testimonials", href: "#testimonials" },
@@ -87,22 +88,22 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
           </div>
 
           {/* Right Action Concierge */}
-          <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
+          <div className="hidden sm:flex items-center gap-2.5 flex-shrink-0">
             <a
               href="tel:9849798674"
               onClick={() => trackPhoneCall("9849798674")}
-              className="px-3 py-1.5 rounded-full text-xs font-medium text-[#4a5840] hover:text-[#1a2713] hover:bg-[#f5f0e6] transition-all flex items-center gap-1.5 whitespace-nowrap"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 transition-all flex items-center gap-1.5 whitespace-nowrap shadow-xs"
               title="Call Helpline"
             >
-              <Phone className="w-3.5 h-3.5 text-[#2b4c1c]" />
+              <Phone className="w-3.5 h-3.5 text-emerald-700" />
               <span>98497 98674</span>
             </a>
 
             <button
               onClick={onOpenBooking}
-              className="px-5 py-2 rounded-full text-xs font-semibold text-white bg-[#2b4c1c] hover:bg-[#1f3714] shadow-sm hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap"
+              className="px-5 py-2 rounded-full text-xs font-bold text-white bg-gradient-to-r from-emerald-600 via-green-600 to-amber-600 hover:from-emerald-700 hover:to-amber-700 shadow-sm hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-1.5 whitespace-nowrap"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#e6f2dc]" />
+              <Sparkles className="w-3.5 h-3.5 text-yellow-200" />
               <span>Book a Visit</span>
             </button>
           </div>
@@ -163,9 +164,9 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                   setMobileMenuOpen(false);
                   onOpenBooking();
                 }}
-                className="w-full py-3.5 rounded-2xl text-xs font-semibold text-white bg-[#2b4c1c] shadow-md flex items-center justify-center gap-2"
+                className="w-full py-3.5 rounded-2xl text-xs font-bold text-white bg-gradient-to-r from-emerald-600 via-green-600 to-amber-600 shadow-md flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-4 h-4" />
+                <Sparkles className="w-4 h-4 text-yellow-200" />
                 Book a Visit
               </button>
             </div>

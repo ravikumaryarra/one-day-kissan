@@ -48,24 +48,26 @@ export default function ExpeditionPlanner({ onOpenBooking }: ExpeditionPlannerPr
 
   return (
     <section id="planner" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#2b4c1c]/10">
-      {/* Header */}
+      {/* Header with Colorful Agritourism Badges */}
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <div className="field-note-tag mb-4">
-          <Sparkles className="w-3.5 h-3.5 text-[#a84724]" />
-          Epilogue • The Expedition Desk
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/15 via-green-500/15 to-amber-500/15 border border-emerald-600/20 text-xs font-semibold text-[#1e5128] uppercase tracking-wider mb-4 shadow-xs">
+          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+          <span>Epilogue • The Expedition Desk & Packages</span>
         </div>
 
-        <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#1a2713] tracking-tight">
+        <h2 className="text-3xl sm:text-5xl font-serif font-black text-[#14230e] tracking-tight">
           Everything you need <br />
-          <span className="italic font-normal text-[#a84724]">to plan your day on the farm.</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-green-600 to-amber-600">
+            to plan your day on the farm.
+          </span>
         </h2>
 
-        <p className="mt-4 text-[#4a5840] text-base sm:text-lg font-light leading-relaxed">
+        <p className="mt-4 text-[#3d4f33] text-sm sm:text-base font-normal leading-relaxed">
           Transparent arrangements, zero hidden costs, and dedicated farm guides for schools, corporate teams, and families.
         </p>
 
         {/* Tab Selector */}
-        <div className="mt-8 inline-flex p-1.5 rounded-full bg-[#ffffff] border border-[#2b4c1c]/15 shadow-sm">
+        <div className="mt-8 inline-flex p-1.5 rounded-full bg-white border border-emerald-900/15 shadow-sm">
           {[
             { id: "schools" as const, label: "Schools & Colleges", icon: <GraduationCap className="w-4 h-4" /> },
             { id: "corporates" as const, label: "Corporates & Teams", icon: <Briefcase className="w-4 h-4" /> },
@@ -74,10 +76,10 @@ export default function ExpeditionPlanner({ onOpenBooking }: ExpeditionPlannerPr
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all flex items-center gap-2 ${
+              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
                 activeTab === tab.id
-                  ? "bg-[#2b4c1c] text-white font-semibold shadow-sm"
-                  : "text-[#526048] hover:text-[#1a2713]"
+                  ? "bg-gradient-to-r from-emerald-700 to-green-700 text-white shadow-sm"
+                  : "text-[#3f5135] hover:text-[#14230e]"
               }`}
             >
               {tab.icon}
