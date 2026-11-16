@@ -29,13 +29,13 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "One Day Kisan — India's Premier Farm-Based Edutainment Destination | Hyderabad",
-    template: "%s | One Day Kisan",
+    default: "One Day Kissan | Explore Authentic Farm Experiences",
+    template: "%s | One Day Kissan",
   },
   description:
-    "Experience authentic rural farming, hands-on paddy transplantation, ancient Persian wheel water systems, pottery, and 360° virtual farm tours. Telangana's #1 farm field trip destination near Hyderabad (Bhongir & Moinabad) for schools, families, and corporate outings.",
-  applicationName: "One Day Kisan",
-  authors: [{ name: "One Day Kisan Team", url: siteUrl }],
+    "Discover One Day Kissan, an immersive farm tourism experience offering authentic rural activities, agricultural experiences and memorable visits near Hyderabad, Telangana.",
+  applicationName: "One Day Kissan",
+  authors: [{ name: "One Day Kissan Team", url: `${siteUrl}/` }],
   generator: "Next.js",
   icons: {
     icon: [
@@ -48,13 +48,15 @@ export const metadata: Metadata = {
     shortcut: "/images/logo.png",
   },
   keywords: [
-    // Brand Keywords
+    // Brand Keywords (Primary & Alternate)
+    "One Day Kissan",
     "One Day Kisan",
+    "One Day Kissan Hyderabad",
     "One Day Kisan Hyderabad",
-    "One Day Kisan Bhongir",
-    "One Day Kisan Moinabad",
-    "One Day Kisan reviews",
-    "One Day Kisan ticket price",
+    "One Day Kissan Bhongir",
+    "One Day Kissan Moinabad",
+    "One Day Kissan reviews",
+    "One Day Kissan ticket price",
     // Agritourism & Day Outings
     "Agri tourism Hyderabad",
     "agri tourism Telangana",
@@ -92,22 +94,22 @@ export const metadata: Metadata = {
     "places to visit near Chilkur Balaji",
     "Kapil Agro Farms Moinabad"
   ],
-  creator: "One Day Kisan",
-  publisher: "One Day Kisan",
+  creator: "One Day Kissan",
+  publisher: "One Day Kissan",
   formatDetection: {
     email: true,
     address: true,
     telephone: true,
   },
   alternates: {
-    canonical: "/",
+    canonical: `${siteUrl}/`,
   },
   openGraph: {
-    title: "One Day Kisan — India's Premier Farm-Based Edutainment Destination",
+    title: "One Day Kissan | Explore Authentic Farm Experiences",
     description:
-      "Give your children the childhood you had. Hands-on paddy transplantation, working Persian water wheels, walk-in aviary, pottery, and 360° virtual farm tours near Hyderabad (Bhongir & Moinabad).",
-    url: siteUrl,
-    siteName: "One Day Kisan",
+      "Discover One Day Kissan, an immersive farm tourism experience offering authentic rural activities, agricultural experiences and memorable visits near Hyderabad, Telangana.",
+    url: `${siteUrl}/`,
+    siteName: "One Day Kissan",
     locale: "en_IN",
     type: "website",
     images: [
@@ -116,22 +118,22 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: "image/jpeg",
-        alt: "One Day Kisan - Experiential Farm Tour & Edutainment Destination Hyderabad",
+        alt: "One Day Kissan - Experiential Farm Tour & Edutainment Destination Hyderabad",
       },
       {
         url: "/gallery/gallery-01.webp",
         width: 1200,
         height: 800,
         type: "image/webp",
-        alt: "School children experiencing hands-on farming at One Day Kisan",
+        alt: "School children experiencing hands-on farming at One Day Kissan",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "One Day Kisan — Experience Life. Learn Real Farming.",
+    title: "One Day Kissan | Explore Authentic Farm Experiences",
     description:
-      "India's #1 farm-based edutainment destination near Hyderabad. Hands-on paddy sowing, ancient water wheels, pottery, and interactive 360° virtual farm view.",
+      "Discover One Day Kissan, an immersive farm tourism experience offering authentic rural activities, agricultural experiences and memorable visits near Hyderabad, Telangana.",
     images: ["/images/hero-bg.jpg"],
     creator: "@onedaykisan",
   },
@@ -151,6 +153,7 @@ export const metadata: Metadata = {
     "geo.placename": "Hyderabad, Telangana",
     "geo.position": "17.5117;78.8889",
     ICBM: "17.5117, 78.8889",
+    "apple-mobile-web-app-title": "One Day Kissan",
   },
 };
 

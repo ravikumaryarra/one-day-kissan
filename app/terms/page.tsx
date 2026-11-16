@@ -7,9 +7,9 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 export const metadata: Metadata = {
   title: "Terms and Conditions of Farm Entry",
   description:
-    "Official Terms and Conditions, Visitor Agreement, campus code of conduct, and rules of admission for One Day Kisan (Bhongir & Moinabad campuses).",
+    "Official Terms and Conditions, Visitor Agreement, campus code of conduct, and rules of admission for One Day Kissan (Bhongir & Moinabad campuses).",
   alternates: {
-    canonical: "/terms",
+    canonical: "https://onedaykissan.vercel.app/terms",
   },
 };
 
@@ -27,7 +27,7 @@ export default function TermsPage() {
             className="inline-flex items-center gap-2 text-xs font-semibold text-[#2b4c1c] hover:text-[#1a3811] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Return to One Day Kisan</span>
+            <span>Return to One Day Kissan</span>
           </Link>
           <div className="flex items-center gap-2 text-xs font-mono text-[#8a4724]">
             <FileText className="w-4 h-4 text-[#2b4c1c]" />
@@ -184,7 +184,7 @@ export default function TermsPage() {
       {/* Footer Return Bar */}
       <footer className="border-t border-[#2b4c1c]/15 bg-white py-6">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#526048]">
-          <span>© {new Date().getFullYear()} One Day Kisan. All Rights Reserved.</span>
+          <span>© {new Date().getFullYear()} One Day Kissan. All Rights Reserved.</span>
           <div className="flex items-center gap-4">
             <Link href="/privacy" prefetch={true} className="hover:text-[#14230e] underline">Privacy Policy</Link>
             <Link href="/cancellation-refunds" prefetch={true} className="hover:text-[#14230e] underline">Refund & Cancellation</Link>

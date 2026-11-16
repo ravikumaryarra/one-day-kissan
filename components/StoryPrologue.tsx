@@ -90,7 +90,7 @@ export default function StoryPrologue({ onOpenBooking }: StoryPrologueProps) {
             </p>
 
             <p className="mt-4">
-              <strong>One Day Kisan is not a resort or a sterile amusement park.</strong> It is fifteen acres of living, breathing Telangana farmland—two lush campuses at <strong>Bhongir</strong> and <strong>Moinabad</strong>—where children take off their sneakers, roll up their sleeves, and discover how humanity actually survives.
+              <strong>One Day Kissan (One Day Kisan) is not a resort or a sterile amusement park.</strong> It is fifteen acres of living, breathing Telangana farmland—two lush campuses at <strong>Bhongir</strong> and <strong>Moinabad</strong>—where children take off their sneakers, roll up their sleeves, and discover how humanity actually survives.
             </p>
 
             {/* Travel Footnote */}

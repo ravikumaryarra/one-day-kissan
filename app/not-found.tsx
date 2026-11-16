@@ -7,7 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 export const metadata: Metadata = {
   title: "Page Not Found (404)",
   description:
-    "The requested page on One Day Kisan could not be found. Explore our 360° virtual farm tour, educational school itineraries, and directions to Bhongir and Moinabad campuses.",
+    "The requested page on One Day Kissan could not be found. Explore our 360° virtual farm tour, educational school itineraries, and directions to Bhongir and Moinabad campuses.",
   robots: {
     index: false,
     follow: true,
@@ -25,7 +25,7 @@ export default function NotFound() {
             className="inline-flex items-center gap-2 text-xs font-semibold text-[#2b4c1c] hover:text-[#1a3811] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Return to One Day Kisan</span>
+            <span>Return to One Day Kissan</span>
           </Link>
           <div className="flex items-center gap-2 text-xs font-mono text-[#8a4724]">
             <MapPin className="w-3.5 h-3.5 text-[#2b4c1c]" />
@@ -109,7 +109,7 @@ export default function NotFound() {
       {/* Footer */}
       <footer className="border-t border-[#2b4c1c]/15 bg-white py-6">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#526048]">
-          <span>© {new Date().getFullYear()} One Day Kisan. All Rights Reserved.</span>
+          <span>© {new Date().getFullYear()} One Day Kissan. All Rights Reserved.</span>
           <div className="flex items-center gap-4">
             <Link href="/privacy" className="hover:text-[#14230e] underline">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-[#14230e] underline">Terms of Entry</Link>

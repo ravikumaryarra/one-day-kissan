@@ -7,9 +7,9 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 export const metadata: Metadata = {
   title: "Farm Safety, Health & Child Protection Standards",
   description:
-    "Comprehensive safety protocols, 1:25 instructor ratios, RO water hygiene, FSSAI meals, and hospital readiness for schools and families at One Day Kisan.",
+    "Comprehensive safety protocols, 1:25 instructor ratios, RO water hygiene, FSSAI meals, and hospital readiness for schools and families at One Day Kissan.",
   alternates: {
-    canonical: "/safety",
+    canonical: "https://onedaykissan.vercel.app/safety",
   },
 };
 
@@ -27,7 +27,7 @@ export default function SafetyPage() {
             className="inline-flex items-center gap-2 text-xs font-semibold text-[#2b4c1c] hover:text-[#1a3811] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Return to One Day Kisan</span>
+            <span>Return to One Day Kissan</span>
           </Link>
           <div className="flex items-center gap-2 text-xs font-mono text-[#8a4724]">
             <ShieldCheck className="w-4 h-4 text-[#2b4c1c]" />
@@ -195,7 +195,7 @@ export default function SafetyPage() {
       {/* Footer Return Bar */}
       <footer className="border-t border-[#2b4c1c]/15 bg-white py-6">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#526048]">
-          <span>© {new Date().getFullYear()} One Day Kisan. All Rights Reserved.</span>
+          <span>© {new Date().getFullYear()} One Day Kissan. All Rights Reserved.</span>
           <div className="flex items-center gap-4">
             <Link href="/privacy" prefetch={true} className="hover:text-[#14230e] underline">Privacy Policy</Link>
             <Link href="/terms" prefetch={true} className="hover:text-[#14230e] underline">Terms & Conditions</Link>

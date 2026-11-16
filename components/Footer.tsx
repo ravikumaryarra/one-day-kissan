@@ -20,7 +20,7 @@ export default function Footer() {
               <div className="w-10 h-10 rounded-full overflow-hidden border border-[#2b4c1c]/20 bg-[#ffffff] flex items-center justify-center group-hover:scale-105 transition-transform">
                 <img
                   src="/images/logo.png"
-                  alt="One Day Kisan - India's Premier Farm-Based Edutainment Destination"
+                  alt="One Day Kissan - India's Premier Farm-Based Edutainment Destination"
                   width={40}
                   height={40}
                   loading="lazy"
@@ -28,7 +28,7 @@ export default function Footer() {
                 />
               </div>
               <span className="font-serif font-bold text-lg text-[#1e2917] group-hover:text-[#2b4c1c] transition-colors">
-                One Day Kisan
+                One Day Kissan
               </span>
             </Link>
 
@@ -210,7 +210,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#6e7d64]">
           <div>
-            © {new Date().getFullYear()} One Day Kisan. Experience Life. Learn Real Farming.
+            © {new Date().getFullYear()} One Day Kissan. Experience Life. Learn Real Farming.
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">

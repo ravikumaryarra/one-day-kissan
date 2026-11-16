@@ -2,9 +2,9 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "One Day Kisan — Farm-Based Edutainment Destination",
-    short_name: "One Day Kisan",
-    description: "Experience authentic rural farming, ancient Persian wheel water systems, and 360° virtual farm tours near Hyderabad.",
+    name: "One Day Kissan — Farm-Based Edutainment Destination",
+    short_name: "One Day Kissan",
+    description: "Discover One Day Kissan, an immersive farm tourism experience offering authentic rural activities, agricultural experiences and memorable visits near Hyderabad, Telangana.",
     start_url: "/",
     display: "standalone",
     background_color: "#faf7f0",

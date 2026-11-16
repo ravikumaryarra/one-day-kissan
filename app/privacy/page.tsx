@@ -7,9 +7,9 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 export const metadata: Metadata = {
   title: "Privacy Policy & DPDP Act Data Governance",
   description:
-    "Official Privacy Policy of One Day Kisan under the Digital Personal Data Protection Act (DPDP 2023) and IT Act 2000. Learn how we safeguard student batch and visitor data.",
+    "Official Privacy Policy of One Day Kissan under the Digital Personal Data Protection Act (DPDP 2023) and IT Act 2000. Learn how we safeguard student batch and visitor data.",
   alternates: {
-    canonical: "/privacy",
+    canonical: "https://onedaykissan.vercel.app/privacy",
   },
 };
 
@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
             className="inline-flex items-center gap-2 text-xs font-semibold text-[#2b4c1c] hover:text-[#1a3811] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Return to One Day Kisan</span>
+            <span>Return to One Day Kissan</span>
           </Link>
           <div className="flex items-center gap-2 text-xs font-mono text-[#8a4724]">
             <ShieldCheck className="w-4 h-4 text-[#2b4c1c]" />
@@ -202,7 +202,7 @@ export default function PrivacyPolicyPage() {
       {/* Footer Return Bar */}
       <footer className="border-t border-[#2b4c1c]/15 bg-white py-6">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#526048]">
-          <span>© {new Date().getFullYear()} One Day Kisan. All Rights Reserved.</span>
+          <span>© {new Date().getFullYear()} One Day Kissan. All Rights Reserved.</span>
           <div className="flex items-center gap-4">
             <Link href="/terms" prefetch={true} className="hover:text-[#14230e] underline">Terms & Conditions</Link>
             <Link href="/cancellation-refunds" prefetch={true} className="hover:text-[#14230e] underline">Refund & Cancellation</Link>

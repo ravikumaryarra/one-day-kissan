@@ -4,13 +4,13 @@ import { getSiteUrl } from "@/lib/siteUrl";
 export async function GET() {
   const siteUrl = getSiteUrl();
 
-  const content = `# One Day Kisan (ODK)
+  const content = `# One Day Kissan (One Day Kisan / ODK)
 > India's Premier Farm-Based Edutainment & Agritourism Destination
 > Locations: Bhongir Main Farm & Moinabad Agro-Sanctuary, Telangana, India.
 > Official Website: ${siteUrl}
 
 ## Overview
-One Day Kisan is a 15-acre experiential farm sanctuary operating across two campuses near Hyderabad, Telangana. It bridges urban youth, school students, corporate organizations, and families with genuine Indian agricultural heritage, water hydraulics, cattle care, and living soil stewardship through 24 curriculum-linked hands-on learning modules.
+One Day Kissan (also known as One Day Kisan) is a 15-acre experiential farm sanctuary operating across two campuses near Hyderabad, Telangana. It bridges urban youth, school students, corporate organizations, and families with genuine Indian agricultural heritage, water hydraulics, cattle care, and living soil stewardship through 24 curriculum-linked hands-on learning modules.
 
 ## Campuses & Directions
 - **Bhongir Main Farm (Flagship Campus, 15+ Acres)**: Near Hotel Vivera, Hyderabad - Warangal Highway (NH 163), Bhongir Bypass, Yadadri Bhuvanagiri District, Telangana - 508 116. Drive time: ~45–50 Mins from Hyderabad via ORR Exit 9 / Uppal.

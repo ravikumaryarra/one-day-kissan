@@ -5,16 +5,25 @@ import { getSiteUrl } from "@/lib/siteUrl";
 export default function SEOStructuredData() {
   const siteUrl = getSiteUrl();
 
-  // 1. LocalBusiness / TouristAttraction Schema for both locations
+  // 1. WebSite Schema (Official Google Site Name identity signal)
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "One Day Kissan",
+    "alternateName": "One Day Kisan",
+    "url": "https://onedaykissan.vercel.app/"
+  };
+
+  // 2. LocalBusiness / TouristAttraction Schema for both locations
   const locationsSchema = [
     {
       "@context": "https://schema.org",
       "@type": ["TouristAttraction", "LocalBusiness"],
       "@id": `${siteUrl}/#bhongir-farm`,
-      "name": "One Day Kisan — Bhongir Main Farm",
-      "alternateName": "One Day Kisan Hyderabad Warangal Highway",
+      "name": "One Day Kissan — Bhongir Main Farm",
+      "alternateName": "One Day Kisan — Bhongir Main Farm",
       "description": "India's First Farm-Based Edutainment Destination. 15+ acres of hands-on agricultural experiences, ancient Persian wheel water systems, paddy transplantation, and rural living near Hyderabad.",
-      "url": siteUrl,
+      "url": `${siteUrl}/`,
       "telephone": "+91-9849798674",
       "email": "info@onedaykisan.com",
       "priceRange": "₹₹",
@@ -73,10 +82,10 @@ export default function SEOStructuredData() {
       "@context": "https://schema.org",
       "@type": ["TouristAttraction", "LocalBusiness"],
       "@id": `${siteUrl}/#moinabad-farm`,
-      "name": "One Day Kisan — Moinabad Agro-Sanctuary",
-      "alternateName": "One Day Kisan Kapil Agro Farms",
+      "name": "One Day Kissan — Moinabad Agro-Sanctuary",
+      "alternateName": "One Day Kisan — Moinabad Agro-Sanctuary",
       "description": "Lush agro-sanctuary featuring the Walk-In Birds Aviary, Desi Gir cattle dairy, polyhouse greenhouse cultivation, and hands-on pottery workshops near Chilkur Balaji, Hyderabad.",
-      "url": siteUrl,
+      "url": `${siteUrl}/`,
       "telephone": "+91-9849798674",
       "email": "info@onedaykisan.com",
       "priceRange": "₹₹",
@@ -147,8 +156,8 @@ export default function SEOStructuredData() {
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "Home",
-        "item": siteUrl
+        "name": "One Day Kissan Home",
+        "item": `${siteUrl}/`
       },
       {
         "@type": "ListItem",
@@ -181,8 +190,9 @@ export default function SEOStructuredData() {
   const educationalSchema = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
-    "name": "One Day Kisan Farm School Academy",
-    "url": siteUrl,
+    "name": "One Day Kissan Farm School Academy",
+    "alternateName": "One Day Kisan Farm School Academy",
+    "url": `${siteUrl}/`,
     "description": "Experiential hands-on agricultural and environmental education for K-12 students aligned with CBSE, ICSE, and NCERT guidelines.",
     "educationalCredentialAwarded": "Certificate of Agri-Literacy",
     "hasOfferCatalog": {
@@ -219,6 +229,10 @@ export default function SEOStructuredData() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(locationsSchema) }}

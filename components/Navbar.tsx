@@ -62,7 +62,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             <div className="w-10 h-10 rounded-full overflow-hidden border border-[#2b4c1c]/20 bg-[#faf7f0] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
               <img
                 src="/images/logo.png"
-                alt="One Day Kisan - India's Premier Farm-Based Edutainment Destination"
+                alt="One Day Kissan - India's Premier Farm-Based Edutainment Destination"
                 width={40}
                 height={40}
                 className="w-full h-full object-contain p-0.5"
@@ -70,7 +70,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             </div>
             <div className="flex flex-col text-left">
               <span className="font-serif font-bold text-base tracking-tight text-[#1a2713] group-hover:text-[#2b4c1c] transition-colors leading-tight">
-                One Day Kisan
+                One Day Kissan
               </span>
               <span className="text-[10px] text-[#8a5738] font-medium tracking-wider uppercase">
                 Edutainment Farms
